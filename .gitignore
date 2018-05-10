@@ -2,3 +2,9 @@
 *.project
 *.prefs
 *.xml
+/nbproject/nbproject/private/
+*.bowerrc
+*.json
+*.js
+*.properties
+nbproject/public_html/index.html
