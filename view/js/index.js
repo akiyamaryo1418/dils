@@ -61,7 +61,7 @@ function moveTopPage(){
 
 // 制作者一覧へ移動
 function moveDesignerIndex(){
-	location.href = "/dils/html/";
+	location.href = "/dils/html/designerindex.html";
 }
 
 // ログインページへ移動
