@@ -32,6 +32,16 @@ function Initialize(){
     });
 }
 
+// トップページへ移動
+function moveTopPage(){
+	location.href = "/dils/html/index.html";
+}
+
+// 制作者一覧へ移動
+function moveDesignerIndex(){
+	location.href = "/dils/html/";
+}
+
 // ログインページへ移動
 function moveLoginPage(){
 	location.href = "/dils/html/login.html";
@@ -71,6 +81,24 @@ function sortButton(){
 		'action' : 'sort',
 		'list'   :  param
 	};
+
+	$.ajax({
+		url      : '/dils/api/controller.php',
+		type     : 'POST',
+		dataType : 'json',
+		data     :  data,
+		timeout  :  1000,
+	}).done(function(data, dataType){
+		alert('Success');
+	}).fail(function(){
+		alert('NoData');
+	});
+}
+
+// フィルタ検索機能(ジャンル)
+function searchCategory(){
+
+	var category = $('#category_id').val();
 
 	$.ajax({
 		url      : '/dils/api/controller.php',
