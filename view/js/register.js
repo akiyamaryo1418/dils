@@ -1,8 +1,8 @@
 $(function(){
 
-
 });
 
+// 新規登録ページ情報
 // 登録ボタン押したとき
 function inputRegistrationButton(){
 
@@ -25,7 +25,7 @@ function inputRegistrationButton(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-        alert('success');
+        alert('Success');
     }).fail(function(){
     	alert('Nodata');
     });
@@ -36,7 +36,6 @@ function checkValidation(){
 
     validationName();
     validationPassword();
-
 }
 
 // ユーザ名

@@ -22,7 +22,7 @@ function inputInsert(){
 		timeout  :  1000,
 	}).done(function(data, dataType){
 		location.href = "/dils/html/index.html";
-		alert('success');
+		alert('Success');
 	}).fail(function(){
 		alert('NoData');
 	});

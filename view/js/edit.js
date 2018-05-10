@@ -7,7 +7,6 @@ $(function(){
 function Initialize(){
 
 
-
 	data = {
 		'model'  : 'edit',
 		'action' : 'editload',

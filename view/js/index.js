@@ -24,10 +24,12 @@ function Initialize(){
     });
 }
 
+// ログインページへ移動
 function moveLoginPage(){
 	location.href = "/dils/html/login.html";
 }
 
+// マイページへ移動
 function moveMyPageButton(){
 	location.href = "/dils/html/mypage.html";
 }
@@ -37,14 +39,19 @@ function moveInsertButton(){
 	location.href = "/dils/html/insert.html";
 }
 
+// ライトボックス
+
+
+
+
 // 編集ボタン
-function moveEditButton(){
+/*function moveEditButton(){
 
 	// ページ遷移の際にIDをアドレスの後ろにつける処理
 	var id = escape($('name').value);
 
 	location.href = "/dils/html/edit.html?"+id;
-}
+}*/
 
 // ソート時のボタン(非同期)
 function sortButton(){
@@ -54,7 +61,7 @@ function sortButton(){
 	data = {
 		'model'  : 'usersort',
 		'action' : 'sort',
-		'list'   : param
+		'list'   :  param
 	};
 
 	$.ajax({
@@ -64,7 +71,7 @@ function sortButton(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		alert('success');
+		alert('Success');
 	}).fail(function(){
 		alert('NoData');
 	});
