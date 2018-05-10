@@ -1,3 +1,79 @@
-aaaaaa
-bbbbbbbbbb
-ccccccc
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Designer Works（仮）</title>
+    <meta charset="utf-8" />
+    <!------css------>
+    <link href="../css/top.css" rel="stylesheet" type="text/css"/>
+    <!------js------->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  </head>
+  <body>
+    <!--------ヘッダー------->
+    <header>
+      <h1><a href="#">Designer Works</a></h1>
+      <nav class="login">
+        <ul>
+          <li>制作者一覧</li>
+          <li>LOGIN</li>
+        </ul>
+      </nav>
+      <nav class="mypage">
+        <ul>
+          <li>制作者一覧</li>
+          <li>MYPAGE</li>
+        </ul>
+      </nav>
+    </header>
+    
+    <div id="wrap">
+    
+    <section id="Top">
+      <!------トップスライダー----->
+      <div class="slider-wrapper">
+        <div class="slider-item"></div>
+        <div class="slider-item"></div>
+        <div class="slider-item"></div>       
+      </div>
+    </section>
+    <!------ソート機能------->
+    <section id="SearchBox">
+      <ul id="SearchBoxSort">
+        <li id="SearchAll"></li>
+        <li id="SearchUpDeat"></li>
+        <li id="SeartReview"></li>
+      </ul>
+      <!-----フィルタ検索機能------>
+      <ul id="SearchBoxfilter">
+        <li id="SearchChekbox">
+          <div id="Checkbox-chara"><input type="checkbox" name="Checkbox-chara" value="キャラ">キャラ</div>
+          <div id="Chekcbox-bg"><input type="checkbox" name="Checkbox-chara" value="背景">背景</div>
+          <div id="Checkbox-item"><input type="checkbox" name="Checkbox-chara" value="アイテム">アイテム</div>
+        </li>
+      </ul>
+    </section>
+    
+    <section id="masonry">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </section>
+    </div>
+    <footer>
+      <h1>Designer Works(仮)</h1>
+      <ul id="Footermenubox">
+        <li>お問い合わせ</li>
+        <li>プライバシーポリシー</li>
+      </ul>
+      <p>copyright©2018.system</p>
+    </footer>
+    
+  </body>
+</html>
