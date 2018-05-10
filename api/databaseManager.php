@@ -1,5 +1,4 @@
 <?php
-
 // データベース接続用クラス
 class DatabaseManager {
 
@@ -15,7 +14,6 @@ class DatabaseManager {
         $this->password = 'Mk5STEcs';
 
         // DBに接続
-        // データベースへの接続失敗で、例外を投げる
         try{
             $this->dbh = new PDO($this->dsn, $this->userName, $this->password);
         }catch (PDOException $e){
