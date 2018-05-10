@@ -2,6 +2,3 @@
 *.project
 *.prefs
 *.xml
-/dils/nbproject/private/
-/nbproject/private/
-*.properties
