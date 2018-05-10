@@ -18,7 +18,15 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	alert('Success');
+    	//alert('Success');
+    	for(var index = 0; index < data.length; index++){
+    		$('.illust_list').append($('<div></div>').attr('id', data[index].id)
+    		                 .append($('<div></div>').html('<img src='data[index].img
+    		                		                         'width='data[index].width
+    		                		                         'height='data[index].height
+    		                		                         'alt='data[index].imgname'>'))
+    		                 .append($('<p></p>').html(data[index].imgname)));
+    	}
     }).fail(function(){
     	alert('NoData');
     });
