@@ -1,6 +1,6 @@
 $(function(){
     Initialize();
-
+    moveHeadButton();
 });
 
 // 初期化
@@ -30,6 +30,28 @@ function Initialize(){
     }).fail(function(){
     	alert('NoData');
     });
+}
+
+// ページの先頭へ戻るボタン
+function moveHeadButton(){
+	var topButton = $('#pagetop')
+	topButton.hide();
+
+	$(window).scroll(function(){
+		if($(this).scrollTop()>100){
+			// 画面を100pxスクロールしたらボタン表示
+			topButton.fadeIn();
+		}else{
+			// 画面が100より上ならボタン表示はしない
+			topButton.fadeOut();
+		}
+	});
+
+	topButton.on('click', function(){
+		$('body,html').animate({
+			scrollTop: 0},500);
+		    return false;
+		});
 }
 
 // トップページへ移動
