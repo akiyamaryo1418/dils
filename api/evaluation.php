@@ -4,7 +4,7 @@
 require_once('databaseManager.php');
 header('Content-type:application/json; charset=utf8');
 
-class Illustration {
+class Evaluation {
     // データベース操作用クラス
     private $dbm;
 
@@ -14,19 +14,11 @@ class Illustration {
     }
 
     public function index() {
-        echo json_encode( '作品一覧' );
+        echo json_encode( '評価一覧' );
     }
 
     public function insert() {
-        echo json_encode( '作品登録' );
-    }
-
-    public function edit() {
-        echo json_encode( '作品編集' );
-    }
-
-    public function delete() {
-        echo json_encode( '作品削除' );
+        echo json_encode( '評価登録' );
     }
 }
 
