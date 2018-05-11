@@ -9,9 +9,15 @@ function inputLoginButton(){
 	var param = "";
 
 	data = {
+<<<<<<< HEAD
     'model':'login',
 		'action':'login',
 		'list': param
+=======
+		'model'  :'login',
+		'action' : 'login',
+		'list'   :  param
+>>>>>>> 479a94ef9aa439150ac06d37658f5be28a7edd53
 	}
 
 	$.ajax({
