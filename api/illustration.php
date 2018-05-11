@@ -21,9 +21,10 @@ class illustration {
         $filePath = '../view/images/creator/*';
         foreach(glob($filePath) as $file){
             if(is_file($file)){
-                $result[] = array(
-                    'id' => $file,
+                /*$result[] = array(
                     'img' => $file
+                    );*/
+                $result[] = $file;
             }
         }
         echo json_encode($result);
