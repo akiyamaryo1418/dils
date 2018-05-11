@@ -44,7 +44,7 @@ class user {
         $fileName = $id.'_'.$userName;
 
         // フォルダのファイルパス
-        $directoryPath = '..//view/images/creator/'.$fileName;
+        $directoryPath = '../view/images/creator/'.$fileName;
 
         //フォルダ作成
         if(mkdir($directoryPath, 0777)) {
@@ -118,7 +118,7 @@ class user {
         $userName = $data[0][value];
         $password = $data[1][value];
 
-        $sql = "SELEFE id FROM designers "
+        $sql = "SELECT id FROM designers "
               ."WHERE name = '".$userName."' "
                   ."and password = '".$password."' ";
 
