@@ -25,6 +25,7 @@ class user {
         $result;
 
         // ユーザー名、パスワードを取得
+        // 現状、アイコン画像は追加できない
         $userName = $data[0][value];
         $password = $data[1][value];
 
@@ -42,30 +43,97 @@ class user {
         // ファイル名の設定
         $fileName = $id.'_'.$userName;
 
-        // フォルダ作成のファイルパス
+        // フォルダのファイルパス
         $directoryPath = '..//view/images/creator/'.$fileName;
 
-        if(mkdir($directoryPath, 0777)){
+        //フォルダ作成
+        if(mkdir($directoryPath, 0777)) {
             chmod($directoryPath, 0777);
-            $result = '作成しました';
-        }else{
-            $result = '失敗しました';
-        }
+            $result = 0;
 
+            // todo
+            // アイコン画像を作成したフォルダに入れる
+        }else{
+            $result = 1;
+        }
         echo json_encode( $result );
     }
 
 
-    public function edit() {
-        echo json_encode( 'ユーザー編集' );
+    public function edit($data) {
+
+        $result;
+
+        // ID、ユーザー名の取得
+        $id = $data[0][value];
+        $userName = $data[1][value];
+
+
+        // ユーザーをデータベースに登録
+        $sql = "UPDATE designers SET "
+                    ."name = " .'".$userName."'
+              ."WHERE"
+                    ."id = " .'".$id."';
+
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();
+
+        // todo
+        // アイコン画像の変更処理
+
+        if($flag) {
+            $result = 0;
+        }else{
+            $result = 1;
+        }
+        echo json_encode( $result );
     }
 
-    public function delete() {
-        echo json_encode( 'ユーザー削除' );
+    public function delete($data) {
+        $result;
+
+        // IDの取得
+        $id = $data[0][value];
+
+        // DBからユーザーの削除
+        $sql = "DELETE FROM designers WHERE id = '".$id."'";
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();
+
+        // todo
+        // ユーザーのフォルダ削除
+
+        if($flag) {
+            $result = 0;
+        }else{
+            $result = 1;
+        }
+        echo json_encode( $result );
     }
 
-    public function login() {
-        echo json_encode( 'ログイン' );
+    public function login($data) {
+        $result;
+
+        // ユーザー名、パスワードを取得
+        $userName = $data[0][value];
+        $password = $data[1][value];
+
+        $sql = "SELEFE id FROM designers "
+              ."WHERE name = '".$userName."' "
+                  ."and password = '".$password."' ";
+
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();
+
+        if($flag) {
+            while ($row = $stmt->fetchObject())
+            {
+                $result[] = array('id' => $row->id);
+            }
+        }else{
+            $result = 1;
+        }
+        echo json_encode( $result );
     }
 }
 
