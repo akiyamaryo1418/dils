@@ -27,3 +27,15 @@ function Initialize(){
 		//alert('Error : ' + errorThrown);
 	});
 }
+
+// 制作者検索
+function searchDesigner(){
+
+}
+
+// 制作者詳細へ移動
+// 引数・・・制作者ID
+function moveDesignerDetails(id){
+	var param = id;
+	location.href = "/dils/view/html/designerdetails.html?"+param;
+}

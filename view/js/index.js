@@ -20,12 +20,12 @@ function Initialize(){
     }).done(function(data, dataType){
     	//alert('Success');
     	for(var index = 0; index < data.length; index++){
-    		$('.illust_list').append($('<div></div>').attr('id', data[index].id)
-    		                 .append($('<div></div>').html('<img src='data[index].img
-    		                		                         'width='data[index].width
-    		                		                         'height='data[index].height
-    		                		                         'alt='data[index].imgname'>'))
-    		                 .append($('<p></p>').html(data[index].imgname)));
+    		$('.masonry').append($('<div></div>').attr('id', data[index].id)
+    		             .append($('<div></div>').html('<img src='data[index].img'
+    		                		                     'width='data[index].width'
+    		                		                     'height='data[index].height'
+    		                		                     'alt='data[index].imgname'>'))
+    		             .append($('<p></p>').html(data[index].imgname)));
     	}
     }).fail(function(){
     	alert('NoData');
@@ -99,7 +99,7 @@ function sortButton(){
 	var param = "";
 
 	data = {
-		'model'  : 'usersort',
+		'model'  : 'indexsort',
 		'action' : 'sort',
 		'list'   :  param
 	};
