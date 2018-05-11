@@ -9,9 +9,9 @@ function inputLoginButton(){
 	var param = "";
 
 	data = {
-		'model'  = 'login',
-		'action' = 'login',
-		'list'   =  param
+    'model':'login',
+		'action':'login',
+		'list': param
 	}
 
 	$.ajax({
