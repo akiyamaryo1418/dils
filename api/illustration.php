@@ -15,46 +15,61 @@ class illustration {
 
     // 作品一覧
     public function index($data) {
-
         $result;
 
+        // 全件データの取得
         $filePath = '../view/images/creator/*';
+
         foreach(glob($filePath) as $file){
-            if(is_file($file)){
-                /*$result[] = array(
-                    'img' => $file
-                    );*/
-                $result[] = $file;
-            }
+        if(is_file($file)){
+            $result[] = $file;
         }
         echo json_encode($result);
 
-
+        /*
 
         // ソートの対象
         // $sortTarget = $data[0][value];
-
         // 表示する作品カテゴリー
-        // $password = $data[1][value];
+        // $categories = $data[1][value];
 
-        /*$sql = "SELECT id, name FROM works ";
+        $exts = ['jpg', 'png', 'bmp'];
+
+        $sql = "SELECT id, designer_id, name FROM works "
+              ."ORDER BY '".$sortTarget."' DESC";
         $stmt = $this->dbm->dbh->prepare($sql);
-        $flag = $stmt->execute();*/
+        $stmt->execute();
 
-        /*if($flag) {
-            while ($row = $stmt->fetchObject())
-            {
-                $result[] = array(
-                    'id' => $row->id,
+        //while ($row = $stmt->fetchObject())
+        {
+            // $d_id = $row->designer_id;
+            // $id = $row->id;
+            $filePath;
 
-                );
+            foreach( $exts as $ext) {
+                $filePath = '../view/images/creator/2'.'.'.$ext;
+                //$filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
+
+                if(is_file($filePath)) {
+                    break;
+                }
             }
-        }else{
-            $result = 1;
+
+
+            // 画像サイズの取得
+            $size = getimagesize($filePath);
+
+            $result[] = array(
+                //'id'       => $row->id,
+                'img'      => $filePath,
+                'width'    => $size[0],
+                'height'   => $size[1],
+                //'imgname'  => $row->name,
+            );
         }
-        echo json_encode( $result );*/
+        */
 
-
+        echo json_encode( $result );
     }
 
     public function insert() {
