@@ -1,6 +1,6 @@
 <?php
 // データベース接続用クラス
-class DatabaseManager {
+class databaseManager {
 
     private $dsn;       // データソース名
     private $userName;  // ユーザー名

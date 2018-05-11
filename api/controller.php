@@ -7,14 +7,12 @@ header('Content-type:application/json; charset=utf8');
 if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
 {
-
     // modelからクラスを生成
     $className = new $_POST['model'];
 
-    // actionから行う関数を取得
-    $func = new $_POST['action'];
+    $func = $_POST['action'];
+    $data = $_POST['list'];
 
-
-    $className->$func($_POST['data']);
+    $className->$func($data);
 }
 ?>

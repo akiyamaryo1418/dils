@@ -4,7 +4,7 @@
 require_once('databaseManager.php');
 header('Content-type:application/json; charset=utf8');
 
-class Illustration {
+class illustration {
     // データベース操作用クラス
     private $dbm;
 
