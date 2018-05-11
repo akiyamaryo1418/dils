@@ -1,3 +1,5 @@
+
+// マイページ
 $(function(){
     Initialize();
 
@@ -28,9 +30,53 @@ function Initialize(){
     });
 }
 
-// 編集ボタンを押したとき
-function inputEditButton(){
+// アイコン編集ボタンを押したとき
+function inputIconEditButton(){
+    var icon = "";
+    icon.addEventListerner("change", function(evt){
+    	var file = evt.target.files;
+    	alert(file[0].name + "を取得");
+    }, false);
 
+    new Vue({
+    	el : '',  // アイコン表示場所のID
+    	data(){
+    		return{
+    			uploadedImage: '',
+    		};
+    	},
+    	methods:{
+    		onFileChange(e){
+    			let files = e.target.files || e.dataTransfer.files;
+    			this.createImage(files[0]);
+    		},
+    		// 選択した画像を表示
+    		createImage(file){
+    			let reader = new FileReader();
+    			reader.onload = (e) => {
+    				this.uploadedImage = e.target.result;
+    			};
+    			reader.readAsDataURL(file);
+    		}
+    	}
+    })
+}
+
+// ユーザ名編集ボタンを押したとき
+function inputUsernameEditButton(){
+    var name = window.prompt("ユーザ名を入力してください。","");
+
+    new Vue({
+    	el : '',  // テキスト表示場所のID
+    	data: {
+    		text1: ''
+    	},
+    	methods: {
+    		doAction: function(){
+    			var str = this.text1;
+    		}
+    	}
+    })
 }
 
 // 削除ボタンを押したとき

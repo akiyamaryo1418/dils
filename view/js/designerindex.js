@@ -1,3 +1,5 @@
+
+// デザイナー一覧ページ
 $(function(){
 	Initialize();
 });

@@ -1,7 +1,10 @@
+
+// ログインページ
 $(function(){
 
 });
 
+// ログインボタン
 function inputLoginButton(){
 
 	checkValidation();
@@ -10,7 +13,7 @@ function inputLoginButton(){
 
 	data = {
 <<<<<<< HEAD
-    'model':'login',
+        'model':'login',
 		'action':'login',
 		'list': param
 =======

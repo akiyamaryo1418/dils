@@ -1,3 +1,5 @@
+
+// イラスト編集ページ
 $(function(){
     Initialize();
 
