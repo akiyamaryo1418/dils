@@ -24,7 +24,7 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-        //alert('Success');
+
     }).fail(function(){
     	alert('Nodata');
     });
@@ -74,6 +74,7 @@ function inputUsernameEditButton(){
     	methods: {
     		doAction: function(){
     			var str = this.text1;
+    			this.message = str;
     		}
     	}
     })

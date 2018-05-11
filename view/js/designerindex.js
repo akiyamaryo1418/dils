@@ -5,6 +5,7 @@ $(function(){
 });
 
 // 初期化
+// デザイナー一覧を表示している
 function Initialize(){
 	data = {
 		'model'  : 'designer',

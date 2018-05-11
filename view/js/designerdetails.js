@@ -77,3 +77,8 @@ function searchCategory(){
 		alert('NoData');
 	});
 }
+
+// イラストが選択された後の処理
+function selectIllustration(){
+	var
+}
