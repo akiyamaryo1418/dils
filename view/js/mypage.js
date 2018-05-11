@@ -30,9 +30,18 @@ function Initialize(){
     });
 }
 
-// 編集ボタンを押したとき
-function inputEditButton(){
+// アイコン編集ボタンを押したとき
+function inputIconEditButton(){
+    var icon = "";
+    icon.addEventListerner("change", function(evt){
+    	var file = evt.target.files;
+    	alert(file[0].name + "を取得");
+    }, false);
+}
 
+// ユーザ名編集ボタンを押したとき
+function inputUsernameEditButton(){
+    var name = window.prompt("ユーザ名を入力してください。","");
 }
 
 // 削除ボタンを押したとき
