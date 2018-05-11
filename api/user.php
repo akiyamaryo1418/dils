@@ -34,12 +34,10 @@ class User {
         $fileName = $id.'_'.$name;
 
         // フォルダ作成のファイルパス
-        $directoryPath = '../../view/images/creaor/'.$fileName;
+        $directoryPath = '../../view/images/creator/'.$fileName;
 
         if(mkdir($directory_path, 0777)){
-            // 作成したディレクトリのパーミッションを確実に変更
             chmod($directory_path, 0777);
-
             $result = '作成しました';
         }else{
             $result = '失敗しました';
