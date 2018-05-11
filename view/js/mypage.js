@@ -1,3 +1,5 @@
+
+// マイページ
 $(function(){
     Initialize();
 

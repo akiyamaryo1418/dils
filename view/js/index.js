@@ -1,3 +1,5 @@
+
+// イラスト一覧ページ
 $(function(){
     Initialize();
     moveHeadButton();
