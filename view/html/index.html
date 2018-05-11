@@ -6,8 +6,12 @@
     <!------css------>
     <link href="../css/top.css" rel="stylesheet" type="text/css"/>
     <!------js------->
+    <script src="../js/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="slick/slick.min.js"></script>
+    <script src="../js/style.js" type="text/javascript"></script>
   </head>
   <body>
     <!--------ヘッダー------->
@@ -32,11 +36,9 @@
     <section id="Top">
       <!------トップスライダー----->
       <div class="slider-wrapper">
-        <ul>
-          <li class="slider-item"></li>
-          <li class="slider-item"></li>
-          <li class="slider-item"></li>
-        </ul>  
+          <div class="slider-item"></div>
+          <div class="slider-item"></div>
+          <div class="slider-item"></div>
       </div>
     </section>
     <!------ソート機能------->
@@ -49,16 +51,23 @@
       <!-----フィルタ検索機能------>
       <ul id="SearchBoxfilter">
         <li id="SearchChekbox">
-          <div id="Checkbox-chara"><input type="checkbox" name="Checkbox-chara" value="キャラ">キャラ</div>
-          <div id="Chekcbox-bg"><input type="checkbox" name="Checkbox-chara" value="背景">背景</div>
-          <div id="Checkbox-item"><input type="checkbox" name="Checkbox-chara" value="アイテム">アイテム</div>
+          <input type="checkbox" name="Checkbox-chara" value="キャラ">
+          <label for="chara" class="check_css">キャラ</label>
+          <input type="checkbox" name="Checkbox-bg" value="背景">
+          <label for="bg" class="check_css">背景</label>
+          <input type="checkbox" name="Checkbox-item" value="アイテム">
+          <label for="item" class="check_css">アイテム</label>
         </li>
       </ul>
     </section>
 
-    <div class="masonry" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 150 }'>
-      <div class="item"></div>
-      <div class="item"></div>
+    <div class="masonry">
+      <div class="item">
+        <img src="../images/top/kawaii.jpg" alt="女の子" width="400" height="300"/>
+      </div>
+      <div class="item">
+        <img src="../images/top/kawaii2.jpg" alt=""　width="300" height="200"/>
+      </div>
       <div class="item"></div>
       <div class="item"></div>
       <div class="item"></div>
