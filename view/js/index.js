@@ -6,6 +6,7 @@ $(function(){
 });
 
 // 初期化
+// 作品一覧表示を行っている
 function Initialize(){
     data = {
     	'model'  : 'illustration',
@@ -23,10 +24,10 @@ function Initialize(){
     	//alert('Success');
     	for(var index = 0; index < data.length; index++){
     		$('.masonry').append($('<div></div>').attr('id', data[index].id)
-    		             .append($('<div></div>').html('<img src='data[index].img'
-    		                		                     'width='data[index].width'
-    		                		                     'height='data[index].height'
-    		                		                     'alt='data[index].imgname'>'))
+    		             .append($('<div></div>').html('<img src="'+data[index].img+"'"+
+    		            		                        'width="'+data[index].width+"'"+
+    		            		                        'height="'+data[index].height+"'"+
+    		            		                        'alt="'+data[index].imgname+'">'))
     		             .append($('<p></p>').html(data[index].imgname)));
     	}
     }).fail(function(){
