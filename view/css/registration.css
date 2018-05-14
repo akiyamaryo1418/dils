@@ -5,6 +5,10 @@
   padding: 0;
 }
 
+
+
+
+
 /*--------------------------------------------------
 	1. document
 --------------------------------------------------*/
@@ -22,6 +26,11 @@ body {
   margin:0 auto;
 }
 
+#wrap:after {
+  display: block;
+  clear: both;
+  content: "";
+}
 /*--------------------------------------------------
 	2. header
 --------------------------------------------------*/
@@ -82,21 +91,44 @@ header li a {
 /*--------------------------------------------------
 	3. main
 --------------------------------------------------*/
-#LoginPage {
+#Registration {
   width: 800px;
   margin: 0 auto;
 }
 
-#LoginPage h1 {
+#Registration h1 {
   margin: 120px 0;
   font-size: 36px;
-}
+} 
 
-#LoginPage form {
+#Registration form {
   width: 340px;
-  margin: 140px auto 0;
+  margin: 60px auto 100px;
 }
 
+.preview {
+  float: left;
+  width: 210px;
+  margin: 60px 68px 0 108px;
+}
+
+.previewbox {
+  width: 200px;
+  height: 200px;
+  background: #ccc;
+}
+
+.preview input {
+  width: 100px;
+  margin: 12px 0 0 100px;
+  background: #fff;
+}
+
+.form {
+  float: left;
+  width: 340px;
+  margin: 0 0 169px 0;
+}
 input {
   width: 330px;
   height: 23px;
