@@ -109,6 +109,62 @@ header li a {
   background: #000;
 }
 
+#SearchBoxSort {
+  width: 320px;
+  height: 45px;
+  float: left;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-left: 34%;
+}
+
+#SearchBoxSort li {
+    float: left;
+    width: 105px;
+    height: 45px;
+    padding: 15px 0;
+    box-sizing: border-box;
+    border-left: solid 2px #fff;
+    color: #fff;
+    list-style: none;
+    text-align: center;
+}
+
+#SearchBoxSort li#SearchAll:hover {
+  background: rgba(255,200,188,0.8);
+}
+
+#SearchBoxSort li#SearchUpDeat:hover {
+  background: rgba(255,187,187,0.8);
+}
+
+#SearchBoxSort li#SeartReview:hover {
+  background: rgba(255,124,127,0.8);
+}
+
+.SearchBoxfilter {
+  float: left;
+  width: 300px;
+  height: 45px;
+  margin: 0 10px;
+}
+
+.check_css {
+  margin: 15px 0;
+  color: #fff;
+}
+/*#SearchBoxfilter li {
+  float: left;
+  width: 270px;
+  height: 45px;
+  padding: 15px 0;
+  box-sizing: border-box;
+  text-align: center;
+  color: #fff;
+  list-style: none;
+}*/
+
 input[type=checkbox] {
   display: none;
 }
@@ -159,57 +215,6 @@ input[type=checkbox]:checked + .check_css:before {
   opacity: 1;
 }
 
-#SearchBoxSort {
-  width: 320px;
-  height: 45px;
-  float: left;
-  position: relative;
-  top: 0;
-  left: 0;
-  margin-left: 34%;
-}
-
-#SearchBoxSort li {
-    float: left;
-    width: 105px;
-    height: 45px;
-    padding: 15px 0;
-    box-sizing: border-box;
-    border-left: solid 2px #fff;
-    color: #fff;
-    list-style: none;
-    text-align: center;
-}
-
-#SearchBoxSort li#SearchAll:hover {
-  background: rgba(255,200,188,0.8);
-}
-
-#SearchBoxSort li#SearchUpDeat:hover {
-  background: rgba(255,187,187,0.8);
-}
-
-#SearchBoxSort li#SeartReview:hover {
-  background: rgba(255,124,127,0.8);
-}
-
-#SearchBoxfilter {
-  float: left;
-  width: 300px;
-  height: 45px;
-  margin: 0 10px;
-}
-
-#SearchBoxfilter li {
-  float: left;
-  width: 270px;
-  height: 45px;
-  padding: 15px 0;
-  box-sizing: border-box;
-  text-align: center;
-  color: #fff;
-  list-style: none;
-}
 
 #SeartReview {
   border-right: solid 2px #fff;
