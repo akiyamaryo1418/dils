@@ -4,7 +4,7 @@ $(function(){
     Initialize();
     moveHeadButton();
 
-    $('#thumbnail').mk_thumbnails();
+    //$('#thumbnail').mk_thumbnails();
 
 });
 
@@ -24,6 +24,7 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
+    	//$('.masonry').masonry({itemSelector: '.item', columnWidth: 400 });
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div></div>').attr({'id':data[index].id, 'class':'item'})
@@ -34,7 +35,9 @@ function Initialize(){
     		             .append($('<p></p>').html(data[index].imgname)));
     	}
 
-    	$('.masonry').attr({'id':"thumbnail", 'data-masonry':'+{"itemSelector": ".item", "columnWidth": 400 }+'})
+    	$('.masonry').masonry({itemSelector: '.item', columnWidth: 400 });
+
+    	//$('.masonry').attr({'id':"thumbnail", 'data-masonry':'{"itemSelector": ".item", "columnWidth": 400 }'})
 
     	/*for(var index = 0; index < data.length; index++){
 
@@ -52,7 +55,7 @@ function Initialize(){
     });
 
 
-    $.fn.mk_thumbnails = function(options){
+    /*$.fn.mk_thumbnails = function(options){
 
         return this.each(function(){
             var opts = $.extend({}, $.fn.mk_thumbnails.defaults, options);
@@ -104,7 +107,7 @@ function Initialize(){
     $.fn.mk_thumbnails.defaults = {
         padding: 5,
         thumbnail_count: 4
-    };
+    };*/
 }
 
 // ページの先頭へ戻るボタン
