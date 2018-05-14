@@ -18,15 +18,15 @@ class illustration {
         $result;
 
         // 全件データの取得
-        $filePath = '../view/images/creator/*';
+        /*$filePath = '../view/images/creator/*';
 
         foreach(glob($filePath) as $file){
         if(is_file($file)){
             $result[] = $file;
         }
-        echo json_encode($result);
+        echo json_encode($result);*/
 
-        /*
+
 
         // ソートの対象
         // $sortTarget = $data[0][value];
@@ -35,20 +35,20 @@ class illustration {
 
         $exts = ['jpg', 'png', 'bmp'];
 
-        $sql = "SELECT id, designer_id, name FROM works "
-              ."ORDER BY '".$sortTarget."' DESC";
+        $sql = "SELECT id, designer_id, name FROM works";
+              // ."ORDER BY '".$sortTarget."' DESC";
         $stmt = $this->dbm->dbh->prepare($sql);
         $stmt->execute();
 
-        //while ($row = $stmt->fetchObject())
+        while ($row = $stmt->fetchObject())
         {
-            // $d_id = $row->designer_id;
-            // $id = $row->id;
+            $d_id = $row->designer_id;
+            $id = $row->id;
             $filePath;
 
             foreach( $exts as $ext) {
-                $filePath = '../view/images/creator/2'.'.'.$ext;
-                //$filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
+                //$filePath = '../view/images/creator/2'.'.'.$ext;
+                $filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
 
                 if(is_file($filePath)) {
                     break;
@@ -60,14 +60,14 @@ class illustration {
             $size = getimagesize($filePath);
 
             $result[] = array(
-                //'id'       => $row->id,
+                'id'       => $row->id,
                 'img'      => $filePath,
                 'width'    => $size[0],
                 'height'   => $size[1],
-                //'imgname'  => $row->name,
+                'imgname'  => $row->name,
             );
         }
-        */
+
 
         echo json_encode( $result );
     }
