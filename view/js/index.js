@@ -24,11 +24,11 @@ function Initialize(){
 
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
-    		$('.masonry').append($('<div></div>').attr('id', data[index].id)
+    		$('.masonry').append($('<div></div>').attr({'id':data[index].id, 'class':'item'})
     		             .append($('<div></div>').html(
     		            		 '<img src="'+result+'"'+
-    		            		 'width="'+data[index].width+"' "+
-    		            		 'height="'+data[index].height+"' "+
+    		            		 'width="'+data[index].width+'"'+
+    		            		 'height="'+data[index].height+'"'+
     		            		 'alt="'+data[index].imgname+'">'))
     		             .append($('<p></p>').html(data[index].imgname)));
     	}
