@@ -32,7 +32,7 @@ function Initialize(){
     		            		 'width="'+data[index].width+'"'+
     		            		 'height="'+data[index].height+'"'+
     		            		 'alt="'+data[index].imgname+'">'))
-    		             .append($('<p></p>').html(data[index].imgname)));
+    		             .append($('<p></p>').html(data[index].imgname));
     	}
 
     	/*for(var index = 0; index < data.length; index++){
