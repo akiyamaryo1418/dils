@@ -37,7 +37,7 @@ function Initialize(){
 
 // ページの先頭へ戻るボタン
 function moveHeadButton(){
-	var topButton = $('#pagetop')
+	var topButton = $('#pagetopbutton')
 	topButton.hide();
 
 	$(window).scroll(function(){
