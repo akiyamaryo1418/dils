@@ -55,7 +55,6 @@ class illustration {
                 }
             }
 
-
             // 画像サイズの取得
             $size = getimagesize($filePath);
 
@@ -72,15 +71,15 @@ class illustration {
         echo json_encode( $result );
     }
 
-    public function insert() {
+    public function insert($data) {
         echo json_encode( '作品登録' );
     }
 
-    public function edit() {
+    public function edit($data) {
         echo json_encode( '作品編集' );
     }
 
-    public function delete() {
+    public function delete($data) {
         echo json_encode( '作品削除' );
     }
 }
