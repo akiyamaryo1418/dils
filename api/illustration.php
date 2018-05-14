@@ -17,22 +17,6 @@ class illustration {
     public function index($data) {
         $result;
 
-        // 全件データの取得
-        /*$filePath = '../view/images/creator/*';
-
-        foreach(glob($filePath) as $file){
-        if(is_file($file)){
-            $result[] = $file;
-        }
-        echo json_encode($result);*/
-
-
-
-        // ソートの対象
-        // $sortTarget = $data[0][value];
-        // 表示する作品カテゴリー
-        // $categories = $data[1][value];
-
         $exts = ['jpg', 'png'];
 
         $sql = "SELECT id, designer_id, name FROM works";

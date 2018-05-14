@@ -14,6 +14,8 @@ class user {
     // データベース操作用クラス
     private $dbm;
 
+    const FILE_PATH = '../view/images/creator/';
+
     // コンストラクタ
     public function __construct() {
         $this->dbm = new DatabaseManager();
@@ -23,25 +25,6 @@ class user {
     public function register($data) {
 
         $result;
-
-        /*
-
-
-         $result[] = array('salt' => $salt, '$new_password' => $new_password);*/
-
-
-        /*$check = crypt("pass", $salt); //保存時と同じ暗号化
-
-        // パスワードの一致を調べる
-        if($new_password == $check){
-        // echo 'ようこそ！！';
-        $result = 'ログイン';
-        } else {
-        // echo 'ID・パスワードが不正です';
-        $result = 'ミス';
-        }*/
-
-        // echo json_encode( $result );
 
         // ユーザー名、パスワードを取得
         // 現状、アイコン画像は追加できない
