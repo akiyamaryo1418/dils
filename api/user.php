@@ -24,14 +24,45 @@ class user {
 
         $result;
 
+        /*
+
+
+         $result[] = array('salt' => $salt, '$new_password' => $new_password);*/
+
+
+        /*$check = crypt("pass", $salt); //保存時と同じ暗号化
+
+        // パスワードの一致を調べる
+        if($new_password == $check){
+        // echo 'ようこそ！！';
+        $result = 'ログイン';
+        } else {
+        // echo 'ID・パスワードが不正です';
+        $result = 'ミス';
+        }*/
+
+        // echo json_encode( $result );
+
         // ユーザー名、パスワードを取得
         // 現状、アイコン画像は追加できない
         $userName = $data[0][value];
         $password = $data[1][value];
 
+        // ソルトをランダムで生成
+        $options = [
+            'cost' => 11,
+            'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+        ];
+
+        // パスワードハッシュ作成、
+        $hash = password_hash($password, PASSWORD_DEFAULT, $options);
+        // パスワードハッシュからハッシュ化したパスワードを作成
+        $new_password = crypt($password, $hash);
+
+
         // ユーザーをデータベースに登録
-        $sql = "INSERT INTO designers(name, password)"
-              ."VALUES ('".$userName."', '".$password."')";
+        $sql = "INSERT INTO designers(name, password, hash)"
+            ."VALUES ('".$userName."', '".$new_password."', '".$hash."')";
 
         // 実行
         $stmt = $this->dbm->dbh->prepare($sql);
@@ -59,7 +90,7 @@ class user {
         echo json_encode( $result );
     }
 
-
+    // 編集
     public function edit($data) {
 
         $result;
@@ -89,6 +120,7 @@ class user {
         echo json_encode( $result );
     }
 
+    // 削除
     public function delete($data) {
         $result;
 
@@ -111,6 +143,7 @@ class user {
         echo json_encode( $result );
     }
 
+    // ログイン
     public function login($data) {
         $result;
 
@@ -118,22 +151,33 @@ class user {
         $userName = $data[0][value];
         $password = $data[1][value];
 
-        $sql = "SELECT id FROM designers "
-              ."WHERE name = '".$userName."' "
-                  ."and password = '".$password."' ";
+        // ユーザー名に合致するデータの取得
+        $sql = "SELECT * FROM designers "
+            ."WHERE name = '".$userName."' ";
 
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
+
         if($flag) {
             while ($row = $stmt->fetchObject())
             {
-                $result[] = array('id' => $row->id);
+                // データベースからパスワードハッシュを取得
+                // 入力されたパスワードをハッシュ化
+                $hash = $row->hash;
+                $encrypted_password  = $row->password;
+                $check_password = crypt($password, $hash);
+
+                // データベースにあるデータとの比較
+                if($encrypted_password == $check_password) {
+                    $result = array('id' => $row->id);
+                }
             }
         }else{
-            $result = 1;
+            $result = 'error';
         }
         echo json_encode( $result );
+
     }
 }
 
