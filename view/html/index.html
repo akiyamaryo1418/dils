@@ -9,10 +9,14 @@
     <script src="../js/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script type="text/javascript" src="slick/slick.min.js"></script>
     <script src="../js/style.js" type="text/javascript"></script>
+    <!--slick用-->
+    <link href="../js/slick/slick-theme.css" rel="stylesheet" type="text/css"/>
+    <link href="../js/slick/slick.css" rel="stylesheet" type="text/css"/>
+    <script src="../js/slick/slick.min.js" type="text/javascript"></script>
+
   </head>
+ 
   <body>
     <!--------ヘッダー------->
     <header>
@@ -45,11 +49,11 @@
     <section id="SearchBox">
       <ul id="SearchBoxSort">
         <li id="SearchAll"><a>ALL</a></li>
-        <li id="SearchUpDeat">UP DEAT</li>
+        <li id="SearchUpDeat">UP DATA</li>
         <li id="SeartReview">REVIEW</li>
       </ul>
       <!-----フィルタ検索機能------>
-      <ul id="SearchBoxfilter">
+<!--      <ul id="SearchBoxfilter">
         <li id="SearchChekbox">
           <input type="checkbox" name="Checkbox-chara" value="キャラ">
           <label for="chara" class="check_css">キャラ</label>
@@ -58,7 +62,15 @@
           <input type="checkbox" name="Checkbox-item" value="アイテム">
           <label for="item" class="check_css">アイテム</label>
         </li>
-      </ul>
+      </ul>-->
+      <div class="SearchBoxfilter">
+        <input type="checkbox" name="Checkbox-chara" value="キャラ" id="chara" />
+        <label for="chara" class="check_css">キャラ</label>
+        <input type="checkbox" name="Checkbox-bg" value="背景" id="bg" />
+        <label for="bg" class="check_css">背景</label>
+        <input type="checkbox" name="Checkbox-item" value="アイテム" id="item" />
+        <label for="item" class="check_css">アイテム</label>
+      </div>
     </section>
 
     <div class="masonry">
@@ -99,5 +111,5 @@
 
   </body>
 
-<script type="text/javascript" src="../js/index.js"></script>
+<!--<script type="text/javascript" src="../js/index.js"></script>-->
 </html>
