@@ -10,7 +10,7 @@ $(function(){
 function Initialize(){
     data = {
     	'model'  : 'illustration',
-    	'action' : 'illustRendering',
+    	'action' : 'index',
     	'list'   : 'a'
     }
 
@@ -21,15 +21,29 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//alert('Success');
+
     	for(var index = 0; index < data.length; index++){
+    		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div></div>').attr('id', data[index].id)
-    		             .append($('<div></div>').html('<img src="'+data[index].img+"'"+
-    		            		                        'width="'+data[index].width+"'"+
-    		            		                        'height="'+data[index].height+"'"+
-    		            		                        'alt="'+data[index].imgname+'">'))
+    		             .append($('<div></div>').html(
+    		            		 '<img src="'+result+'"'+
+    		            		 'width="'+data[index].width+"' "+
+    		            		 'height="'+data[index].height+"' "+
+    		            		 'alt="'+data[index].imgname+'">'))
     		             .append($('<p></p>').html(data[index].imgname)));
     	}
+
+    	/*for(var index = 0; index < data.length; index++){
+
+    		var result = data[index].img.replace('view/', '');
+    		$('.masonry').append($('<div></div>').attr('id', data[index].id)
+    		             .append($('<div></div>').html(
+    		            		 '<img src="'+result+" ' "+
+    		            		 'width="'+data[index].width+" ' "+
+    		            		 'height="'+data[index].height+" ' "+
+    		            		 'alt="'+data[index].imgname+'">'))
+    		             .append($('<p></p>').html(data[index].imgname)));
+    	}*/
     }).fail(function(){
     	alert('NoData');
     });

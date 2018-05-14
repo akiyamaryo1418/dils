@@ -33,7 +33,7 @@ class illustration {
         // 表示する作品カテゴリー
         // $categories = $data[1][value];
 
-        $exts = ['jpg', 'png', 'bmp'];
+        $exts = ['jpg', 'png'];
 
         $sql = "SELECT id, designer_id, name FROM works";
               // ."ORDER BY '".$sortTarget."' DESC";
@@ -47,7 +47,6 @@ class illustration {
             $filePath;
 
             foreach( $exts as $ext) {
-                //$filePath = '../view/images/creator/2'.'.'.$ext;
                 $filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
 
                 if(is_file($filePath)) {
