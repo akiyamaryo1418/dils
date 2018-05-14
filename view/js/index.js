@@ -35,7 +35,7 @@ function Initialize(){
     		             .append($('<p></p>').html(data[index].imgname)));
     	}
 
-    	//$('.masonry').masonry({itemSelector: '.item', columnWidth: 400 });
+    	$('.masonry').masonry({itemSelector: '.item', columnWidth: 400 });
 
     	//$('.masonry').attr({'id':"thumbnail", 'data-masonry':'{"itemSelector": ".item", "columnWidth": 400 }'})
 
