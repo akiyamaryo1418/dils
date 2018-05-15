@@ -40,12 +40,14 @@ class user {
         // パスワードハッシュ作成、
         $hash = password_hash($password, PASSWORD_DEFAULT, $options);
         // パスワードハッシュからハッシュ化したパスワードを作成
-        $new_password = crypt($password, $hash);
+        // $new_password = crypt($password, $hash);
 
 
         // ユーザーをデータベースに登録
-        $sql = "INSERT INTO designers(name, password, hash)"
-            ."VALUES ('".$userName."', '".$new_password."', '".$hash."')";
+        // $sql = "INSERT INTO designers(name, password, hash)"
+        //     ."VALUES ('".$userName."', '".$new_password."', '".$hash."')";
+        $sql = "INSERT INTO designers(name, password)"
+            ."VALUES ('".$userName."', '".$hash."')";
 
         // 実行
         $stmt = $this->dbm->dbh->prepare($sql);
@@ -82,12 +84,9 @@ class user {
         $id = $data[0][value];
         $userName = $data[1][value];
 
-
         // ユーザーをデータベースに登録
-        $sql = "UPDATE designers SET "
-                    ."name = " .'".$userName."'
-              ."WHERE"
-                    ."id = " .'".$id."';
+        $sql = "UPDATE designers SET name = " .'".$userName."'
+              ."WHERE id = " .'".$id."';
 
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
@@ -141,22 +140,18 @@ class user {
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
-
         if($flag) {
             while ($row = $stmt->fetchObject())
             {
-                // データベースからパスワードハッシュを取得
-                // 入力されたパスワードをハッシュ化
-                $hash = $row->hash;
-                $encrypted_password  = $row->password;
-                $check_password = crypt($password, $hash);
-
                 // データベースにあるデータとの比較
-                if($encrypted_password == $check_password) {
+                $hash  = $row->password;
+                if(password_verify($password, $hash))
+                {
                     $result = array('id' => $row->id);
                 }
             }
         }else{
+            // ユーザーが存在しない
             $result = 'error';
         }
         echo json_encode( $result );
