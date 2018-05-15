@@ -71,10 +71,12 @@ function Initialize(){
 		timeout:1000,
     }).done(function(categorydata, dataType){
     	for(var index = 0; index < categorydata.length; index++){
-    		$('.SearchBoxfilter').append('<input>').attr({'type':'checkbox', 'name':'checkbox',
+    		/*$('.SearchBoxfilter').append('<input>').attr({'type':'checkbox', 'name':'checkbox',
     			                                          'id':categorydata[index].id, 'value':categorydata[index].id,
     			                                          'checked':'checked'})
-    			                 .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
+    			                 .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);*/
+    		$('.SearchBoxfilter').html('<input type="checkbox" name="checkbox" value="'categorydata[index].id'" id="'categorydata[index].id'" checked="checked" onchange="sortButton()">')
+    		                     .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
     	}
     }).fail(function(){
     	alert('NoData');
