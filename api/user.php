@@ -1,6 +1,7 @@
 
 <?php
 require_once('databaseManager.php');
+require_once('image.php');
 header('Content-type:application/json; charset=utf8');
 
 // 修正項目
@@ -14,7 +15,8 @@ class user {
     // データベース操作用クラス
     private $dbm;
 
-    const FILE_PATH = '../view/images/creator/';
+    // 画像送信用クラス
+    private $img;
 
     // コンストラクタ
     public function __construct() {
@@ -39,13 +41,9 @@ class user {
 
         // パスワードハッシュ作成、
         $hash = password_hash($password, PASSWORD_DEFAULT, $options);
-        // パスワードハッシュからハッシュ化したパスワードを作成
-        // $new_password = crypt($password, $hash);
 
 
         // ユーザーをデータベースに登録
-        // $sql = "INSERT INTO designers(name, password, hash)"
-        //     ."VALUES ('".$userName."', '".$new_password."', '".$hash."')";
         $sql = "INSERT INTO designers(name, password)"
             ."VALUES ('".$userName."', '".$hash."')";
 
@@ -69,6 +67,8 @@ class user {
 
             // todo
             // アイコン画像を作成したフォルダに入れる
+
+
         }else{
             $result = 1;
         }
@@ -148,6 +148,7 @@ class user {
                 if(password_verify($password, $hash))
                 {
                     $result = array('id' => $row->id);
+                    break;
                 }
             }
         }else{

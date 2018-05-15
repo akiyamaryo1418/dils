@@ -11,7 +11,7 @@ class image {
     private $dbm;
 
     // 共通部分のファイルパス
-    private $filePath = '../view/images/creator/';
+    // private $filePath = '../view/images/creator/';
 
 
     // コンストラクタ
@@ -19,18 +19,15 @@ class image {
         $this->dbm = new DatabaseManager();
     }
 
-
-
     public function upload($data) {
         $result;
 
         $fileData = $_FILES['file'];
         $designerId = '4';
         $name = 'テスト';
-        $date = date("Y/m/d H:i:s");
         $categoryId = '1';
 
-        if (getDataUpload($fileData, $designerId, $name, $date, $categoryId)) {
+        if (dataUpload($fileData, $designerId, $name, $categoryId)) {
             $result = 'success';
         } else {
             $result = 'failure';
@@ -39,19 +36,32 @@ class image {
     }
 
     // ファイルをサーバーに送信
-    private function getDataUpload($fileData, $designerId, $name, $date, $categoryId)
+    private function dataUpload($fileData, $designerId, $name, $categoryId)
     {
-        // ファイルの有無
+        // 画像ファイルの有無
         if(empty($fileData)) {
             return false;
         }
 
-        // 存在チェック
-        if (! file_exists($fileData)) {
+        $sql = "SELECT name FROM designeries WHERE id = ".$designerId;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        $filePath;
+        while ($row = $stmt->fetchObject())
+        {
+            $filePath = '../view/images/creator/'.$designerId.'_'.$row->name;
+        }
+
+        // ディレクトリの存在確認
+        if (! file_exists($filePath)) {
             return false;
         }
 
         try {
+            // 日時の取得
+            $date = date("Y/m/d H:i:s");
+
             // 画像情報をデータベースに登録
             $sql = "INSERT INTO works(designer_id, name, uploaded_at, category_id)"
                 ."VALUES ('".$designerId."', '".$name."', '".$date."', '".$categoryId."')";
@@ -67,9 +77,9 @@ class image {
 
             // ファイル名の設定
             $fileName = $designerId.'_'.$id;
-            $upload_name = $fileName.'.'.$ext;
+            $newName = $fileName.'.'.$ext;
 
-            $sql = "SELECT name FROM designeries WHERE id = ".$designerId;
+            /*$sql = "SELECT name FROM designeries WHERE id = ".$designerId;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
 
@@ -77,10 +87,10 @@ class image {
             {
                 $tmp = $filePath;
                 $filePath = $tmp.$row->name;
-            }
+            }*/
 
             // アップロード後のファイルの移動先
-            $destination = $filePath . $upload_name;
+            $destination = $filePath . $newName;
 
             // テンポラリからファイルを移動
             move_uploaded_file($fileData['tmp_name'], $destination);
