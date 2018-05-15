@@ -18,7 +18,7 @@ function Initialize(){
     }
 
     $.ajax({
-    	url      : '/dils/api/controller.php',
+    	url      : '/dils_test/api/controller.php',
     	type     : 'POST',
     	dataType : 'json',
     	data     :  data,
@@ -65,7 +65,7 @@ function Initialize(){
     // idとnameの値を取得してきてます。
     $.ajax({
     	type:'POST',
-		url:'/dils/api/controller.php',
+		url:'/dils_test/api/controller.php',
 		dataType:'json',
 		data:categorydata,
 		timeout:1000,
@@ -207,7 +207,7 @@ function sortButton(){
 
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '/dils_test/api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
@@ -235,7 +235,7 @@ function searchCategory(){
 	//alert(JSON.stringify(param));
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '/dils_test/api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
