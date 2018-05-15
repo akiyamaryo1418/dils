@@ -174,7 +174,7 @@ function sortButton(){
 		'list'   :  param
 	};
 
-	alert(param);
+	alert(JSON.stringify(param));
 
 	$.ajax({
 		url      : '/dils/api/controller.php',
