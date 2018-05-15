@@ -81,8 +81,10 @@ function Initialize(){
     		$('.SearchBoxfilter').append($input).append($label);
     	}*/
 
-    	$('.SearchBoxfilter').append($('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[0].id, 'value':categorydata[0].id, 'onchange':'searchCategory();'}))
-    			             .append($('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[0].name));
+    	/*$('.SearchBoxfilter').append($('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[0].id, 'value':categorydata[0].id, 'onchange':'searchCategory();'}))
+    			             .append($('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[0].name));*/
+    	$('.SearchBoxfilter').append($('<input type="checkbox" />').html('<input type="checkbox" name="checkbox" id="categoryid_'+categorydata[0].id'" value="categoryid_'+categorydata[0].id'" onchange="searchCategory();">'))
+                             .append($('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[0].name));
 
     }).fail(function(){
     	alert('NoData');
