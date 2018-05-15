@@ -27,7 +27,7 @@ function Initialize(){
     	//$('.masonry').masonry({itemSelector: '.item', columnWidth: 400 });
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
-    		$('.masonry').append($('<div></div>').attr({'id':data[index].id, 'class':'item'})
+    		$('.masonry').append($('<div></div>').attr({'id':data[index].id, 'class':'item', 'name':'illustration'})
     				     .html(  '<img src="'+result+'"'+
     		            		 'width="'+data[index].width+'"'+
     		            		 'height="'+data[index].height+'"'+
@@ -174,13 +174,15 @@ function moveInsertButton(){
 // ソート時のボタン(非同期)
 function sortButton(){
 
-	var param = "";
+	var param = $('#illustindex').serializeArray();
 
 	data = {
 		'model'  : 'indexsort',
 		'action' : 'sort',
 		'list'   :  param
 	};
+
+	alert(param);
 
 	$.ajax({
 		url      : '/dils/api/controller.php',
@@ -189,7 +191,8 @@ function sortButton(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		alert('Success');
+
+		//alert('Success');
 	}).fail(function(){
 		alert('NoData');
 	});
