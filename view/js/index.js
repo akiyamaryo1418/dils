@@ -55,6 +55,34 @@ function Initialize(){
     });
 
 
+    // カテゴリの動的生成
+    categorydata = {
+    		'model'  : 'category',
+    		'action' : 'info',
+    		'list'   : 'a'
+    };
+
+    // idとnameの値を取得してきてます。
+    $.ajax({
+    	type:'POST',
+		url:'/CustomerManagementWebSystem/Api/controller.php',
+		dataType:'json',
+		data:categorydata,
+		timeout:1000,
+    }).done(function(categorydata, dataType){
+    	for(var index = 0; index < categorydata.length; index++){
+    		$('.SearchBoxfilter').append('<input>').attr({'type':'checkbox', 'name':'checkbox',
+    			                                          'id':categorydata[index].id, 'value':categorydata[index].id,
+    			                                          'checked':'checked'})
+    			                 .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
+    	}
+    }).fail(function(){
+    	alert('NoData');
+    })
+
+
+
+
     /*$.fn.mk_thumbnails = function(options){
 
         return this.each(function(){
@@ -162,7 +190,7 @@ function moveInsertButton(){
 
 
 
-// ソート時のボタン(非同期)
+// ソート時のボタン
 function sortButton(){
 
 	var param = $('#sortindex').serializeArray();
@@ -174,7 +202,7 @@ function sortButton(){
 		'list'   :  param
 	};
 
-	alert(JSON.stringify(param));
+
 
 	$.ajax({
 		url      : '/dils/api/controller.php',
@@ -195,6 +223,15 @@ function searchCategory(){
 
 	var category = $('#category_id').val();
 
+	// 必要な情報はチェックボックスの状態
+	data = {
+		'model'  : 'categoryfilter',
+		'action' : 'sort',
+		'list'   :  param
+	};
+
+	//alert(JSON.stringify(param));
+
 	$.ajax({
 		url      : '/dils/api/controller.php',
 		type     : 'POST',
@@ -202,7 +239,18 @@ function searchCategory(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		alert('Success');
+		for(var index = 0; index < data.length; index++){
+    		var result = data[index].img.replace('view/', '');
+    		$('.masonry').append($('<div></div>').attr({'id':data[index].id, 'class':'item', 'name':'illustration'})
+    				     .html(  '<img src="'+result+'"'+
+    		            		 'width="'+data[index].width+'"'+
+    		            		 'height="'+data[index].height+'"'+
+    		            		 'alt="'+data[index].imgname+'">')
+    		             .append($('<p></p>').html(data[index].imgname)));
+    	}
+
+    	$('.masonry').masonry({itemSelector: '.item', columnWidth: 400 });
+		//alert('Success');
 	}).fail(function(){
 		alert('NoData');
 	});
