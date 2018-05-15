@@ -47,14 +47,16 @@
     </section>
     <!------ソート機能------->
     <section id="SearchBox">
+      <form id="sortindex">
       <ul id="SearchBoxSort">
         <li id="SearchAll"><a>ALL</a></li>
         <li id="SearchUpDeat">UP DATA</li>
         <li id="SeartReview">REVIEW</li>
       </ul>
+      </form>
       <!-----フィルタ検索機能------>
       <div class="SearchBoxfilter">
-        <form id="sortindex">
+        <form id="category_id">
         <input type="checkbox" name="Checkbox-chara" value="キャラ" id="chara" onchange="sortButton();"/>
         <label for="chara" class="check_css">キャラ</label>
         <input type="checkbox" name="Checkbox-bg" value="背景" id="bg" onchange="sortButton();"/>
