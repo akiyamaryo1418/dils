@@ -18,7 +18,7 @@ function Initialize(){
     }
 
     $.ajax({
-    	url      : '/dils/api/controller.php',
+    	url      : '/dils_test/api/controller.php',
     	type     : 'POST',
     	dataType : 'json',
     	data     :  data,
@@ -65,16 +65,18 @@ function Initialize(){
     // idとnameの値を取得してきてます。
     $.ajax({
     	type:'POST',
-		url:'/dils/api/controller.php',
+		url:'/dils_test/api/controller.php',
 		dataType:'json',
 		data:categorydata,
 		timeout:1000,
     }).done(function(categorydata, dataType){
     	for(var index = 0; index < categorydata.length; index++){
-    		$('.SearchBoxfilter').append('<input>').attr({'type':'checkbox', 'name':'checkbox',
+    		/*$('.SearchBoxfilter').append('<input>').attr({'type':'checkbox', 'name':'checkbox',
     			                                          'id':categorydata[index].id, 'value':categorydata[index].id,
     			                                          'checked':'checked'})
-    			                 .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
+    			                 .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);*/
+    		$('.SearchBoxfilter').html('<input type="checkbox" name="checkbox" value="'categorydata[index].id'" id="'categorydata[index].id'" checked="checked" onchange="sortButton()">')
+    		                     .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
     	}
     }).fail(function(){
     	alert('NoData');
@@ -205,7 +207,7 @@ function sortButton(){
 
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '/dils_test/api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
@@ -233,7 +235,7 @@ function searchCategory(){
 	//alert(JSON.stringify(param));
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '/dils_test/api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
