@@ -162,20 +162,12 @@ function moveInsertButton(){
 
 
 
-// 編集ボタン
-/*function moveEditButton(){
-
-	// ページ遷移の際にIDをアドレスの後ろにつける処理
-	var id = escape($('name').value);
-
-	location.href = "/dils/html/edit.html?"+id;
-}*/
-
 // ソート時のボタン(非同期)
 function sortButton(){
 
-	var param = $('#illustindex').serializeArray();
+	var param = $('#sortindex').serializeArray();
 
+	// 必要な情報はチェックボックスの状態
 	data = {
 		'model'  : 'indexsort',
 		'action' : 'sort',
