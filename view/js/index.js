@@ -24,7 +24,7 @@ function Initialize(){
     }).done(function(data, dataType){
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
-    		$('.masonry').append($('<div></div>').attr({'id':data[index].id, 'class':'item', 'name':'illustration'})
+    		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
     				     .html(  '<img src="'+result+'"'+
     		            		 'width="'+data[index].width+'"'+
     		            		 'height="'+data[index].height+'"'+
@@ -69,17 +69,18 @@ function Initialize(){
     }).done(function(categorydata, dataType){
     	// 最初にhtml()に設定しておく
     	//===============================================
-    	var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[0].id, 'value':categorydata[0].id, 'onchange':'searchCategory();'}).prop('checked',true);
+    	var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[0].id, 'value':categorydata[0].id, 'onchange':'searchCategory();'}).prop('checked',true);
 		var $label = $('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[0].name);
     	$('.SearchBoxfilter').html($input).append($label);
     	//===============================================
 
     	// 以下はappend()で追加するのみ
     	for(var index = 1; index < categorydata.length; index++){
-    		var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'onchange':'searchCategory();'}).prop('checked', true);
+    		var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[index].id, 'value':categorydata[index].id, 'onchange':'searchCategory();'}).prop('checked', true);
     		var $label = $('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
     		$('.SearchBoxfilter').append($input).append($label);
     	}
+
     }).fail(function(){
     	alert('NoData');
     })
@@ -167,8 +168,8 @@ function sortButton(){
 // フィルタ検索機能(ジャンル)
 function searchCategory(){
 
-	var param = $('#category_id').serializeArray();
-	//console.log(param);
+	var param = $('#categoryfilter').serializeArray();
+	alert(JSON.stringify(param));
 
 	// 必要な情報はチェックボックスの状態
 	data = {
@@ -189,7 +190,7 @@ function searchCategory(){
 	}).done(function(data, dataType){
 		for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
-    		$('.masonry').append($('<div></div>').attr({'id':data[index].id, 'class':'item', 'name':'illustration'})
+    		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
     				     .html(  '<img src="'+result+'"'+
     		            		 'width="'+data[index].width+'"'+
     		            		 'height="'+data[index].height+'"'+
