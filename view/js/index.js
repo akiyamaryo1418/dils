@@ -210,7 +210,6 @@ function sortButton(){
 	};
 
 
-
 	$.ajax({
 		url      : '/dils_test/api/controller.php',
 		type     : 'POST',
@@ -228,7 +227,7 @@ function sortButton(){
 // フィルタ検索機能(ジャンル)
 function searchCategory(){
 
-	var category = $('#category_id').serializeArray();
+	var param = $('#category_id').serializeArray();
 
 	// 必要な情報はチェックボックスの状態
 	data = {
@@ -237,6 +236,7 @@ function searchCategory(){
 		'list'   :  param
 	};
 
+	console.log(param);
 	alert(JSON.stringify(param));
 
 	$.ajax({
