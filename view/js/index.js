@@ -22,7 +22,6 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//$('.masonry').masonry({itemSelector: '.item', columnWidth: 400 });
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div></div>').attr({'id':data[index].id, 'class':'item', 'name':'illustration'})
