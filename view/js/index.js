@@ -71,7 +71,7 @@ function Initialize(){
 		timeout:1000,
     }).done(function(categorydata, dataType){
     	var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[0].id, 'value':categorydata[0].id, 'checked':'checked', 'onchange':'sortButton();'});
-		var $label = $('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[index].name);
+		var $label = $('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[0].name);
     	$('.SearchBoxfilter').html($input).append($label);
     	for(var index = 1; index < categorydata.length; index++){
     		/*$('.SearchBoxfilter').append('<input>').attr({'type':'checkbox', 'name':'checkbox',
