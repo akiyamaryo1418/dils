@@ -75,7 +75,7 @@ function Initialize(){
     			                                          'id':categorydata[index].id, 'value':categorydata[index].id,
     			                                          'checked':'checked'})
     			                 .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);*/
-    		$('.SearchBoxfilter').html('<input type="checkbox" name="checkbox" value="'categorydata[index].id'" id="'categorydata[index].id'" checked="checked" onchange="sortButton();">')
+    		$('.SearchBoxfilter').append('<input type="checkbox">').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'checked':'checked', 'onchange':'sortButton();'})
     		                     .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
     	}
     }).fail(function(){
