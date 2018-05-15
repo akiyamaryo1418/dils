@@ -69,14 +69,14 @@ function Initialize(){
     }).done(function(categorydata, dataType){
     	// 最初にhtml()に設定しておく
     	//===============================================
-    	var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[0].id, 'value':categorydata[0].id, 'onchange':'searchCategory();'});
+    	var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[0].id, 'value':categorydata[0].id, 'onclick':'searchCategory();'});
 		var $label = $('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[0].name);
     	$('.SearchBoxfilter').html($input).append($label);
     	//===============================================
 
     	// 以下はappend()で追加するのみ
     	for(var index = 1; index < categorydata.length; index++){
-    		var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[index].id, 'value':categorydata[index].id, 'onchange':'searchCategory();'});
+    		var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[index].id, 'value':categorydata[index].id, 'onclick':'searchCategory();'});
     		var $label = $('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
     		$('.SearchBoxfilter').append($input).append($label);
     	}
@@ -168,6 +168,7 @@ function sortButton(){
 // フィルタ検索機能(ジャンル)
 function searchCategory(){
 
+	alert('Success');
 	var param = $('#categoryfilter').serializeArray();
 	alert(JSON.stringify(param));
 
