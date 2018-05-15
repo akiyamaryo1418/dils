@@ -70,8 +70,8 @@ function Initialize(){
 		data:categorydata,
 		timeout:1000,
     }).done(function(categorydata, dataType){
-    	var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'checked':'checked', 'onchange':'sortButton();'});
-		var $label = $('<label>'categorydata[index].name'</label>').attr({'for':categorydata[index].name, 'class':'check_css'});
+    	var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[0].id, 'value':categorydata[0].id, 'checked':'checked', 'onchange':'sortButton();'});
+		var $label = $('<label>"'categorydata[0].name'"</label>').attr({'for':categorydata[0].name, 'class':'check_css'});
     	$('.SearchBoxfilter').html($input).append($label);
     	for(var index = 1; index < categorydata.length; index++){
     		/*$('.SearchBoxfilter').append('<input>').attr({'type':'checkbox', 'name':'checkbox',
@@ -79,7 +79,7 @@ function Initialize(){
     			                                          'checked':'checked'})
     			                 .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);*/
     		var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'checked':'checked', 'onchange':'sortButton();'});
-    		var $label = $('<label>'categorydata[index].name'</label>').attr({'for':categorydata[index].name, 'class':'check_css'});
+    		var $label = $('<label>"'categorydata[index].name'"</label>').attr({'for':categorydata[index].name, 'class':'check_css'});
     		/*$('.SearchBoxfilter').append('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'checked':'checked', 'onchange':'sortButton();'})
     		                     .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);*/
     		$('.SearchBoxfilter').append($input).append($label);
