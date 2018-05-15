@@ -45,7 +45,7 @@ class illustration {
             $conditions = $tmp;
         }
 
-        if($array[1] != "") {
+        if($array[2] != "") {
             if($conditions != "") {
                 $tmp = $conditions.' and ';
                 $conditions = $tmp;
@@ -136,15 +136,54 @@ class illustration {
 
     public function insert($data) {
 
-        echo json_encode( '作品登録' );
+
     }
 
     public function edit($data) {
-        echo json_encode( '作品編集' );
+        $result;
+
+        $id = $data[0][value];
+        $name = $data[1][value];
+        $categoryId = $data[2][value];
+
+        // ユーザーをデータベースに登録
+        $sql = "UPDATE works SET name = ".$name.", category_Id = ".$categoryId." "
+              ."WHERE id = ".$id;
+
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();
+
+        if($flag) {
+            $result = 0;
+        }else{
+            $result = 1;
+        }
+        echo json_encode( $result );
+
     }
 
     public function delete($data) {
-        echo json_encode( '作品削除' );
+        $id = $data[0][value];
+        $name = $data[1][value];
+        $designerId = $data[2][value];
+
+        // DBから作品の削除
+        $sql = "DELETE FROM works WHERE id = ".$id;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();
+
+        // todo
+        // DBからIDに対応する評価を削除する
+
+        // todo
+        // サーバー上の画像の削除
+
+        if($flag) {
+            $result = 0;
+        }else{
+            $result = 1;
+        }
+        echo json_encode( $result );
     }
 }
 

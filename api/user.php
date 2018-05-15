@@ -85,8 +85,7 @@ class user {
         $userName = $data[1][value];
 
         // ユーザーをデータベースに登録
-        $sql = "UPDATE designers SET name = " .'".$userName."'
-              ."WHERE id = " .'".$id."';
+        $sql = "UPDATE designers SET name = ".$userName." WHERE id = " .$id;
 
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
