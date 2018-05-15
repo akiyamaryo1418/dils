@@ -75,8 +75,11 @@ function Initialize(){
     			                                          'id':categorydata[index].id, 'value':categorydata[index].id,
     			                                          'checked':'checked'})
     			                 .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);*/
-    		/*$('.SearchBoxfilter').append('<input type="checkbox">').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'checked':'checked', 'onchange':'sortButton();'})
+    		var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'checked':'checked', 'onchange':'sortButton();'});
+    		var $label = $('<label>'categorydata[index].name'</label>').attr({'for':categorydata[index].name, 'class':'check_css'});
+    		/*$('.SearchBoxfilter').append('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'checked':'checked', 'onchange':'sortButton();'})
     		                     .append('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);*/
+            $('.SearchBoxfilter').append($input).append($label);
     	}
     }).fail(function(){
     	alert('NoData');
