@@ -77,6 +77,7 @@ header li a {
   margin: 30px 0;
   font-size: 14px;
   color: #fff;
+  text-decoration: none;
 }
 
 /*--------------------------------------------------
@@ -110,7 +111,7 @@ header li a {
 }
 
 #SearchBoxSort {
-  width: 320px;
+  width: 323px;
   height: 45px;
   float: left;
   position: relative;
@@ -141,6 +142,11 @@ header li a {
 
 #SearchBoxSort li#SeartReview:hover {
   background: rgba(255,124,127,0.8);
+}
+
+
+#SeartReview {
+  border-right: solid 2px #fff;
 }
 /*：：：：チェックボックス：：：：*/
 .SearchBoxfilter {
@@ -205,10 +211,6 @@ input[type=checkbox]:checked + .check_css:before {
   opacity: 1;
 }
 
-
-#SeartReview {
-  border-right: solid 2px #fff;
-}
 
 #SearchBoxfilter div {
   float: left;

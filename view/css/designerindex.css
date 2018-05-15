@@ -18,7 +18,7 @@ body {
 }
 
 #wrap {
-  width: 900px;
+  width: 1160px;
   margin:0 auto;
 }
 
@@ -83,45 +83,75 @@ header li a {
 /*--------------------------------------------------
 	3. main
 --------------------------------------------------*/
-#LoginPage {
-  width: 800px;
+#contentabox {
+  width: 1160px;
   margin: 0 auto;
 }
 
-#LoginPage h1 {
-  margin: 120px 0;
-  font-size: 36px;
+#contentsbox h1 {
+  font-size: 14px;
+  margin: 21px 0 0 13px;
 }
 
-#LoginPage form {
-  width: 340px;
-  margin: 140px auto 0;
+.creatersortbox {
+  width: 1160px;
+  height: 22px;
+  padding: 7px 0 15px 0;
 }
 
-input {
-  width: 330px;
-  height: 23px;
-  margin: 10px 0 23px;
+.creatersortbox ul {
+  float: right;
+  list-style: none;
 }
 
-input.button {
-  height: 36px;
-  margin: 24px 0 10px;
-  color: #fff;
-  background: #000;
+.creatersortbox ul li {
+  float: left;
+  width: 70px;
+  height: 22px;
+  text-align: center;
+  border-left: 1px solid #000;
 }
 
-p.text {
-  width: 330px;
-  margin: 5px auto 280px;
+#SortOther {
+  border-right: 1px solid #000;
+}
+
+.creatersortbox li span {
+  font-size: 10px;
+  color: #333333;
+}
+
+.listbox {
+  min-width: 960px;
+  height: 580px;
+  margin: 0 0 150px 0;
+}
+
+.listbox ul {
+  width: 1150px;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.listbox ul li {
+  float: left;
+  width: 115px;
+  height: 125px;
+  padding-bottom: 20px;
+  color: #000;
+  cursor: pointer;
   text-align: center;
 }
 
-p.text a {
-  text-decoration: none;
-  color: #000;
+.listbox ul li div {
+  font-size: 12px;
 }
 
+
+img {
+  width: 105px;
+  border: 1px solid #ccc;
+}
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
