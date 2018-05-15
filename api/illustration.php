@@ -28,6 +28,38 @@ class illustration {
 
         $sql = "SELECT id, designer_id, name FROM works";
               // ."ORDER BY '".$sortTarget."' DESC";
+
+        // 検索条件
+        /*$conditions;
+
+        if($array[0] != "") {
+            $conditions = "category_id = ".$array[0];
+        }
+
+        if($array[1] != "") {
+            if($conditions != "") {
+                $tmp = $conditions.' and ';
+                $conditions = $tmp;
+            }
+            $tmp = $conditions."category_id = ".$array[0];
+            $conditions = $tmp;
+        }
+
+        if($array[1] != "") {
+            if($conditions != "") {
+                $tmp = $conditions.' and ';
+                $conditions = $tmp;
+            }
+            $tmp = $conditions."category_id = ".$array[0];
+            $conditions = $tmp;
+        }
+
+        $target = $array[1];
+
+
+        $sql = "SELECT id, designer_id, name FROM works"
+            ."WHERE ".$conditions." ORDER BY " .$target. " DESC";*/
+
         $stmt = $this->dbm->dbh->prepare($sql);
         $stmt->execute();
 
@@ -103,6 +135,7 @@ class illustration {
     }
 
     public function insert($data) {
+
         echo json_encode( '作品登録' );
     }
 
