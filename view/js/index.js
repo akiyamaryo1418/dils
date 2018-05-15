@@ -68,17 +68,16 @@ function Initialize(){
 		data:categorydata,
 		timeout:1000,
     }).done(function(categorydata, dataType){
-    	console.log(categorydata.length);
     	// 最初にhtml()に設定しておく
     	//===============================================
-    	var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[0].id, 'value':categorydata[0].id, 'checked':'checked', 'onchange':'searchCategory();'});
+    	var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[0].id, 'value':categorydata[0].id, 'onchange':'searchCategory();'}).prop('checked': true);
 		var $label = $('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[0].name);
     	$('.SearchBoxfilter').html($input).append($label);
     	//===============================================
 
     	// 以下はappend()で追加するのみ
     	for(var index = 1; index < categorydata.length; index++){
-    		var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'checked':'checked', 'onchange':'searchCategory();'});
+    		var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': categorydata[index].id, 'value':categorydata[index].id, 'onchange':'searchCategory();'}).prop('checked': true);
     		var $label = $('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
     		$('.SearchBoxfilter').append($input).append($label);
     	}
@@ -170,12 +169,12 @@ function sortButton(){
 function searchCategory(){
 
 	var param = $('#category_id').serializeArray();
-	console.log(param);
+	//console.log(param);
 
 	// 必要な情報はチェックボックスの状態
 	data = {
 		'model'  : 'categoryfilter',
-		'action' : 'sort',
+		'action' : 'filter',
 		'list'   :  param
 	};
 
