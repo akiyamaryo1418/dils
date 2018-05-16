@@ -17,57 +17,33 @@ class illustration {
     public function index($data) {
         $result;
 
-        // 全件データの取得
-        /*$filePath = '../view/images/creator/*';
-
-        foreach(glob($filePath) as $file){
-        if(is_file($file)){
-            $result[] = $file;
-        }
-        echo json_encode($result);*/
-
-
-
-        // ソートの対象
-        // $sortTarget = $data[0][value];
-        // 表示する作品カテゴリー
-        // $categories = $data[1][value];
-
         $exts = ['jpg', 'png'];
 
-        $sql = "SELECT id, designer_id, name FROM works";
+        //$sql = "SELECT id, designer_id, name FROM works";
         // ."ORDER BY '".$sortTarget."' DESC";
 
         // 検索条件
-        /*$conditions;
-
-        if($array[0] != "") {
-        $conditions = "category_id = ".$array[0];
+        $conditions;
+        for($num = 0; $num < count($data); $num++) {
+            if($conditions != "") {
+                $tmp = $conditions.' or ';
+                $conditions = $tmp;
+            }
+            $tmp = $conditions."category_id = ".$data[$num][value];
+            $conditions = $tmp;
         }
 
-        if($array[1] != "") {
+        //$target = $array[1];
+
+        $sql;
         if($conditions != "") {
-        $tmp = $conditions.' and ';
-        $conditions = $tmp;
+            $sql = "SELECT id, designer_id, name FROM works WHERE ".$conditions;
+            // ."WHERE ".$conditions." ORDER BY " .$target. " DESC";
         }
-        $tmp = $conditions."category_id = ".$array[0];
-        $conditions = $tmp;
-        }
-
-        if($array[1] != "") {
-        if($conditions != "") {
-        $tmp = $conditions.' and ';
-        $conditions = $tmp;
-        }
-        $tmp = $conditions."category_id = ".$array[0];
-        $conditions = $tmp;
+        else {
+            $result = 0;
         }
 
-        $target = $array[1];
-
-
-        $sql = "SELECT id, designer_id, name FROM works"
-        ."WHERE ".$conditions." ORDER BY " .$target. " DESC";*/
 
         $stmt = $this->dbm->dbh->prepare($sql);
         $stmt->execute();
@@ -80,7 +56,6 @@ class illustration {
 
             foreach( $exts as $ext) {
                 $filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
-
                 if(is_file($filePath)) {
                     break;
                 }
@@ -97,8 +72,6 @@ class illustration {
                 'imgname'  => $row->name,
             );
         }
-
-
         echo json_encode( $result );
     }
 

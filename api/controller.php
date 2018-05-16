@@ -15,7 +15,6 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
 
     $func = $_POST['action'];
     $data = $_POST['list'];
-
     $className->$func($data);
 }
 ?>
