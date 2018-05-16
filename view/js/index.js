@@ -16,7 +16,7 @@ function Initialize(){
     }
 
     $.ajax({
-    	url      : '/dils_test/api/controller.php',
+    	url      : '../../api/controller.php',
     	type     : 'POST',
     	dataType : 'json',
     	data     :  data,
@@ -33,20 +33,6 @@ function Initialize(){
     	}
 
     	$('.masonry').masonry({itemSelector: '.item', columnWidth: 400 });
-
-    	//$('.masonry').attr({'id':"thumbnail", 'data-masonry':'{"itemSelector": ".item", "columnWidth": 400 }'})
-
-    	/*for(var index = 0; index < data.length; index++){
-
-    		var result = data[index].img.replace('view/', '');
-    		$('.masonry').append($('<div></div>').attr('id', data[index].id)
-    		             .append($('<div></div>').html(
-    		            		 '<img src="'+result+" ' "+
-    		            		 'width="'+data[index].width+" ' "+
-    		            		 'height="'+data[index].height+" ' "+
-    		            		 'alt="'+data[index].imgname+'">'))
-    		             .append($('<p></p>').html(data[index].imgname)));
-    	}*/
     }).fail(function(){
     	alert('NoData');
     });
@@ -62,31 +48,15 @@ function Initialize(){
     // idとnameの値を取得してきてます。
     $.ajax({
     	type:'POST',
-		url:'/dils_test/api/controller.php',
+		url:'../../api/controller.php',
 		dataType:'json',
 		data:categorydata,
 		timeout:1000,
     }).done(function(categorydata, dataType){
-    	// 最初にhtml()に設定しておく
-    	//===============================================
-    	/*var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[0].id, 'value':categorydata[0].id, 'onchange':'searchCategory();'});
-		var $label = $('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[0].name);
-    	$('.SearchBoxfilter').html($input).append($label);
-    	//===============================================
-
-    	// 以下はappend()で追加するのみ
-    	for(var index = 1; index < categorydata.length; index++){
-    		var $input = $('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[index].id, 'value':categorydata[index].id, 'onchange':'searchCategory();'});
-    		var $label = $('<label></label>').attr({'for':categorydata[index].name, 'class':'check_css'}).html(categorydata[index].name);
-    		$('.SearchBoxfilter').append($input).append($label);
-    	}*/
-
-
-    	/*$('.SearchBoxfilter').append($('<input type="checkbox" />').attr({'name':'checkbox', 'id': 'categoryid_'+categorydata[0].id, 'value':categorydata[0].id, 'onchange':'searchCategory();'}))
-    			             .append($('<label></label>').attr({'for':categorydata[0].name, 'class':'check_css'}).html(categorydata[0].name));*/
-    	$('.SearchBoxfilter').append('<input type="checkbox" name="checkbox" id="categoryid_1" value="categoryid_1" onchange="searchCategory();">')
-                             .append($('<label></label>').attr({'for':'categoryid_1', 'class':'check_css'}).html(categorydata[0].name));
-
+    	for(var index = 0; index < categorydata.length; index++){
+    		$('.SearchBoxfilter').append('<input type="checkbox" name="checkbox" id="categoryid_'+ categorydata[index].id +'" value="'+ categorydata[index].id +'" checked="checked" onchange="searchCategory();">')
+            .append($('<label></label>').attr({'for':'categoryid_'+categorydata[index].id, 'class':'check_css'}).html(categorydata[index].name));
+    	}
     }).fail(function(){
     	alert('NoData');
     })
@@ -116,27 +86,27 @@ function moveHeadButton(){
 
 // トップページへ移動
 function moveTopPage(){
-	location.href = "/dils/html/index.html";
+	location.href = "../html/index.html";
 }
 
 // 制作者一覧へ移動
 function moveDesignerIndex(){
-	location.href = "/dils/html/designerindex.html";
+	location.href = "../html/designerindex.html";
 }
 
 // ログインページへ移動
 function moveLoginPage(){
-	location.href = "/dils/html/login.html";
+	location.href = "../html/login.html";
 }
 
 // マイページへ移動
 function moveMyPageButton(){
-	location.href = "/dils/html/mypage.html";
+	location.href = "../html/mypage.html";
 }
 
 // 新規登録ボタン
 function moveInsertButton(){
-	location.href = "/dils/html/insert.html";
+	location.href = "../html/insert.html";
 }
 
 // ライトボックス
@@ -158,7 +128,7 @@ function sortButton(){
 
 
 	$.ajax({
-		url      : '/dils_test/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
@@ -174,27 +144,29 @@ function sortButton(){
 // フィルタ検索機能(ジャンル)
 function searchCategory(){
 
-	alert('Success');
-	var param = $('#categoryfilter').serializeArray();
-	alert(JSON.stringify(param));
+	//alert('Success');
+	var param = $('#SearchAndFilter').serializeArray();
+	//alert(JSON.stringify(param));
 
 	// 必要な情報はチェックボックスの状態
 	data = {
-		'model'  : 'categoryfilter',
-		'action' : 'filter',
+		'model'  : 'illustration',
+		'action' : 'index',
 		'list'   :  param
 	};
 
-	console.log(param);
+	//console.log(param);
 	alert(JSON.stringify(param));
 
 	$.ajax({
-		url      : '/dils_test/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
+		$('.item').remove();
+
 		for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})

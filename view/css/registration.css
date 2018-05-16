@@ -87,12 +87,19 @@ header li a {
   font-size: 14px;
   color: #fff;
   text-decoration: none;
-  
+
 }
 
 /*--------------------------------------------------
 	3. main
 --------------------------------------------------*/
+img{
+	width:30%;
+	margin:auto;
+	display:block;
+	margin-bottom:10px;
+}
+
 #Registration {
   width: 800px;
   margin: 0 auto;
@@ -101,7 +108,7 @@ header li a {
 #Registration h1 {
   margin: 120px 0;
   font-size: 36px;
-} 
+}
 
 #Registration form {
   width: 340px;
@@ -182,7 +189,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {

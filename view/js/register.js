@@ -33,6 +33,48 @@ function inputRegistrationButton(){
     });
 }
 
+function selectImage(){
+
+
+
+
+	// Vue.jsの処理
+	new Vue({
+		el: '#previewbox',
+		data() {
+			return {
+				uploadedImage: '',
+			};
+		},
+		methods: {
+			onFileChange(e){
+				var files = e.target.files || e.dataTransfer.files;
+				if(!files.length)
+					return;
+				this.createImage(files[0]);
+			},
+			// アップロードした画像を表示
+			createImage(file){
+				var reader = new FileReader();
+				reader.onload = (e) => {
+					this.uploadedImage = e.target.result;
+				};
+				reader.readAsDataURL(file);
+			},
+		},
+	})
+
+}
+
+
+/*var app = new Vue({
+	el: '#app',
+	data: {
+		message: 'TEST'
+	}
+})*/
+
+
 // バリデーションチェック
 function checkValidation(){
 
