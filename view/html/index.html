@@ -20,11 +20,11 @@
   <body>
     <!--------ヘッダー------->
     <header>
-      <h1><a href="#">Designer Works</a></h1>
+      <h1><a href="index.html">Designer Works</a></h1>
       <nav class="login">
         <ul>
           <li><a>制作者一覧</a></li>
-          <li><a>LOGIN</a></li>
+          <li><a href="login.html">LOGIN</a></li>
         </ul>
       </nav>
       <nav class="mypage">
@@ -47,29 +47,30 @@
     </section>
     <!------ソート機能------->
     <section id="SearchBox">
-      <form id="sortindex">
       <ul id="SearchBoxSort">
         <li id="SearchAll"><a>ALL</a></li>
         <li id="SearchUpDeat">UP DATA</li>
         <li id="SeartReview">REVIEW</li>
       </ul>
-      </form>
+      
       <!-----フィルタ検索機能------>
-      <form id="categoryfilter">
       <div class="SearchBoxfilter">
-
+        <input type="checkbox" name="Checkbox-chara" value="キャラ" id="chara" />
+        <label for="chara" class="check_css">キャラ</label>
+        <input type="checkbox" name="Checkbox-bg" value="背景" id="bg" />
+        <label for="bg" class="check_css">背景</label>
+        <input type="checkbox" name="Checkbox-item" value="アイテム" id="item" />
+        <label for="item" class="check_css">アイテム</label>
       </div>
-      </form>
     </section>
     <div id="wrapper">
-      <form id="illustindex">
+      <!--data-masonry='{ "itemSelector": ".item", "columnWidth": 400 }'-->
       <div class="masonry" id="thumbnail">
         <div class="item">
           <img src="../images/top/kawaii2.jpg" alt=""/>
           <p>title 1</p>
         </div>
       </div>
-      </form>
     </div>
     </div>
     <footer>

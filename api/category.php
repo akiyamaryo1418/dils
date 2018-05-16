@@ -13,7 +13,7 @@ class category {
         $this->dbm = new DatabaseManager();
     }
 
-    public function info($data) {
+    public function get() {
         // 返却用の配列
         $return_list = null;
 

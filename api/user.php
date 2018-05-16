@@ -1,7 +1,6 @@
 
 <?php
 require_once('databaseManager.php');
-require_once('image.php');
 header('Content-type:application/json; charset=utf8');
 
 // 修正項目
@@ -14,9 +13,6 @@ header('Content-type:application/json; charset=utf8');
 class user {
     // データベース操作用クラス
     private $dbm;
-
-    // 画像送信用クラス
-    private $img;
 
     // コンストラクタ
     public function __construct() {
@@ -33,19 +29,9 @@ class user {
         $userName = $data[0][value];
         $password = $data[1][value];
 
-        // ソルトをランダムで生成
-        $options = [
-            'cost' => 11,
-            'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-        ];
-
-        // パスワードハッシュ作成、
-        $hash = password_hash($password, PASSWORD_DEFAULT, $options);
-
-
         // ユーザーをデータベースに登録
         $sql = "INSERT INTO designers(name, password)"
-            ."VALUES ('".$userName."', '".$hash."')";
+              ."VALUES ('".$userName."', '".$password."')";
 
         // 実行
         $stmt = $this->dbm->dbh->prepare($sql);
@@ -67,15 +53,13 @@ class user {
 
             // todo
             // アイコン画像を作成したフォルダに入れる
-
-
         }else{
             $result = 1;
         }
         echo json_encode( $result );
     }
 
-    // 編集
+
     public function edit($data) {
 
         $result;
@@ -84,8 +68,12 @@ class user {
         $id = $data[0][value];
         $userName = $data[1][value];
 
+
         // ユーザーをデータベースに登録
-        $sql = "UPDATE designers SET name = ".$userName." WHERE id = " .$id;
+        $sql = "UPDATE designers SET "
+                    ."name = " .'".$userName."'
+              ."WHERE"
+                    ."id = " .'".$id."';
 
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
@@ -101,7 +89,6 @@ class user {
         echo json_encode( $result );
     }
 
-    // 削除
     public function delete($data) {
         $result;
 
@@ -124,7 +111,6 @@ class user {
         echo json_encode( $result );
     }
 
-    // ログイン
     public function login($data) {
         $result;
 
@@ -132,9 +118,9 @@ class user {
         $userName = $data[0][value];
         $password = $data[1][value];
 
-        // ユーザー名に合致するデータの取得
-        $sql = "SELECT * FROM designers "
-            ."WHERE name = '".$userName."' ";
+        $sql = "SELECT id FROM designers "
+              ."WHERE name = '".$userName."' "
+                  ."and password = '".$password."' ";
 
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
@@ -142,20 +128,12 @@ class user {
         if($flag) {
             while ($row = $stmt->fetchObject())
             {
-                // データベースにあるデータとの比較
-                $hash  = $row->password;
-                if(password_verify($password, $hash))
-                {
-                    $result = array('id' => $row->id);
-                    break;
-                }
+                $result[] = array('id' => $row->id);
             }
         }else{
-            // ユーザーが存在しない
-            $result = 'error';
+            $result = 1;
         }
         echo json_encode( $result );
-
     }
 }
 
