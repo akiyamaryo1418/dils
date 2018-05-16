@@ -109,11 +109,11 @@ header li a {
   width: 70px;
   height: 22px;
   text-align: center;
-  border-left: 1px solid #000;
+  border-left: 2px solid #000;
 }
 
 #SortOther {
-  border-right: 1px solid #000;
+  border-right: 2px solid #000;
 }
 
 .creatersortbox li span {
@@ -147,11 +147,16 @@ header li a {
   font-size: 12px;
 }
 
-
 img {
   width: 105px;
   border: 1px solid #ccc;
 }
+
+.creatersortbox ul li:hover {
+  background: #99ccff;
+}
+
+
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
