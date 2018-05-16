@@ -90,21 +90,40 @@ header li a {
   width: 1000px;
   height: 372px;
   margin: 0 auto;
-  background: #ccc;
 }
 
 .creatoricon {
   width: 200px;
   height: 200px;
-  background: #333;
+  float: left;
+  padding: 80px 40px 70px 0;
 }
 
 .creatoricon img {
   width: 200px;
   height: 200px;
+  border: 2px solid #eee;
 }
 
+.creatorname {
+  float: left;
+  width: 250px;
+  margin: 100px 0 50px;
+}
 
+span {
+  font-size: 12px;
+}
+
+p.return {
+  float: right;
+  margin: 330px 0 0 0;
+}
+
+p.return a {
+  text-decoration: none;
+  color: #000;
+}
 
 /*：：：：検索：：：：*/
 #SearchBox {
