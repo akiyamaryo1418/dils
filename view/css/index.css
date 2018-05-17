@@ -1,0 +1,9 @@
+
+div.item{
+	width    : 250px;
+	height   : 250px;
+	overflow : hidden;
+	border   : solid 1px #666;
+}
+
+.item img { position : relative; }

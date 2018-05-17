@@ -33,42 +33,96 @@ function inputRegistrationButton(){
     });
 }
 
-function selectImage(){
-
-
-
-
-	// Vue.jsの処理
-	new Vue({
-		el: '#previewbox',
-		data() {
-			return {
-				uploadedImage: '',
-			};
-		},
-		methods: {
-			onFileChange(e){
-				var files = e.target.files || e.dataTransfer.files;
-				if(!files.length)
-					return;
-				this.createImage(files[0]);
-			},
-			// アップロードした画像を表示
-			createImage(file){
-				var reader = new FileReader();
-				reader.onload = (e) => {
-					this.uploadedImage = e.target.result;
-				};
-				reader.readAsDataURL(file);
-			},
-		},
-	})
-
+// 一覧画面へ移動
+function moveIndex(){
+    location.href = "../html/index.html";
 }
 
+/*function selectImage(){*/
 
-/*var app = new Vue({
-	el: '#app',
+// Vue.jsの処理
+new Vue({
+	el: '#previewbox',
+	data() {
+		return {
+			uploadedImage: '',
+		};
+	},
+	methods: {
+		onFileChange(e){
+			var files = e.target.files || e.dataTransfer.files;
+			if(!files.length)
+				return;
+			this.createImage(files[0]);
+		},			// アップロードした画像を表示
+		createImage(file){
+			var reader = new FileReader();
+			reader.onload = (e) => {
+				// トリミング処理
+				this.uploadedImage = e.target.result;
+				//this.uploadedImage = triming(this.uploadedImage);
+				//triming(this.uploadedImage);
+			};
+			alert('aaa');
+			//this.uploadedImage = triming(this.uploadedImage);
+			reader.readAsDataURL(file);
+		},
+	},
+})
+
+// トリミング
+function triming(img){
+	// class="previewbox"のimgタグに適用
+	var $image = $('.previewbox > img'),replaced;
+
+	// 何か適用している
+	//console.log($image);
+
+	//console.log(img.images);
+
+	// crop options
+	$(img.images).cropper({ aspectRatio : 4 / 4 });
+
+
+    //var data = $('#img').cropper('onFileChange');
+	var data = $(img.images).cropper('onFileChange');
+
+    console.log(data);
+
+    console.log(data.width);
+    console.log(data.height);
+    console.log(data.x);
+    console.log(data.y);
+
+    // 切り抜きした画像のデータ
+    // このデータを元に画像の切り抜きが行われる
+    var image = {
+    		width  : Math.round(data.width),
+    		height : Math.round(data.height),
+    		x      : Math.round(data.x),
+    		y      : Math.round(data.y)
+    };
+
+    return image;
+}
+/*}*/
+
+/*var vm =  new Vue({
+		el: '#previewbox',
+	data: {
+		message: '',
+		inputMessage: ''
+	},
+	methods: {
+		// getMessageを発火させると文字列が代入される
+		getMessage: function(){
+			this.message = this.inputMessage
+		}
+	  }
+	})*/
+
+/*new Vue({
+	el: '#previewbox',
 	data: {
 		message: 'TEST'
 	}
