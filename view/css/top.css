@@ -215,7 +215,7 @@ input[type=checkbox]:checked + .check_css:before {
 #SearchBoxfilter div {
   float: left;
   width: 90px;
-  
+
 }
 /*：：：：：作品一覧：：：：：*/
 
@@ -231,20 +231,31 @@ input[type=checkbox]:checked + .check_css:before {
   margin: 0 auto;
 }
 
-.item {
+/*.item {
   float: left;
   width: 140px;
   margin: 10px;
   padding: 8px;
   border: 1px solid #eee;
+}*/
+
+div.item {
+  width   : 250px;
+  height  : 250px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
 }
+
+.cle { clear: both; }
 
 .item.x2 {
   width: 320px;
 }
 
 .item img {
-  width: 100%;
+  /*width: 100%;*/
+  position : relative;
 }
 
 
@@ -276,7 +287,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {

@@ -27,14 +27,17 @@ function Initialize(){
     		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
     				     .html(  '<img src="'+result+'"'+
-    		            		 'width="'+data[index].width+'"'+
-    		            		 'height="'+data[index].height+'"'+
     		            		 'alt="'+data[index].imgname+'">')
     		             .append($('<p></p>').html(data[index].imgname)));
+
+    		console.log(data[index].width);
+    		console.log(data[index].height);
     	}
 
     	triming();
-    	$('.masonry').masonry({itemSelector: '.item', columnWidth: 300 });
+    	$('.masonry').append($('<div></div>').attr({'class': 'cle' }));
+    	$('.masonry').masonry({itemSelector: '.item', columnWidth : 300 });
+
     }).fail(function(){
     	alert('NoData');
     });
@@ -173,8 +176,6 @@ function searchCategory(){
     		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
     				     .html(  '<img src="'+result+'"'+
-    		            		 'width="'+data[index].width+'"'+
-    		            		 'height="'+data[index].height+'"'+
     		            		 'alt="'+data[index].imgname+'">')
     		             .append($('<p></p>').html(data[index].imgname)));
     	}
