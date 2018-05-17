@@ -144,6 +144,18 @@ header li a {
   background: rgba(255,124,127,0.8);
 }
 
+input[type=radio]{
+	display:none;
+}
+
+input[type="radio"]:checked + label{
+	background: rgba(255, 128, 128, 0.8);
+}
+
+.label{
+    cursor: pointer;
+}
+
 
 #SeartReview {
   border-right: solid 2px #fff;

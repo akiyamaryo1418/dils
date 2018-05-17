@@ -151,7 +151,7 @@ function searchCategory(){
 
 	//alert('Success');
 	var param = $('#SearchAndFilter').serializeArray();
-	//alert(JSON.stringify(param));
+	alert(JSON.stringify(param));
 
 	// 必要な情報はチェックボックスの状態
 	data = {
@@ -161,7 +161,7 @@ function searchCategory(){
 	};
 
 	//console.log(param);
-	alert(JSON.stringify(param));
+	//alert(JSON.stringify(param));
 
 	$.ajax({
 		url      : '../../api/controller.php',
@@ -181,6 +181,7 @@ function searchCategory(){
     	}
 
         triming();
+        $('.masonry').append($('<div></div>').attr({'class': 'cle' }));
     	$('.masonry').masonry({itemSelector: '.item', columnWidth: 300 });
 		//alert('Success');
 	}).fail(function(){

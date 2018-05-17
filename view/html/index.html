@@ -44,9 +44,9 @@
     <section id="SearchBox">
     <form id="SearchAndFilter">
       <ul id="SearchBoxSort">
-        <li name="sort" id="SearchAll" value="1"><a href="javascript:searchCategory();">ALL</a></li>
-        <li name="sort" id="SearchUpDeat" value="2">UP DATA</li>
-        <li name="sort" id="SeartReview" value="3">REVIEW</li>
+        <li id="SearchAll" value="1"><label for="all">ALL</label><input type="radio" name="sort" value="id" id="all" onchange="searchCategory();"></li>
+        <li id="SearchUpDeat" value="2"><label for="date">UP DATE</label><input type="radio" name="sort" value="uploaded_at" id="date" onchange="searchCategory();"></li>
+        <li id="SeartReview" value="3"><label for="review">REVIEW</label><input type="radio" name="sort" value="review" id="review" onchange="searchCategory();"></li>
       </ul>
 
       <!-----フィルタ検索機能------>
