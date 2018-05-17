@@ -34,7 +34,6 @@ function Initialize(){
     	}
 
     	triming();
-
     	$('.masonry').masonry({itemSelector: '.item', columnWidth: 300 });
     }).fail(function(){
     	alert('NoData');
@@ -180,6 +179,7 @@ function searchCategory(){
     		             .append($('<p></p>').html(data[index].imgname)));
     	}
 
+        triming();
     	$('.masonry').masonry({itemSelector: '.item', columnWidth: 300 });
 		//alert('Success');
 	}).fail(function(){
@@ -190,7 +190,7 @@ function searchCategory(){
 // トリミング
 function triming(){
 
-	var resizeClass    = '.item';
+	var resizeClass    = '.item img';
 	var thumnailWidth  = 250;
 	var thumnailHeight = 250;
 	var iw, ih;
