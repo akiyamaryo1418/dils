@@ -149,7 +149,6 @@ function sortButton(){
 // フィルタ検索機能(ジャンル)
 function searchCategory(){
 
-	//alert('Success');
 	var param = $('#SearchAndFilter').serializeArray();
 	alert(JSON.stringify(param));
 
@@ -183,7 +182,6 @@ function searchCategory(){
         triming();
         $('.masonry').append($('<div></div>').attr({'class': 'cle' }));
     	$('.masonry').masonry({itemSelector: '.item', columnWidth: 300 });
-		//alert('Success');
 	}).fail(function(){
 		alert('NoData');
 	});
