@@ -17,6 +17,12 @@ body {
 	letter-spacing: 2px;
 }
 
+.clearfix:after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+
 #wrap {
   width: 1200px;
   margin:0 auto;
@@ -30,6 +36,7 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
+  min-width: 1250px;
   height: 75px;
   background: #000;
 }
@@ -85,6 +92,7 @@ header li a {
 --------------------------------------------------*/
 #Edit {
   width: 1200px;
+  min-width: 1250px;
   margin: 0 auto;
 }
 
@@ -227,6 +235,7 @@ input.button {
 footer {
   position: relative;
   width: 100%;
+  min-width: 1250px;
   height: 70px;
   background: #000;
 }

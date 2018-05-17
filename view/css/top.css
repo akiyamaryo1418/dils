@@ -17,6 +17,12 @@ body {
 	letter-spacing: 2px;
 }
 
+.clearfix:after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+
 #wrap {
   position: relative;
   top: -75px;
@@ -30,6 +36,7 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
+  min-width: 1250px;
   height: 75px;
   background: rgba(0,0,0,0.5);
 }
@@ -86,6 +93,7 @@ header li a {
 
 #Top {
   width: 100%;
+  min-width: 1250px;
   height: 600px;
 }
 .slider-wrapper {
@@ -106,7 +114,7 @@ header li a {
 
 #SearchBox {
   width: 100%;
-  min-width: 960px;
+  min-width: 1000px;
   height: 45px;
   margin: 15px 0;
   background: #000;
@@ -258,6 +266,7 @@ input[type=checkbox]:checked + .check_css:before {
 footer {
   position: relative;
   width: 100%;
+  min-width: 1250px;
   height: 70px;
   background: #000;
 }
