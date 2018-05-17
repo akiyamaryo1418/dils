@@ -22,3 +22,135 @@ body {
     display: block;
     clear: both;
 }
+
+/*--------------------------------------------------
+	2. header
+--------------------------------------------------*/
+
+header {
+  position: relative;
+  z-index: 9999;
+  width: 100%;
+  min-width: 1250px;
+  height: 75px;
+  background: #000;
+}
+
+header h1 {
+  float: left;
+  width: 300px;
+  padding: 25px 0 25px 50px;
+}
+
+header h1 a {
+  display: block;
+  font-size: 30px;
+  color: #fff;
+  text-decoration: none;
+}
+
+header nav.login {
+  float: right;
+  width: 280px;
+  margin: 0 50px;
+}
+
+header nav.mypage {
+  float: right;
+  width: 280px;
+  min-width: 960px;
+  margin: 0 50px;
+  display: none;
+}
+
+header ul {
+  width: 280px;
+  list-style: none;
+}
+
+header li {
+  float: left;
+  width: 140px;
+  height: 75px;
+  text-align: center;
+}
+
+header li:hover {
+  background: rgba(204,204,204,0.5);
+}
+
+header li a {
+  display: block;
+  margin: 30px 0;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+}
+
+/*--------------------------------------------------
+	3. main
+--------------------------------------------------*/
+
+
+
+
+
+
+
+
+/*--------------------------------------------------
+	4. footer
+--------------------------------------------------*/
+
+footer {
+  position: relative;
+  width: 100%;
+  min-width: 1250px;
+  height: 70px;
+  background: #000;
+}
+
+footer h1 {
+  float: left;
+  width: 280px;
+  padding: 25px 0 25px 50px;
+  font-size: 24px;
+  color: #fff;
+}
+
+footer nav {
+  float: left;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-left: 23%;
+  width: 280px;
+  padding: 30px 25px;
+  
+}
+
+footer nav ul {
+  width: 800px;
+  margin: 0 auto;
+}
+
+footer li {
+  float: left;
+  width: 140px;
+  text-align: center;
+  list-style: none;
+}
+
+footer li a {
+  font-size: 12px;
+  font-family: "メイリオ";
+  color: #fff;
+}
+
+footer p {
+  float: right;
+  width: 205px;
+  margin-right: 36px;
+  padding: 25px;
+  color: #fff;
+}
