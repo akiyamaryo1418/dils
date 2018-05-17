@@ -17,13 +17,11 @@ body {
 	letter-spacing: 2px;
 }
 
-#wrap {
-  width: 1000px;
-  margin:0 auto;
-  background: #000;
+.clearfix:after {
+    content: " ";
+    display: block;
+    clear: both;
 }
-
-
 /*--------------------------------------------------
 	2. header
 --------------------------------------------------*/
@@ -32,6 +30,7 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
+  min-width: 1000px;
   height: 75px;
   background: #000;
 }
@@ -58,8 +57,14 @@ header nav.login {
 header nav.mypage {
   float: right;
   width: 280px;
+  min-width: 960px;
   margin: 0 50px;
   display: none;
+}
+
+header ul {
+  width: 280px;
+  list-style: none;
 }
 
 header li {
@@ -67,7 +72,6 @@ header li {
   width: 140px;
   height: 75px;
   text-align: center;
-  list-style: none;
 }
 
 header li:hover {
@@ -87,7 +91,7 @@ header li a {
 --------------------------------------------------*/
 
 .creatorbox {
-  width: 1000px;
+  width: 960px;
   height: 372px;
   margin: 0 auto;
 }
@@ -96,7 +100,7 @@ header li a {
   width: 200px;
   height: 200px;
   float: left;
-  padding: 80px 40px 70px 0;
+  padding: 80px 40px 70px 60px;
 }
 
 .creatoricon img {
@@ -117,7 +121,7 @@ span {
 
 p.return {
   float: right;
-  margin: 330px 0 0 0;
+  margin: 330px 60px 0 0;
 }
 
 p.return a {
@@ -128,7 +132,7 @@ p.return a {
 /*：：：：検索：：：：*/
 #SearchBox {
   width: 100%;
-  min-width: 960px;
+  min-width: 1000px;
   height: 45px;
   margin: 15px 0;
   background: #000;
@@ -235,15 +239,46 @@ input[type=checkbox]:checked + .check_css:before {
   opacity: 1;
 }
 
-
 #SearchBoxfilter div {
   float: left;
-  width: 90px;
-  
+  width: 90px; 
 }
 
+/*#wrap {
+  width: 1000px;
+  margin:0 auto 100px;
+}
 
+#wrap:after {
+  display: block;
+  clear: both;
+  content: "";
+}*/
 
+.creatoristbox {
+  width: 960px;
+  margin: 0 auto 100px;
+}
+.creatoristbox ul {
+  width: 875px;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.creatoristbox ul li {
+  float: left;
+  width: 105px;
+  height: 105px;
+  margin: 0 10px 20px 10px;
+  cursor: pointer;
+  text-align: center;
+  background: #ccc;
+}
+
+.creatoristbox img {
+  width: 105px;
+  height: 105px;
+}
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
@@ -251,6 +286,7 @@ input[type=checkbox]:checked + .check_css:before {
 footer {
   position: relative;
   width: 100%;
+  min-width: 1250px;
   height: 70px;
   background: #000;
 }
