@@ -12,13 +12,15 @@ function inputLoginButton(){
 	var param = $('#login').serializeArray();
 
 	data = {
-		'model'  :'login',
+		'model'  : 'login',
 		'action' : 'login',
 		'list'   :  param
 	}
 
+	alert(JSON.stringify(param));
+
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
@@ -35,7 +37,7 @@ function inputLoginButton(){
 }
 
 function debugButton(){
-	location.href = "../html/index.html";
+	//location.href = "../html/index.html";
 }
 
 // バリデーションチェック

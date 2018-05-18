@@ -18,7 +18,7 @@ function Initialize(){
     }
 
     $.ajax({
-    	url      : '/dils/api/controller.php',
+    	url      : '../../api/controller.php',
     	type     : 'POST',
     	dataType : 'json',
     	data     :  data,
@@ -31,7 +31,7 @@ function Initialize(){
 }
 
 // アイコン編集ボタンを押したとき
-function inputIconEditButton(){
+/*function inputIconEditButton(){
     var icon = "";
     icon.addEventListerner("change", function(evt){
     	var file = evt.target.files;
@@ -60,6 +60,53 @@ function inputIconEditButton(){
     		}
     	}
     })
+}*/
+
+//Vue.jsの処理
+new Vue({
+	el: '#previewbox',   // ここを変更
+	data() {
+		return {
+			uploadedImage: '',
+		};
+	},
+	methods: {
+		onFileChange(e){
+			var files = e.target.files || e.dataTransfer.files;
+			if(!files.length)
+				return;
+			this.createImage(files[0]);
+		},
+		// アップロードした画像を表示
+		createImage(file){
+			var reader = new FileReader();
+			reader.onload = (e) => {
+				// まずは表示
+				this.uploadedImage = e.target.result;
+			};
+			triming();
+			reader.readAsDataURL(file);
+		},
+	},
+})
+
+//トリミング
+function triming(){
+
+	var resizeClass    = '.item img';
+	var thumnailWidth  = 200;
+	var thumnailHeight = 200;
+
+	$(resizeClass).each(function(){
+
+		$(this).height(thumnailHeight);
+		$(this).width(thumnailWidth);
+		$(this).css("height", 200+"px");
+		$(this).css("top", 0);
+		$(this).css("width", 200+"px");
+		$(this).css("left", 0);
+
+	});
 }
 
 // ユーザ名編集ボタンを押したとき
