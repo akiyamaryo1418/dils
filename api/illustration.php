@@ -37,40 +37,40 @@ class illustration {
 
         $sql;
         if($conditions != "") {
-            $sql = "SELECT id, designer_id, name FROM works WHERE ".$conditions;
+            $sql = "SELECT id, designer_id, name FROM works "
+                  ."WHERE ".$conditions;
             // ."WHERE ".$conditions." ORDER BY " .$target. " DESC";
+
+            $stmt = $this->dbm->dbh->prepare($sql);
+            $stmt->execute();
+
+            while ($row = $stmt->fetchObject())
+            {
+                $d_id = $row->designer_id;
+                $id = $row->id;
+                $filePath;
+
+                foreach( $exts as $ext) {
+                    $filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
+                    if(is_file($filePath)) {
+                        break;
+                    }
+                }
+
+                // 画像サイズの取得
+                $size = getimagesize($filePath);
+
+                $result[] = array(
+                    'id'       => $row->id,
+                    'img'      => $filePath,
+                    'width'    => $size[0],
+                    'height'   => $size[1],
+                    'imgname'  => $row->name,
+                );
+            }
         }
         else {
             $result = 0;
-        }
-
-
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
-
-        while ($row = $stmt->fetchObject())
-        {
-            $d_id = $row->designer_id;
-            $id = $row->id;
-            $filePath;
-
-            foreach( $exts as $ext) {
-                $filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
-                if(is_file($filePath)) {
-                    break;
-                }
-            }
-
-            // 画像サイズの取得
-            $size = getimagesize($filePath);
-
-            $result[] = array(
-                'id'       => $row->id,
-                'img'      => $filePath,
-                'width'    => $size[0],
-                'height'   => $size[1],
-                'imgname'  => $row->name,
-            );
         }
         echo json_encode( $result );
     }
@@ -113,8 +113,6 @@ class illustration {
 
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
-
-
 
         // todo
         // サーバー上の画像の削除
