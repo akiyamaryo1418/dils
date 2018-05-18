@@ -19,9 +19,6 @@ class illustration {
 
         $exts = ['jpg', 'png'];
 
-        //$sql = "SELECT id, designer_id, name FROM works";
-        // ."ORDER BY '".$sortTarget."' DESC";
-
         // 検索条件
         $conditions;
         for($num = 0; $num < count($data); $num++) {
