@@ -108,6 +108,7 @@ class user {
         echo json_encode( $result );
     }
 
+    // ログイン
     public function login($data) {
         $result;
 
@@ -115,20 +116,28 @@ class user {
         $userName = $data[0][value];
         $password = $data[1][value];
 
-        $sql = "SELECT id FROM designers "
-              ."WHERE name = '".$userName."' "
-                  ."and password = '".$password."' ";
-
+        // ユーザー名に合致するデータの取得
+        $sql = "SELECT * FROM designers WHERE name = '".$userName."' ";
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
         if($flag) {
             while ($row = $stmt->fetchObject())
             {
-                $result[] = array('id' => $row->id);
+                // データベースにあるデータとの比較
+                $hash  = $row->password;
+                if(password_verify($password, $hash))
+                {
+                    $result = $row->id;
+                }
+                else {
+                    $result = 'error';
+                }
+
             }
         }else{
-            $result = 1;
+            // ユーザーが存在しない
+            $result = 'error';
         }
         echo json_encode( $result );
     }

@@ -14,7 +14,6 @@ class category {
     }
 
     public function info() {
-        // 返却用の配列
         $return_list = null;
 
         $sql = 'select * from categories';

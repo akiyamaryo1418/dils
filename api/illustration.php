@@ -19,9 +19,12 @@ class illustration {
 
         $exts = ['jpg', 'png'];
 
+        // ソート対象
+        $target = $data[0][value];
+
         // 検索条件
         $conditions;
-        for($num = 0; $num < count($data); $num++) {
+        for($num = 1; $num < count($data) ; $num++) {
             if($conditions != "") {
                 $tmp = $conditions.' or ';
                 $conditions = $tmp;
@@ -35,8 +38,8 @@ class illustration {
         $sql;
         if($conditions != "") {
             $sql = "SELECT id, designer_id, name FROM works "
-                  ."WHERE ".$conditions;
-            // ."WHERE ".$conditions." ORDER BY " .$target. " DESC";
+                  //."WHERE ".$conditions;
+                  ."WHERE ".$conditions." ORDER BY " .$target. " DESC";
 
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
