@@ -65,14 +65,14 @@ class illustration {
             }
         }
         else {
-            $result = 0;
+            $result = 'error';
         }
         echo json_encode( $result );
     }
 
     // 登録
-    public function insert($data) {
-        echo json_encode( '作品登録' );
+    public function insert($file, $data) {
+        echo json_encode( '登録' );
     }
 
     // 編集
@@ -90,9 +90,9 @@ class illustration {
         $flag = $stmt->execute();
 
         if($flag) {
-            $result = 0;
+            $result = 'success';
         }else{
-            $result = 1;
+            $result = 'error';
         }
         echo json_encode( $result );
     }

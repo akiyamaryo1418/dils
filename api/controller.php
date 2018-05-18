@@ -12,9 +12,16 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
 {
     // modelからクラスを生成
     $className = new $_POST['model'];
-
     $func = $_POST['action'];
     $data = $_POST['list'];
-    $className->$func($data);
+
+    if($_FILES['img'] == null){
+        $className->$func($data);
+    }
+    else {
+        $className->$func($_FILES['img'], $data);
+    }
+
+
 }
 ?>

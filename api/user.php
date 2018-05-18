@@ -19,47 +19,56 @@ class user {
         $this->dbm = new DatabaseManager();
     }
 
+    // ユーザーの作品一覧
+    public function illustIndex() {
+
+    }
+
+    // ユーザー一覧
+    public function index() {
+
+    }
+
     // ユーザーの登録
     public function register($data) {
 
         $result;
-
         // ユーザー名、パスワードを取得
-       $name = $data[0][value];
+        $name = $data[1];
 
-       // パスワードの生成
-       $options = [
+        // パスワードの生成
+        /*$options = [
             'cost' => 11,
             'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-       ];
+        ];
 
-       $password = password_hash($data[1][value], PASSWORD_BCRYPT, $options);
+        $password = password_hash($data[2][value], PASSWORD_BCRYPT, $options);
 
-       $sql = "INSERT INTO designers(name, password) "
-             ."VALUES ('".$name."', '".$password."')"
-       ;
+        $sql = "INSERT INTO designers(name, password) "
+              ."VALUES ('".$name."', '".$password."')"
+        ;
 
-       $stmt = $this->dbm->dbh->prepare($sql);
-       $stmt->execute();
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
 
-       // 最後に追加されたIDの取得
-       $id = $this->dbm->dbh->lastInsertId();
+        // 最後に追加されたIDの取得
+        $id = $this->dbm->dbh->lastInsertId();
 
-       // フォルダのファイルパスの作成
-       $fileName = $id.'_'.$userName;
-       $directoryPath = '../view/images/creator/'.$fileName;
+        // フォルダのファイルパスの作成
+        $fileName = $id.'_'.$name;
+        $directoryPath = '../view/images/creator/'.$fileName;
 
-       //フォルダ作成
-       if(mkdir($directoryPath, 0777)) {
-           chmod($directoryPath, 0777);
-           $result = 0;
+        //フォルダ作成
+        if(mkdir($directoryPath, 0777)) {
+            chmod($directoryPath, 0777);
+            $result = 'succes';
 
-           // todo
-           // アイコン画像を作成したフォルダに入れる
-       }else{
-           $result = 1;
-       }
-       echo json_encode( $result );
+            // todo
+            // アイコン画像を作成したフォルダに入れる
+        }else{
+            $result = 'error';
+        }*/
+        echo json_encode( $name );
     }
 
 
@@ -82,9 +91,9 @@ class user {
         // アイコン画像の変更処理
 
         if($flag) {
-            $result = 0;
+            $result = 'succes';
         }else{
-            $result = 1;
+            $result = 'error';
         }
         echo json_encode( $result );
     }
