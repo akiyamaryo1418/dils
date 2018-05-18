@@ -25,7 +25,7 @@ function Initialize(){
 
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
-    		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
+    		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration', 'onclick':'openLightbox();'})
     				     .html(  '<img src="'+result+'"'+
     		            		 'alt="'+data[index].imgname+'">')
     		             .append($('<p></p>').html(data[index].imgname)));
@@ -38,6 +38,7 @@ function Initialize(){
     	$('.masonry').append($('<div></div>').attr({'class': 'cle' }));
     	$('.masonry').masonry({itemSelector: '.item', columnWidth : 300 });
 
+    	for(var index = 0; index < data.length;)
     }).fail(function(){
     	alert('NoData');
     });

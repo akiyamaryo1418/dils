@@ -12,7 +12,7 @@ function inputLoginButton(){
 	var param = $('#login').serializeArray();
 
 	data = {
-		'model'  : 'login',
+		'model'  : 'user',
 		'action' : 'login',
 		'list'   :  param
 	}
