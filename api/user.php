@@ -25,48 +25,46 @@ class user {
         $result;
 
         // ユーザー名、パスワードを取得
-        // 現状、アイコン画像は追加できない
-        $userName = $data[0][value];
+       $name = $data[0][value];
 
-        $options = [
+       // パスワードの生成
+       $options = [
             'cost' => 11,
             'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-        ];
-        $password = password_hash($data[1][value], PASSWORD_BCRYPT, $options);
+       ];
 
-        // ユーザーをデータベースに登録
-        $sql = "INSERT INTO designers(name, password)"
-              ."VALUES ('".$userName."', '".$password."')";
+       $password = password_hash($data[1][value], PASSWORD_BCRYPT, $options);
 
-        // 実行
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
+       $sql = "INSERT INTO designers(name, password) "
+             ."VALUES ('".$name."', '".$password."')"
+       ;
 
-        // 最後に追加されたIDの取得
-        $id = $this->dbm->dbh->lastInsertId();
+       $stmt = $this->dbm->dbh->prepare($sql);
+       $stmt->execute();
 
-        // ファイル名の設定
-        $fileName = $id.'_'.$userName;
+       // 最後に追加されたIDの取得
+       $id = $this->dbm->dbh->lastInsertId();
 
-        // フォルダのファイルパス
-        $directoryPath = '../view/images/creator/'.$fileName;
+       // フォルダのファイルパスの作成
+       $fileName = $id.'_'.$userName;
+       $directoryPath = '../view/images/creator/'.$fileName;
 
-        //フォルダ作成
-        if(mkdir($directoryPath, 0777)) {
-            chmod($directoryPath, 0777);
-            $result = 0;
+       //フォルダ作成
+       if(mkdir($directoryPath, 0777)) {
+           chmod($directoryPath, 0777);
+           $result = 0;
 
-            // todo
-            // アイコン画像を作成したフォルダに入れる
-        }else{
-            $result = 1;
-        }
-        echo json_encode( $result );
+           // todo
+           // アイコン画像を作成したフォルダに入れる
+       }else{
+           $result = 1;
+       }
+       echo json_encode( $result );
     }
 
 
+    // 編集
     public function edit($data) {
-
         $result;
 
         // ID、ユーザー名の取得
@@ -91,6 +89,7 @@ class user {
         echo json_encode( $result );
     }
 
+    // 削除
     public function delete($data) {
 
         $result;
@@ -105,30 +104,33 @@ class user {
 
         $name;
         while ($row = $stmt->fetchObject()) {
-            $name = $row->name;
+            $tmp = $id.'_'.$name;
+            $name = $tmp;
         }
 
         // ファイルパスの指定
-        $filePath = '/var/www/html/work/hoge/'.$name;
+        $filePath = '../../view/images/creater/'.$name;
         if (is_dir($filePath)) {
             rmdir($filePath);
+
+            // DB上のデータの削除
+            // ユーザー
+            $sql = "DELETE FROM designers WHERE id = '".$id."'";
+            $stmt = $this->dbm->dbh->prepare($sql);
+            $stmt->execute();
+
+            $sql = "DELETE works, evaluations FROM works "
+                  ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
+                  ."WHERE works.id = ".$id
+            ;
+
+            $stmt = $this->dbm->dbh->prepare($sql);
+            $stmt->execute();
+
             $result = 0;
         } else {
             $result = 1;
         }
-
-        // DB上のデータの削除
-        // ユーザー
-        $sql = "DELETE FROM designers WHERE id = '".$id."'";
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
-
-        $sql = "DELETE works, evaluations FROM works "
-              ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
-              ."WHERE works.id = ".$id;
-
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $flag = $stmt->execute();
 
         echo json_encode( $result );
     }
@@ -154,8 +156,7 @@ class user {
                 if(password_verify($password, $hash))
                 {
                     $result = $row->id;
-                }
-                else {
+                } else {
                     // 入力したパスワードが違う
                     $result = 'error';
                 }

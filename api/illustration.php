@@ -16,8 +16,7 @@ class illustration {
     // 作品一覧
     public function index($data) {
         $result;
-
-        $exts = ['jpg', 'png'];
+        $exts = ['jpg', 'png', 'bmp'];
 
         // ソート対象
         $target = $data[0][value];
@@ -33,12 +32,9 @@ class illustration {
             $conditions = $tmp;
         }
 
-        //$target = $array[1];
-
         $sql;
         if($conditions != "") {
             $sql = "SELECT id, designer_id, name FROM works "
-                  //."WHERE ".$conditions;
                   ."WHERE ".$conditions." ORDER BY " .$target. " DESC";
 
             $stmt = $this->dbm->dbh->prepare($sql);
@@ -56,7 +52,6 @@ class illustration {
                         break;
                     }
                 }
-
                 // 画像サイズの取得
                 $size = getimagesize($filePath);
 
@@ -75,10 +70,12 @@ class illustration {
         echo json_encode( $result );
     }
 
+    // 登録
     public function insert($data) {
         echo json_encode( '作品登録' );
     }
 
+    // 編集
     public function edit($data) {
         $result;
 
@@ -100,9 +97,9 @@ class illustration {
         echo json_encode( $result );
     }
 
+    // 削除
     public function delete($data) {
         $result;
-
         $id = $data[0][value];
         $name = $data[1][value];
         $designerId = $data[2][value];
@@ -117,34 +114,33 @@ class illustration {
             $name = $row->name;
         }
 
-        $exts = ['jpg', 'png'];
+        $exts = ['jpg', 'png', 'bmp'];
         // ファイルパスの指定
         foreach( $exts as $ext) {
             $filePath = '../view/images/creator/'.$name.'/'.$designerId.'_'.$id.'.'.$ext;
             if(is_file($filePath)) {
                 unlink($filePath);
-                $result = 'success';
+
+                // DBから作品と評価の削除
+                // $sql = "DELETE FROM works WHERE id = ".$id;
+                $sql = "DELETE works, evaluations FROM works "
+                      ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
+                      ."WHERE works.id = ".$id
+                ;
+
+                $stmt = $this->dbm->dbh->prepare($sql);
+                $flag = $stmt->execute();
+
+                if($flag) {
+                    $result = 'success';
+                }else{
+                    $result = 'error';
+                }
                 break;
             }
-        }
-
-        if($result == 'success') {
-            // DBから作品と評価の削除
-            // $sql = "DELETE FROM works WHERE id = ".$id;
-            $sql = "DELETE works, evaluations FROM works "
-                  ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
-                  ."WHERE works.id = ".$id;
-
-            $stmt = $this->dbm->dbh->prepare($sql);
-            $flag = $stmt->execute();
-
-            if($flag) {
-                $result = 'success';
-            }else{
+            else {
                 $result = 'error';
             }
-        } else {
-            $result = 'fail';
         }
         echo json_encode( $result );
     }
