@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/registration.css" rel="stylesheet" type="text/css"/>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.0.0/cropper.min.css" rel="stylesheet" type="text/css" media="all" />
 
   </head>
@@ -32,28 +31,30 @@
         <h1>Sign Up</h1>
         <div class="preview">
           <div id="previewbox" class="previewbox">
-            <!--<input type="button" value="ファイルを選択" onclick="">-->
-            <img id="img" class="img" v-show="uploadedImage" :src="uploadedImage" />
-            <input type="file" v-on:change="onFileChange">
-            <!--<input v-model="message">
-            <p>{{ message }}</p>
-
-            <input type="text" v-model="inputMessage" /><input type="button" value="PleaseClick" @click="getMessage()">
-            <p>{{ message }}</p>-->
+            <div class="item">
+              <form id="sendimg" name="sendimg">
+                <img id="icon" v-show="uploadedImage" :src="uploadedImage" />
+              </form>
+            </div>
+            <form id="previewform" name="preview" method="POST" enctype="multipart/form-data">
+              <input type="file" v-on:change="onFileChange">
+            </form>
+            <div class="cle"></div>
           </div>
         </div>
+
         <div class="form">
-        <form method="post" action="example.cgi">
+        <form name="senddata" method="post" action="example.cgi">
           <p>ユーザー名<br>
-          <input type="text" name="user"></p>
+          <input type="text" id="username" name="user"></p>
 
           <!--<div id="app">
             {{ message }}
           </div>-->
 
           <p>パスワード<br>
-          <input type="text" name="password"></p>
-          <p><input type="button"value="新規登録" class="button" onclick="moveIndex();"></p>
+          <input type="text" id="password" name="password"></p>
+          <p><input type="button"value="新規登録" class="button" onclick="inputRegistrationButton();"></p>
         </form>
         </div>
      </div>

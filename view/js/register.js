@@ -9,25 +9,34 @@ $(function(){
 function inputRegistrationButton(){
 
 	// バリデーションチェックの関数を呼び出す
-	checkValidation();
+	//checkValidation();
 
-	// 新規ユーザ情報
-	var param = "";
 
-	data = {
-		'model'  : 'user_register',
+	data = new FormData($('#sendimg').get(0));
+	data.append('model', 'user');
+	data.append('action', 'register');
+
+	var param = [ $('#username').val(), $('#password').val() ];
+	data.append('list', param);
+
+	alert(param);
+
+	/*data = {
+		'model'  : 'user',
 		'action' : 'register',
 		'list'   :  param
-	}
+	}*/
 
     $.ajax({
-    	url      : '/dils/api/controller.php',
-    	type     : 'POST',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
+    	url         : '../../api/controller.php',
+    	type        : 'POST',
+    	dataType    : 'json',
+    	processData : false,
+    	contentType : false,
+    	data        :  data,
+    	timeout     :  1000,
     }).done(function(data, dataType){
-        alert('Success');
+        alert(data);
     }).fail(function(){
     	alert('Nodata');
     });
@@ -37,8 +46,6 @@ function inputRegistrationButton(){
 function moveIndex(){
     location.href = "../html/index.html";
 }
-
-/*function selectImage(){*/
 
 // Vue.jsの処理
 new Vue({
@@ -54,24 +61,41 @@ new Vue({
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
-		},			// アップロードした画像を表示
+		},
+		// アップロードした画像を表示
 		createImage(file){
 			var reader = new FileReader();
 			reader.onload = (e) => {
-				// トリミング処理
+				// まずは表示
 				this.uploadedImage = e.target.result;
-				//this.uploadedImage = triming(this.uploadedImage);
-				//triming(this.uploadedImage);
 			};
-			alert('aaa');
-			//this.uploadedImage = triming(this.uploadedImage);
+			triming();
 			reader.readAsDataURL(file);
 		},
 	},
 })
 
+//トリミング
+function triming(){
+
+	var resizeClass    = '.item img';
+	var thumnailWidth  = 200;
+	var thumnailHeight = 200;
+
+	$(resizeClass).each(function(){
+
+		$(this).height(thumnailHeight);
+		$(this).width(thumnailWidth);
+		$(this).css("height", 200+"px");
+		$(this).css("top", 0);
+		$(this).css("width", 200+"px");
+		$(this).css("left", 0);
+
+	});
+}
+
 // トリミング
-function triming(img){
+/*function triming(img){
 	// class="previewbox"のimgタグに適用
 	var $image = $('.previewbox > img'),replaced;
 
@@ -105,7 +129,7 @@ function triming(img){
 
     return image;
 }
-/*}*/
+}*/
 
 /*var vm =  new Vue({
 		el: '#previewbox',
