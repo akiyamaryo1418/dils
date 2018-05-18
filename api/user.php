@@ -27,7 +27,12 @@ class user {
         // ユーザー名、パスワードを取得
         // 現状、アイコン画像は追加できない
         $userName = $data[0][value];
-        $password = $data[1][value];
+
+        $options = [
+            'cost' => 11,
+            'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+        ];
+        $password = password_hash($data[1][value], PASSWORD_BCRYPT, $options);
 
         // ユーザーをデータベースに登録
         $sql = "INSERT INTO designers(name, password)"
@@ -87,24 +92,44 @@ class user {
     }
 
     public function delete($data) {
+
         $result;
 
         // IDの取得
         $id = $data[0][value];
 
-        // DBからユーザーの削除
+        // ユーザーのフォルダ削除
+        $sql = "SELECT name FROM designers WHERE id = ".$id;
+        $stmt = $dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        $name;
+        while ($row = $stmt->fetchObject()) {
+            $name = $row->name;
+        }
+
+        // ファイルパスの指定
+        $filePath = '/var/www/html/work/hoge/'.$name;
+        if (is_dir($filePath)) {
+            rmdir($filePath);
+            $result = 0;
+        } else {
+            $result = 1;
+        }
+
+        // DB上のデータの削除
+        // ユーザー
         $sql = "DELETE FROM designers WHERE id = '".$id."'";
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        $sql = "DELETE works, evaluations FROM works "
+              ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
+              ."WHERE works.id = ".$id;
+
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
-        // todo
-        // ユーザーのフォルダ削除
-
-        if($flag) {
-            $result = 0;
-        }else{
-            $result = 1;
-        }
         echo json_encode( $result );
     }
 
@@ -131,9 +156,9 @@ class user {
                     $result = $row->id;
                 }
                 else {
+                    // 入力したパスワードが違う
                     $result = 'error';
                 }
-
             }
         }else{
             // ユーザーが存在しない

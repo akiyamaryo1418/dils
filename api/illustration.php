@@ -101,26 +101,50 @@ class illustration {
     }
 
     public function delete($data) {
+        $result;
+
         $id = $data[0][value];
         $name = $data[1][value];
         $designerId = $data[2][value];
 
-        // DBから作品と評価の削除
-        // $sql = "DELETE FROM works WHERE id = ".$id;
-        $sql = "DELETE works, evaluations FROM works "
-              ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
-              ."WHERE works.id = ".$id;
-
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $flag = $stmt->execute();
-
-        // todo
         // サーバー上の画像の削除
+        $sql = "SELECT name FROM designers WHERE id = ".$id;
+        $stmt = $dbm->dbh->prepare($sql);
+        $stmt->execute();
 
-        if($flag) {
-            $result = 0;
-        }else{
-            $result = 1;
+        $name;
+        while ($row = $stmt->fetchObject()) {
+            $name = $row->name;
+        }
+
+        $exts = ['jpg', 'png'];
+        // ファイルパスの指定
+        foreach( $exts as $ext) {
+            $filePath = '../view/images/creator/'.$name.'/'.$designerId.'_'.$id.'.'.$ext;
+            if(is_file($filePath)) {
+                unlink($filePath);
+                $result = 'success';
+                break;
+            }
+        }
+
+        if($result == 'success') {
+            // DBから作品と評価の削除
+            // $sql = "DELETE FROM works WHERE id = ".$id;
+            $sql = "DELETE works, evaluations FROM works "
+                  ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
+                  ."WHERE works.id = ".$id;
+
+            $stmt = $this->dbm->dbh->prepare($sql);
+            $flag = $stmt->execute();
+
+            if($flag) {
+                $result = 'success';
+            }else{
+                $result = 'error';
+            }
+        } else {
+            $result = 'fail';
         }
         echo json_encode( $result );
     }
