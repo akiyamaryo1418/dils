@@ -70,6 +70,7 @@ class illustration {
         echo json_encode( $result );
     }
 
+
     // 登録
     public function insert($file, $data) {
         echo json_encode( '登録' );

@@ -22,6 +22,67 @@ class user {
     // ユーザーの作品一覧
     public function illustIndex() {
 
+        // $data
+        // フィルター(表示する名前の範囲)
+
+        // return
+        // designer_id
+        // name
+        // アイコン
+
+        $result;
+        /*$exts = ['jpg', 'png', 'bmp'];
+
+        // ソート対象
+        $target = $data[0][value];
+
+        // 検索条件
+        $conditions;
+        for($num = 1; $num < count($data) ; $num++) {
+            if($conditions != "") {
+                $tmp = $conditions.' or ';
+                $conditions = $tmp;
+            }
+            $tmp = $conditions."category_id = ".$data[$num][value];
+            $conditions = $tmp;
+        }
+
+        $sql;
+        if($conditions != "") {
+            $sql = "SELECT id, designer_id, name FROM works "
+                ."WHERE ".$conditions." ORDER BY " .$target. " DESC";
+
+                $stmt = $this->dbm->dbh->prepare($sql);
+                $stmt->execute();
+
+                while ($row = $stmt->fetchObject())
+                {
+                    $d_id = $row->designer_id;
+                    $id = $row->id;
+                    $filePath;
+
+                    foreach( $exts as $ext) {
+                        $filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
+                        if(is_file($filePath)) {
+                            break;
+                        }
+                    }
+                    // 画像サイズの取得
+                    $size = getimagesize($filePath);
+
+                    $result[] = array(
+                        'id'       => $row->id,
+                        'img'      => $filePath,
+                        'width'    => $size[0],
+                        'height'   => $size[1],
+                        'imgname'  => $row->name,
+                    );
+                }
+        }
+        else {
+            $result = 'error';
+        }*/
+        echo json_encode( $result );
     }
 
     // ユーザー一覧
@@ -37,7 +98,7 @@ class user {
         $name = $data[1];
 
         // パスワードの生成
-        /*$options = [
+        $options = [
             'cost' => 11,
             'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
         ];
@@ -67,7 +128,7 @@ class user {
             // アイコン画像を作成したフォルダに入れる
         }else{
             $result = 'error';
-        }*/
+        }
         echo json_encode( $name );
     }
 
