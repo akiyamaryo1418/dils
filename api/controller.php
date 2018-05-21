@@ -21,7 +21,5 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     else {
         $className->$func($_FILES['img'], $data);
     }
-
-
 }
 ?>

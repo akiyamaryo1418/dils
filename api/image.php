@@ -19,10 +19,28 @@ class image {
         $this->dbm = new DatabaseManager();
     }
 
-    public function upload($data) {
+    // 画像のアップロード
+    public function upload($fileData, $data) {
         $result;
 
-        $fileData = $_FILES['file'];
+        // $fileData = $_FILES['file'];
+        $designerId = '4';
+        $name = 'テスト';
+        $categoryId = '1';
+
+        if (dataUpload($fileData, $designerId, $name, $categoryId)) {
+            $result = 'success';
+        } else {
+            $result = 'failure';
+        }
+        echo json_encode($result);
+    }
+
+    // アイコン画像の更新
+    public function updateIcon($fileData, $data) {
+        $result;
+
+        // $fileData = $_FILES['file'];
         $designerId = '4';
         $name = 'テスト';
         $categoryId = '1';

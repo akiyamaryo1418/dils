@@ -34,8 +34,10 @@ class illustration {
 
         $sql;
         if($conditions != "") {
+
             $sql = "SELECT id, designer_id, name FROM works "
-                  ."WHERE ".$conditions." ORDER BY " .$target. " DESC";
+                  ."WHERE ".$conditions." ORDER BY " .$target. " DESC"
+            ;
 
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
@@ -65,7 +67,7 @@ class illustration {
             }
         }
         else {
-            $result = 'error';
+            $result = 0 ;
         }
         echo json_encode( $result );
     }

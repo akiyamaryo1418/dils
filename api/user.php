@@ -1,6 +1,7 @@
 
 <?php
 require_once('databaseManager.php');
+require_once('image.php');
 header('Content-type:application/json; charset=utf8');
 
 // 修正項目
@@ -14,31 +15,26 @@ class user {
     // データベース操作用クラス
     private $dbm;
 
+    // 画像登録用
+    private $dbm;
+
     // コンストラクタ
     public function __construct() {
         $this->dbm = new DatabaseManager();
     }
 
     // ユーザーの作品一覧
-    public function illustIndex() {
-
-        // $data
-        // フィルター(表示する名前の範囲)
-
-        // return
-        // designer_id
-        // name
-        // アイコン
+    public function illustIndex($data) {
 
         $result;
-        /*$exts = ['jpg', 'png', 'bmp'];
+        $exts = ['jpg', 'png', 'bmp'];
 
-        // ソート対象
-        $target = $data[0][value];
+        $d_id = $data[0][value];      // 表示するユーザーのID
+        $target = $data[1][value];  // ソート対象
 
         // 検索条件
-        $conditions;
-        for($num = 1; $num < count($data) ; $num++) {
+        $conditions = "";
+        for($num = 2; $num < count($data) ; $num++) {
             if($conditions != "") {
                 $tmp = $conditions.' or ';
                 $conditions = $tmp;
@@ -49,53 +45,100 @@ class user {
 
         $sql;
         if($conditions != "") {
-            $sql = "SELECT id, designer_id, name FROM works "
-                ."WHERE ".$conditions." ORDER BY " .$target. " DESC";
+            $sql = "SELECT des.name AS d_name, work.id, work.name "
+                  ."FROM designers AS des "
+                  ."INNER JOIN works AS work "
+                  ."WHERE des.id = work.designer_id "
+                  ."AND des.id = ".$d_id." "
+                  ."AND ".$conditions." "
+                  ."ORDER BY " .$target." DESC"
+            ;
 
-                $stmt = $this->dbm->dbh->prepare($sql);
-                $stmt->execute();
+            $stmt = $this->dbm->dbh->prepare($sql);
+            $stmt->execute();
 
-                while ($row = $stmt->fetchObject())
-                {
-                    $d_id = $row->designer_id;
-                    $id = $row->id;
-                    $filePath;
+            while ($row = $stmt->fetchObject())
+            {
+                $id = $row->id;
+                $fileName = $d_id.'_'.$row->d_name;
 
-                    foreach( $exts as $ext) {
-                        $filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
-                        if(is_file($filePath)) {
-                            break;
-                        }
+                $filePath;
+                foreach( $exts as $ext) {
+                    $imageName = $d_id.'_'.$id.'.'.$ext;
+                    // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
+
+                    $filePath = '../view/images/creator/'.$imageName;
+                    if(is_file($filePath)) {
+                        break;
                     }
-                    // 画像サイズの取得
-                    $size = getimagesize($filePath);
-
-                    $result[] = array(
-                        'id'       => $row->id,
-                        'img'      => $filePath,
-                        'width'    => $size[0],
-                        'height'   => $size[1],
-                        'imgname'  => $row->name,
-                    );
                 }
+                // 画像サイズの取得
+                $size = getimagesize($filePath);
+
+                $result[] = array(
+                    'id'       => $row->id,
+                    'img'      => $filePath,
+                    'width'    => $size[0],
+                    'height'   => $size[1],
+                    'imgname'  => $row->name,
+                );
+            }
         }
         else {
-            $result = 'error';
-        }*/
+            // フィルターの対象がない
+            $result = 0;
+        }
         echo json_encode( $result );
     }
 
     // ユーザー一覧
-    public function index() {
+    public function index($data) {
+        $result;
 
+        $sql = "SELECT id, name FROM designers";
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        while ($row = $stmt->fetchObject())
+        {
+            $id = $row->id;
+            $fileName = $id.'_'.$row->d_name;
+
+            $filePath;
+            foreach( $exts as $ext) {
+                $imageName = $id.'_icon.'.$ext;
+                // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
+
+                $filePath = '../view/images/creator/'.$imageName;
+                if(is_file($filePath)) {
+                    break;
+                }
+            }
+            // 画像サイズの取得
+            $size = getimagesize($filePath);
+
+            $result[] = array(
+                'id'        => $id,
+                'userName'  => $row->name,
+                'img'       => $filePath,
+                'width'     => $size[0],
+                'height'    => $size[1],
+            );
+        }
+
+        echo json_encode( $result );
     }
 
     // ユーザーの登録
-    public function register($data) {
+    public function register($fileData, $data) {
 
         $result;
         // ユーザー名、パスワードを取得
-        $name = $data[1];
+        $newData = explode(",", $data);
+        $name = $newData[1];
+
+        // アイコン名
+        $iconName = 'icon';
 
         // パスワードの生成
         $options = [
@@ -103,7 +146,8 @@ class user {
             'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
         ];
 
-        $password = password_hash($data[2][value], PASSWORD_BCRYPT, $options);
+        $password = password_hash($newData[2], PASSWORD_BCRYPT, $options);
+        // $password = password_hash($data[2][value], PASSWORD_BCRYPT, $options);
 
         $sql = "INSERT INTO designers(name, password) "
               ."VALUES ('".$name."', '".$password."')"
