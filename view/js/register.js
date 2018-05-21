@@ -19,7 +19,7 @@ function inputRegistrationButton(){
 	var param = [ $('#username').val(), $('#password').val() ];
 	data.append('list', param);
 
-	alert(param);
+	//alert(param);
 
 	/*data = {
 		'model'  : 'user',
@@ -36,6 +36,7 @@ function inputRegistrationButton(){
     	data        :  data,
     	timeout     :  1000,
     }).done(function(data, dataType){
+    	location.href = "../html/index.html";
         alert(data);
     }).fail(function(){
     	alert('Nodata');
@@ -61,6 +62,7 @@ new Vue({
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
+			triming();
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -69,7 +71,6 @@ new Vue({
 				// まずは表示
 				this.uploadedImage = e.target.result;
 			};
-			triming();
 			reader.readAsDataURL(file);
 		},
 	},
