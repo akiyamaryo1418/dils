@@ -1,7 +1,6 @@
 
 <?php
 require_once('databaseManager.php');
-require_once('image.php');
 header('Content-type:application/json; charset=utf8');
 
 // 修正項目
@@ -124,20 +123,21 @@ class user {
                 'id'        => $id,
                 'userName'  => $row->name,
                 'img'       => $filePath,
-                'width'     => $size[0],
-                'height'    => $size[1],
             );
         }
-
         echo json_encode( $result );
     }
 
     // ================================================================
     // ユーザーの登録
     // ================================================================
-    public function register($fileData, $data) {
+    public function register($data) {
 
         $result;
+        // $newData = explode(",", $data)
+        //echo json_encode( 'test' );
+
+
         // ユーザー名、パスワードを取得
         $newData = explode(",", $data);
         $name = $newData[1];
@@ -179,6 +179,91 @@ class user {
             $result = 'error';
         }
         echo json_encode( $name );
+    }
+
+    public function register($fileData, $data) {
+
+        //echo json_encode( $result );
+
+        $result;
+        // ユーザー名、パスワードを取得
+        $newData = explode(",", $data);
+        $name = $newData[1];
+
+        // アイコン名
+        $iconName = 'icon';
+
+        // パスワードの生成
+        $options = [
+        'cost' => 11,
+        'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+        ];
+
+        $password = password_hash($newData[2], PASSWORD_BCRYPT, $options);
+
+        $sql = "INSERT INTO designers(name, password) "
+            ."VALUES ('".$name."', '".$password."')"
+        ;
+
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        // 最後に追加されたIDの取得
+        $id = $this->dbm->dbh->lastInsertId();
+
+        // フォルダのファイルパスの作成
+        $fileName = $id.'_'.$name;
+        $directoryPath = '../view/images/creator/'.$fileName;
+
+        //フォルダ作成
+        if(mkdir($directoryPath, 0777)) {
+            chmod($directoryPath, 0777);
+            $result = 'succes';
+
+            // todo
+            // アイコン画像を作成したフォルダに入れる
+            if (dataUpload($fileData, $directoryPath, $name)) {
+                $result = $name;
+            } else {
+                $result = 'error';
+            }
+        }else{
+            $result = 'error';
+        }
+
+        echo json_encode( $result );
+    }
+
+    // ファイルをサーバーに送信
+    private function dataUpload($fileData, $directoryPath, $name)
+    {
+        // 画像ファイルの有無
+        if(empty($fileData)) {
+            return false;
+        }
+
+        // ディレクトリの存在確認
+        if (! file_exists($directoryPath)) {
+            return false;
+        }
+
+        try {
+            // ファイルの拡張子の取得
+            $ext = substr($fileData[name], strrpos($fileData[name], '.') + 1);
+
+            // ファイル名の設定
+            $newName = $name.'_icon.'$ext;
+
+            // アップロード後のファイルの移動先
+            $destination = $filePath.'/'.$newName;
+
+            // テンポラリからファイルを移動
+            move_uploaded_file($fileData['tmp_name'], $destination);
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 
     // ================================================================
@@ -249,10 +334,9 @@ class user {
 
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
-
             $result = 0;
         } else {
-            $result = 1;
+            $result = -999;
         }
 
         echo json_encode( $result );
@@ -282,12 +366,12 @@ class user {
                     $result = $row->id;
                 } else {
                     // 入力したパスワードが違う
-                    $result = 'error';
+                    $result = -999;
                 }
             }
         }else{
             // ユーザーが存在しない
-            $result = 'error';
+            $result = -999;
         }
         echo json_encode( $result );
     }
