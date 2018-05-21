@@ -9,41 +9,6 @@ $(function(){
 // 初期化
 // 作品一覧表示を行っている
 function Initialize(){
-    data = {
-    	'model'  : 'illustration',
-    	'action' : 'index',
-    	'list'   : 'a'
-    }
-
-    $.ajax({
-    	url      : '../../api/controller.php',
-    	type     : 'POST',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-
-    	for(var index = 0; index < data.length; index++){
-    		var result = data[index].img.replace('view/', '');
-    		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration', 'onclick':'openLightbox();'})
-    				     .html(  '<img src="'+result+'"'+
-    		            		 'alt="'+data[index].imgname+'">')
-    		             .append($('<p></p>').html(data[index].imgname)));
-
-    		console.log(data[index].width);
-    		console.log(data[index].height);
-    	}
-
-    	triming();
-    	$('.masonry').append($('<div></div>').attr({'class': 'cle' }));
-    	$('.masonry').masonry({itemSelector: '.item', columnWidth : 300 });
-
-    	for(var index = 0; index < data.length;)
-    }).fail(function(){
-    	alert('NoData');
-    });
-
-
     // カテゴリの動的生成
     categorydata = {
     		'model'  : 'category',
@@ -66,6 +31,52 @@ function Initialize(){
     }).fail(function(){
     	alert('NoData');
     })
+
+    data = {
+    	'model'  : 'illustration',
+    	'action' : 'index',
+    	'list'   : 'a'
+    }
+
+    $.ajax({
+    	url      : '../../api/controller.php',
+    	type     : 'POST',
+    	dataType : 'json',
+    	data     :  data,
+    	timeout  :  1000,
+    }).done(function(data, dataType){
+
+    	//===ただの表示===
+    	for(var index = 0; index < data.length; index++){
+    		var result = data[index].img.replace('view/', '');
+    		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
+    				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+')'})
+    				     .html('<img src="'+result+'"'+
+    		            	   'alt="'+data[index].imgname+'">'))
+    		             .append($('<p></p>').html(data[index].imgname)));
+
+    		/*console.log(data[index].width);
+    		console.log(data[index].height);*/
+    	}
+        //================
+
+    	triming();
+    	$('.masonry').append($('<div></div>').attr({'class': 'cle' }));
+    	$('.masonry').masonry({itemSelector: '.item', columnWidth : 300 });
+
+    	// ライトボックス
+    	for(var index = 0; index < data.length; index++){
+            var result = data[index].img.replace('view/', '');
+            $('.lightbox_view').append($('<div></div>').attr({'id':'lightboxid_'+data[index].id,'class':'lightbox_view_img'})
+                               .append($('<div></div>').attr({'class':'lightbox_img_content'})
+                               .append($('<div></div>').attr({'class':'close_btn'}).html('ddd'))
+                               .html('<img src="'+result+'"'+
+                            		 'alt="'+data[index].imgname+'">')));
+    	}
+    	//===============
+    }).fail(function(){
+    	alert('NoData');
+    });
 }
 
 // ページの先頭へ戻るボタン

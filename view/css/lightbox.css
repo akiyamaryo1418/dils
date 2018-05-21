@@ -1,3 +1,20 @@
+
+.clearfix:after{
+  content:" ";
+  display:block;
+  clear:both;
+}
+
+body.overflow{
+	overflow: hidden;
+}
+
+.main_gallery{
+	position   : relative;
+	width:     : 100%;
+	min-height : 900px;
+}
+
 .lightbox_view{
 	display: none;
 }
@@ -23,6 +40,7 @@
 
 .close_btn{
 	position: absolute;
+
     right: -40px;
     cursor: pointer;
 }
