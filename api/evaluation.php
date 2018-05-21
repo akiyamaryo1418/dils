@@ -3,7 +3,6 @@
 
 require_once('databaseManager.php');
 header('Content-type:application/json; charset=utf8');
-
 date_default_timezone_set('Asia/Tokyo');
 
 class evaluation {
