@@ -16,64 +16,69 @@ class illustration {
     // 作品一覧
     public function index($data) {
         $result;
+        $exts = ['jpg', 'png', 'bmp'];
 
-        // 全件データの取得
-        /*$filePath = '../view/images/creator/*';
+        // ソート対象
+        $target = $data[0][value];
 
-        foreach(glob($filePath) as $file){
-        if(is_file($file)){
-            $result[] = $file;
-        }
-        echo json_encode($result);*/
-
-
-
-        // ソートの対象
-        // $sortTarget = $data[0][value];
-        // 表示する作品カテゴリー
-        // $categories = $data[1][value];
-
-        $exts = ['jpg', 'png'];
-
-        $sql = "SELECT id, designer_id, name FROM works";
-              // ."ORDER BY '".$sortTarget."' DESC";
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
-
-        while ($row = $stmt->fetchObject())
-        {
-            $d_id = $row->designer_id;
-            $id = $row->id;
-            $filePath;
-
-            foreach( $exts as $ext) {
-                $filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
-
-                if(is_file($filePath)) {
-                    break;
-                }
+        // 検索条件
+        $conditions;
+        for($num = 1; $num < count($data) ; $num++) {
+            if($conditions != "") {
+                $tmp = $conditions.' or ';
+                $conditions = $tmp;
             }
-
-            // 画像サイズの取得
-            $size = getimagesize($filePath);
-
-            $result[] = array(
-                'id'       => $row->id,
-                'img'      => $filePath,
-                'width'    => $size[0],
-                'height'   => $size[1],
-                'imgname'  => $row->name,
-            );
+            $tmp = $conditions."category_id = ".$data[$num][value];
+            $conditions = $tmp;
         }
 
+        $sql;
+        if($conditions != "") {
 
+            $sql = "SELECT id, designer_id, name FROM works "
+                  ."WHERE ".$conditions." ORDER BY " .$target. " DESC"
+            ;
+
+            $stmt = $this->dbm->dbh->prepare($sql);
+            $stmt->execute();
+
+            while ($row = $stmt->fetchObject())
+            {
+                $d_id = $row->designer_id;
+                $id = $row->id;
+                $filePath;
+
+                foreach( $exts as $ext) {
+                    $filePath = '../view/images/creator/'.$d_id.'_'.$id.'.'.$ext;
+                    if(is_file($filePath)) {
+                        break;
+                    }
+                }
+                // 画像サイズの取得
+                $size = getimagesize($filePath);
+
+                $result[] = array(
+                    'id'       => $row->id,
+                    'img'      => $filePath,
+                    'width'    => $size[0],
+                    'height'   => $size[1],
+                    'imgname'  => $row->name,
+                );
+            }
+        }
+        else {
+            $result = 0 ;
+        }
         echo json_encode( $result );
     }
 
-    public function insert($data) {
-        echo json_encode( '作品登録' );
+
+    // 登録
+    public function insert($file, $data) {
+        echo json_encode( '登録' );
     }
 
+    // 編集
     public function edit($data) {
         $result;
 
@@ -88,36 +93,57 @@ class illustration {
         $flag = $stmt->execute();
 
         if($flag) {
-            $result = 0;
+            $result = 'success';
         }else{
-            $result = 1;
+            $result = 'error';
         }
         echo json_encode( $result );
     }
 
+    // 削除
     public function delete($data) {
+        $result;
         $id = $data[0][value];
         $name = $data[1][value];
         $designerId = $data[2][value];
 
-        // DBから作品と評価の削除
-        // $sql = "DELETE FROM works WHERE id = ".$id;
-        $sql = "DELETE works, evaluations FROM works "
-              ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
-              ."WHERE works.id = ".$id;
-
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $flag = $stmt->execute();
-
-
-
-        // todo
         // サーバー上の画像の削除
+        $sql = "SELECT name FROM designers WHERE id = ".$id;
+        $stmt = $dbm->dbh->prepare($sql);
+        $stmt->execute();
 
-        if($flag) {
-            $result = 0;
-        }else{
-            $result = 1;
+        $name;
+        while ($row = $stmt->fetchObject()) {
+            $name = $row->name;
+        }
+
+        $exts = ['jpg', 'png', 'bmp'];
+        // ファイルパスの指定
+        foreach( $exts as $ext) {
+            $filePath = '../view/images/creator/'.$name.'/'.$designerId.'_'.$id.'.'.$ext;
+            if(is_file($filePath)) {
+                unlink($filePath);
+
+                // DBから作品と評価の削除
+                // $sql = "DELETE FROM works WHERE id = ".$id;
+                $sql = "DELETE works, evaluations FROM works "
+                      ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
+                      ."WHERE works.id = ".$id
+                ;
+
+                $stmt = $this->dbm->dbh->prepare($sql);
+                $flag = $stmt->execute();
+
+                if($flag) {
+                    $result = 'success';
+                }else{
+                    $result = 'error';
+                }
+                break;
+            }
+            else {
+                $result = 'error';
+            }
         }
         echo json_encode( $result );
     }

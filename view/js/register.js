@@ -82,15 +82,31 @@ function triming(){
 	var resizeClass    = '.item img';
 	var thumnailWidth  = 200;
 	var thumnailHeight = 200;
+	var iw, ih;
 
 	$(resizeClass).each(function(){
 
-		$(this).height(thumnailHeight);
+		var w = $(this).width();
+		var h = $(this).height();
+
+		if(w >= h){
+			iw = (thumnailHeight/h*w-thumnailWidth)/2
+			$(this).height(thumnailHeight);
+			$(this).css("top",0);
+            $(this).css("left","-"+iw+"px");
+		}
+		else{
+			ih = (thumnailWidth/w*h-thumnailHeight)/2
+			$(this).css("top","-"+ih+"px");
+            $(this).css("left",0);
+		}
+
+		/*$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);
 		$(this).css("height", 200+"px");
 		$(this).css("top", 0);
 		$(this).css("width", 200+"px");
-		$(this).css("left", 0);
+		$(this).css("left", 0);*/
 
 	});
 }

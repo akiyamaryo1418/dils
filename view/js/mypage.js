@@ -140,7 +140,7 @@ function inputDeleteButton(){
     }
 
     $.ajax({
-    	url      : '/dils/api/controller.php',
+    	url      : '../../api/controller.php',
     	type     : 'POST',
     	dataType : 'json',
     	data     :  data,
@@ -154,5 +154,5 @@ function inputDeleteButton(){
 
 // 戻るボタンを押したとき
 function inputBackButton(){
-    location.href = "/dils/html/index.html";
+    location.href = "../../html/index.html";
 }

@@ -17,7 +17,7 @@ function inputLoginButton(){
 		'list'   :  param
 	}
 
-	alert(JSON.stringify(param));
+	//alert(JSON.stringify(param));
 
 	$.ajax({
 		url      : '../../api/controller.php',
@@ -27,9 +27,11 @@ function inputLoginButton(){
 		timeout  :  1000,
 	}).done(function(data, dataType){
 		var id = data;
-
-
-		location.href = "../html/index.html?"+ id;
+		if(id == -999){
+			alert('ユーザ名かパスワードが違います。');
+		}else{
+			location.href = "../html/index.html?"+ id;
+		}
 		//alert('Success');
 	}).fail(function(){
 		alert('ユーザ名かパスワードが違います。');

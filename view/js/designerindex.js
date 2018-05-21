@@ -15,7 +15,7 @@ function Initialize(){
 
 	$.ajax({
 		type:'POST',
-		url:'/CustomerManagementWebSystem/Api/controller.php',
+		url:'../../api/controller.php',
 		dataType:'json',
 		data:data,
 		timeout:1000,
