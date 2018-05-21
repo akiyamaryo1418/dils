@@ -86,7 +86,7 @@ class user {
         }
         else {
             // フィルターの対象がない
-            $result = 0;
+            $result = -999;
         }
         echo json_encode( $result );
     }

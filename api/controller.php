@@ -1,9 +1,9 @@
 <?php
 
-/*require_once('user.php');
+require_once('user.php');
 require_once('illustration.php');
 require_once('evaluation.php');
-require_once('category.php');*/
+require_once('category.php');
 header('Content-type:application/json; charset=utf8');
 
 
