@@ -16,18 +16,16 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     $func = $_POST['action'];
     $data = $_POST['list'];
 
-    //echo json_encode( 'test' );
+    // echo json_encode( $_FILES['img'] );
 
-    //$className->$func($data);
-    //$className->$func($data);
 
     if($_FILES['img']['name'] == null){
+        //echo json_encode( 'test' );
         $className->$func($data);
-        //echo json_encode( 'NG' );
-    }
-    else {
-        $className->$func($_FILES['img'], $data);
-        //echo json_encode( 'OK' );
+    } else {
+        //echo json_encode( 'img' );
+        $tmp = [$data, $_FILES['img']];
+        $className->$func(...$tmp);
     }
 }
 ?>
