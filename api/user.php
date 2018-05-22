@@ -14,6 +14,8 @@ class user {
     // データベース操作用クラス
     private $dbm;
 
+    private $exts = ['jpg', 'png', 'bmp'];
+
     // ================================================================
     // コンストラクタ
     // ================================================================
@@ -26,8 +28,8 @@ class user {
     // ================================================================
     public function illustIndex($data) {
 
-        $result;
-        $exts = ['jpg', 'png', 'bmp'];
+        $result = -999;
+        // $exts = ['jpg', 'png', 'bmp'];
 
         $d_id = $data[0][value];      // 表示するユーザーのID
         $target = $data[1][value];  // ソート対象
@@ -63,7 +65,7 @@ class user {
                 $fileName = $d_id.'_'.$row->d_name;
 
                 $filePath;
-                foreach( $exts as $ext) {
+                foreach( $this->exts as $ext) {
                     $imageName = $d_id.'_'.$id.'.'.$ext;
                     // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
 
@@ -101,13 +103,16 @@ class user {
         $stmt = $this->dbm->dbh->prepare($sql);
         $stmt->execute();
 
+        // $exts = ['jpg', 'png', 'bmp'];
+
         while ($row = $stmt->fetchObject())
         {
             $id = $row->id;
-            $fileName = $id.'_'.$row->d_name;
+            //$fileName = $id.'_'.$row->d_name;
 
             $filePath;
-            foreach( $exts as $ext) {
+            $imageName;
+            foreach( $this->exts as $ext) {
                 $imageName = $id.'_icon.'.$ext;
                 // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
 
@@ -123,6 +128,7 @@ class user {
                 'id'        => $id,
                 'userName'  => $row->name,
                 'img'       => $filePath,
+                'imgname'   => $imageName,
             );
         }
         echo json_encode( $result );
@@ -131,7 +137,7 @@ class user {
     // ================================================================
     // ユーザーの登録
     // ================================================================
-    public function register($data) {
+    public function register($fileData, $data) {
 
         $result;
         // $newData = explode(",", $data)
@@ -140,7 +146,7 @@ class user {
 
         // ユーザー名、パスワードを取得
         $newData = explode(",", $data);
-        $name = $newData[1];
+        $name = $newData[0];
 
         // アイコン名
         $iconName = 'icon';
@@ -151,7 +157,7 @@ class user {
             'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
         ];
 
-        $password = password_hash($newData[2], PASSWORD_BCRYPT, $options);
+        $password = password_hash($newData[1], PASSWORD_BCRYPT, $options);
         // $password = password_hash($data[2][value], PASSWORD_BCRYPT, $options);
 
         $sql = "INSERT INTO designers(name, password) "
@@ -181,67 +187,11 @@ class user {
         echo json_encode( $name );
     }
 
-    public function register($fileData, $data) {
-
-        //echo json_encode( $result );
-
-        $result;
-        // ユーザー名、パスワードを取得
-        $newData = explode(",", $data);
-        $name = $newData[1];
-
-        // アイコン名
-        $iconName = 'icon';
-
-        // パスワードの生成
-        $options = [
-        'cost' => 11,
-        'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-        ];
-
-        $password = password_hash($newData[2], PASSWORD_BCRYPT, $options);
-
-        $sql = "INSERT INTO designers(name, password) "
-            ."VALUES ('".$name."', '".$password."')"
-        ;
-
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
-
-        // 最後に追加されたIDの取得
-        $id = $this->dbm->dbh->lastInsertId();
-
-        // フォルダのファイルパスの作成
-        $fileName = $id.'_'.$name;
-        $directoryPath = '../view/images/creator/'.$fileName;
-
-        //フォルダ作成
-        if(mkdir($directoryPath, 0777)) {
-            chmod($directoryPath, 0777);
-            $result = 'succes';
-
-            // todo
-            // アイコン画像を作成したフォルダに入れる
-            if (dataUpload($fileData, $directoryPath, $name)) {
-                $result = $name;
-            } else {
-                $result = 'error';
-            }
-        }else{
-            $result = 'error';
-        }
-
-        echo json_encode( $result );
-    }
-
-    // ファイルをサーバーに送信
-    private function dataUpload($fileData, $directoryPath, $name)
-    {
+    private function test($fileData, $directoryPath, $name) {
         // 画像ファイルの有無
         if(empty($fileData)) {
             return false;
         }
-
         // ディレクトリの存在確認
         if (! file_exists($directoryPath)) {
             return false;
@@ -252,19 +202,24 @@ class user {
             $ext = substr($fileData[name], strrpos($fileData[name], '.') + 1);
 
             // ファイル名の設定
-            $newName = $name.'_icon.'$ext;
+            $newName = $name.'_icon.'.$ext;
 
             // アップロード後のファイルの移動先
             $destination = $filePath.'/'.$newName;
 
             // テンポラリからファイルを移動
             move_uploaded_file($fileData['tmp_name'], $destination);
+
         } catch (Exception $e) {
             return false;
         }
 
         return true;
     }
+
+
+
+
 
     // ================================================================
     // 編集
@@ -346,7 +301,7 @@ class user {
     // ログイン
     // ================================================================
     public function login($data) {
-        $result;
+        $result = -999;
 
         // ユーザー名、パスワードを取得
         $userName = $data[0][value];
@@ -358,19 +313,29 @@ class user {
         $flag = $stmt->execute();
 
         if($flag) {
+            $flag = false;
             while ($row = $stmt->fetchObject())
             {
                 // データベースにあるデータとの比較
                 $hash  = $row->password;
                 if(password_verify($password, $hash)) {
                     $result = $row->id;
+                    $flag = true;
+                    break;
                 } else {
                     // 入力したパスワードが違う
                     $result = -999;
+                    $flag = true;
                 }
             }
+            // ユーザー見つからない
+            if(!$flag) {
+                $result = -999;
+            }
+
+
         }else{
-            // ユーザーが存在しない
+            // SQLの失敗
             $result = -999;
         }
         echo json_encode( $result );

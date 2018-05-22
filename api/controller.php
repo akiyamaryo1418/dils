@@ -10,6 +10,7 @@ header('Content-type:application/json; charset=utf8');
 if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
 {
+
     // modelからクラスを生成
     $className = new $_POST['model'];
     $func = $_POST['action'];
@@ -18,14 +19,15 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     //echo json_encode( 'test' );
 
     //$className->$func($data);
+    //$className->$func($data);
 
-    if($_FILES['img'] == null){
-        //$className->$func($data);
-        echo json_encode( 'NG' );
+    if($_FILES['img']['name'] == null){
+        $className->$func($data);
+        //echo json_encode( 'NG' );
     }
     else {
-        //$className->$func($_FILES['img'], $data);
-        echo json_encode( 'OK' );
+        $className->$func($_FILES['img'], $data);
+        //echo json_encode( 'OK' );
     }
 }
 ?>
