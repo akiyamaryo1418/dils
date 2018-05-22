@@ -16,10 +16,11 @@ class evaluation {
 
     // 作品の評価、コメント
     public function index($data) {
-        $result;
+        $result = -999;
         $id = $data[0][value];
 
-        $sql = "SELECT eva.point, eva.comment, eva.created_at, work.average_point "
+
+        $sql = "SELECT eva.point, eva.comment, eva.created_at, work.designer_id, work.average_point "
               ."FROM evaluations AS eva "
               ."INNER JOIN works AS work ON work.id = eva.work_id "
               ."WHERE eva.work_id = ".$id
@@ -27,6 +28,7 @@ class evaluation {
 
         $stmt = $this->dbm->dbh->prepare($sql);
         $stmt->execute();
+
 
         while ($row = $stmt->fetchObject())
         {
@@ -42,7 +44,7 @@ class evaluation {
 
     // 評価、コメントの追加
     public function insert($data) {
-        $result;
+        $result = -999;
 
         $id = $data[0][value];
         $point = $data[1][value];
