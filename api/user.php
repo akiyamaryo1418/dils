@@ -26,7 +26,7 @@ class user {
     // ================================================================
     public function illustIndex($data) {
 
-        $result;
+        $result = -999;
         $exts = ['jpg', 'png', 'bmp'];
 
         $d_id = $data[0][value];      // 表示するユーザーのID
@@ -181,59 +181,6 @@ class user {
         echo json_encode( $name );
     }
 
-    public function register($fileData, $data) {
-
-        //echo json_encode( $result );
-
-        $result;
-        // ユーザー名、パスワードを取得
-        $newData = explode(",", $data);
-        $name = $newData[1];
-
-        // アイコン名
-        $iconName = 'icon';
-
-        // パスワードの生成
-        $options = [
-        'cost' => 11,
-        'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-        ];
-
-        $password = password_hash($newData[2], PASSWORD_BCRYPT, $options);
-
-        $sql = "INSERT INTO designers(name, password) "
-            ."VALUES ('".$name."', '".$password."')"
-        ;
-
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
-
-        // 最後に追加されたIDの取得
-        $id = $this->dbm->dbh->lastInsertId();
-
-        // フォルダのファイルパスの作成
-        $fileName = $id.'_'.$name;
-        $directoryPath = '../view/images/creator/'.$fileName;
-
-        //フォルダ作成
-        if(mkdir($directoryPath, 0777)) {
-            chmod($directoryPath, 0777);
-            $result = 'succes';
-
-            // todo
-            // アイコン画像を作成したフォルダに入れる
-            if (dataUpload($fileData, $directoryPath, $name)) {
-                $result = $name;
-            } else {
-                $result = 'error';
-            }
-        }else{
-            $result = 'error';
-        }
-
-        echo json_encode( $result );
-    }
-
     // ファイルをサーバーに送信
     private function dataUpload($fileData, $directoryPath, $name)
     {
@@ -265,6 +212,8 @@ class user {
 
         return true;
     }
+
+
 
     // ================================================================
     // 編集
@@ -346,7 +295,7 @@ class user {
     // ログイン
     // ================================================================
     public function login($data) {
-        $result;
+        $result = -999;
 
         // ユーザー名、パスワードを取得
         $userName = $data[0][value];
@@ -358,19 +307,29 @@ class user {
         $flag = $stmt->execute();
 
         if($flag) {
+            $flag = false;
             while ($row = $stmt->fetchObject())
             {
                 // データベースにあるデータとの比較
                 $hash  = $row->password;
                 if(password_verify($password, $hash)) {
                     $result = $row->id;
+                    $flag = true;
+                    break;
                 } else {
                     // 入力したパスワードが違う
                     $result = -999;
+                    $flag = true;
                 }
             }
+            // ユーザー見つからない
+            if(!$flag) {
+                $result = -999;
+            }
+
+
         }else{
-            // ユーザーが存在しない
+            // SQLの失敗
             $result = -999;
         }
         echo json_encode( $result );

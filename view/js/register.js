@@ -82,11 +82,11 @@ function triming(){
 	var resizeClass    = '.item img';
 	var thumnailWidth  = 200;
 	var thumnailHeight = 200;
-	var iw, ih;
+	//var iw, ih;
 
 	$(resizeClass).each(function(){
 
-		var w = $(this).width();
+		/*var w = $(this).width();
 		var h = $(this).height();
 
 		if(w >= h){
@@ -99,15 +99,16 @@ function triming(){
 			ih = (thumnailWidth/w*h-thumnailHeight)/2
 			$(this).css("top","-"+ih+"px");
             $(this).css("left",0);
-		}
+		}*/
 
-		/*$(this).height(thumnailHeight);
+		//====固定値====
+		$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);
 		$(this).css("height", 200+"px");
-		$(this).css("top", 0);
+		$(this).css("top", -60+"px");
 		$(this).css("width", 200+"px");
-		$(this).css("left", 0);*/
-
+		$(this).css("left", -70+"px");
+        //==============
 	});
 }
 

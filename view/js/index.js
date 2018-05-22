@@ -7,16 +7,16 @@ $(function(){
     moveHeadButton();
     //initIllust();
 
-
-
 });
 
 function Initialize(){
 
-	initCategory().then(responce => {
+	initCategory().then(function(){
 		return initIllust();
-	}).then(responce => {
-		alert('a');
+	}).then(function(){
+		//alert('a');
+	}).catch(function(){
+		alert('n');
 	});
 
 	var id = location.search;
@@ -31,15 +31,14 @@ function Initialize(){
 
 function initCategory(){
 
-	return new Promise((resolve, reject) =>{
+	return new Promise(function(resolve, reject){
+
 		// カテゴリの動的生成
 	    categorydata = {
 	    		'model'  : 'category',
 	    		'action' : 'info',
 	    		'list'   : 'a'
 	    };
-
-
 
 	 // idとnameの値を取得してきてます。
 	    $.ajax({
@@ -49,25 +48,26 @@ function initCategory(){
 			data:categorydata,
 			timeout:1000,
 	    }).done(function(categorydata, dataType){
+
 	    	for(var index = 0; index < categorydata.length; index++){
 	    		$('.SearchBoxfilter').append('<input type="checkbox" name="checkbox" id="categoryid_'+ categorydata[index].id +'" value="'+ categorydata[index].id +'" checked="checked" onchange="searchCategory();">')
 	            .append($('<label></label>').attr({'for':'categoryid_'+categorydata[index].id, 'class':'check_css'}).html(categorydata[index].name));
 	    	}
-	    	alert('1');
+	    	//alert('1');
 	    	resolve();
-	    }).fail(function(){
-	    	alert('11');
+	    }).fail(function(categorydata, dataType){
+	    	//alert(JSON.stringify(categorydata));
+	    	//alert('11');
 	    	reject();
-	    })
+	    });
 	});
 }
 
 function initIllust(){
+//alert("aaaaaaa");
 
-	/*var param = $('#SearchAndFilter').serializeArray();
+	return new Promise(function(resolve, reject){
 
-	alert(JSON.stringify(param));*/
-	return new Promise((resolve, reject) =>{
 		var param = $('#SearchAndFilter').serializeArray();
 	data = {
 	    	'model'  : 'illustration',
@@ -82,7 +82,6 @@ function initIllust(){
 	    	data     :  data,
 	    	timeout  :  1000,
 	    }).done(function(data, dataType){
-
 	    	//===ただの表示===
 	    	for(var index = 0; index < data.length; index++){
 	    		var result = data[index].img.replace('view/', '');
@@ -118,6 +117,7 @@ function initIllust(){
 	    	reject();
 	    });
 	});
+
 }
 
 // 初期化
@@ -225,31 +225,6 @@ function moveHeadButton(){
 			scrollTop: 0},500);
 		    return false;
 		});
-}
-
-// トップページへ移動
-function moveTopPage(){
-	location.href = "../html/index.html";
-}
-
-// 制作者一覧へ移動
-function moveDesignerIndex(){
-	location.href = "../html/designerindex.html";
-}
-
-// ログインページへ移動
-function moveLoginPage(){
-	location.href = "../html/login.html";
-}
-
-// マイページへ移動
-function moveMyPageButton(){
-	location.href = "../html/mypage.html";
-}
-
-// 新規登録ボタン
-function moveInsertButton(){
-	location.href = "../html/insert.html";
 }
 
 // フィルタ検索機能(ジャンル)

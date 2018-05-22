@@ -27,6 +27,7 @@ function inputLoginButton(){
 		timeout  :  1000,
 	}).done(function(data, dataType){
 		var id = data;
+		//alert(JSON.stringify(id));
 		if(id == -999){
 			alert('ユーザ名かパスワードが違います。');
 		}else{
