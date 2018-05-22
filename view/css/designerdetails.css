@@ -22,12 +22,6 @@ body {
     display: block;
     clear: both;
 }
-
-#wrap {
-  position: relative;
-  top: -75px;
-  margin:0 auto;
-}
 /*--------------------------------------------------
 	2. header
 --------------------------------------------------*/
@@ -36,8 +30,9 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
+  min-width: 1250px;
   height: 75px;
-  background: rgba(0,0,0,0.5);
+  background: #000;
 }
 
 header h1 {
@@ -62,8 +57,14 @@ header nav.login {
 header nav.mypage {
   float: right;
   width: 280px;
+  min-width: 960px;
   margin: 0 50px;
   display: none;
+}
+
+header ul {
+  width: 280px;
+  list-style: none;
 }
 
 header li {
@@ -71,7 +72,6 @@ header li {
   width: 140px;
   height: 75px;
   text-align: center;
-  list-style: none;
 }
 
 header li:hover {
@@ -90,27 +90,49 @@ header li a {
 	3. main
 --------------------------------------------------*/
 
-#Top {
-  width: 100%;
-  height: 600px;
-}
-.slider-wrapper {
-  overflow: hidden;
-  width: 100%;
-  height: 600px;
-  background: #99ffff;
+.creatorbox {
+  width: 960px;
+  height: 372px;
+  margin: 0 auto;
 }
 
-.slider-item {
-  width: 100%;
-  height: 600px;
-  background: url("../images/top/miko.jpg") no-repeat;
-  background-size: cover;
+.creatoricon {
+  width: 200px;
+  height: 200px;
+  float: left;
+  padding: 80px 40px 70px 60px;
 }
 
+.creatoricon img {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #eee;
+}
+
+.creatorname {
+  float: left;
+  width: 250px;
+  margin: 100px 0 50px;
+}
+
+span {
+  font-size: 12px;
+}
+
+p.return {
+  float: right;
+  margin: 330px 60px 0 0;
+}
+
+p.return a {
+  text-decoration: none;
+  color: #000;
+}
+
+/*：：：：検索：：：：*/
 #SearchBox {
   width: 100%;
-  min-width: 960px;
+  min-width: 1000px;
   height: 45px;
   margin: 15px 0;
   background: #000;
@@ -148,18 +170,6 @@ header li a {
 
 #SearchBoxSort li#SeartReview:hover {
   background: rgba(255,124,127,0.8);
-}
-
-input[type=radio]{
-	display:none;
-}
-
-input[type="radio"]:checked + label{
-	background: rgba(255, 128, 128, 0.8);
-}
-
-.label{
-    cursor: pointer;
 }
 
 
@@ -229,49 +239,52 @@ input[type=checkbox]:checked + .check_css:before {
   opacity: 1;
 }
 
-
 #SearchBoxfilter div {
   float: left;
-  width: 90px;
-
+  width: 90px; 
 }
-/*：：：：：作品一覧：：：：：*/
 
-#wrapper {
-  position: relative;
-  max-width: 900px;
+/*#wrap {
+  width: 1000px;
+  margin:0 auto 100px;
+}
+
+#wrap:after {
+  display: block;
+  clear: both;
+  content: "";
+}*/
+
+.creatoristbox {
+  width: 960px;
+  margin: 0 auto 100px;
+}
+.creatoristbox ul {
+  width: 875px;
   margin: 0 auto;
+  list-style: none;
 }
 
-.masonry {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
+.creatoristbox ul li {
+  float: left;
+  width: 105px;
+  height: 105px;
+  margin: 0 10px 20px 10px;
+  cursor: pointer;
+  text-align: center;
+  background: #ccc;
 }
 
-div.item {
-  width   : 250px;
-  height  : 250px;
-  float   : left;
-  overflow: hidden;
-  border  : 1px solid #eee;
+.creatoristbox img {
+  width: 105px;
+  height: 105px;
 }
 
-.cle { clear: both; }
-
-.item.x2 {
-  width: 320px;
-}
-
-.item img {
-  /*width: 100%;*/
-  position : relative;
-}
 
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
 .lightbox_view{
-  display: none;
+/*  display: none;*/
   position: fixed;
   top: 0px;
   left: 0px;
@@ -426,6 +439,8 @@ textarea {
   color: #ffcc00;
 }
 
+
+
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
@@ -433,6 +448,7 @@ textarea {
 footer {
   position: relative;
   width: 100%;
+  min-width: 1250px;
   height: 70px;
   background: #000;
 }
@@ -453,7 +469,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-
+  
 }
 
 footer nav ul {
@@ -480,14 +496,4 @@ footer p {
   margin-right: 36px;
   padding: 25px;
   color: #fff;
-}
-
-#pagetopbutton {
-  width: 60px;
-  height: 60px;
-  background: #ccc;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: -60px 20px;
 }

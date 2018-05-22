@@ -64,7 +64,6 @@ function initCategory(){
 }
 
 function initIllust(){
-//alert("aaaaaaa");
 
 	return new Promise(function(resolve, reject){
 
@@ -90,9 +89,8 @@ function initIllust(){
 	    				     .html('<img src="'+result+'"'+
 	    		            	   'alt="'+data[index].imgname+'">'))
 	    		             .append($('<p></p>').html(data[index].imgname)));
-
-	    		/*console.log(data[index].width);
-	    		console.log(data[index].height);*/
+	    		$('.imgbox').append('<img src="'+result+'"'+
+	    				          'alt="'+data[index].imgname+'>');
 
 	    	}
 	        //================
@@ -102,14 +100,14 @@ function initIllust(){
 	    	$('.masonry').masonry({itemSelector: '.item', columnWidth : 300 });
 
 	    	// ライトボックス
-	    	for(var index = 0; index < data.length; index++){
-	            var result = data[index].img.replace('view/', '');
-	            $('.lightbox_view').append($('<div></div>').attr({'id':'lightboxid_'+data[index].id,'class':'lightbox_view_img'})
-	                               .append($('<div></div>').attr({'class':'lightbox_img_content'})
+	    	/*for(var index = 0; index < data.length; index++){
+	    		var result = data[index].img.replace('view/', '');
+	            $('.lightbox_view').append($('<div></div>').attr({'id':'lightboxid_'+data[index].id,'class':'leftcontents'})
+	                               .append($('<div></div>').attr({'class':'imgbox'})
 	                               .append($('<div></div>').attr({'class':'close_btn'}).html('ddd'))
 	                               .html('<img src="'+result+'"'+
 	                            		 'alt="'+data[index].imgname+'">')));
-	    	}
+	    	}*/
 	    	resolve();
 	    	//===============
 	    }).fail(function(){

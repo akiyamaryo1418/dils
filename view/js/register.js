@@ -12,7 +12,7 @@ function inputRegistrationButton(){
 	//checkValidation();
 
 
-	data = new FormData($('#sendimg').get(0));
+	data = new FormData($('#previewform').get(0));
 	data.append('model', 'user');
 	data.append('action', 'register');
 

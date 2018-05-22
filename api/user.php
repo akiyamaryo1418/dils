@@ -14,6 +14,8 @@ class user {
     // データベース操作用クラス
     private $dbm;
 
+    private $exts = ['jpg', 'png', 'bmp'];
+
     // ================================================================
     // コンストラクタ
     // ================================================================
@@ -27,7 +29,6 @@ class user {
     public function illustIndex($data) {
 
         $result = -999;
-        $exts = ['jpg', 'png', 'bmp'];
 
         $d_id = $data[0][value];      // 表示するユーザーのID
         $target = $data[1][value];  // ソート対象
@@ -63,7 +64,7 @@ class user {
                 $fileName = $d_id.'_'.$row->d_name;
 
                 $filePath;
-                foreach( $exts as $ext) {
+                foreach( $this->exts as $ext) {
                     $imageName = $d_id.'_'.$id.'.'.$ext;
                     // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
 
@@ -104,10 +105,11 @@ class user {
         while ($row = $stmt->fetchObject())
         {
             $id = $row->id;
-            $fileName = $id.'_'.$row->d_name;
+            //$fileName = $id.'_'.$row->d_name;
 
             $filePath;
-            foreach( $exts as $ext) {
+            $imageName;
+            foreach( $this->exts as $ext) {
                 $imageName = $id.'_icon.'.$ext;
                 // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
 
@@ -123,6 +125,7 @@ class user {
                 'id'        => $id,
                 'userName'  => $row->name,
                 'img'       => $filePath,
+                'imgname'   => $imageName,
             );
         }
         echo json_encode( $result );
@@ -131,28 +134,20 @@ class user {
     // ================================================================
     // ユーザーの登録
     // ================================================================
-    public function register($data) {
+    public function register($data, $fileData = null) {
 
-        $result;
-        // $newData = explode(",", $data)
-        //echo json_encode( 'test' );
-
+        $result = -999;
 
         // ユーザー名、パスワードを取得
         $newData = explode(",", $data);
-        $name = $newData[1];
-
-        // アイコン名
-        $iconName = 'icon';
+        $name = $newData[0];
 
         // パスワードの生成
         $options = [
             'cost' => 11,
             'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
         ];
-
-        $password = password_hash($newData[2], PASSWORD_BCRYPT, $options);
-        // $password = password_hash($data[2][value], PASSWORD_BCRYPT, $options);
+        $password = password_hash($newData[1], PASSWORD_BCRYPT, $options);
 
         $sql = "INSERT INTO designers(name, password) "
               ."VALUES ('".$name."', '".$password."')"
@@ -164,6 +159,7 @@ class user {
         // 最後に追加されたIDの取得
         $id = $this->dbm->dbh->lastInsertId();
 
+
         // フォルダのファイルパスの作成
         $fileName = $id.'_'.$name;
         $directoryPath = '../view/images/creator/'.$fileName;
@@ -171,24 +167,33 @@ class user {
         //フォルダ作成
         if(mkdir($directoryPath, 0777)) {
             chmod($directoryPath, 0777);
-            $result = 'succes';
+            $result = $name;
 
-            // todo
+
             // アイコン画像を作成したフォルダに入れる
+            if($fileData != null) {
+                $iconName = $id.'_icon';
+                if($this->uploadImage($fileData, $directoryPath, $iconName)) {
+                    $result = '画像あり';
+                }
+                else{
+                    $result = -999;
+                }
+            }
+            else{
+                $result = '画像なし';
+            }
         }else{
-            $result = 'error';
+            $result = -999;
         }
-        echo json_encode( $name );
+        echo json_encode( $result );
     }
 
-    // ファイルをサーバーに送信
-    private function dataUpload($fileData, $directoryPath, $name)
-    {
+    private function uploadImage($fileData, $directoryPath, $name) {
         // 画像ファイルの有無
         if(empty($fileData)) {
             return false;
         }
-
         // ディレクトリの存在確認
         if (! file_exists($directoryPath)) {
             return false;
@@ -196,22 +201,25 @@ class user {
 
         try {
             // ファイルの拡張子の取得
-            $ext = substr($fileData[name], strrpos($fileData[name], '.') + 1);
+            $ext = substr($fileData['name'], strrpos($fileData['name'], '.') + 1);
 
             // ファイル名の設定
-            $newName = $name.'_icon.'$ext;
+            $newName = $name.'.'.$ext;
 
             // アップロード後のファイルの移動先
-            $destination = $filePath.'/'.$newName;
+            $destination = $directoryPath.'/'.$newName;
 
             // テンポラリからファイルを移動
             move_uploaded_file($fileData['tmp_name'], $destination);
+
         } catch (Exception $e) {
             return false;
         }
 
         return true;
     }
+
+
 
 
 
