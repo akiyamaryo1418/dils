@@ -74,7 +74,7 @@
 
           <div class="rightcontents">
             <div class="close">
-              <img src="../images/top/batuicon.png" alt=""/>
+              <a href="#"><img src="../images/top/batuicon.png" alt=""/></a>
             </div>
             <div class="star">
               <input id="star1" type="radio" name="star" value="5" />
@@ -90,28 +90,9 @@
             </div>
             <p>評価コメント</p>
             <div class="commentbox">
-              <dl>
-                <dt>18/05/08</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/08</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/08</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/07</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/06</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
             </div>
-            <form method="post" action="example.cgi">
+            <form id="sendeva">
+            <div class="idmem"></div>
               <p>作品評価</p>
               <div class="starbutton">
                 <input id="starbutton1" type="radio" name="star" value="5" />
@@ -124,10 +105,11 @@
                 <label for="starbutton4">★</label>
                 <input id="starbutton5" type="radio" name="star" value="1" />
                 <label for="starbutton5">★</label>
+                <input id="starbutton6" type="radio" name="star" value="0" checked="checked" />
               </div>
               <div class="reviewbox">
                 <textarea name="kanso" rows="4" cols="40">作品にコメントする</textarea>
-                <p><input type="submit" value="投稿" class="review"></p>
+                <p><input type="button" value="投稿" class="review" onclick="sendEvaluation();"></p>
               </div>
 
             </form>

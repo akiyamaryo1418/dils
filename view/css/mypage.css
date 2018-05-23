@@ -240,6 +240,18 @@ header li a {
   font-size: 12px;
 }
 
+div.creatoricon {
+  width   : 150px;
+  height  : 150px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+}
+
+.creatoricon img {
+  position : relative;
+}
+
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
@@ -268,7 +280,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {

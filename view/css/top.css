@@ -314,10 +314,26 @@ div.item {
 }
 
 .leftcontents .imgbox {
-  width: 500px;
+  width: 750px;
   height: 700px;
   margin: 0 auto;
-  background: #ff0033;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+  /*background: #ff0033;*/
+}
+
+/*div.imgbox{
+  width   : 500px;
+  height  : 700px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+}*/
+
+.imgbox img {
+  /*width: 100%;*/
+  position : relative;
 }
 
 .rightcontents {

@@ -16,8 +16,8 @@ class evaluation {
 
     // 作品の評価、コメント
     public function index($data) {
-        $result = -999;
-        $id = $data[0][value];
+        $result;
+        $id = $data;
 
 
         $sql = "SELECT eva.point, eva.comment, eva.created_at, work.designer_id, work.average_point "
@@ -27,7 +27,7 @@ class evaluation {
         ;
 
         $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
+        $flag = $stmt->execute();
 
 
         while ($row = $stmt->fetchObject())

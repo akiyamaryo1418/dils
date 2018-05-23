@@ -28,13 +28,44 @@ class user {
     // ================================================================
     public function illustIndex($data) {
 
-        $result = -999;
+        $result;
 
-        $d_id = $data[0][value];      // 表示するユーザーのID
-        $target = $data[1][value];  // ソート対象
+        $d_id = $data;      // 表示するユーザーのID
+        
+        $sql = "SELECT name FROM designer WHERE id = ".$d_id;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+        
+        while ($row = $stmt->fetchObject()) {
+                $fileName = $d_id.'_'.$row->name;
+
+                $filePath;
+                foreach( $this->exts as $ext) {
+                    $imageName = $d_id.'_icon'.'.'.$ext;
+                    // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
+
+                    $filePath = '../view/images/creator/'.$imageName;
+                    if(is_file($filePath)) {
+                        break;
+                    }
+                }
+                // 画像サイズの取得
+                $size = getimagesize($filePath);
+
+                $result[] = array(
+                    'img'      => $filePath,
+                    'width'    => $size[0],
+                    'height'   => $size[1],
+                    'imgname'  => $row->name,
+                    'username' => $row->name,
+                );
+            }
+        echo json_encode( $result );
+        
+        //$target = $data[1][value];  // ソート対象
 
         // 検索条件
-        $conditions = "";
+        /*$conditions = "";
         for($num = 2; $num < count($data) ; $num++) {
             if($conditions != "") {
                 $tmp = $conditions.' or ';
@@ -42,9 +73,9 @@ class user {
             }
             $tmp = $conditions."category_id = ".$data[$num][value];
             $conditions = $tmp;
-        }
+        }*/
 
-        $sql;
+        /*$sql;
         if($conditions != "") {
             $sql = "SELECT des.name AS d_name, work.id, work.name "
                   ."FROM designers AS des "
@@ -89,7 +120,7 @@ class user {
             // フィルターの対象がない
             $result = -999;
         }
-        echo json_encode( $result );
+        echo json_encode( $result );*/
     }
 
     // ================================================================
