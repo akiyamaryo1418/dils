@@ -241,9 +241,34 @@
     </div>
 
    <!------ライトボックス----->
-
-
-   <div class="lightbox_view"></div>
+   <div class="lightbox_view">
+     <div class="close">
+       <img src="../images/top/batuicon.png" alt="閉じるボタン"/>
+     </div>
+     <div class="formbox">
+       <form method="post" action="example.cgi">
+         <div class="leftcontents">
+          <div class="imgbox"></div>
+          <p><input type="file" name="datafile"></p>
+         </div>
+         <div class="rightcontents">
+           <p class="title">タイトル<input type="text" name="title"></p>
+            <div class="selectwrap">
+              <label for="category">カテゴリ</label>
+                <select name="category">
+                  <option value="キャラ">キャラ</option>
+                  <option value="背景">背景</option>
+                  <option value="アイテム">アイテム</option>
+                </select>
+            </div>
+           <div class="buttonbox">
+             <p><input type="button" value="変更内容を登録" onclick="sendEdit();"></p>
+           <p><input type="button" value="削除" onclick="DeleteIllust();"></p>
+           </div>
+         </div>
+       </form>
+     </div>
+   </div>
 
 
     <footer class="clearfix">

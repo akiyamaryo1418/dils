@@ -36,6 +36,11 @@ function Initialize(){
     });
 }
 
+// イラストのライトボックスを開く(編集)
+function openIllustLightbox(){
+
+}
+
 function editUserName(){
 	var name = window.prompt("ユーザ名を入力してください","");
 
@@ -92,8 +97,6 @@ function triming(){
 	var thumnailHeight = 150;
 
 	$(resizeClass).each(function(){
-
-		//alert('dddddd');
 
 		$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);
