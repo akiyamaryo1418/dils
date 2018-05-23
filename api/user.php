@@ -29,8 +29,7 @@ class user {
     // ================================================================
     public function illustIndex($data) {
 
-        $result = -999;
-
+        $result;
         $d_id = $data[0][value];    // 表示するユーザーのID
         $target = $data[1][value];  // ソート対象
 
@@ -136,7 +135,6 @@ class user {
     // ユーザーの登録
     // ================================================================
     public function register($data, $fileData = null) {
-
         $result = -999;
 
         // ユーザー名、パスワードを取得
@@ -168,21 +166,20 @@ class user {
         //フォルダ作成
         if(mkdir($directoryPath, 0777)) {
             chmod($directoryPath, 0777);
-            $result = $name;
-
 
             // アイコン画像を作成したフォルダに入れる
             if($fileData != null) {
                 $iconName = $id.'_icon';
                 if($this->uploadImage($fileData, $directoryPath, $iconName)) {
-                    $result = '画像あり';
+                    $result = 'success';
                 }
                 else{
                     $result = -999;
                 }
             }
             else{
-                $result = '画像なし';
+                // 画像なし
+                $result = 'success';
             }
         }else{
             $result = -999;
@@ -190,6 +187,7 @@ class user {
         echo json_encode( $result );
     }
 
+    // 画像を登録する
     private function uploadImage($fileData, $directoryPath, $name) {
         // 画像ファイルの有無
         if(empty($fileData)) {
@@ -219,10 +217,6 @@ class user {
 
         return true;
     }
-
-
-
-
 
     // ================================================================
     // 編集
@@ -317,27 +311,22 @@ class user {
         $flag = $stmt->execute();
 
         if($flag) {
-            $flag = false;
-            while ($row = $stmt->fetchObject())
-            {
-                // データベースにあるデータとの比較
-                $hash  = $row->password;
-                if(password_verify($password, $hash)) {
-                    $result = $row->id;
-                    $flag = true;
-                    break;
-                } else {
-                    // 入力したパスワードが違う
-                    $result = -999;
-                    $flag = true;
+            if(!$stmt->fetchObject()) {
+                $result = -999;
+            } else {
+                while ($row = $stmt->fetchObject())
+                {
+                    // データベースにあるデータとの比較
+                    $hash  = $row->password;
+                    if(password_verify($password, $hash)) {
+                        $result = $row->id;
+                        break;
+                    } else {
+                        // 入力したパスワードが違う
+                        $result = -999;
+                    }
                 }
             }
-            // ユーザー見つからない
-            if(!$flag) {
-                $result = -999;
-            }
-
-
         }else{
             // SQLの失敗
             $result = -999;

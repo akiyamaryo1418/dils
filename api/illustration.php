@@ -80,8 +80,39 @@ class illustration {
 
 
     // 登録
-    public function insert($file, $data) {
+    public function insert($data, $fileData = null) {
         echo json_encode( '登録' );
+    }
+
+    // 画像を登録する
+    private function uploadImage($fileData, $directoryPath, $name) {
+        // 画像ファイルの有無
+        if(empty($fileData)) {
+            return false;
+        }
+        // ディレクトリの存在確認
+        if (! file_exists($directoryPath)) {
+            return false;
+        }
+
+        try {
+            // ファイルの拡張子の取得
+            $ext = substr($fileData['name'], strrpos($fileData['name'], '.') + 1);
+
+            // ファイル名の設定
+            $newName = $name.'.'.$ext;
+
+            // アップロード後のファイルの移動先
+            $destination = $directoryPath.'/'.$newName;
+
+            // テンポラリからファイルを移動
+            move_uploaded_file($fileData['tmp_name'], $destination);
+
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 
     // 編集

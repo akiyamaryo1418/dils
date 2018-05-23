@@ -16,26 +16,37 @@ class evaluation {
 
     // 作品の評価、コメント
     public function index($data) {
-        $result = -999;
-        $id = $data[0][value];
+        $result;
+        $id = $data;
 
         $sql = "SELECT eva.comment, eva.created_at, work.designer_id, work.average_point "
               ."FROM evaluations AS eva "
               ."INNER JOIN works AS work ON work.id = eva.work_id "
               ."WHERE eva.work_id = ".$id
         ;
-
         $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
+        $flag = $stmt->execute();
 
-
-        while ($row = $stmt->fetchObject())
-        {
-            $result[] = array(
-                'comment'    => $row->comment,
-                'created_at' => $row->created_at,
-                'review'     => $row->average_point,
-            );
+        if($flag) {
+            if(!$stmt->fetchObject()) {
+                $result[] = array(
+                    'comment'    => '',
+                    'created_at' => '',
+                    'review'     => 0,
+                );
+            } else {
+                while ($row = $stmt->fetchObject())
+                {
+                    $result[] = array(
+                        'comment'    => $row->comment,
+                        'created_at' => $row->created_at,
+                        'review'     => $row->average_point,
+                    );
+                }
+            }
+        }else{
+            // SQLの失敗
+            $result = -999;
         }
         echo json_encode( $result );
     }
