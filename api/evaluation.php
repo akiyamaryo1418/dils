@@ -19,8 +19,7 @@ class evaluation {
         $result = -999;
         $id = $data[0][value];
 
-
-        $sql = "SELECT eva.point, eva.comment, eva.created_at, work.designer_id, work.average_point "
+        $sql = "SELECT eva.comment, eva.created_at, work.designer_id, work.average_point "
               ."FROM evaluations AS eva "
               ."INNER JOIN works AS work ON work.id = eva.work_id "
               ."WHERE eva.work_id = ".$id
@@ -33,7 +32,6 @@ class evaluation {
         while ($row = $stmt->fetchObject())
         {
             $result[] = array(
-                'point'      => $row->point,
                 'comment'    => $row->comment,
                 'created_at' => $row->created_at,
                 'review'     => $row->average_point,

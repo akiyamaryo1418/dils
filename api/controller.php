@@ -16,14 +16,10 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     $func = $_POST['action'];
     $data = $_POST['list'];
 
-    // echo json_encode( $_FILES['img'] );
-
 
     if($_FILES['img']['name'] == null){
-        //echo json_encode( 'test' );
         $className->$func($data);
     } else {
-        //echo json_encode( 'img' );
         $tmp = [$data, $_FILES['img']];
         $className->$func(...$tmp);
     }

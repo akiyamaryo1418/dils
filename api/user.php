@@ -14,6 +14,7 @@ class user {
     // データベース操作用クラス
     private $dbm;
 
+    // 登録できる拡張子
     private $exts = ['jpg', 'png', 'bmp'];
 
     // ================================================================
@@ -30,7 +31,7 @@ class user {
 
         $result = -999;
 
-        $d_id = $data[0][value];      // 表示するユーザーのID
+        $d_id = $data[0][value];    // 表示するユーザーのID
         $target = $data[1][value];  // ソート対象
 
         // 検索条件
@@ -63,12 +64,10 @@ class user {
                 $id = $row->id;
                 $fileName = $d_id.'_'.$row->d_name;
 
-                $filePath;
                 foreach( $this->exts as $ext) {
                     $imageName = $d_id.'_'.$id.'.'.$ext;
-                    // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
+                    $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
 
-                    $filePath = '../view/images/creator/'.$imageName;
                     if(is_file($filePath)) {
                         break;
                     }
@@ -78,6 +77,7 @@ class user {
 
                 $result[] = array(
                     'id'       => $row->id,
+                    'userName' => $row->d_name,
                     'img'      => $filePath,
                     'width'    => $size[0],
                     'height'   => $size[1],
@@ -105,16 +105,17 @@ class user {
         while ($row = $stmt->fetchObject())
         {
             $id = $row->id;
-            //$fileName = $id.'_'.$row->d_name;
+            $fileName = $id.'_'.$row->name;
 
-            $filePath;
-            $imageName;
+            $filePath = '../view/images/creator/Share/default.png';
+            $imageName = 'default.png';
+
             foreach( $this->exts as $ext) {
-                $imageName = $id.'_icon.'.$ext;
-                // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
-
-                $filePath = '../view/images/creator/'.$imageName;
-                if(is_file($filePath)) {
+                $imageTmpName = $id.'_icon.'.$ext;
+                $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
+                if(is_file($tmpPath)) {
+                    $filePath = $tmpPath;
+                    $imageName = $imageTmpName;
                     break;
                 }
             }
@@ -257,25 +258,26 @@ class user {
     // ================================================================
     public function delete($data) {
 
-        $result;
+        $result = -999;
 
         // IDの取得
         $id = $data[0][value];
 
-        // ユーザーのフォルダ削除
+        // IDからユーザ名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$id;
         $stmt = $dbm->dbh->prepare($sql);
         $stmt->execute();
 
-        $name;
+        $fileName;
         while ($row = $stmt->fetchObject()) {
             $tmp = $id.'_'.$name;
-            $name = $tmp;
+            $fileName = $tmp;
         }
 
         // ファイルパスの指定
-        $filePath = '../../view/images/creater/'.$name;
+        $filePath = '../../view/images/creater/'.$fileName;
         if (is_dir($filePath)) {
+            // フォルダの削除
             rmdir($filePath);
 
             // DB上のデータの削除
@@ -291,7 +293,7 @@ class user {
 
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
-            $result = 0;
+            $result = 'succes';
         } else {
             $result = -999;
         }
