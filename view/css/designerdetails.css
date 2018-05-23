@@ -22,12 +22,6 @@ body {
     display: block;
     clear: both;
 }
-
-#wrap {
-  position: relative;
-  top: -75px;
-  margin:0 auto;
-}
 /*--------------------------------------------------
 	2. header
 --------------------------------------------------*/
@@ -38,7 +32,7 @@ header {
   width: 100%;
   min-width: 1250px;
   height: 75px;
-  background: rgba(0,0,0,0.5);
+  background: #000;
 }
 
 header h1 {
@@ -63,8 +57,14 @@ header nav.login {
 header nav.mypage {
   float: right;
   width: 280px;
+  min-width: 960px;
   margin: 0 50px;
   display: none;
+}
+
+header ul {
+  width: 280px;
+  list-style: none;
 }
 
 header li {
@@ -72,7 +72,6 @@ header li {
   width: 140px;
   height: 75px;
   text-align: center;
-  list-style: none;
 }
 
 header li:hover {
@@ -91,27 +90,46 @@ header li a {
 	3. main
 --------------------------------------------------*/
 
-#Top {
-  width: 100%;
-  min-width: 1250px;
-  height: 600px;
-}
-.slider-wrapper {
-  overflow: hidden;
-  width: 100%;
-  height: 600px;
-  background: #99ffff;
+.creatorbox {
+  width: 960px;
+  height: 372px;
+  margin: 0 auto;
 }
 
-.slider-item {
-  width: 100%;
-  height: 600px;
+.creatoricon {
+  width: 200px;
+  height: 200px;
+  float: left;
+  padding: 80px 40px 70px 60px;
 }
 
-.slider-item img {
-  width: 100%;
+.creatoricon img {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #eee;
 }
 
+.creatorname {
+  float: left;
+  width: 250px;
+  margin: 100px 0 50px;
+}
+
+span {
+  font-size: 12px;
+}
+
+p.return {
+  float: right;
+  margin: 330px 60px 0 0;
+}
+
+p.return a {
+  text-decoration: none;
+  color: #000;
+}
+
+/*：：：：検索：：：：*/
 #SearchBox {
   width: 100%;
   min-width: 1000px;
@@ -221,44 +239,46 @@ input[type=checkbox]:checked + .check_css:before {
   opacity: 1;
 }
 
-
 #SearchBoxfilter div {
   float: left;
-  width: 90px;
-  
+  width: 90px; 
 }
-/*：：：：：作品一覧：：：：：*/
 
-#wrapper {
-  position: relative;
-  max-width: 900px;
+/*#wrap {
+  width: 1000px;
+  margin:0 auto 100px;
+}
+
+#wrap:after {
+  display: block;
+  clear: both;
+  content: "";
+}*/
+
+.creatoristbox {
+  width: 960px;
+  margin: 0 auto 100px;
+}
+.creatoristbox ul {
+  width: 875px;
   margin: 0 auto;
+  list-style: none;
 }
 
-.masonry {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.item {
+.creatoristbox ul li {
   float: left;
-  width: 140px;
-  margin: 10px;
-  padding: 8px;
-  border: 1px solid #eee;
+  width: 105px;
+  height: 105px;
+  margin: 0 10px 20px 10px;
+  cursor: pointer;
+  text-align: center;
+  background: #ccc;
 }
 
-.item.x2 {
-  width: 320px;
+.creatoristbox img {
+  width: 105px;
+  height: 105px;
 }
-
-.item img {
-  width: 100%;
-}
-
-
-
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
@@ -314,14 +334,4 @@ footer p {
   margin-right: 36px;
   padding: 25px;
   color: #fff;
-}
-
-#pagetopbutton {
-  width: 60px;
-  height: 60px;
-  background: #ccc;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: -60px 20px;
 }

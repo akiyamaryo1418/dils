@@ -19,18 +19,18 @@
 
   <body>
     <!--------ヘッダー------->
-    <header>
+    <header class="clearfix">
       <h1><a href="index.html">Designer Works</a></h1>
       <nav class="login">
         <ul>
-          <li><a>制作者一覧</a></li>
+          <li><a href="designerindex.html">制作者一覧</a></li>
           <li><a href="login.html">LOGIN</a></li>
         </ul>
       </nav>
       <nav class="mypage">
         <ul>
-          <li><a>制作者一覧</a></li>
-          <li><a>MYPAGE</a></li>
+          <li><a href="designerindex.html">制作者一覧</a></li>
+          <li><a href="mypage.html">MYPAGE</a></li>
         </ul>
       </nav>
     </header>
@@ -40,9 +40,15 @@
     <section id="Top">
       <!------トップスライダー----->
       <div class="slider-wrapper">
-          <div class="slider-item"></div>
-          <div class="slider-item"></div>
-          <div class="slider-item"></div>
+          <div class="slider-item">
+            <img src="../images/top/miko.jpg" alt="女の子"/>
+          </div>
+          <div class="slider-item">
+            <img src="../images/top/miko.jpg" alt="女の子"/>
+          </div>
+          <div class="slider-item">
+          <img src="../images/top/miko.jpg" alt="女の子"/>
+          </div>
       </div>
     </section>
     <!------ソート機能------->
@@ -63,8 +69,7 @@
         <label for="item" class="check_css">アイテム</label>
       </div>
     </section>
-    <div id="wrapper">
-      <!--data-masonry='{ "itemSelector": ".item", "columnWidth": 400 }'-->
+    <div id="wrapper" class="clearfix">
       <div class="masonry" id="thumbnail">
         <div class="item">
           <img src="../images/top/kawaii2.jpg" alt=""/>
@@ -73,7 +78,7 @@
       </div>
     </div>
     </div>
-    <footer>
+    <footer class="clearfix">
       <h1>Designer Works</h1>
       <nav>
       <ul>

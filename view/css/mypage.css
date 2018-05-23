@@ -23,11 +23,6 @@ body {
     clear: both;
 }
 
-#wrap {
-  width: 1160px;
-  margin:0 auto;
-}
-
 /*--------------------------------------------------
 	2. header
 --------------------------------------------------*/
@@ -63,8 +58,14 @@ header nav.login {
 header nav.mypage {
   float: right;
   width: 280px;
+  min-width: 960px;
   margin: 0 50px;
   display: none;
+}
+
+header ul {
+  width: 280px;
+  list-style: none;
 }
 
 header li {
@@ -72,7 +73,6 @@ header li {
   width: 140px;
   height: 75px;
   text-align: center;
-  list-style: none;
 }
 
 header li:hover {
@@ -90,81 +90,148 @@ header li a {
 /*--------------------------------------------------
 	3. main
 --------------------------------------------------*/
-#contentabox {
-  width: 1160px;
-  min-width: 1200px;
+#contentsbox {
+  width: 1100px;
   margin: 0 auto;
 }
 
-#contentsbox h1 {
-  font-size: 14px;
-  margin: 21px 0 0 13px;
-}
-
-.creatersortbox {
-  width: 1160px;
-  height: 22px;
-  padding: 7px 0 15px 0;
-}
-
-.creatersortbox ul {
-  float: right;
-  list-style: none;
-}
-
-.creatersortbox ul li {
+#LeftBox {
   float: left;
-  width: 70px;
-  height: 22px;
-  text-align: center;
-  border-left: 2px solid #000;
+  width: 260px;
 }
 
-#SortOther {
-  border-right: 2px solid #000;
+#LeftBox h1 {
+  margin: 60px 0;
+  font-size: 36px;
 }
 
-.creatersortbox li span {
-  font-size: 10px;
-  color: #333333;
+#LeftBox h2 {
+  margin: 0 0 0 10px;
+  font-size: 16px;
 }
 
-.listbox {
-  min-width: 960px;
-  margin: 0 0 150px 0;
+#LeftBox .creatoricon {
+  width: 137px;
+  height: 137px;
+  margin: 10px 10px 0 10px;
+  background: #000;
 }
 
-.listbox ul {
-  width: 1150px;
-  margin: 0 auto;
-  list-style: none;
+#LeftBox .file_edit {
+  width: 110px;
+  margin: 0 0 10px 30px;
 }
 
-.listbox ul li {
+#LeftBox .usernamebox {
+  width: 120px;
   float: left;
-  width: 115px;
-  height: 125px;
-  padding-bottom: 20px;
-  color: #000;
-  cursor: pointer;
-  text-align: center;
 }
 
-.listbox ul li div {
+#LeftBox span {
   font-size: 12px;
+  margin: 10px;
 }
 
-img {
-  width: 105px;
+#LeftBox p {
+  font-size: 14px;
+  margin: 5px 10px;
+}
+
+#LeftBox p.editbox {
+  width: 50px;
+  float: left;
+  margin: 17px 0 0 0;
+}
+
+.editbox input {
+  width: 50px;
+  height: 25px;
+  background: #000;
+  color: #fff;
+  border: none;
+}
+
+#LeftBox .buttonbox {
+  float: left;
+  width: 250px;
+  margin: 40px 0;
+}
+
+#LeftBox .buttonbox p {
+  float: left;
+  width: 100px;
+}
+
+.buttonbox input {
+  width: 112px;
+  height: 40px;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
   border: 1px solid #ccc;
 }
 
-.creatersortbox ul li:hover {
-  background: #99ccff;
+#RightBox {
+ float: left;
+ width: 742px;
+ margin: 0 0 0 97px;
+ background: #ccc;
 }
 
-img:hover {
-  opacity:0.8;
+#RightBox .rightcontents {
+  width: 722px;
+  margin: 140px auto 0;
+}
+
+#RightBox span {
+  float: left;
+  margin: 5px 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#RightBox p.addbutton {
+  float: right;
+  margin: 0 10px;
+}
+
+.addbutton input {
+  width: 112px;
+  height: 40px;
+  background: #000;
+  color: #fff;
+  border: none;
+}
+
+#RightBox .myistbox {
+  float: left;
+  width: 722px;
+  margin: 20px auto 60px;
+}
+
+.myistbox ul {
+  list-style: none;
+}
+
+.myistbox ul li {
+  float: left;
+  width: 125px;
+  height: 168px;
+  margin: 0 9px 30px 10px;
+}
+
+.myistbox li .imgbox {
+  width: 125px;
+  height: 125px;
+  background: #000;
+}
+
+.myistbox .textbox {
+  margin: 5px 0 0 0;
+}
+
+.myistbox .textbox p.category {
+  font-size: 12px;
 }
 
 /*--------------------------------------------------
