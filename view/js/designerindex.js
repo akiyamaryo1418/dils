@@ -8,26 +8,28 @@ $(function(){
 // デザイナー一覧を表示している
 function Initialize(){
 	data = {
-		'model'  : 'designer',
+		'model'  : 'user',
 		'action' : 'index',
 		'list'   : 'a'
 	};
 
 	$.ajax({
 		type:'POST',
-		url:'/CustomerManagementWebSystem/Api/controller.php',
+		url:'../../api/controller.php',
 		dataType:'json',
 		data:data,
 		timeout:1000,
 	}).done(function(data, dataType){
 		for(var index = 0; index < data.length; index++){
-			$('.designer_list').append($('<div></div>').attr('id', data[index].id)
-					           .append($('<div></div>').html('<img src='data[index].img
-					        		                          'alt='data[index].imgname'>'))
-					           .append($('<p></p>').html(data[index].imgname)));
+			var result = data[index].img.replace('view/', '');
+			$('#listbox').append($('<li></li>').html('<img src="'+data[index].imgname+'"'+
+					                                 'alt="'+data[index].imgname+'">')
+					     .append($('<div></div>').attr({'class':'createname'}).html(data[index].imgname))
+					     .append($('<p></p>').html(data[index].userName)));
 		}
+		//alert(data.length);
 	}).fail(function(XMLHttpRequest, textStatus, errorThrown){
-		//alert('Error : ' + errorThrown);
+		alert('n');
 	});
 }
 
@@ -40,5 +42,5 @@ function searchDesigner(){
 // 引数・・・制作者ID
 function moveDesignerDetails(id){
 	var param = id;
-	location.href = "/dils/view/html/designerdetails.html?"+param;
+	location.href = "../html/designerdetails.html?"+param;
 }

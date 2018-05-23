@@ -7,37 +7,40 @@ $(function(){
 // ログインボタン
 function inputLoginButton(){
 
-	checkValidation();
+	//checkValidation();
 
-	var param = "";
+	var param = $('#login').serializeArray();
 
 	data = {
-<<<<<<< HEAD
-        'model':'login',
-		'action':'login',
-		'list': param
-=======
-		'model'  :'login',
+		'model'  : 'user',
 		'action' : 'login',
 		'list'   :  param
->>>>>>> 479a94ef9aa439150ac06d37658f5be28a7edd53
 	}
 
+	//alert(JSON.stringify(param));
+
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
 		var id = data;
-
-
-		location.href = "/dils/html/index.html?"+ id;
+		//alert(JSON.stringify(id));
+		if(id == -999){
+			alert('ユーザ名かパスワードが違います。');
+		}else{
+			location.href = "../html/index.html?"+ id;
+		}
 		//alert('Success');
 	}).fail(function(){
 		alert('ユーザ名かパスワードが違います。');
 	});
+}
+
+function debugButton(){
+	//location.href = "../html/index.html";
 }
 
 // バリデーションチェック

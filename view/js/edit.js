@@ -16,7 +16,7 @@ function Initialize(){
 	}
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,

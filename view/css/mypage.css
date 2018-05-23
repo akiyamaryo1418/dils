@@ -174,8 +174,19 @@ header li a {
 #RightBox {
  float: left;
  width: 742px;
+<<<<<<< HEAD
  margin: 0 0 0 97px;
  background: #ccc;
+=======
+ height: 852px;
+ margin: 0 0 0 97px;
+ background: #ccc;
+ overflow-y: auto;
+}
+
+#RightBox::-webkit-scrollbar {
+  display: none;
+>>>>>>> origin/akiyama
 }
 
 #RightBox .rightcontents {
