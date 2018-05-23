@@ -17,17 +17,15 @@ function openLightbox(id,pass){
         data     :  data,
         timeout  :  1000,
 	}).done(function(data, dataType){
-        //alert(JSON.stringify(data));
-		//alert(JSON.stringify(id));
-		$('.imgbox').append('<img src="'+pass+'">')
-		$(".lightbox_view, #illustid_"+id+"").fadeIn();   // 第1引数・・・背景？(class)  第2引数・・・拡大写真(class)
+		$('.imgbox').append('<img class="lightboxview" id="lightboxid_"'+id+'"  src="'+pass+'">')
+		$(".lightbox_view, #lightboxid_"+id+"").fadeIn();   // 第1引数・・・背景？(class)  第2引数・・・拡大写真(class)
 		$('body').addClass("overflow");
 		lightboxtriming();
 
 		var intaverage = Math.floor(data[0].review);
 
 		for(var index = 0; index < data.length; index++){
-			$('.commentbox').append($('<dl></dl>')
+			$('.commentbox').append($('<dl class="lightboxview"></dl>')
                             .append($('<dt></dt>').html(data[index].created_at))
                             .append($('<dd></dd>').html(data[index].comment)));
 		}
@@ -37,7 +35,8 @@ function openLightbox(id,pass){
 			$('#star'+intaverage+'').attr({'checked': 'checked'});
 		}
 
-		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" checked="checked" display:none>'));
+		// 見えないようにしている
+		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
 	}).fail(function(){
         alert('no');
 	})
@@ -106,7 +105,11 @@ function sendEvaluation(){
 
 // ライトボックスを閉じる
 function closeLightbox(){
+	var memid = $('.id').val();
 
-	$(".lightbox_view, #illustid_"+id+"").fadeOut();
+	//alert(memid);
+	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
+	$('.lightboxview').remove();
+	$('.id').remove();
 	$('body').removeClass("overflow");
 }

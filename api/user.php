@@ -31,11 +31,11 @@ class user {
         $result;
 
         $d_id = $data;      // 表示するユーザーのID
-        
-        $sql = "SELECT name FROM designer WHERE id = ".$d_id;
+
+        $sql = "SELECT name FROM designers WHERE id = ".$d_id;
         $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
-        
+        $flag = $stmt->execute();
+
         while ($row = $stmt->fetchObject()) {
                 $fileName = $d_id.'_'.$row->name;
 
@@ -60,8 +60,8 @@ class user {
                     'username' => $row->name,
                 );
             }
-        echo json_encode( $result );
-        
+            echo json_encode( $result );
+
         //$target = $data[1][value];  // ソート対象
 
         // 検索条件

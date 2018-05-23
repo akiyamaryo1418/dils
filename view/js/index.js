@@ -157,7 +157,7 @@ function moveHeadButton(){
 function searchCategory(){
 
 	var param = $('#SearchAndFilter').serializeArray();
-	alert(JSON.stringify(param));
+	//alert(JSON.stringify(param));
 
 	// 必要な情報はチェックボックスの状態
 	data = {

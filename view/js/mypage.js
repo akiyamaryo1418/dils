@@ -25,8 +25,12 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//$('#penname').html(data.username);
-    	alert(JSON.stringify(data));
+    	//$('#mypageicon').html('<img id="mypageicon" v-show>')
+    	var result = data[0].img.replace('view/', '');
+    	$('#mypagepreview').append('<img src="'+result+'">');
+    	$('.penname').html(data[0].username);
+    	triming();
+    	//alert(JSON.stringify(data[0].username));
     }).fail(function(){
     	alert('Nodata');
     });
@@ -35,7 +39,7 @@ function Initialize(){
 function editUserName(){
 	var name = window.prompt("ユーザ名を入力してください","");
 
-	$('penname').html(name);
+	$('.penname').html(name);
 	/*new Vue({
 		el: '#penname',
 		data: {
