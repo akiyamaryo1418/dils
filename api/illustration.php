@@ -83,8 +83,9 @@ class illustration {
     // 登録
     public function insert($data, $fileData = null) {
         $result = -999;
+        echo json_encode(fileData);
 
-        if($fileData != null) {
+        /*if($fileData != null) {
             // ユーザー名、パスワードを取得
             $newData = explode(",", $data);
             $designerId = $newData[0];
@@ -142,7 +143,7 @@ class illustration {
             // ファイルデータが無い
             $result = -999;
         }
-        echo json_encode( $result );
+        echo json_encode( $result );*/
     }
 
     // 画像を登録する

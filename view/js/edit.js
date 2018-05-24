@@ -277,32 +277,39 @@ function triming(){
 // 画像新規登録
 function inputUpdateButton(){
 
-    var img = new Array();
-    var name = new Array();
-    for(var index = 0; index < 8; index++){
-    	name[index] = $('.text'+(index+1)+'').val();
-    	img[index] = new FormData($('#send').get(1 + index * 3));
-    }
-
-    /*img[0] = new FormData($('#send').get(1));
-    img[0] = new FormData($('#send').get(1));
-    img[0] = new FormData($('#send').get(1));
-    img[0] = new FormData($('#send').get(1));
-    img[0] = new FormData($('#send').get(1));
-    img[0] = new FormData($('#send').get(1));
-    img[0] = new FormData($('#send').get(1));*/
-
-
-    data = new FormData();
-
-	data.append('model',  'illustration');
-	data.append('action', 'insert');
-
-	var id = location.search;
+    var id = location.search;
 	id = id.substring(1);
 
-	var param = [ id, img ]
-	data.append('list', param);
+    // 毎回通信する
+    for(var index = 0; index < 8; index++){
+
+    	data = new FormData($('#send').get(1 + index * 3));
+    	data.append('model',  'illustration');
+    	data.append('action', 'insert');
+
+    	var name = $('.text'+(index+1)+'').val();
+
+        var param = [ id, name ];
+        data.append('list', param);
+
+        $.ajax({
+    		url         : '../../api/controller.php',
+    		type        : 'POST',
+    		dataType    : 'json',
+    		processData : false,
+        	contentType : false,
+    		data        :  data,
+    		timeout     :  1000,
+    	}).done(function(data, dataType){
+    		alert('Success');
+    		console.log(JSON.stringify(data));
+    	}).fail(function(){
+    		alert('NoData');
+    	});
+    }
+
+
+	/*data.append('list', param);
 
 	$.ajax({
 		url         : '../../api/controller.php',
@@ -314,8 +321,8 @@ function inputUpdateButton(){
 		timeout     :  1000,
 	}).done(function(data, dataType){
 		alert('Success');
-		console.log(data);
+		console.log(JSON.stringify(data));
 	}).fail(function(){
 		alert('NoData');
-	});
+	});*/
 }
