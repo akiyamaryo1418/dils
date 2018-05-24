@@ -27,23 +27,29 @@ class evaluation {
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
+
         if($flag) {
-            if(!$stmt->fetchObject()) {
-                $result[] = array(
-                    'comment'    => '',
-                    'created_at' => '',
-                    'review'     => 0,
-                );
-            } else {
-                while ($row = $stmt->fetchObject())
-                {
+            while ($row = $stmt->fetchObject()) {
+                if(!$row) {
+                    $result[] = array(
+                        'comment'    => '',
+                        'created_at' => '',
+                        'review'     => 0,
+                    );
+                    break;
+                }
+                else {
+                    $cut = 9;//カットしたい文字数
+                    $newDay = substr( $row->created_at , 0 , strlen($row->created_at)-$cut);
                     $result[] = array(
                         'comment'    => $row->comment,
-                        'created_at' => $row->created_at,
+                        'created_at' => $newDay,
                         'review'     => $row->average_point,
                     );
                 }
+
             }
+
         }else{
             // SQLの失敗
             $result = -999;

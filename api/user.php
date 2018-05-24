@@ -311,20 +311,16 @@ class user {
         $flag = $stmt->execute();
 
         if($flag) {
-            if(!$stmt->fetchObject()) {
-                $result = -999;
-            } else {
-                while ($row = $stmt->fetchObject())
-                {
-                    // データベースにあるデータとの比較
-                    $hash  = $row->password;
-                    if(password_verify($password, $hash)) {
-                        $result = $row->id;
-                        break;
-                    } else {
-                        // 入力したパスワードが違う
-                        $result = -999;
-                    }
+            while ($row = $stmt->fetchObject())
+            {
+                // データベースにあるデータとの比較
+                $hash  = $row->password;
+                if(password_verify($password, $hash)) {
+                    $result = $row->id;
+                    break;
+                } else {
+                    // 入力したパスワードが違う
+                    $result = -999;
                 }
             }
         }else{
