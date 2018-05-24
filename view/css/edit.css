@@ -126,7 +126,7 @@ form p {
   margin: 25px 0 0 0;
 }
 
-.box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box 
+.box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box
 ,.box5 .img-box ,.box6 .img-box ,.box7 .img-box ,.box8 .img-box {
   float: left;
   width: 240px;
@@ -134,7 +134,7 @@ form p {
   background: #000;
 }
 
-.box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box 
+.box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box
 ,.box5 .img-box ,.box6 .img-box ,.box7 .img-box ,.box8 .img-box {
   margin: 0 46px 0 0;
 }
@@ -143,6 +143,18 @@ form p {
 ,.text6 ,.text7 ,.text8 {
   width: 236px;
   height: 20px;
+}
+
+div.img-box {
+  width   : 250px;
+  height  : 250px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+}
+
+.img-box img {
+  position : relative;
 }
 
 select {
@@ -209,7 +221,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {

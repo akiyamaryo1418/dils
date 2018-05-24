@@ -19,25 +19,29 @@ class evaluation {
         $result;
         $id = $data;
 
-
-        $sql = "SELECT eva.point, eva.comment, eva.created_at, work.designer_id, work.average_point "
+        $sql = "SELECT eva.comment, eva.created_at, work.designer_id, work.average_point "
               ."FROM evaluations AS eva "
               ."INNER JOIN works AS work ON work.id = eva.work_id "
               ."WHERE eva.work_id = ".$id
         ;
-
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
 
-        while ($row = $stmt->fetchObject())
-        {
-            $result[] = array(
-                'point'      => $row->point,
-                'comment'    => $row->comment,
-                'created_at' => $row->created_at,
-                'review'     => $row->average_point,
-            );
+        if($flag) {
+            while ($row = $stmt->fetchObject())
+            {
+                $cut = 9;   //カットしたい文字数
+                $newDay = substr( $row->created_at , 0 , strlen($row->created_at)-$cut);
+                $result[] = array(
+                    'comment'    => $row->comment,
+                    'created_at' => $newDay,
+                    'review'     => $row->average_point,
+                );
+            }
+        }else{
+            // SQLの失敗
+            $result = -999;
         }
         echo json_encode( $result );
     }
@@ -72,9 +76,9 @@ class evaluation {
 
         if($flag)
         {
-            $result = 0;
+            $result = 'succes';
         } else {
-            $result = 1;
+            $result = -999;
         }
         echo json_encode( $result );
     }

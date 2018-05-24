@@ -45,19 +45,6 @@ function editUserName(){
 	var name = window.prompt("ユーザ名を入力してください","");
 
 	$('.penname').html(name);
-	/*new Vue({
-		el: '#penname',
-		data: {
-			message: '',
-			inputMessage: ''
-		},
-		methods: {
-			// getMessageを発火させると文字列が代入される
-			getMessage: function(){
-			    this.message = name
-		    }
-		}
-	})*/
 }
 
 // アイコン
@@ -108,23 +95,43 @@ function triming(){
 	});
 }
 
-// ユーザ名編集ボタンを押したとき
-//var name = window.prompt("ユーザ名を入力してください。","");
+// アカウント編集登録
+function sendAccountEdit(){
 
-/*new Vue({
-	el : '#penname',  // テキスト表示場所のID
-	data: {
-		message: '',
-		inputMessage: ''
-	},
-	methods: {
-		// getMessageを発火させると文字列が代入される
-		getMessage: function(){
-		    this.message = this.inputMessage
-	    }
-	}
-})*/
+	//data = new FormData($('#mypageiconform').get(0));
+	data = new FormData($('#mypageiconform').get(0));
+	data.append('model', 'user');
+	data.append('action', 'register');
 
+	var id = location.search;
+    id = id.substring(1);
+
+	data.append('list', id);
+
+    $.ajax({
+    	url         : '../../api/controller.php',
+    	type        : 'POST',
+    	dataType    : 'json',
+    	processData : false,
+    	contentType : false,
+    	data        :  data,
+    	timeout     :  1000,
+    }).done(function(data, dataType){
+    	location.href = "../html/index.html?"+id;
+        //alert(data);
+    }).fail(function(){
+    	alert('Nodata');
+    });
+}
+
+// 編集画面へ
+function moveEdit(){
+
+	var id = location.search;
+	id = id.substring(1);
+
+	location.href = "../html/edit.html?"+id;
+}
 
 // 削除ボタンを押したとき
 function inputDeleteButton(){

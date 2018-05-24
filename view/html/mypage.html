@@ -35,7 +35,7 @@
             </form>
           </div>
           <form id="mypageiconform" name="mypageicon" method="POST" enctype="multipart/form-data">
-            <p><input type="file" class="file_edit" v-on:change="onFileChange" name="datafile"></p>
+            <p><input type="file" id="sd" class="file_edit" v-on:change="onFileChange" name="datafile"></p>
           </form>
         </div>
         <div class="usernamebox">
@@ -48,15 +48,15 @@
         </div>
         <p class="editbox"><input type="button" name="user" value="編集" onclick="editUserName();"></p>
         <div class="buttonbox">
-        <p><input type="submit" class="reg" value="変更内容を登録"></p>
-        <p><input type="submit" class="delete" value="アカウント削除"></p>
+        <p><input type="submit" class="reg" value="変更内容を登録" onclick="sendAccountEdit();"></p>
+        <p><input type="submit" class="delete" value="アカウント削除" onclick="deleteAccount();"></p>
         </div>
       </div>
 
       <div id="RightBox">
         <div class="rightcontents">
         <span>作品</span>
-        <p class="addbutton"><input type="button" value="作品を追加"></p>
+        <p class="addbumtton"><input type="button" value="作品を追加" onclick="moveEdit();"></p>
           <div class="myistbox">
             <ul>
               <li>
@@ -262,8 +262,8 @@
                 </select>
             </div>
            <div class="buttonbox">
-             <p><input type="button" value="変更内容を登録" onclick="sendEdit();"></p>
-           <p><input type="button" value="削除" onclick="DeleteIllust();"></p>
+             <p><input type="button" value="変更内容を登録" onclick="sendIllustEdit();"></p>
+           <p><input type="button" value="削除" onclick="deleteIllust();"></p>
            </div>
          </div>
        </form>

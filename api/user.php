@@ -14,6 +14,7 @@ class user {
     // データベース操作用クラス
     private $dbm;
 
+    // 登録できる拡張子
     private $exts = ['jpg', 'png', 'bmp'];
 
     // ================================================================
@@ -27,56 +28,35 @@ class user {
     // ユーザーの作品一覧
     // ================================================================
     public function illustIndex($data) {
-
         $result;
+        $designerId = $data[0][value];    // 表示するユーザーのID
 
-        $d_id = $data;      // 表示するユーザーのID
+        // ソート対象
+        $target = "";
+        if($data[1][value] == null) {
+            $target = 'uploaded_at';
+        } else {
+            $target = $data[1][value];
+        }
 
-        $sql = "SELECT name FROM designers WHERE id = ".$d_id;
-        $stmt = $this->dbm->dbh->prepare($sql);
-        $flag = $stmt->execute();
-
-        while ($row = $stmt->fetchObject()) {
-                $fileName = $d_id.'_'.$row->name;
-
-                $filePath;
-                foreach( $this->exts as $ext) {
-                    $imageName = $d_id.'_icon'.'.'.$ext;
-                    // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
-
-                    $filePath = '../view/images/creator/'.$imageName;
-                    if(is_file($filePath)) {
-                        break;
-                    }
-                }
-                // 画像サイズの取得
-                $size = getimagesize($filePath);
-
-                $result[] = array(
-                    'img'      => $filePath,
-                    'width'    => $size[0],
-                    'height'   => $size[1],
-                    'imgname'  => $row->name,
-                    'username' => $row->name,
-                );
-            }
-            echo json_encode( $result );
-
-        //$target = $data[1][value];  // ソート対象
 
         // 検索条件
-        /*$conditions = "";
-        for($num = 2; $num < count($data) ; $num++) {
-            if($conditions != "") {
-                $tmp = $conditions.' or ';
+        $conditions = "";
+        if($data[2][value] == null) {
+            $conditions = "category_id IN (1,2,3)";
+        } else {
+            for($num = 2; $num < count($data) ; $num++) {
+                if($conditions != "") {
+                    $tmp = $conditions.' or ';
+                    $conditions = $tmp;
+                }
+                $tmp = $conditions."category_id = ".$data[$num][value];
                 $conditions = $tmp;
             }
-            $tmp = $conditions."category_id = ".$data[$num][value];
-            $conditions = $tmp;
-        }*/
+        }
 
-        /*$sql;
-        if($conditions != "") {
+        // 条件確認
+        if($conditions != "" && $target != "") {
             $sql = "SELECT des.name AS d_name, work.id, work.name "
                   ."FROM designers AS des "
                   ."INNER JOIN works AS work "
@@ -85,21 +65,19 @@ class user {
                   ."AND ".$conditions." "
                   ."ORDER BY " .$target." DESC"
             ;
-
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
 
             while ($row = $stmt->fetchObject())
             {
-                $id = $row->id;
-                $fileName = $d_id.'_'.$row->d_name;
+                $imageId = $row->id;
+                $fileName = $designerId.'_'.$row->d_name;
 
-                $filePath;
+                // 拡張子の確認
                 foreach( $this->exts as $ext) {
-                    $imageName = $d_id.'_'.$id.'.'.$ext;
-                    // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
+                    $imageName = $designerId.'_'.$imageId.'.'.$ext;
+                    $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
 
-                    $filePath = '../view/images/creator/'.$imageName;
                     if(is_file($filePath)) {
                         break;
                     }
@@ -109,6 +87,7 @@ class user {
 
                 $result[] = array(
                     'id'       => $row->id,
+                    'userName' => $row->d_name,
                     'img'      => $filePath,
                     'width'    => $size[0],
                     'height'   => $size[1],
@@ -117,10 +96,10 @@ class user {
             }
         }
         else {
-            // フィルターの対象がない
+            // ソート、対象の取得ミス
             $result = -999;
         }
-        echo json_encode( $result );*/
+        echo json_encode( $result );
     }
 
     // ================================================================
@@ -136,16 +115,17 @@ class user {
         while ($row = $stmt->fetchObject())
         {
             $id = $row->id;
-            //$fileName = $id.'_'.$row->d_name;
+            $fileName = $id.'_'.$row->name;
 
-            $filePath;
-            $imageName;
+            $filePath = '../view/images/creator/Share/default.png';
+            $imageName = 'default.png';
+
             foreach( $this->exts as $ext) {
-                $imageName = $id.'_icon.'.$ext;
-                // $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
-
-                $filePath = '../view/images/creator/'.$imageName;
-                if(is_file($filePath)) {
+                $imageTmpName = $id.'_icon.'.$ext;
+                $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
+                if(is_file($tmpPath)) {
+                    $filePath = $tmpPath;
+                    $imageName = $imageTmpName;
                     break;
                 }
             }
@@ -166,7 +146,6 @@ class user {
     // ユーザーの登録
     // ================================================================
     public function register($data, $fileData = null) {
-
         $result = -999;
 
         // ユーザー名、パスワードを取得
@@ -198,21 +177,20 @@ class user {
         //フォルダ作成
         if(mkdir($directoryPath, 0777)) {
             chmod($directoryPath, 0777);
-            $result = $name;
-
 
             // アイコン画像を作成したフォルダに入れる
             if($fileData != null) {
                 $iconName = $id.'_icon';
                 if($this->uploadImage($fileData, $directoryPath, $iconName)) {
-                    $result = '画像あり';
+                    $result = 'success';
                 }
                 else{
                     $result = -999;
                 }
             }
             else{
-                $result = '画像なし';
+                // 画像なし
+                $result = 'success';
             }
         }else{
             $result = -999;
@@ -220,6 +198,7 @@ class user {
         echo json_encode( $result );
     }
 
+    // 画像を登録する
     private function uploadImage($fileData, $directoryPath, $name) {
         // 画像ファイルの有無
         if(empty($fileData)) {
@@ -249,10 +228,6 @@ class user {
 
         return true;
     }
-
-
-
-
 
     // ================================================================
     // 編集
@@ -288,25 +263,26 @@ class user {
     // ================================================================
     public function delete($data) {
 
-        $result;
+        $result = -999;
 
         // IDの取得
         $id = $data[0][value];
 
-        // ユーザーのフォルダ削除
+        // IDからユーザ名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$id;
         $stmt = $dbm->dbh->prepare($sql);
         $stmt->execute();
 
-        $name;
+        $fileName;
         while ($row = $stmt->fetchObject()) {
             $tmp = $id.'_'.$name;
-            $name = $tmp;
+            $fileName = $tmp;
         }
 
         // ファイルパスの指定
-        $filePath = '../../view/images/creater/'.$name;
+        $filePath = '../../view/images/creater/'.$fileName;
         if (is_dir($filePath)) {
+            // フォルダの削除
             rmdir($filePath);
 
             // DB上のデータの削除
@@ -322,11 +298,10 @@ class user {
 
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
-            $result = 0;
+            $result = 'succes';
         } else {
             $result = -999;
         }
-
         echo json_encode( $result );
     }
 
@@ -346,27 +321,19 @@ class user {
         $flag = $stmt->execute();
 
         if($flag) {
-            $flag = false;
+            $result = -999;
             while ($row = $stmt->fetchObject())
             {
                 // データベースにあるデータとの比較
                 $hash  = $row->password;
                 if(password_verify($password, $hash)) {
                     $result = $row->id;
-                    $flag = true;
                     break;
                 } else {
                     // 入力したパスワードが違う
                     $result = -999;
-                    $flag = true;
                 }
             }
-            // ユーザー見つからない
-            if(!$flag) {
-                $result = -999;
-            }
-
-
         }else{
             // SQLの失敗
             $result = -999;
@@ -374,5 +341,4 @@ class user {
         echo json_encode( $result );
     }
 }
-
 ?>
