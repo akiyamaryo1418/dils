@@ -28,24 +28,35 @@ class user {
     // ユーザーの作品一覧
     // ================================================================
     public function illustIndex($data) {
-
         $result;
-        $d_id = $data[0][value];    // 表示するユーザーのID
-        $target = $data[1][value];  // ソート対象
+        $designerId = $data[0][value];    // 表示するユーザーのID
+
+        // ソート対象
+        $target = "";
+        if($data[1][value] == null) {
+            $target = 'uploaded_at';
+        } else {
+            $target = $data[1][value];
+        }
+
 
         // 検索条件
         $conditions = "";
-        for($num = 2; $num < count($data) ; $num++) {
-            if($conditions != "") {
-                $tmp = $conditions.' or ';
+        if($data[2][value] == null) {
+            $conditions = "category_id IN (1,2,3)";
+        } else {
+            for($num = 2; $num < count($data) ; $num++) {
+                if($conditions != "") {
+                    $tmp = $conditions.' or ';
+                    $conditions = $tmp;
+                }
+                $tmp = $conditions."category_id = ".$data[$num][value];
                 $conditions = $tmp;
             }
-            $tmp = $conditions."category_id = ".$data[$num][value];
-            $conditions = $tmp;
         }
 
-        $sql;
-        if($conditions != "") {
+        // 条件確認
+        if($conditions != "" && $target != "") {
             $sql = "SELECT des.name AS d_name, work.id, work.name "
                   ."FROM designers AS des "
                   ."INNER JOIN works AS work "
@@ -54,17 +65,17 @@ class user {
                   ."AND ".$conditions." "
                   ."ORDER BY " .$target." DESC"
             ;
-
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
 
             while ($row = $stmt->fetchObject())
             {
-                $id = $row->id;
-                $fileName = $d_id.'_'.$row->d_name;
+                $imageId = $row->id;
+                $fileName = $designerId.'_'.$row->d_name;
 
+                // 拡張子の確認
                 foreach( $this->exts as $ext) {
-                    $imageName = $d_id.'_'.$id.'.'.$ext;
+                    $imageName = $designerId.'_'.$imageId.'.'.$ext;
                     $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
 
                     if(is_file($filePath)) {
@@ -85,7 +96,7 @@ class user {
             }
         }
         else {
-            // フィルターの対象がない
+            // ソート、対象の取得ミス
             $result = -999;
         }
         echo json_encode( $result );
@@ -291,7 +302,6 @@ class user {
         } else {
             $result = -999;
         }
-
         echo json_encode( $result );
     }
 
@@ -311,6 +321,7 @@ class user {
         $flag = $stmt->execute();
 
         if($flag) {
+            $result = -999;
             while ($row = $stmt->fetchObject())
             {
                 // データベースにあるデータとの比較
@@ -330,5 +341,4 @@ class user {
         echo json_encode( $result );
     }
 }
-
 ?>

@@ -29,27 +29,16 @@ class evaluation {
 
 
         if($flag) {
-            while ($row = $stmt->fetchObject()) {
-                if(!$row) {
-                    $result[] = array(
-                        'comment'    => '',
-                        'created_at' => '',
-                        'review'     => 0,
-                    );
-                    break;
-                }
-                else {
-                    $cut = 9;//カットしたい文字数
-                    $newDay = substr( $row->created_at , 0 , strlen($row->created_at)-$cut);
-                    $result[] = array(
-                        'comment'    => $row->comment,
-                        'created_at' => $newDay,
-                        'review'     => $row->average_point,
-                    );
-                }
-
+            while ($row = $stmt->fetchObject())
+            {
+                $cut = 9;   //カットしたい文字数
+                $newDay = substr( $row->created_at , 0 , strlen($row->created_at)-$cut);
+                $result[] = array(
+                    'comment'    => $row->comment,
+                    'created_at' => $newDay,
+                    'review'     => $row->average_point,
+                );
             }
-
         }else{
             // SQLの失敗
             $result = -999;
@@ -87,9 +76,9 @@ class evaluation {
 
         if($flag)
         {
-            $result = 0;
+            $result = 'succes';
         } else {
-            $result = 1;
+            $result = -999;
         }
         echo json_encode( $result );
     }

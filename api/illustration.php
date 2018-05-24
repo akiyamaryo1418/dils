@@ -45,16 +45,16 @@ class illustration {
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
 
-            $filePath;
             while ($row = $stmt->fetchObject())
             {
                 $d_id = $row->designer_id;
                 $d_name = $row->designer_name;
                 $id = $row->id;
 
+
+                $filePath;
                 $fileName = $d_id.'_'.$d_name;
                 $imageName = $d_id.'_'.$id;
-
                 foreach( $this->exts as $ext) {
                     $filePath = '../view/images/creator/'.$fileName.'/'.$imageName.'.'.$ext;
                     if(is_file($filePath)) {
