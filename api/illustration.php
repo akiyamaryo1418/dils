@@ -11,12 +11,16 @@ class illustration {
 
     private $exts = ['jpg', 'png', 'bmp'];
 
+    // ================================================================
     // コンストラクタ
+    // ================================================================
     public function __construct() {
         $this->dbm = new DatabaseManager();
     }
 
+    // ================================================================
     // 作品一覧
+    // ================================================================
     public function index($data) {
         $result;
 
@@ -80,13 +84,15 @@ class illustration {
     }
 
 
+    // ================================================================
     // 登録
+    // ================================================================
     public function insert($data, $fileData = null) {
-        $result = -999;
+        $result = 'test';
 
         // ファイルデータの確認
-        if($fileData != null) {
-            $result = -999;
+        if($fileData == null) {
+            $result = 'not file data';
             echo json_encode( $result );
             return;
         }
@@ -94,8 +100,8 @@ class illustration {
         // ユーザーID、カテゴリーID、作品名を取得
         $newData = explode(",", $data);
         $designerId = $newData[0];
-        $categoryId = $newData[1];
-        $name = $newData[2];
+        //$categoryId = $newData[1];
+        $name = $newData[1];
 
         // IDからユーザー名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$designerId;
@@ -110,14 +116,14 @@ class illustration {
 
         // SQLミス、ファイル名の取得ミス
         if(!$flag || $designerName == '') {
-            $result = -999;
+            $result = 'miss get file';
             echo json_encode( $result );
             return;
         }
 
         // ファイルパスの作成
         $fileName = $designerId.'_'.$designerName;
-        $filePath = '../view/images/creator/'.$fileName.'/';
+        $filePath = '../view/images/creator/'.$fileName;
         $date = date("Y/m/d H:i:s");
 
         $sql = "INSERT INTO works(designer_id, name, uploaded_at, category_id, average_point) "
@@ -126,15 +132,15 @@ class illustration {
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
-        if(flag) {
+        if($flag) {
             $id = $this->dbm->dbh->lastInsertId();
-
             $imageName = $designerId.'_'.$id;
+
             if($this->uploadImage($fileData, $filePath, $imageName)) {
                 $result = 'success';
             } else{
                 // アップロードミス
-                $result = -999;
+                $result = 'miss upload';
             }
         } else {
             // SQL失敗
@@ -173,7 +179,9 @@ class illustration {
         return true;
     }
 
+    // ================================================================
     // 編集
+    // ================================================================
     public function edit($data) {
         $result = -999;
 
@@ -194,7 +202,9 @@ class illustration {
         echo json_encode( $result );
     }
 
+    // ================================================================
     // 削除
+    // ================================================================
     public function delete($data) {
         $result = -999;
         $id = $data[0][value];

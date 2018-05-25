@@ -49,49 +49,51 @@ class user {
         }
 
         // 条件確認
-        if($conditions != "" && $target != "") {
-            $sql = "SELECT des.name AS d_name, work.id, work.name "
-                  ."FROM designers AS des "
-                  ."INNER JOIN works AS work "
-                  ."WHERE des.id = work.designer_id "
-                  ."AND des.id = ".$d_id." "
-                  ."AND ".$conditions." "
-                  ."ORDER BY " .$target." DESC"
-            ;
-            $stmt = $this->dbm->dbh->prepare($sql);
-            $stmt->execute();
-
-            while ($row = $stmt->fetchObject())
-            {
-                $imageId = $row->id;
-                $fileName = $designerId.'_'.$row->d_name;
-
-                // 拡張子の確認
-                foreach( $this->exts as $ext) {
-                    $imageName = $designerId.'_'.$imageId.'.'.$ext;
-                    $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
-
-                    if(is_file($filePath)) {
-                        break;
-                    }
-                }
-                // 画像サイズの取得
-                $size = getimagesize($filePath);
-
-                $result[] = array(
-                    'id'       => $row->id,
-                    'userName' => $row->d_name,
-                    'img'      => $filePath,
-                    'width'    => $size[0],
-                    'height'   => $size[1],
-                    'imgname'  => $row->name,
-                );
-            }
-        }
-        else {
+        if($conditions == "" && $target == "") {
             // ソート、対象の取得ミス
             $result = -999;
+            echo json_encode( $result );
+            return;
         }
+
+        $sql = "SELECT des.name AS d_name, work.id, work.name "
+              ."FROM designers AS des "
+              ."INNER JOIN works AS work "
+              ."WHERE des.id = work.designer_id "
+              ."AND des.id = ".$d_id." "
+              ."AND ".$conditions." "
+              ."ORDER BY " .$target." DESC"
+        ;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        while ($row = $stmt->fetchObject())
+        {
+            $imageId = $row->id;
+            $fileName = $designerId.'_'.$row->d_name;
+
+            // 拡張子の確認
+            foreach( $this->exts as $ext) {
+                $imageName = $designerId.'_'.$imageId.'.'.$ext;
+                $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
+
+                if(is_file($filePath)) {
+                    break;
+                }
+            }
+            // 画像サイズの取得
+            $size = getimagesize($filePath);
+
+            $result[] = array(
+                'id'       => $row->id,
+                'userName' => $row->d_name,
+                'img'      => $filePath,
+                'width'    => $size[0],
+                'height'   => $size[1],
+                'imgname'  => $row->name,
+            );
+        }
+
         echo json_encode( $result );
     }
 
@@ -266,9 +268,10 @@ class user {
             $result = -999;
             echo json_encode( $result );
             return;
-        } else {
-            rename( $oldPath, $newPath );
         }
+
+        // ファイル名の変更
+        rename( $oldPath, $newPath );
 
         // 情報登録
         $sql = "UPDATE designers SET name = ".$name." WHERE id = " .$id;
