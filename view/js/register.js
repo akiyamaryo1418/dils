@@ -16,7 +16,8 @@ function inputRegistrationButton(){
 	data.append('model', 'user');
 	data.append('action', 'register');
 
-	var param = [ $('#username').val(), $('#password').val() ];
+	var fileName = 'img';
+	var param = [ $('#username').val(), $('#password').val(), fileName ];
 	data.append('list', param);
 
     $.ajax({

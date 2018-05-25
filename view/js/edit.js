@@ -2,6 +2,8 @@
 // イラスト編集ページ
 $(function(){
     //Initialize();
+
+
 });
 
 // 初期化
@@ -15,7 +17,7 @@ function Initialize(){
 
 	$.ajax({
 		url      : '../../api/controller.php',
-		type     : 'POST',
+		type    ih : 'POST',
 		dataType : 'json',
 		data     :  data,
 		timeout  :  1000,
@@ -279,7 +281,7 @@ function inputUpdateButton(){
 
     var id = location.search;
 	id = id.substring(1);
-	id = 8;
+	//id = 8;
 
     // 毎回通信する
     for(var index = 0; index < 8; index++){
@@ -294,8 +296,6 @@ function inputUpdateButton(){
         var param = [ id, name, fileName ];
         data.append('list', param);
 
-        //
-        // console.log($('#send').get(1));
 
         if(name != '') {
 
@@ -316,22 +316,4 @@ function inputUpdateButton(){
         	});
         }
     }
-
-
-	/*data.append('list', param);
-
-	$.ajax({
-		url         : '../../api/controller.php',
-		type        : 'POST',
-		dataType    : 'json',
-		processData : false,
-    	contentType : false,
-		data        :  data,
-		timeout     :  1000,
-	}).done(function(data, dataType){
-		alert('Success');
-		console.log(JSON.stringify(data));
-	}).fail(function(){
-		alert('NoData');
-	});*/
 }

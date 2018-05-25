@@ -22,6 +22,7 @@ class user {
     // ================================================================
     public function illustIndex($data) {
         $result;
+
         $designerId = $data[0][value];    // 表示するユーザーのID
 
         // ソート対象
@@ -31,7 +32,6 @@ class user {
         } else {
             $target = $data[1][value];
         }
-
 
         // 検索条件
         $conditions = "";
@@ -60,7 +60,7 @@ class user {
               ."FROM designers AS des "
               ."INNER JOIN works AS work "
               ."WHERE des.id = work.designer_id "
-              ."AND des.id = ".$d_id." "
+              ."AND des.id = ".$designerId." "
               ."AND ".$conditions." "
               ."ORDER BY " .$target." DESC"
         ;
@@ -92,6 +92,10 @@ class user {
                 'height'   => $size[1],
                 'imgname'  => $row->name,
             );
+        }
+
+        if($result == null) {
+            $result = -999;
         }
 
         echo json_encode( $result );

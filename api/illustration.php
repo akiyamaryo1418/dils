@@ -100,8 +100,9 @@ class illustration {
         // ユーザーID、カテゴリーID、作品名を取得
         $newData = explode(",", $data);
         $designerId = $newData[0];
-        //$categoryId = $newData[1];
         $name = $newData[1];
+        //$categoryId = $newData[1];
+        $categoryId = 1;
 
         // IDからユーザー名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$designerId;
@@ -126,16 +127,14 @@ class illustration {
         $filePath = '../view/images/creator/'.$fileName;
         $date = date("Y/m/d H:i:s");
 
-        /*$sql = "INSERT INTO works(designer_id, name, uploaded_at, category_id, average_point) "
+        $sql = "INSERT INTO works(designer_id, name, uploaded_at, category_id, average_point) "
               ."VALUES (".$designerId.", '".$name."', '".$date."', ".$categoryId.", 0)"
         ;
         $stmt = $this->dbm->dbh->prepare($sql);
-        $flag = $stmt->execute();*/
+        $flag = $stmt->execute();
 
-        if(true) {
-            //$id = $this->dbm->dbh->lastInsertId();
-
-            $id = $name;
+        if($flag) {
+            $id = $this->dbm->dbh->lastInsertId();
             $imageName = $designerId.'_'.$id;
 
             if($this->uploadImage($fileData, $filePath, $imageName)) {
