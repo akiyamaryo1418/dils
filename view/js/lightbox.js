@@ -1,10 +1,11 @@
 
 $(function(){
 
-	$(".imgbox").click(function(){
+	$('.illustbox').on('click', '.imgbox', function(){
 
+		//alert('aaa');
 	    var id = $(this).attr("id");
-	    alert('aaa');
+		//var img = $(this).children('img').attr('src');
 
 	    viewInitialize(id);
 	    $(".lightbox_view").fadeIn(100);
@@ -26,11 +27,15 @@ function viewInitialize(illustid){
 
     alert('!!');
 
+
+
+    //console.log(src);
+
     var param={ 'user' : id, 'illust' : illustid };
 
     data= {
-    	'model'  : 'user',
-    	'action' : 'illustIndex',
+    	'model'  : 'illustration',
+    	'action' : 'selectIllust',
     	'list'   :  param
     }
 
@@ -41,9 +46,9 @@ function viewInitialize(illustid){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	for(var index = 0; index < 20; index++){
+    	for(var index = 0; index < data.length; index++){
             $('.illustbox').append($('<li></li>')
-                          .append($('<div></div>').attr({'class':'imgbox'}))
+                          .append($('<div></div>').attr({'class': 'imgbox'}))
                           .append($('<div></div>').attr({'class': 'textbox'})
                           .append($('<p>作品タイトル</p>'))
                           .append($('<p>カテゴリー</p>').attr({'class':'category'}))));

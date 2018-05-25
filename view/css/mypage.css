@@ -252,6 +252,18 @@ div.creatoricon {
   position : relative;
 }
 
+div.imgbox {
+  width   : 150px;
+  height  : 150px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+}
+
+.imgbox img {
+  position : relative;
+}
+
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
 .lightbox_view {

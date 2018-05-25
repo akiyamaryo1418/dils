@@ -11,10 +11,12 @@ function Initialize(){
     id = id.substring(1);
 
 
+    var param = { 'id' : id };
+
     data= {
     	'model'  : 'user',
     	'action' : 'illustIndex',
-    	'list'   :  id
+    	'list'   :  param
     }
 
     $.ajax({
@@ -30,9 +32,11 @@ function Initialize(){
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').html(data[0].username);
 
+    	alert(data.length);
     	for(var index = 0; index < data.length; index++){
             $('.illustbox').append($('<li></li>')
-                          .append($('<div></div>').attr({'class':'imgbox'}))
+                          .append($('<div></div>').attr({'class': 'imgbox'})
+                          .append($('<img src="'+result+'">')))
                           .append($('<div></div>').attr({'class': 'textbox'})
                           .append($('<p>作品タイトル</p>'))
                           .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
@@ -41,6 +45,7 @@ function Initialize(){
 
 
     	triming();
+    	illusttriming();
     	//alert(JSON.stringify(data[0].username));
     }).fail(function(){
     	alert('Nodata');
@@ -91,6 +96,24 @@ new Vue({
 function triming(){
 
 	var resizeClass    = '.creatoricon img';
+	var thumnailWidth  = 150;
+	var thumnailHeight = 150;
+
+	$(resizeClass).each(function(){
+
+		$(this).height(thumnailHeight);
+		$(this).width(thumnailWidth);
+		$(this).css("height", 150+"px");
+		$(this).css("top", 0);
+		$(this).css("width", 150+"px");
+		$(this).css("left", 0);
+
+	});
+}
+
+function illusttriming(){
+
+	var resizeClass = '.imgbox img';
 	var thumnailWidth  = 150;
 	var thumnailHeight = 150;
 
