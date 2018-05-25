@@ -35,7 +35,7 @@
       </nav>
     </header>
 
-    <div id="wrap">
+    <div id="wrap">.i
 
     <section id="Top">
       <!------トップスライダー----->
@@ -69,6 +69,88 @@
         <label for="item" class="check_css">アイテム</label>
       </div>
     </section>
+    
+    <!------ライトボックス----->
+    <div class="lightbox_view">
+      <div class="usernamebox">
+        <div class="iconbox"></div>
+        <div class="textbox">
+          <span>作品タイトル</span>
+          <p>なまえなまえ</p>
+        </div>
+      </div>
+     
+          <div class="leftcontents">
+          <div class="imgbox"></div>
+          </div>
+           
+          <div class="rightcontents">
+            <div class="close">
+              <img src="../images/top/batuicon.png" alt=""/>
+            </div>
+            <div class="star">
+              <input id="star1" type="radio" name="star" value="5" />
+              <label for="star1">★</label>
+              <input id="star2" type="radio" name="star" value="4" />
+              <label for="star2">★</label>
+              <input id="star3" type="radio" name="star" value="3" />
+              <label for="star3">★</label>
+              <input id="star4" type="radio" name="star" value="2" />
+              <label for="star4">★</label>
+              <input id="star5" type="radio" name="star" value="1" />
+              <label for="star5">★</label>
+            </div>
+            <p>評価コメント</p>
+            <div class="commentbox">
+              <dl>
+                <dt>18/05/08</dt>
+                <dd>とても素敵です。</dd>
+              </dl>
+              <dl>
+                <dt>18/05/08</dt>
+                <dd>とても素敵です。</dd>
+              </dl>
+              <dl>
+                <dt>18/05/08</dt>
+                <dd>とても素敵です。</dd>
+              </dl>
+              <dl>
+                <dt>18/05/07</dt>
+                <dd>とても素敵です。</dd>
+              </dl>
+              <dl>
+                <dt>18/05/06</dt>
+                <dd>とても素敵です。</dd>
+              </dl>
+            </div>
+            <form method="post" action="example.cgi">
+              <p>作品評価</p>
+              <div class="starbutton">
+                <input id="starbutton1" type="radio" name="star" value="5" />
+                <label for="starbutton1">★</label>
+                <input id="starbutton2" type="radio" name="star" value="4" />
+                <label for="starbutton2">★</label>
+                <input id="starbutton3" type="radio" name="star" value="3" />
+                <label for="starbutton3">★</label>
+                <input id="starbutton4" type="radio" name="star" value="2" />
+                <label for="starbutton4">★</label>
+                <input id="starbutton5" type="radio" name="star" value="1" />
+                <label for="starbutton5">★</label>
+              </div>
+              <div class="reviewbox">
+                <textarea name="kanso" rows="4" cols="40">作品にコメントする</textarea>
+                <p><input type="button" value="投稿" class="review" onclick="postText();"></p>
+              </div>
+            </form> 
+          </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
     <div id="wrapper" class="clearfix">
       <div class="masonry" id="thumbnail">
         <div class="item">

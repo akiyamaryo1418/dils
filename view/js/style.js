@@ -16,3 +16,73 @@ $('#container').masonry({
 
 });
 
+
+
+
+
+//トップページライトボックス内レビュー投稿
+function postText(){
+  
+}
+
+//マイページ
+
+function nameEdit(){
+  
+}
+
+function sendEdit(){
+  
+}
+
+function DeleteAccount(){
+  
+}
+
+function moveEdit(){
+  location.href="../html/edit.html";
+  
+}
+
+//ライトボックス内
+function sendIllustEdit(){
+  
+}
+
+function DeleteIllust(){
+  
+}
+
+
+//作品新規追加ページ
+
+function addIllust(){
+  
+}
+
+function DeleteIllust(){
+  
+}
+
+
+function recordIllust(){
+  
+}
+
+//ログインページ
+function pageLogin(){
+  
+}
+
+//新規登録ページ
+
+function newRegistration(){
+  
+}
+
+//製作者詳細ページ　ライトボックス内レビュー投稿
+
+function postText(){
+  
+}
+

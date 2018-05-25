@@ -123,8 +123,8 @@ header li a {
 }
 
 .preview input {
-  width: 100px;
-  margin: 12px 0 0 100px;
+  width: 110px;
+  margin: 12px 0 0 90px;
   background: #fff;
 }
 
@@ -133,6 +133,7 @@ header li a {
   width: 340px;
   margin: 0 0 169px 0;
 }
+
 input {
   width: 330px;
   height: 23px;

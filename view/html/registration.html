@@ -29,15 +29,15 @@
         <h1>Sign Up</h1>
         <div class="preview">
           <div class="previewbox"></div>
-          <p><input type="button" value="ファイルを選択" onclick=""></p>
+          <p><input type="file" class="file_edit" name="datafile"></p>
         </div>
         <div class="form">
         <form method="post" action="example.cgi">
           <p>ユーザー名<br>
           <input type="text" name="user"></p>
           <p>パスワード<br>
-          <input type="text" name="password"></p>
-          <p><input type="submit" value="新規登録" class="button"></p>
+          <input type="password" name="password"></p>
+          <p><input type="button" value="新規登録" class="button" onclick="newRegistration();"></p>
         </form>
         </div>
      </div> 

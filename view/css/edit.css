@@ -101,10 +101,6 @@ header li a {
   font-size: 36px;
 }
 
-form p {
-  float: right;
-}
-
 .editbox {
   width: 1100px;
   height: 764px;
@@ -154,55 +150,22 @@ form p {
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   float: left;
   width: 122px;
   height: 23px;
   margin: 0 5px 0 2px;
 }
 
-select::-ms-expand {
-    display: none;
-}
-
 .selectwrap {
-    position: relative;
-    display: inline-block;
     margin: 5px 0 0 0;
 }
 
-.selectwrap::before {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    right: 0;
-    background: #000;
-    height: 23px;
-    width: 23px;
-}
-.selectwrap::after {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    right: 7px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 5px 5px 0 5px;
-    border-color: #fff transparent transparent transparent; 
-}
 
 input.imgbutton {
   float: left;
   width: 50px;
   height: 23px;
-  margin: 5px 5px 0 2px;
+  margin: 0 5px 0 2px;
   background: #000;
   color: #fff;
   border: none;
@@ -211,23 +174,26 @@ input.imgbutton {
 input.delete {
   width: 50px;
   height: 23px;
-  margin: 5px 0;
+  margin: 0;
   background: #000;
   color: #fff;
   border: none;
 }
 
 form p.button {
+  clear: both;
   width: 1100px;
-  margin: 30px 0;
+  padding: 30px 0;
   text-align: center;
 }
+
 input.button {
   width: 150px;
   height: 45px;
   background: #000;
   color: #fff;
 }
+
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
