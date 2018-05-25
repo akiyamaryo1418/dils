@@ -3,13 +3,6 @@
 require_once('databaseManager.php');
 header('Content-type:application/json; charset=utf8');
 
-// 修正項目
-/* ユーザー追加の際、トランザクション処理や例外処理を実施し
-   データベースに登録できているのに、フォルダがないなどが
-   起こらないようにする
-
-*/
-
 class user {
     // データベース操作用クラス
     private $dbm;
@@ -238,27 +231,67 @@ class user {
     // ================================================================
     // 編集
     // ================================================================
-    public function edit($data) {
-        $result;
+    public function edit($data, $fileData = null) {
+        $result = -999;
 
         // ID、ユーザー名の取得
-        $id = $data[0][value];
-        $userName = $data[1][value];
+        $newData = explode(",", $data);
+        $id = $newData[0];
+        $name = $newData[1];
 
+        // 名前がない場合
+        if($id == null || $name == null) {
+            $result = -999;
+            echo json_encode( $result );
+            return;
+        }
 
-        // ユーザーをデータベースに登録
-        $sql = "UPDATE designers SET name = ".$userName." WHERE id = " .$id;
-
+        // 現在のユーザー名の取得
+        $sql = "SELECT name FROM designers WHERE id = ".$id;
         $stmt = $this->dbm->dbh->prepare($sql);
-        $flag = $stmt->execute();
+        $stmt->execute();
 
-        // todo
-        // アイコン画像の変更処理
+        $oldPath = '';
+        $newPath = '';
+        while ($row = $stmt->fetchObject())
+        {
+            // フォルダのファイルパスの作成
+            $oldName = $row->name;
+            $oldPath = '../view/images/creator/'.$id.'_'.$oldName;
+            $newPath = '../view/images/creator/'.$id.'_'.$name;
+        }
 
-        if($flag) {
-            $result = 'succes';
-        }else{
-            $result = 'error';
+        // パスを確認し、ファイル名の変更
+        if($oldPath == '' || $newPath == '') {
+            $result = -999;
+            echo json_encode( $result );
+            return;
+        } else {
+            rename( $oldPath, $newPath );
+        }
+
+        // 情報登録
+        $sql = "UPDATE designers SET name = ".$name." WHERE id = " .$id;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        // アイコン画像の更新
+        if($fileData == null) {
+            // 新しいアイコンがない場合、現在あるアイコンを消す
+            foreach( $this->exts as $ext) {
+                $filePath = $newPath.'/'.$id.'_icon.'.$ext;
+                if(is_file($filePath)) {
+                    unlink($filePath);
+                }
+            }
+        } else{
+            $iconName = $id.'_icon';
+            if($this->uploadImage($fileData, $newPath, $iconName)) {
+                $result = 'success';
+            }
+            else{
+                $result = -999;
+            }
         }
         echo json_encode( $result );
     }
