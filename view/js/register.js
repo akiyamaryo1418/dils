@@ -19,14 +19,6 @@ function inputRegistrationButton(){
 	var param = [ $('#username').val(), $('#password').val() ];
 	data.append('list', param);
 
-	//alert(param);
-
-	/*data = {
-		'model'  : 'user',
-		'action' : 'register',
-		'list'   :  param
-	}*/
-
     $.ajax({
     	url         : '../../api/controller.php',
     	type        : 'POST',

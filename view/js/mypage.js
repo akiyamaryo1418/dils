@@ -2,7 +2,6 @@
 // マイページ
 $(function(){
     Initialize();
-
 });
 
 // 初期化
@@ -11,10 +10,13 @@ function Initialize(){
     var id = location.search;
     id = id.substring(1);
 
+
+    var param = { 'id' : id };
+
     data= {
-    	'model'  : 'mypage',
-    	'action' : 'mypage',
-    	'list'   :  id
+    	'model'  : 'user',
+    	'action' : 'illustIndex',
+    	'list'   :  param
     }
 
     $.ajax({
@@ -24,47 +26,47 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
+    	//$('#mypageicon').html('<img id="mypageicon" v-show>')
+    	//alert(data);
+    	var result = data[0].iconPath.replace('view/', '');
+    	$('#mypagepreview').append($('<img src="'+result+'">'));
+    	$('.penname').html(data[0].username);
 
+    	alert(data.length);
+    	for(var index = 0; index < data.length; index++){
+            $('.illustbox').append($('<li></li>')
+                          .append($('<div></div>').attr({'class': 'imgbox'})
+                          .append($('<img src="'+result+'">')))
+                          .append($('<div></div>').attr({'class': 'textbox'})
+                          .append($('<p>作品タイトル</p>'))
+                          .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
+        }
+
+
+
+    	triming();
+    	illusttriming();
+    	//alert(JSON.stringify(data[0].username));
     }).fail(function(){
     	alert('Nodata');
     });
 }
 
-// アイコン編集ボタンを押したとき
-/*function inputIconEditButton(){
-    var icon = "";
-    icon.addEventListerner("change", function(evt){
-    	var file = evt.target.files;
-    	alert(file[0].name + "を取得");
-    }, false);
+// イラストのライトボックスを開く(編集)
+function openIllustLightbox(){
 
-    new Vue({
-    	el : '',  // アイコン表示場所のID
-    	data(){
-    		return{
-    			uploadedImage: '',
-    		};
-    	},
-    	methods:{
-    		onFileChange(e){
-    			let files = e.target.files || e.dataTransfer.files;
-    			this.createImage(files[0]);
-    		},
-    		// 選択した画像を表示
-    		createImage(file){
-    			let reader = new FileReader();
-    			reader.onload = (e) => {
-    				this.uploadedImage = e.target.result;
-    			};
-    			reader.readAsDataURL(file);
-    		}
-    	}
-    })
-}*/
+}
 
+function editUserName(){
+	var name = window.prompt("ユーザ名を入力してください","");
+
+	$('.penname').html(name);
+}
+
+// アイコン
 //Vue.jsの処理
 new Vue({
-	el: '#previewbox',   // ここを変更
+	el: '#mypagebox',   // ここを変更
 	data() {
 		return {
 			uploadedImage: '',
@@ -93,38 +95,76 @@ new Vue({
 //トリミング
 function triming(){
 
-	var resizeClass    = '.item img';
-	var thumnailWidth  = 200;
-	var thumnailHeight = 200;
+	var resizeClass    = '.creatoricon img';
+	var thumnailWidth  = 150;
+	var thumnailHeight = 150;
 
 	$(resizeClass).each(function(){
 
 		$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);
-		$(this).css("height", 200+"px");
+		$(this).css("height", 150+"px");
 		$(this).css("top", 0);
-		$(this).css("width", 200+"px");
+		$(this).css("width", 150+"px");
 		$(this).css("left", 0);
 
 	});
 }
 
-// ユーザ名編集ボタンを押したとき
-function inputUsernameEditButton(){
-    var name = window.prompt("ユーザ名を入力してください。","");
+function illusttriming(){
 
-    new Vue({
-    	el : '',  // テキスト表示場所のID
-    	data: {
-    		text1: ''
-    	},
-    	methods: {
-    		doAction: function(){
-    			var str = this.text1;
-    			this.message = str;
-    		}
-    	}
-    })
+	var resizeClass = '.imgbox img';
+	var thumnailWidth  = 150;
+	var thumnailHeight = 150;
+
+	$(resizeClass).each(function(){
+
+		$(this).height(thumnailHeight);
+		$(this).width(thumnailWidth);
+		$(this).css("height", 150+"px");
+		$(this).css("top", 0);
+		$(this).css("width", 150+"px");
+		$(this).css("left", 0);
+
+	});
+}
+
+// アカウント編集登録
+function sendAccountEdit(){
+
+	//data = new FormData($('#mypageiconform').get(0));
+	data = new FormData($('#mypageiconform').get(0));
+	data.append('model', 'user');
+	data.append('action', 'register');
+
+	var id = location.search;
+    id = id.substring(1);
+
+	data.append('list', id);
+
+    $.ajax({
+    	url         : '../../api/controller.php',
+    	type        : 'POST',
+    	dataType    : 'json',
+    	processData : false,
+    	contentType : false,
+    	data        :  data,
+    	timeout     :  1000,
+    }).done(function(data, dataType){
+    	location.href = "../html/index.html?"+id;
+        //alert(data);
+    }).fail(function(){
+    	alert('Nodata');
+    });
+}
+
+// 編集画面へ
+function moveEdit(){
+
+	var id = location.search;
+	id = id.substring(1);
+
+	location.href = "../html/edit.html?"+id;
 }
 
 // 削除ボタンを押したとき
@@ -152,7 +192,3 @@ function inputDeleteButton(){
     });
 }
 
-// 戻るボタンを押したとき
-function inputBackButton(){
-    location.href = "../../html/index.html";
-}
