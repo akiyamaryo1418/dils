@@ -151,24 +151,30 @@ class user {
         // ユーザー名、パスワードを取得
         $newData = explode(",", $data);
         $name = $newData[0];
+        $inputPassword = $newData[1];
+
+        // 名前、パスワードがない場合
+        if($name == null || $inputPassword == null) {
+            $result = -999;
+            echo json_encode( $result );
+            return;
+        }
 
         // パスワードの生成
         $options = [
             'cost' => 11,
             'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
         ];
-        $password = password_hash($newData[1], PASSWORD_BCRYPT, $options);
+        $password = password_hash($inputPassword, PASSWORD_BCRYPT, $options);
 
         $sql = "INSERT INTO designers(name, password) "
               ."VALUES ('".$name."', '".$password."')"
         ;
-
         $stmt = $this->dbm->dbh->prepare($sql);
         $stmt->execute();
 
         // 最後に追加されたIDの取得
         $id = $this->dbm->dbh->lastInsertId();
-
 
         // フォルダのファイルパスの作成
         $fileName = $id.'_'.$name;
