@@ -17,12 +17,6 @@ body {
 	letter-spacing: 2px;
 }
 
-.clearfix:after {
-    content: " ";
-    display: block;
-    clear: both;
-}
-
 #wrap {
   width: 1160px;
   margin:0 auto;
@@ -36,7 +30,6 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
-  min-width: 1250px;
   height: 75px;
   background: #000;
 }
@@ -92,7 +85,6 @@ header li a {
 --------------------------------------------------*/
 #contentabox {
   width: 1160px;
-  min-width: 1200px;
   margin: 0 auto;
 }
 
@@ -117,11 +109,11 @@ header li a {
   width: 70px;
   height: 22px;
   text-align: center;
-  border-left: 2px solid #000;
+  border-left: 1px solid #000;
 }
 
 #SortOther {
-  border-right: 2px solid #000;
+  border-right: 1px solid #000;
 }
 
 .creatersortbox li span {
@@ -131,6 +123,7 @@ header li a {
 
 .listbox {
   min-width: 960px;
+  height: 580px;
   margin: 0 0 150px 0;
 }
 
@@ -154,19 +147,11 @@ header li a {
   font-size: 12px;
 }
 
+
 img {
   width: 105px;
   border: 1px solid #ccc;
 }
-
-.creatersortbox ul li:hover {
-  background: #99ccff;
-}
-
-img:hover {
-  opacity:0.8;
-}
-
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
@@ -174,7 +159,6 @@ img:hover {
 footer {
   position: relative;
   width: 100%;
-  min-width: 1250px;
   height: 70px;
   background: #000;
 }

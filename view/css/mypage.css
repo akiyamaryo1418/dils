@@ -174,10 +174,6 @@ header li a {
 #RightBox {
  float: left;
  width: 742px;
-<<<<<<< HEAD
- margin: 0 0 0 97px;
- background: #ccc;
-=======
  height: 852px;
  margin: 0 0 0 97px;
  background: #ccc;
@@ -186,7 +182,6 @@ header li a {
 
 #RightBox::-webkit-scrollbar {
   display: none;
->>>>>>> origin/akiyama
 }
 
 #RightBox .rightcontents {
@@ -245,6 +240,104 @@ header li a {
   font-size: 12px;
 }
 
+div.creatoricon {
+  width   : 150px;
+  height  : 150px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+}
+
+.creatoricon img {
+  position : relative;
+}
+
+/*;;;;;;;;;;ライトボックス;;;;;;;;;*/
+
+.lightbox_view {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -300px 0 0 -450px;
+  z-index: 1;
+  width: 900px;
+  height: 600px;
+  background: #fff;
+  border: 2px solid #99ccff;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: #99ccff;
+}
+
+.close img {
+  width: 15px;
+  margin: 8px;
+}
+
+.lightbox_view .leftcontents {
+  float: left;
+  width: 400px;
+  margin: 50px 60px 0 50px;
+}
+
+.lightbox_view .imgbox {
+  width: 350px;
+  height: 458px;
+  margin: 0 auto;
+  background: #000;
+}
+
+.lightbox_view .leftcontents p {
+  width: 120px;
+  margin: 10px 0 0 266px;
+}
+
+.lightbox_view .leftcontents p input {
+  width: 110px;
+}
+
+.lightbox_view .rightcontents {
+  width: 300px;
+  float: left;
+  margin: 50px 50px 0 0;
+}
+
+.lightbox_view .rightcontents p.title {
+  margin: 110px 0 20px 0;
+}
+
+.lightbox_view .rightcontents input {
+  margin: 0 0 0 30px;
+  height: 18px;
+}
+
+
+.lightbox_view select {
+  width: 174px;
+  height: 22px;
+  margin: 0 0 0 24px;
+}
+
+.lightbox_view .buttonbox {
+  width: 300px;
+  margin: 239px auto 0;
+}
+
+.lightbox_view .buttonbox p {
+  float: left;
+}
+
+.lightbox_view .buttonbox input {
+  height: 38px;
+}
+
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
@@ -273,7 +366,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {
