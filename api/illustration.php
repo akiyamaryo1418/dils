@@ -19,6 +19,59 @@ class illustration {
     }
 
     // ================================================================
+    // クリックされた作品の情報を渡す
+    // ================================================================
+    public function selectIllust($data) {
+        $result;
+
+        // ユーザーID、作品ID
+        $designerId = $data[0][value];
+        $id = $data[0][value];
+
+        // 現在のユーザー名の取得
+        $sql = "SELECT name FROM designers WHERE id = ".$designerId;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        // ファイルパスの取得
+        $fileName = '';
+        while ($row = $stmt->fetchObject())
+        {
+            // フォルダのファイルパスの作成
+            $fileName = $designerId.'_'.$row->name;
+        }
+
+        // タイトル
+        $sql = "SELECT name, category_id FROM works WHERE id = ".$id;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        $filePath = '';
+        while ($row = $stmt->fetchObject())
+        {
+            $imageName = $designerId.'_'.$id;
+            foreach( $this->exts as $ext) {
+                $filePath = '../view/images/creator/'.$fileName.'/'.$imageName.'.'.$ext;
+                if(is_file($filePath)) {
+                    break;
+                }
+            }
+
+            $result[] = array(
+                'id'       => $id,
+                'img'      => $filePath,
+                'name'     => $row->name,
+                'category_id'  => $row->category_id,
+            );
+        }
+
+        if($result == null) {
+            $result = 999;
+        }
+        echo json_encode( $result );
+    }
+
+    // ================================================================
     // 作品一覧
     // ================================================================
     public function index($data) {
@@ -100,8 +153,9 @@ class illustration {
         // ユーザーID、カテゴリーID、作品名を取得
         $newData = explode(",", $data);
         $designerId = $newData[0];
-        //$categoryId = $newData[1];
         $name = $newData[1];
+        //$categoryId = $newData[1];
+        $categoryId = 1;
 
         // IDからユーザー名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$designerId;
@@ -218,6 +272,7 @@ class illustration {
         // ファイルパスの指定
         foreach( $this->exts as $ext) {
             $filePath = '../view/images/creator/'.$fileName.'/'.$imageName.'.'.$ext;
+
             if(is_file($filePath)) {
 
                 // 画像の削除
@@ -237,8 +292,7 @@ class illustration {
                     $result = -999;
                 }
                 break;
-            }
-            else {
+            } else {
                 // 画像がない
                 $result = -999;
             }
