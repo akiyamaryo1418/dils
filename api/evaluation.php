@@ -27,7 +27,6 @@ class evaluation {
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
-
         if($flag) {
             while ($row = $stmt->fetchObject())
             {
@@ -59,7 +58,6 @@ class evaluation {
         $sql = "INSERT INTO evaluations(work_id, point, comment, created_at) "
               ."VALUES (".$id.", ".$point.", '".$comment."', '".$date."')"
         ;
-
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 

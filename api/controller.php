@@ -16,11 +16,14 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     $func = $_POST['action'];
     $data = $_POST['list'];
 
+    $newData = explode(",", $data);
+    $name = $newData[2];
+    //echo json_encode( $_FILES[$name]['name'].'___'.$name );
 
-    if($_FILES['img']['name'] == null){
+    if($_FILES[$name]['name'] == null){
         $className->$func($data);
     } else {
-        $tmp = [$data, $_FILES['img']];
+        $tmp = [$data, $_FILES[$name]];
         $className->$func(...$tmp);
     }
 }

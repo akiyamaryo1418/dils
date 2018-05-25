@@ -279,33 +279,42 @@ function inputUpdateButton(){
 
     var id = location.search;
 	id = id.substring(1);
+	id = 8;
 
     // 毎回通信する
     for(var index = 0; index < 8; index++){
 
-    	data = new FormData($('#send').get(1 + index * 3));
+    	var data = new FormData($('#send').get(0));
     	data.append('model',  'illustration');
     	data.append('action', 'insert');
 
     	var name = $('.text'+(index+1)+'').val();
 
-        var param = [ id, name ];
+    	var fileName = 'img'+ (index + 1) + '';
+        var param = [ id, name, fileName ];
         data.append('list', param);
 
-        $.ajax({
-    		url         : '../../api/controller.php',
-    		type        : 'POST',
-    		dataType    : 'json',
-    		processData : false,
-        	contentType : false,
-    		data        :  data,
-    		timeout     :  1000,
-    	}).done(function(data, dataType){
-    		alert('Success');
-    		console.log(JSON.stringify(data));
-    	}).fail(function(){
-    		alert('NoData');
-    	});
+        //
+        // console.log($('#send').get(1));
+
+        if(name != '') {
+
+        	console.log(JSON.stringify(param));
+        	$.ajax({
+        		url         : '../../api/controller.php',
+        		type        : 'POST',
+        		dataType    : 'json',
+        		processData : false,
+            	contentType : false,
+        		data        :  data,
+        		timeout     :  1000,
+        	}).done(function(data, dataType){
+        		// alert('Success');
+        		console.log(JSON.stringify(data));
+        	}).fail(function(){
+        		alert('NoData');
+        	});
+        }
     }
 
 

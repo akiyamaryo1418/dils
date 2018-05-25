@@ -11,12 +11,16 @@ class illustration {
 
     private $exts = ['jpg', 'png', 'bmp'];
 
+    // ================================================================
     // コンストラクタ
+    // ================================================================
     public function __construct() {
         $this->dbm = new DatabaseManager();
     }
 
+    // ================================================================
     // 作品一覧
+    // ================================================================
     public function index($data) {
         $result;
 
@@ -80,70 +84,71 @@ class illustration {
     }
 
 
+    // ================================================================
     // 登録
+    // ================================================================
     public function insert($data, $fileData = null) {
-        $result = -999;
-        echo json_encode(fileData);
+        $result = 'test';
 
-        /*if($fileData != null) {
-            // ユーザー名、パスワードを取得
-            $newData = explode(",", $data);
-            $designerId = $newData[0];
-            $categoryId = $newData[1];
-            $name = $newData[2];
+        // ファイルデータの確認
+        if($fileData == null) {
+            $result = 'not file data';
+            echo json_encode( $result );
+            return;
+        }
 
-            // IDからユーザー名を取得
-            $sql = "SELECT name FROM designers WHERE id = ".$designerId;
-            $stmt = $this->dbm->dbh->prepare($sql);
-            $flag = $stmt->execute();
+        // ユーザーID、カテゴリーID、作品名を取得
+        $newData = explode(",", $data);
+        $designerId = $newData[0];
+        //$categoryId = $newData[1];
+        $name = $newData[1];
 
-            $designerName = "";
-            if($flag) {
-                if($stmt->fetchObject()) {
-                    while ($row = $stmt->fetchObject())
-                    {
-                        $designerName = $row->name;
-                    }
+        // IDからユーザー名を取得
+        $sql = "SELECT name FROM designers WHERE id = ".$designerId;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();
 
-                    // ファイルパスの作成
-                    $fileName = $designerId.'_'.$designerName;
-                    $filePath = '../view/images/creator/'.$fileName.'/';
-                    $date = date("Y/m/d H:i:s");
+        $designerName = '';
+        while ($row = $stmt->fetchObject())
+        {
+            $designerName = $row->name;
+        }
 
-                    $sql = "INSERT INTO works(designer_id, name, uploaded_at, category_id, average_point) "
-                          ."VALUES (".$designerId.", '".$name."', '".$date."', 0)"
-                    ;
+        // SQLミス、ファイル名の取得ミス
+        if(!$flag || $designerName == '') {
+            $result = 'miss get file';
+            echo json_encode( $result );
+            return;
+        }
 
-                    $stmt = $this->dbm->dbh->prepare($sql);
-                    $flag = $stmt->execute();
+        // ファイルパスの作成
+        $fileName = $designerId.'_'.$designerName;
+        $filePath = '../view/images/creator/'.$fileName;
+        $date = date("Y/m/d H:i:s");
 
-                    if(flag) {
-                        $id = $this->dbm->dbh->lastInsertId();
+        /*$sql = "INSERT INTO works(designer_id, name, uploaded_at, category_id, average_point) "
+              ."VALUES (".$designerId.", '".$name."', '".$date."', ".$categoryId.", 0)"
+        ;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();*/
 
-                        $imageName = $designerId.'_'.$id;
-                        if($this->uploadImage($fileData, $filePath, $imageName)) {
-                            $result = 'success';
-                        } else{
-                            // アップロードミス
-                            $result = -999;
-                        }
-                    } else {
-                        // SQL失敗
-                        $result = -999;
-                    }
-                } else {
-                    // SQL文の実行結果がない場合
-                    $result = -999;
-                }
-            } else {
-                // SQL失敗
-                $result = -999;
+        if(true) {
+            //$id = $this->dbm->dbh->lastInsertId();
+
+            $id = $name;
+            $imageName = $designerId.'_'.$id;
+
+            if($this->uploadImage($fileData, $filePath, $imageName)) {
+                $result = 'success';
+            } else{
+                // アップロードミス
+                $result = 'miss upload';
             }
         } else {
-            // ファイルデータが無い
+            // SQL失敗
             $result = -999;
         }
-        echo json_encode( $result );*/
+        echo json_encode( $result );
     }
 
     // 画像を登録する
@@ -173,11 +178,12 @@ class illustration {
         } catch (Exception $e) {
             return false;
         }
-
         return true;
     }
 
+    // ================================================================
     // 編集
+    // ================================================================
     public function edit($data) {
         $result = -999;
 
@@ -193,12 +199,14 @@ class illustration {
         if($flag) {
             $result = 'success';
         }else{
-            $result = 'error';
+            $result = -999;
         }
         echo json_encode( $result );
     }
 
+    // ================================================================
     // 削除
+    // ================================================================
     public function delete($data) {
         $result = -999;
         $id = $data[0][value];

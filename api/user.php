@@ -3,13 +3,6 @@
 require_once('databaseManager.php');
 header('Content-type:application/json; charset=utf8');
 
-// 修正項目
-/* ユーザー追加の際、トランザクション処理や例外処理を実施し
-   データベースに登録できているのに、フォルダがないなどが
-   起こらないようにする
-
-*/
-
 class user {
     // データベース操作用クラス
     private $dbm;
@@ -56,49 +49,51 @@ class user {
         }
 
         // 条件確認
-        if($conditions != "" && $target != "") {
-            $sql = "SELECT des.name AS d_name, work.id, work.name "
-                  ."FROM designers AS des "
-                  ."INNER JOIN works AS work "
-                  ."WHERE des.id = work.designer_id "
-                  ."AND des.id = ".$d_id." "
-                  ."AND ".$conditions." "
-                  ."ORDER BY " .$target." DESC"
-            ;
-            $stmt = $this->dbm->dbh->prepare($sql);
-            $stmt->execute();
-
-            while ($row = $stmt->fetchObject())
-            {
-                $imageId = $row->id;
-                $fileName = $designerId.'_'.$row->d_name;
-
-                // 拡張子の確認
-                foreach( $this->exts as $ext) {
-                    $imageName = $designerId.'_'.$imageId.'.'.$ext;
-                    $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
-
-                    if(is_file($filePath)) {
-                        break;
-                    }
-                }
-                // 画像サイズの取得
-                $size = getimagesize($filePath);
-
-                $result[] = array(
-                    'id'       => $row->id,
-                    'userName' => $row->d_name,
-                    'img'      => $filePath,
-                    'width'    => $size[0],
-                    'height'   => $size[1],
-                    'imgname'  => $row->name,
-                );
-            }
-        }
-        else {
+        if($conditions == "" && $target == "") {
             // ソート、対象の取得ミス
             $result = -999;
+            echo json_encode( $result );
+            return;
         }
+
+        $sql = "SELECT des.name AS d_name, work.id, work.name "
+              ."FROM designers AS des "
+              ."INNER JOIN works AS work "
+              ."WHERE des.id = work.designer_id "
+              ."AND des.id = ".$d_id." "
+              ."AND ".$conditions." "
+              ."ORDER BY " .$target." DESC"
+        ;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        while ($row = $stmt->fetchObject())
+        {
+            $imageId = $row->id;
+            $fileName = $designerId.'_'.$row->d_name;
+
+            // 拡張子の確認
+            foreach( $this->exts as $ext) {
+                $imageName = $designerId.'_'.$imageId.'.'.$ext;
+                $filePath = '../view/images/creator/'.$fileName.'/'.$imageName;
+
+                if(is_file($filePath)) {
+                    break;
+                }
+            }
+            // 画像サイズの取得
+            $size = getimagesize($filePath);
+
+            $result[] = array(
+                'id'       => $row->id,
+                'userName' => $row->d_name,
+                'img'      => $filePath,
+                'width'    => $size[0],
+                'height'   => $size[1],
+                'imgname'  => $row->name,
+            );
+        }
+
         echo json_encode( $result );
     }
 
@@ -151,24 +146,30 @@ class user {
         // ユーザー名、パスワードを取得
         $newData = explode(",", $data);
         $name = $newData[0];
+        $inputPassword = $newData[1];
+
+        // 名前、パスワードがない場合
+        if($name == null || $inputPassword == null) {
+            $result = -999;
+            echo json_encode( $result );
+            return;
+        }
 
         // パスワードの生成
         $options = [
             'cost' => 11,
             'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
         ];
-        $password = password_hash($newData[1], PASSWORD_BCRYPT, $options);
+        $password = password_hash($inputPassword, PASSWORD_BCRYPT, $options);
 
         $sql = "INSERT INTO designers(name, password) "
               ."VALUES ('".$name."', '".$password."')"
         ;
-
         $stmt = $this->dbm->dbh->prepare($sql);
         $stmt->execute();
 
         // 最後に追加されたIDの取得
         $id = $this->dbm->dbh->lastInsertId();
-
 
         // フォルダのファイルパスの作成
         $fileName = $id.'_'.$name;
@@ -232,27 +233,68 @@ class user {
     // ================================================================
     // 編集
     // ================================================================
-    public function edit($data) {
-        $result;
+    public function edit($data, $fileData = null) {
+        $result = -999;
 
         // ID、ユーザー名の取得
-        $id = $data[0][value];
-        $userName = $data[1][value];
+        $newData = explode(",", $data);
+        $id = $newData[0];
+        $name = $newData[1];
 
+        // 名前がない場合
+        if($id == null || $name == null) {
+            $result = -999;
+            echo json_encode( $result );
+            return;
+        }
 
-        // ユーザーをデータベースに登録
-        $sql = "UPDATE designers SET name = ".$userName." WHERE id = " .$id;
-
+        // 現在のユーザー名の取得
+        $sql = "SELECT name FROM designers WHERE id = ".$id;
         $stmt = $this->dbm->dbh->prepare($sql);
-        $flag = $stmt->execute();
+        $stmt->execute();
 
-        // todo
-        // アイコン画像の変更処理
+        $oldPath = '';
+        $newPath = '';
+        while ($row = $stmt->fetchObject())
+        {
+            // フォルダのファイルパスの作成
+            $oldName = $row->name;
+            $oldPath = '../view/images/creator/'.$id.'_'.$oldName;
+            $newPath = '../view/images/creator/'.$id.'_'.$name;
+        }
 
-        if($flag) {
-            $result = 'succes';
-        }else{
-            $result = 'error';
+        // パスを確認し、ファイル名の変更
+        if($oldPath == '' || $newPath == '') {
+            $result = -999;
+            echo json_encode( $result );
+            return;
+        }
+
+        // ファイル名の変更
+        rename( $oldPath, $newPath );
+
+        // 情報登録
+        $sql = "UPDATE designers SET name = ".$name." WHERE id = " .$id;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        // アイコン画像の更新
+        if($fileData == null) {
+            // 新しいアイコンがない場合、現在あるアイコンを消す
+            foreach( $this->exts as $ext) {
+                $filePath = $newPath.'/'.$id.'_icon.'.$ext;
+                if(is_file($filePath)) {
+                    unlink($filePath);
+                }
+            }
+        } else{
+            $iconName = $id.'_icon';
+            if($this->uploadImage($fileData, $newPath, $iconName)) {
+                $result = 'success';
+            }
+            else{
+                $result = -999;
+            }
         }
         echo json_encode( $result );
     }

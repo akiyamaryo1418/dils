@@ -29,6 +29,18 @@ function Initialize(){
     	var result = data[0].img.replace('view/', '');
     	$('#mypagepreview').append('<img src="'+result+'">');
     	$('.penname').html(data[0].username);
+
+    	for(var index = 0; index < data.length; index++){
+    		$('.myistbox').append($('<ul></ul>')
+                    .append($('<li></li>')
+                    .append($('<div></div>').attr({'class' : 'imgbox'})
+                    .html('<img src="'+data[index]+'">'))
+                    .append($('<div></div>').attr({'class' : 'textbox'})
+                    .append('<p>作品タイトル</p>')
+                    .append('<p class="category">カテゴリー</p>'))));
+    	}
+
+
     	triming();
     	//alert(JSON.stringify(data[0].username));
     }).fail(function(){
