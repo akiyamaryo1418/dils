@@ -219,6 +219,7 @@ class illustration {
         // ファイルパスの指定
         foreach( $this->exts as $ext) {
             $filePath = '../view/images/creator/'.$fileName.'/'.$imageName.'.'.$ext;
+
             if(is_file($filePath)) {
 
                 // 画像の削除
@@ -238,8 +239,7 @@ class illustration {
                     $result = -999;
                 }
                 break;
-            }
-            else {
+            } else {
                 // 画像がない
                 $result = -999;
             }

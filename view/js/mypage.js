@@ -26,9 +26,17 @@ function Initialize(){
     }).done(function(data, dataType){
     	//$('#mypageicon').html('<img id="mypageicon" v-show>')
     	//alert(data);
-    	var result = data[0].img.replace('view/', '');
-    	$('#mypagepreview').append('<img src="'+result+'">');
+    	var result = data[0].iconPath.replace('view/', '');
+    	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').html(data[0].username);
+
+    	for(var index = 0; index < data.length; index++){
+            $('.illustbox').append($('<li></li>')
+                          .append($('<div></div>').attr({'class':'imgbox'}))
+                          .append($('<div></div>').attr({'class': 'textbox'})
+                          .append($('<p>作品タイトル</p>'))
+                          .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
+        }
 
 
 

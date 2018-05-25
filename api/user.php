@@ -23,7 +23,7 @@ class user {
     public function illustIndex($data) {
         $result;
 
-        $designerId = $data[0][value];    // 表示するユーザーのID
+        $designerId = $data;    // 表示するユーザーのID
 
         // ソート対象
         $target = "";
@@ -51,7 +51,7 @@ class user {
         // 条件確認
         if($conditions == "" && $target == "") {
             // ソート、対象の取得ミス
-            $result = -999;
+            $result = '条件ミス';
             echo json_encode( $result );
             return;
         }
@@ -84,18 +84,63 @@ class user {
             // 画像サイズの取得
             $size = getimagesize($filePath);
 
+            // アイコン画像の取得
+            $iconPath = '../view/images/creator/Share/default.png';
+            foreach( $this->exts as $ext) {
+                $imageTmpName = $id.'_icon.'.$ext;
+                $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
+                if(is_file($tmpPath)) {
+                    $iconPath = $tmpPath;
+                    break;
+                }
+            }
+
             $result[] = array(
-                'id'       => $row->id,
-                'userName' => $row->d_name,
-                'img'      => $filePath,
-                'width'    => $size[0],
-                'height'   => $size[1],
-                'imgname'  => $row->name,
+                'id'       => $imageId,     // 作品ID
+                'img'      => $filePath,    // 作品のファイルパス
+                'width'    => $size[0],     // 画像の横幅
+                'height'   => $size[1],     // 画像の縦幅
+                'imgname'  => $row->name,   // 作品名
+                'userName' => $row->d_name, // 制作者名
+                'iconPath' => $iconPath,    // アイコンパス
             );
         }
 
+
+        $test = '';
         if($result == null) {
-            $result = -999;
+            $sql = "SELECT name FROM designers WHERE id = ".$designerId;
+            $stmt = $this->dbm->dbh->prepare($sql);
+            $stmt->execute();
+
+            while ($row = $stmt->fetchObject())
+            {
+                $name = $row->name;
+                $fileName = $designerId.'_'.$name;
+                $iconPath = '../view/images/creator/Share/default.png';
+
+                // $result = $fileName;
+
+                foreach( $this->exts as $ext) {
+                    $imageTmpName = $designerId.'_icon.'.$ext;
+                    $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
+                    if(is_file($tmpPath)) {
+                        $iconPath = $tmpPath;
+                        break;
+                    }
+                }
+                //$result = 'aaa';
+
+                $result[] = array(
+                    'id'       => -999,     // 作品ID
+                    'img'      => '',    // 作品のファイルパス
+                    'width'    => 0,     // 画像の横幅
+                    'height'   => 0,     // 画像の縦幅
+                    'imgname'  => '',   // 作品名
+                    'userName' => $name, // 制作者名
+                    'iconPath' => $iconPath,    // アイコンパス
+                );
+            }
         }
 
         echo json_encode( $result );

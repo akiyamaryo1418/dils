@@ -1,4 +1,60 @@
 
+$(function(){
+
+	$(".imgbox").click(function(){
+
+	    var id = $(this).attr("id");
+	    alert('aaa');
+
+	    viewInitialize(id);
+	    $(".lightbox_view").fadeIn(100);
+
+	});
+
+	$(".close").click(function(){
+
+	    $(".lightbox_view").fadeOut(100);
+
+	});
+});
+
+// 初期化(編集画面での表示)
+function viewInitialize(illustid){
+	// アドレスの「?」以降のパラメータを取得
+    var id = location.search;
+    id = id.substring(1);
+
+    alert('!!');
+
+    var param={ 'user' : id, 'illust' : illustid };
+
+    data= {
+    	'model'  : 'user',
+    	'action' : 'illustIndex',
+    	'list'   :  param
+    }
+
+    $.ajax({
+    	url      : '../../api/controller.php',
+    	type     : 'POST',
+    	dataType : 'json',
+    	data     :  data,
+    	timeout  :  1000,
+    }).done(function(data, dataType){
+    	for(var index = 0; index < 20; index++){
+            $('.illustbox').append($('<li></li>')
+                          .append($('<div></div>').attr({'class':'imgbox'}))
+                          .append($('<div></div>').attr({'class': 'textbox'})
+                          .append($('<p>作品タイトル</p>'))
+                          .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
+
+        }
+    	//alert('Success');
+    }).fail(function(){
+    	alert('Nodata');
+    });
+}
+
 // ライトボックスを開く
 function openLightbox(id,pass){
 
