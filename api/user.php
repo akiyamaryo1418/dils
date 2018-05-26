@@ -23,7 +23,7 @@ class user {
     public function illustIndex($data) {
         $result;
 
-        $designerId = $data;    // 表示するユーザーのID
+        $designerId = $data['id'];    // 表示するユーザーのID
 
         // ソート対象
         $target = "";
