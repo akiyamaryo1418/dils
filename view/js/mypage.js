@@ -45,7 +45,7 @@ function Initialize(){
 
 
     	triming();
-    	illusttriming();
+    	illustTriming();
     	//alert(JSON.stringify(data[0].username));
     }).fail(function(){
     	alert('Nodata');
@@ -111,7 +111,7 @@ function triming(){
 	});
 }
 
-function illusttriming(){
+function illustTriming(){
 
 	var resizeClass = '.imgbox img';
 	var thumnailWidth  = 150;
@@ -132,7 +132,6 @@ function illusttriming(){
 // アカウント編集登録
 function sendAccountEdit(){
 
-	//data = new FormData($('#mypageiconform').get(0));
 	data = new FormData($('#mypageiconform').get(0));
 	data.append('model', 'user');
 	data.append('action', 'register');

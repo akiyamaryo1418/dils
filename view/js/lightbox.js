@@ -25,11 +25,8 @@ function viewInitialize(illustid){
     var id = location.search;
     id = id.substring(1);
 
-    alert('!!');
+    //alert(src);
 
-
-
-    //console.log(src);
 
     var param={ 'user' : id, 'illust' : illustid };
 
@@ -46,14 +43,7 @@ function viewInitialize(illustid){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	for(var index = 0; index < data.length; index++){
-            $('.illustbox').append($('<li></li>')
-                          .append($('<div></div>').attr({'class': 'imgbox'}))
-                          .append($('<div></div>').attr({'class': 'textbox'})
-                          .append($('<p>作品タイトル</p>'))
-                          .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
 
-        }
     	//alert('Success');
     }).fail(function(){
     	alert('Nodata');
