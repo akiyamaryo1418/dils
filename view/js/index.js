@@ -63,7 +63,7 @@ function initIllust(){
 	    	'model'  : 'illustration',
 	    	'action' : 'index',
 	    	'list'   :  param
-	        }
+	    }
 
 	    $.ajax({
 	    	url      : '../../api/controller.php',

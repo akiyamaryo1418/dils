@@ -37,7 +37,7 @@ function Initialize(){
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
             $('.illustbox').append($('<li></li>')
-                          .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })    // ここのIDを修正
+                          .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })
                           .append($('<img src="'+result+'">')))
                           .append($('<div></div>').attr({'class': 'textbox'})
                           .append($('<p>作品タイトル</p>'))

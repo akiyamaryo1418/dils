@@ -178,12 +178,12 @@ p.return a {
 
 
 input[type=radio] {
-	display: none; 	
+	display: none;
 }
 
 input[type="radio"]:checked + label {
 	background: #31A9EE;
-	color: #ffffff; 	
+	color: #ffffff;
 }
 
 
@@ -254,7 +254,7 @@ input[type=checkbox]:checked + .check_css:before {
 
 #SearchBoxfilter div {
   float: left;
-  width: 90px; 
+  width: 90px;
 }
 
 /*#wrap {
@@ -340,11 +340,20 @@ input[type=checkbox]:checked + .check_css:before {
 }
 
 .leftcontents .imgbox {
-  width: 500px;
+  width: 750px;
   height: 700px;
   margin: 0 auto;
-  background: #ff0033;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+  /*background: #ff0033;*/
 }
+
+.imgbox img {
+  /*width: 100%;*/
+  position : relative;
+}
+
 
 .rightcontents {
   position: relative;
@@ -482,7 +491,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {
