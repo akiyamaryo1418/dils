@@ -369,10 +369,17 @@ class user {
         }
 
         // ファイルパスの指定
-        $filePath = '../../view/images/creater/'.$fileName;
-        if (is_dir($filePath)) {
-            // フォルダの削除
-            rmdir($filePath);
+        $dir = '../../view/images/creater/'.$fileName;
+
+        // フォルダとその中の画像を削除
+        if (is_dir($dir) && !is_link($dir)) {
+            $paths = array();
+            while ($glob = glob($dir)) {
+                $paths = array_merge($glob, $paths);
+                $dir .= '/*';
+            }
+            array_map('unlink', array_filter($paths, 'is_file'));
+            array_map('rmdir',  array_filter($paths, 'is_dir'));
 
             // DB上のデータの削除
             // ユーザー
@@ -384,11 +391,10 @@ class user {
                   ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
                   ."WHERE works.id = ".$id
             ;
-
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
             $result = 'succes';
-        } else {
+        }else {
             $result = -999;
         }
         echo json_encode( $result );
