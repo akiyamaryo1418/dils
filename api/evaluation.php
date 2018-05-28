@@ -38,6 +38,14 @@ class evaluation {
                     'review'     => $row->average_point,
                 );
             }
+
+            if($result == null) {
+                $result[] = array(
+                    'comment'    => '',
+                    'created_at' => '',
+                    'review'     => 0,
+                );
+            }
         }else{
             // SQLの失敗
             $result = -999;

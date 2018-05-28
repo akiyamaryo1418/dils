@@ -194,7 +194,7 @@ class illustration {
                 $result = 'success';
             } else{
                 // アップロードミス
-                $result = 'miss upload';
+                $result =  -999;
             }
         } else {
             // SQL失敗

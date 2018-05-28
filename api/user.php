@@ -81,16 +81,18 @@ class user {
                     break;
                 }
             }
+
             // 画像サイズの取得
             $size = getimagesize($filePath);
 
             // アイコン画像の取得
             $iconPath = '../view/images/creator/Share/default.png';
             foreach( $this->exts as $ext) {
-                $imageTmpName = $id.'_icon.'.$ext;
+                $imageTmpName = $designerId.'_icon.'.$ext;
                 $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
-                if(is_file($tmpPath)) {
+                if(file_exists($tmpPath)) {
                     $iconPath = $tmpPath;
+                    $test = 1;
                     break;
                 }
             }
@@ -107,8 +109,7 @@ class user {
         }
 
 
-        $test = '';
-        if($result == null) {
+       if($result == null) {
             $sql = "SELECT name FROM designers WHERE id = ".$designerId;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
@@ -119,8 +120,6 @@ class user {
                 $fileName = $designerId.'_'.$name;
                 $iconPath = '../view/images/creator/Share/default.png';
 
-                // $result = $fileName;
-
                 foreach( $this->exts as $ext) {
                     $imageTmpName = $designerId.'_icon.'.$ext;
                     $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
@@ -129,7 +128,6 @@ class user {
                         break;
                     }
                 }
-                //$result = 'aaa';
 
                 $result[] = array(
                     'id'       => -999,     // 作品ID

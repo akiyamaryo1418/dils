@@ -11,8 +11,6 @@ function Initialize(){
     id = id.substring(1);
 
 
-    var param = { 'id' : id };
-
     data= {
     	'model'  : 'user',
     	'action' : 'illustIndex',
@@ -31,11 +29,14 @@ function Initialize(){
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').html(data[0].username);
+    	console.log(JSON.stringify(result));
+    	console.log(JSON.stringify(data[0].userName));
 
-    	alert(data.length);
+    	//alert(data.length);
     	for(var index = 0; index < data.length; index++){
+    		var result = data[index].img.replace('view/', '');
             $('.illustbox').append($('<li></li>')
-                          .append($('<div></div>').attr({'class': 'imgbox'})
+                          .append($('<div></div>').attr({'class' : 'imgbox', 'id' : '0' })    // ここのIDを修正
                           .append($('<img src="'+result+'">')))
                           .append($('<div></div>').attr({'class': 'textbox'})
                           .append($('<p>作品タイトル</p>'))
@@ -107,7 +108,6 @@ function triming(){
 		$(this).css("top", 0);
 		$(this).css("width", 150+"px");
 		$(this).css("left", 0);
-
 	});
 }
 

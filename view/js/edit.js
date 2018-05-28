@@ -38,11 +38,23 @@ new Vue({
 	},
 	methods: {
 		onFileChange(e){
+			//alert('DD');
 			var files = e.target.files || e.dataTransfer.files;
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
-			triming();
+			triming('.box1 ');
+		},
+		deleteFileChange(){
+			/*var reader = new FileReader();
+			reader.onload = (e) => {
+				this.uploadedImage = '';
+			}*/
+
+
+			this.uploadedImage = '';
+			resetcss('.box1 ');
+			//reader.readAsDataURL('');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -247,19 +259,28 @@ new Vue({
 //========================
 
 //トリミング
-function triming(){
+function triming(boxclass){
 
-	var resizeClass    = '.img-box img';
+
+	var resizeClass    = boxclass + '.img-box img';
+	//alert(resizeClass);
 	var thumnailWidth  = 250;
 	var thumnailHeight = 250;
 	var iw, ih;
+
+	alert('dds');
 
 	$(resizeClass).each(function(){
 		var w = $(this).width();   // 画像の幅(原寸)
 		var h = $(this).height();  // 画像の高さ(原寸)
 
+		/*$(this).css("height", "");
+		$(this).css("top", "");
+		$(this).css("width", "");
+		$(this).css("left", "");
+
 		// 横長の画像の場合
-		if(w >= h){
+		/*if(w >= h){
 			iw = (thumnailHeight / h * w - thumnailWidth) / 2
 			$(this).height(thumnailHeight);    // 高さをサムネイルに合わせる
 			$(this).css("top", 0);
@@ -272,7 +293,22 @@ function triming(){
 			$(this).width(thumnailWidth);      // 幅をサムネイルに合わせる
 			$(this).css("top","-"+ih+"px");    // 画像のセンター合わせ
 			$(this).css("left", 0);
-		}
+		}*/
+		$(this).height(thumnailHeight);
+		$(this).width(thumnailWidth);
+		$(this).css("height", 250+"px");
+		$(this).css("top" , 0);
+		$(this).css("width", 250+"px");
+		$(this).css("left", 0);
+	});
+}
+
+function resetcss(boxclass){
+
+	var resizeClass = boxclass + '.img-box img';
+
+	$(resizeClass).each(function(){
+		$(this).removeAttr('style');
 	});
 }
 
@@ -297,6 +333,7 @@ function inputUpdateButton(){
         data.append('list', param);
 
 
+
         if(name != '') {
 
         	console.log(JSON.stringify(param));
@@ -311,6 +348,7 @@ function inputUpdateButton(){
         	}).done(function(data, dataType){
         		// alert('Success');
         		console.log(JSON.stringify(data));
+        		location.href= "../html/mypage.html?" + id;
         	}).fail(function(){
         		alert('NoData');
         	});

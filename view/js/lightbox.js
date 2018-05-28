@@ -25,7 +25,7 @@ function viewInitialize(illustid){
     var id = location.search;
     id = id.substring(1);
 
-    //alert(src);
+    //alert(illustid);  IDの取得はできた
 
 
     var param={ 'user' : id, 'illust' : illustid };
@@ -43,7 +43,10 @@ function viewInitialize(illustid){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-
+    	alert(JSON.stringify(data));
+    	var result = data[0].img.replace('view/', '');
+    	$('#editimgbox').append($('<img src="'+result+'">'));
+    	$('[name="title"]').html(data[0].name);
     	//alert('Success');
     }).fail(function(){
     	alert('Nodata');

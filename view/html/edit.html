@@ -39,7 +39,7 @@
               <option value="アイテム">アイテム</option>
             </select>
             <p><input type="file" name="img1" value="追加" class="imgbutton" v-on:change="onFileChange"></p>
-            <p><input type="button" value="削除" class="delete" onclick="deleteIllust();"></p>
+            <p><input type="button" value="削除" class="delete" v-on:click="deleteFileChange"></p>
           </div>
           <div class="box2">
             <div class="img-box"><img v-show="uploadedImage" :src="uploadedImage" /></div>
