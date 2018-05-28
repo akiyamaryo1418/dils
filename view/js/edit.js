@@ -2,8 +2,11 @@
 // イラスト編集ページ
 $(function(){
     //Initialize();
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> master
 });
 
 // 初期化
@@ -38,11 +41,15 @@ new Vue({
 	},
 	methods: {
 		onFileChange(e){
+<<<<<<< HEAD
 			//alert('DD');
+=======
+>>>>>>> master
 			var files = e.target.files || e.dataTransfer.files;
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
+<<<<<<< HEAD
 			triming('.box1 ');
 		},
 		deleteFileChange(){
@@ -55,6 +62,9 @@ new Vue({
 			this.uploadedImage = '';
 			resetcss('.box1 ');
 			//reader.readAsDataURL('');
+=======
+			triming();
+>>>>>>> master
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -259,21 +269,31 @@ new Vue({
 //========================
 
 //トリミング
+<<<<<<< HEAD
 function triming(boxclass){
 
 
 	var resizeClass    = boxclass + '.img-box img';
 	//alert(resizeClass);
+=======
+function triming(){
+
+	var resizeClass    = '.img-box img';
+>>>>>>> master
 	var thumnailWidth  = 250;
 	var thumnailHeight = 250;
 	var iw, ih;
 
+<<<<<<< HEAD
 	alert('dds');
 
+=======
+>>>>>>> master
 	$(resizeClass).each(function(){
 		var w = $(this).width();   // 画像の幅(原寸)
 		var h = $(this).height();  // 画像の高さ(原寸)
 
+<<<<<<< HEAD
 		/*$(this).css("height", "");
 		$(this).css("top", "");
 		$(this).css("width", "");
@@ -281,6 +301,10 @@ function triming(boxclass){
 
 		// 横長の画像の場合
 		/*if(w >= h){
+=======
+		// 横長の画像の場合
+		if(w >= h){
+>>>>>>> master
 			iw = (thumnailHeight / h * w - thumnailWidth) / 2
 			$(this).height(thumnailHeight);    // 高さをサムネイルに合わせる
 			$(this).css("top", 0);
@@ -293,6 +317,7 @@ function triming(boxclass){
 			$(this).width(thumnailWidth);      // 幅をサムネイルに合わせる
 			$(this).css("top","-"+ih+"px");    // 画像のセンター合わせ
 			$(this).css("left", 0);
+<<<<<<< HEAD
 		}*/
 		$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);
@@ -309,6 +334,9 @@ function resetcss(boxclass){
 
 	$(resizeClass).each(function(){
 		$(this).removeAttr('style');
+=======
+		}
+>>>>>>> master
 	});
 }
 
@@ -317,6 +345,7 @@ function inputUpdateButton(){
 
     var id = location.search;
 	id = id.substring(1);
+<<<<<<< HEAD
 	//id = 8;
 
     // 毎回通信する
@@ -352,4 +381,56 @@ function inputUpdateButton(){
         	});
         }
     }
+=======
+	id = 8;
+
+    // 毎回通信する
+    for(var index = 0; index < 8; index++){
+
+    	var data = new FormData($('#send').get(0));
+    	data.append('model',  'illustration');
+    	data.append('action', 'insert');
+
+    	var name = $('.text'+(index+1)+'').val();
+    	var fileName = 'img'+ (index + 1) + '';
+        var param = [ id, name, fileName ];
+        data.append('list', param);
+        if(name != '') {
+
+        	console.log(JSON.stringify(param));
+        	$.ajax({
+        		url         : '../../api/controller.php',
+        		type        : 'POST',
+        		dataType    : 'json',
+        		processData : false,
+            	contentType : false,
+        		data        :  data,
+        		timeout     :  1000,
+        	}).done(function(data, dataType){
+        		// alert('Success');
+        		console.log(JSON.stringify(data));
+        	}).fail(function(){
+        		alert('NoData');
+        	});
+        }
+    }
+
+
+	/*data.append('list', param);
+
+	$.ajax({
+		url         : '../../api/controller.php',
+		type        : 'POST',
+		dataType    : 'json',
+		processData : false,
+    	contentType : false,
+		data        :  data,
+		timeout     :  1000,
+	}).done(function(data, dataType){
+		alert('Success');
+		console.log(JSON.stringify(data));
+	}).fail(function(){
+		alert('NoData');
+	});*/
+>>>>>>> master
 }

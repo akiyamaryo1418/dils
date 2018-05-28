@@ -177,10 +177,15 @@ function searchCategory(){
 
 		for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
+    		/*$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
+    					.append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
+    					.html(  '<img src="'+result+'"'+ 'alt="'+data[index].imgname+'">')
+    		            .append($('<p></p>').html(data[index].imgname));*/
     		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
-    				     .html(  '<img src="'+result+'"'+
-    		            		 'alt="'+data[index].imgname+'">')
-    		             .append($('<p></p>').html(data[index].imgname)));
+				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
+				     .html('<img src="'+result+'"'+
+		            	   'alt="'+data[index].imgname+'">'))
+		             .append($('<p></p>').html(data[index].imgname)));
     	}
 
         triming();
