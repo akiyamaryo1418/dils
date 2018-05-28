@@ -43,9 +43,9 @@ function viewInitialize(illustid){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	alert(JSON.stringify(data));
+    	//alert(JSON.stringify(data));
     	var result = data[0].img.replace('view/', '');
-    	$('#editimgbox').append($('<img src="'+result+'">'));
+    	$('#editimgbox').html($('<img src="'+result+'">'));
     	$('[name="title"]').html(data[0].name);
     	//alert('Success');
     }).fail(function(){
@@ -62,7 +62,6 @@ function openLightbox(id,pass){
 		'list'   :  id
 	}
 
-	//alert(JSON.stringify(id));
 
 	$.ajax({
         url      : '../../api/controller.php',

@@ -31,6 +31,13 @@ function Initialize(){
 	}).fail(function(XMLHttpRequest, textStatus, errorThrown){
 		alert('n');
 	});
+
+	var id = location.search;
+    if(id.charAt(0) == '?'){
+    	id = id.substring(1);
+        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
+    }
 }
 
 // 制作者検索

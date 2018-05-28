@@ -30,11 +30,10 @@ function Initialize(){
     	//alert(data);
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
-    	$('.penname').html(data[0].username);
+    	$('.penname').html(data[0].userName);
     	console.log(JSON.stringify(result));
     	console.log(JSON.stringify(data[0].userName));
 
-    	//alert(data.length);
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
             $('.illustbox').append($('<li></li>')
@@ -52,6 +51,13 @@ function Initialize(){
     }).fail(function(){
     	alert('Nodata');
     });
+
+    var id = location.search;
+    if(id.charAt(0) == '?'){
+    	id = id.substring(1);
+        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
+    }
 }
 
 // イラストのライトボックスを開く(編集)
@@ -191,5 +197,3 @@ function inputDeleteButton(){
     	alert('Nodata');
     });
 }
-
-

@@ -16,9 +16,7 @@ function Initialize(){
 	});
 
 	var id = location.search;
-    //alert(id.charAt(0));
     if(id.charAt(0) == '?'){
-    	//alert('ee');
     	id = id.substring(1);
         $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
                        .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
@@ -175,9 +173,9 @@ function searchCategory(){
 		for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
-    				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'''}))
-    				.html(  '<img src="'+result+'"'+
-    		            		 'alt="'+data[index].imgname+'">')
+    				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
+    				     .html(  '<img src="'+result+'"'+
+    		            		 'alt="'+data[index].imgname+'">'))
     		             .append($('<p></p>').html(data[index].imgname)));
     	}
 
