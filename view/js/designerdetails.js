@@ -3,16 +3,14 @@
 $(function(){
     Initialize();
 
-    $(".imgbox").on('click', function(){
-        alert('dd');
+    $('.creatorillustbox').on('click', '.imgbox', function(){
+        //alert('dd');
 	    $(".lightbox_view").fadeIn(100);
 
 	});
 
 	$(".close").on('click', function(){
-
 	    $(".lightbox_view").fadeOut(100);
-
 	});
 });
 
@@ -44,7 +42,7 @@ function Initialize(){
 		for(var index = 0; index < data.length; index++){
 			var result = data[index].img.replace('view/', '')
 			$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
-			                      .append($('<img src="'+result+'">')));
+			                      .append($('<img>').attr({'src': result,'alt':''})));
 		}
 	}).fail(function(){
 		alert('NoData');
@@ -85,7 +83,7 @@ function searchCategory(){
 	var category = $('#category_id').val();
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
