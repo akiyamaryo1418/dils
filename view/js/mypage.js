@@ -18,6 +18,9 @@ function Initialize(){
     	'action' : 'illustIndex',
     	'list'   :  param
     }
+
+    //console.log(data);
+
     $.ajax({
     	url      : '../../api/controller.php',
     	type     : 'POST',
@@ -25,10 +28,13 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
+    	//console.log(data);
+
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').html(data[0].userName);
 
+    	//alert(data.length);
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
             $('.illustbox').append($('<li></li>')
