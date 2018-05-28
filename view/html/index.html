@@ -16,26 +16,18 @@
 
   <body>
     <!--------ヘッダー------->
-    <header class="clearfix">
+    <header>
       <h1><a href="index.html">Designer Works</a></h1>
       <nav class="login">
         <ul>
           <li><a href="designerindex.html">制作者一覧</a></li>
-<<<<<<< HEAD
-          <li><a href="login.html">LOGIN</a></li>
-=======
           <li id="loginlink"><a href="login.html">LOGIN</a></li>
->>>>>>> origin/akiyama
         </ul>
       </nav>
       <!--<nav class="mypage">
         <ul>
           <li><a href="designerindex.html">制作者一覧</a></li>
-<<<<<<< HEAD
-          <li><a href="mypage.html">MYPAGE</a></li>
-=======
           <li id="mypagelink"><a href="mypage.html">MYPAGE</a></li>
->>>>>>> origin/akiyama
         </ul>
       </nav>-->
     </header>
@@ -45,15 +37,9 @@
     <section id="Top">
       <!------トップスライダー----->
       <div class="slider-wrapper">
-          <div class="slider-item">
-            <img src="../images/top/miko.jpg" alt="女の子"/>
-          </div>
-          <div class="slider-item">
-            <img src="../images/top/miko.jpg" alt="女の子"/>
-          </div>
-          <div class="slider-item">
-          <img src="../images/top/miko.jpg" alt="女の子"/>
-          </div>
+          <div class="slider-item"></div>
+          <div class="slider-item"></div>
+          <div class="slider-item"></div>
       </div>
     </section>
     <!------ソート機能------->
@@ -70,13 +56,6 @@
       </div>
     </form>
     </section>
-<<<<<<< HEAD
-    <div id="wrapper" class="clearfix">
-      <div class="masonry" id="thumbnail">
-        <div class="item">
-          <img src="../images/top/kawaii2.jpg" alt=""/>
-          <p>title 1</p>
-=======
 
 
      <!------ライトボックス----->
@@ -86,9 +65,9 @@
         <div class="textbox">
           <span>作品タイトル</span>
           <p>なまえなまえ</p>
->>>>>>> origin/akiyama
         </div>
       </div>
+
 
           <div class="leftcontents">
             <div class="imgbox"></div>
@@ -96,7 +75,7 @@
 
           <div class="rightcontents">
             <div class="close">
-              <img src="../images/top/batuicon.png" alt=""/>
+              <a href="#" onclick="closeLightbox();"><img src="../images/top/batuicon.png" alt=""/></a>
             </div>
             <div class="star">
               <input id="star1" type="radio" name="star" value="5" />
@@ -112,28 +91,9 @@
             </div>
             <p>評価コメント</p>
             <div class="commentbox">
-              <dl>
-                <dt>18/05/08</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/08</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/08</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/07</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/06</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
             </div>
-            <form method="post" action="example.cgi">
+            <form id="sendeva">
+            <div class="idmem"></div>
               <p>作品評価</p>
               <div class="starbutton">
                 <input id="starbutton1" type="radio" name="star" value="5" />
@@ -146,10 +106,11 @@
                 <label for="starbutton4">★</label>
                 <input id="starbutton5" type="radio" name="star" value="1" />
                 <label for="starbutton5">★</label>
+                <input id="starbutton6" type="radio" name="star" value="0" checked="checked" />
               </div>
               <div class="reviewbox">
                 <textarea name="kanso" rows="4" cols="40">作品にコメントする</textarea>
-                <p><input type="submit" value="投稿" class="review"></p>
+                <p><input type="button" value="投稿" class="review" onclick="sendEvaluation();"></p>
               </div>
 
             </form>
@@ -188,7 +149,7 @@
 <!--masonry用-->
 <script src="../js/masonry/masonry.pkgd.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="../js/index.js"></script>
-<script type="text/javascript" src="../js/lightbox.js"></script>
+<script type="text/javascript" src="../js/indexlightbox.js"></script>
 
   </body>
 

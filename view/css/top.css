@@ -36,7 +36,6 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
-  min-width: 1250px;
   height: 75px;
   background: rgba(0,0,0,0.5);
 }
@@ -93,7 +92,6 @@ header li a {
 
 #Top {
   width: 100%;
-  min-width: 1250px;
   height: 600px;
 }
 .slider-wrapper {
@@ -106,15 +104,13 @@ header li a {
 .slider-item {
   width: 100%;
   height: 600px;
-}
-
-.slider-item img {
-  width: 100%;
+  background: url("../images/top/miko.jpg") no-repeat;
+  background-size: cover;
 }
 
 #SearchBox {
   width: 100%;
-  min-width: 1000px;
+  min-width: 960px;
   height: 45px;
   margin: 15px 0;
   background: #000;
@@ -318,10 +314,26 @@ div.item {
 }
 
 .leftcontents .imgbox {
-  width: 500px;
+  width: 750px;
   height: 700px;
   margin: 0 auto;
-  background: #ff0033;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+  /*background: #ff0033;*/
+}
+
+/*div.imgbox{
+  width   : 500px;
+  height  : 700px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+}*/
+
+.imgbox img {
+  /*width: 100%;*/
+  position : relative;
 }
 
 .rightcontents {
@@ -437,7 +449,6 @@ textarea {
 footer {
   position: relative;
   width: 100%;
-  min-width: 1250px;
   height: 70px;
   background: #000;
 }

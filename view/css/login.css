@@ -17,12 +17,6 @@ body {
 	letter-spacing: 2px;
 }
 
-.clearfix:after {
-    content: " ";
-    display: block;
-    clear: both;
-}
-
 #wrap {
   width: 900px;
   margin:0 auto;
@@ -36,7 +30,6 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
-  min-width: 1250px;
   height: 75px;
   background: #000;
 }
@@ -136,7 +129,6 @@ p.text a {
 footer {
   position: relative;
   width: 100%;
-  min-width: 1250px;
   height: 70px;
   background: #000;
 }
