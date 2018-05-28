@@ -172,10 +172,23 @@ p.return a {
   background: rgba(255,124,127,0.8);
 }
 
-
 #SeartReview {
   border-right: solid 2px #fff;
 }
+
+
+input[type=radio] {
+	display: none; 	
+}
+
+input[type="radio"]:checked + label {
+	background: #31A9EE;
+	color: #ffffff; 	
+}
+
+
+
+
 /*：：：：チェックボックス：：：：*/
 .SearchBoxfilter {
   float: left;
@@ -259,13 +272,13 @@ input[type=checkbox]:checked + .check_css:before {
   width: 960px;
   margin: 0 auto 100px;
 }
-.creatoristbox ul {
+.creatoristbox ul.creatorillustbox {
   width: 875px;
   margin: 0 auto;
   list-style: none;
 }
 
-.creatoristbox ul li {
+.creatoristbox ul.creatorillustbox li.imgbox {
   float: left;
   width: 105px;
   height: 105px;
@@ -284,7 +297,7 @@ input[type=checkbox]:checked + .check_css:before {
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
 .lightbox_view{
-/*  display: none;*/
+  display: none;
   position: fixed;
   top: 0px;
   left: 0px;
