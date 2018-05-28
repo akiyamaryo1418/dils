@@ -13,15 +13,15 @@
       <nav class="login">
         <ul>
           <li><a href="designerindex.html">制作者一覧</a></li>
-          <li><a href="login.html">LOGIN</a></li>
+          <li id="loginlink"><a href="login.html">LOGIN</a></li>
         </ul>
       </nav>
-      <nav class="mypage">
+      <!--<nav class="mypage">
         <ul>
           <li><a href="designerindex.html">制作者一覧</a></li>
           <li><a>MYPAGE</a></li>
         </ul>
-      </nav>
+      </nav>-->
     </header>
 
 
@@ -72,24 +72,25 @@
        <img src="../images/top/batuicon.png" alt="閉じるボタン"/>
      </div>
      <div class="formbox">
-       <form method="post" action="example.cgi">
+       <form id ="lightBoxForm" method="post" action="example.cgi">
          <div class="leftcontents">
           <div class="imgbox" id="editimgbox"></div>
           <p><input type="file" name="datafile"></p>
          </div>
          <div class="rightcontents">
-           <p class="title">タイトル<input id='title' type="text" name="title"></p>
+           <p class="title">タイトル<input type="text" name="title"></p>
             <div class="selectwrap">
               <label for="category">カテゴリ</label>
                 <select name="category">
-                  <option value="キャラ">キャラ</option>
-                  <option value="背景">背景</option>
-                  <option value="アイテム">アイテム</option>
+                  <option value="1">キャラ</option>
+                  <option value="2">背景</option>
+                  <option value="3">アイテム</option>
                 </select>
             </div>
+            <div><input id="imageId" name="imageId" type="radio" value=""checked="checked" style="display:none"></div>
            <div class="buttonbox">
              <p><input type="button" value="変更内容を登録" onclick="sendIllustEdit();"></p>
-           <p><input type="button" value="削除" onclick="deleteIllust();"></p>
+             <p><input type="button" value="削除" onclick="deleteIllust();"></p>
            </div>
          </div>
        </form>

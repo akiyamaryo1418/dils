@@ -28,24 +28,29 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//console.log(data);
 
-    	var result = data[0].iconPath.replace('view/', '');
-    	$('#mypagepreview').append($('<img src="'+result+'">'));
-    	$('.penname').html(data[0].userName);
+    	if(data[0].id != -999) {
+    		var result = data[0].iconPath.replace('view/', '');
+        	$('#mypagepreview').append($('<img src="'+result+'">'));
+        	$('.penname').html(data[0].userName);
 
-    	//alert(data.length);
-    	for(var index = 0; index < data.length; index++){
-    		var result = data[index].img.replace('view/', '');
-            $('.illustbox').append($('<li></li>')
-                          .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })    // ここのIDを修正
-                          .append($('<img src="'+result+'">')))
-                          .append($('<div></div>').attr({'class': 'textbox'})
-                          .append($('<p>作品タイトル</p>'))
-                          .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
-        }
-    	triming();
-    	illustTriming();
+        	//alert(data.length);
+        	for(var index = 0; index < data.length; index++){
+        		var result = data[index].img.replace('view/', '');
+                $('.illustbox').append($('<li></li>')
+                              .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })    // ここのIDを修正
+                              .append($('<img src="'+result+'">')))
+                              .append($('<div></div>').attr({'class': 'textbox'})
+                              .append($('<p>作品タイトル</p>'))
+                              .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
+            }
+        	triming();
+        	illustTriming();
+    	}
+
+    	console.log(data);
+
+
     }).fail(function(){
     	alert('Nodata');
     });
@@ -60,6 +65,30 @@ function editUserName(){
 	var name = window.prompt("ユーザ名を入力してください","");
 	$('.penname').html(name);
 }
+
+// 画像情報の編集
+function sendIllustEdit() {
+
+	var param = $('#lightBoxForm').serializeArray();
+    var data= {
+    	'model'  : 'illustration',
+    	'action' : 'edit',
+    	'list'   :  param
+    }
+
+    $.ajax({
+    	url         : '../../api/controller.php',
+    	type        : 'POST',
+    	dataType    : 'json',
+    	data        :  data,
+    	timeout     :  1000,
+    }).done(function(data, dataType){
+    	console.log(data);
+    }).fail(function(){
+    	alert('Nodata');
+    });
+}
+
 
 // アイコン
 //Vue.jsの処理
@@ -127,14 +156,18 @@ function illustTriming(){
 // アカウント編集登録
 function sendAccountEdit(){
 
-	data = new FormData($('#mypageiconform').get(0));
+	var data = new FormData($('#mypageiconform').get(0));
 	data.append('model', 'user');
-	data.append('action', 'register');
+	data.append('action', 'edit');
 
-	var id = location.search;
-    id = id.substring(1);
+	var url = location.search;
+    var id = url.substring(1);
 
-	data.append('list', id);
+    var name = $('.penname').text();
+    var param = [id, name, 'datafile'];
+	data.append('list', param);
+
+	console.log(param);
 
     $.ajax({
     	url         : '../../api/controller.php',
@@ -145,12 +178,38 @@ function sendAccountEdit(){
     	data        :  data,
     	timeout     :  1000,
     }).done(function(data, dataType){
+    	//console.log(data);
     	location.href = "../html/index.html?"+id;
         //alert(data);
     }).fail(function(){
     	alert('Nodata');
     });
 }
+
+function deleteAccount() {
+
+
+	var id = location.search;
+	id = id.substring(1);
+
+	var data = {'model':'user', 'action': 'delete', 'list': id};
+	console.log(data);
+
+	$.ajax({
+    	url         : '../../api/controller.php',
+    	type        : 'POST',
+    	dataType    : 'json',
+    	data        :  data,
+    	timeout     :  1000,
+    }).done(function(data, dataType){
+    	console.log(data);
+    	//location.href = "../html/index.html?"+id;
+        //alert(data);
+    }).fail(function(){
+    	alert('Nodata');
+    });
+}
+
 
 // 編集画面へ
 function moveEdit(){
