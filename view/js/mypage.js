@@ -13,11 +13,7 @@ function Initialize(){
 
     var param = { 'id' : id };
 
-<<<<<<< HEAD
     var data= {
-=======
-    data= {
->>>>>>> origin/akiyama
     	'model'  : 'user',
     	'action' : 'illustIndex',
     	'list'   :  param
@@ -32,7 +28,6 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-<<<<<<< HEAD
     	//console.log(data);
 
     	var result = data[0].iconPath.replace('view/', '');
@@ -40,16 +35,6 @@ function Initialize(){
     	$('.penname').html(data[0].userName);
 
     	//alert(data.length);
-=======
-    	//$('#mypageicon').html('<img id="mypageicon" v-show>')
-    	//alert(data);
-    	var result = data[0].iconPath.replace('view/', '');
-    	$('#mypagepreview').append($('<img src="'+result+'">'));
-    	$('.penname').html(data[0].userName);
-    	console.log(JSON.stringify(result));
-    	console.log(JSON.stringify(data[0].userName));
-
->>>>>>> origin/akiyama
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
             $('.illustbox').append($('<li></li>')
@@ -59,26 +44,11 @@ function Initialize(){
                           .append($('<p>作品タイトル</p>'))
                           .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
         }
-<<<<<<< HEAD
     	triming();
     	illustTriming();
-=======
-
-
-    	triming();
-    	illustTriming();
-    	//alert(JSON.stringify(data[0].username));
->>>>>>> origin/akiyama
     }).fail(function(){
     	alert('Nodata');
     });
-
-    var id = location.search;
-    if(id.charAt(0) == '?'){
-    	id = id.substring(1);
-        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
-                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
-    }
 }
 
 // イラストのライトボックスを開く(編集)
@@ -88,10 +58,6 @@ function openIllustLightbox(){
 
 function editUserName(){
 	var name = window.prompt("ユーザ名を入力してください","");
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/akiyama
 	$('.penname').html(name);
 }
 
@@ -130,13 +96,6 @@ function triming(){
 	var thumnailWidth  = 150;
 	var thumnailHeight = 150;
 
-<<<<<<< HEAD
-=======
-	var resizeClass    = '.creatoricon img';
-	var thumnailWidth  = 150;
-	var thumnailHeight = 150;
-
->>>>>>> origin/akiyama
 	$(resizeClass).each(function(){
 
 		$(this).height(thumnailHeight);
@@ -149,10 +108,6 @@ function triming(){
 }
 
 function illustTriming(){
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/akiyama
 	var resizeClass = '.imgbox img';
 	var thumnailWidth  = 150;
 	var thumnailHeight = 150;
@@ -230,7 +185,4 @@ function inputDeleteButton(){
     	alert('Nodata');
     });
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/akiyama
