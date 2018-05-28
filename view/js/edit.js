@@ -1,7 +1,7 @@
 
 // イラスト編集ページ
 $(function(){
-    //Initialize();
+    Initialize();
 
 
 });
@@ -26,6 +26,13 @@ function Initialize(){
 	}).fail(function(){
 		alert('NoData');
 	});*/
+
+	var id = location.search;
+    if(id.charAt(0) == '?'){
+    	id = id.substring(1);
+        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
+    }
 }
 
 //======Vue.jsの処理======
@@ -331,7 +338,6 @@ function inputUpdateButton(){
     	var fileName = 'img'+ (index + 1) + '';
         var param = [ id, name, fileName ];
         data.append('list', param);
-
 
 
         if(name != '') {

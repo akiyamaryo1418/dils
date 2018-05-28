@@ -2,6 +2,18 @@
 // デザイナー詳細ページ
 $(function(){
     Initialize();
+
+    $(".imgbox").on('click', function(){
+        alert('dd');
+	    $(".lightbox_view").fadeIn(100);
+
+	});
+
+	$(".close").on('click', function(){
+
+	    $(".lightbox_view").fadeOut(100);
+
+	});
 });
 
 // 初期化
@@ -12,21 +24,28 @@ function Initialize(){
 	adrsid = adrsid.substring(1);
 	id = unescape(adrsid);
 
+	var param = { 'id' : id };
+
 	data = {
-		'model'  : 'designer',
-		'action' : 'info',
-		'list'   : id
+		'model'  : 'user',
+		'action' : 'illustIndex',
+		'list'   :  param
 	};
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
+		//console.log(JSON.stringify(data));
 		// ここで値を取得し、表示する
-		//alert('Success');
+		for(var index = 0; index < data.length; index++){
+			var result = data[index].img.replace('view/', '')
+			$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
+			                      .append($('<img src="'+result+'">')));
+		}
 	}).fail(function(){
 		alert('NoData');
 	});
@@ -48,7 +67,7 @@ function sortButton(){
 	};
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
@@ -80,5 +99,5 @@ function searchCategory(){
 
 // イラストが選択された後の処理
 function selectIllustration(){
-	var
+	//var
 }

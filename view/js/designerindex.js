@@ -22,8 +22,10 @@ function Initialize(){
 	}).done(function(data, dataType){
 		for(var index = 0; index < data.length; index++){
 			var result = data[index].img.replace('view/', '');
-			$('#listbox').append($('<li></li>').html('<img src="'+result+'"'+
-					                                 'alt="'+data[index].imgname+'">')
+			$('#listbox').append($('<li></li>')
+					     .append($('<a></a>').attr({'onclick':'moveDesignerDetails('+id+')'})
+					    		 .html('<img src="'+result+'"'+
+					                                 'alt="'+data[index].imgname+'">'))
 					     .append($('<div></div>').attr({'class':'createname'}).html(data[index].imgname))
 					     .append($('<p></p>').html(data[index].userName)));
 		}
