@@ -336,7 +336,7 @@ function inputUpdateButton(){
 
         if(name != '') {
 
-        	console.log(JSON.stringify(param));
+        	//console.log(JSON.stringify(param));
         	$.ajax({
         		url         : '../../api/controller.php',
         		type        : 'POST',
@@ -346,12 +346,20 @@ function inputUpdateButton(){
         		data        :  data,
         		timeout     :  1000,
         	}).done(function(data, dataType){
-        		// alert('Success');
-        		console.log(JSON.stringify(data));
+         		console.log(JSON.stringify(data));
         		location.href= "../html/mypage.html?" + id;
         	}).fail(function(){
         		alert('NoData');
         	});
         }
     }
+}
+
+//バリデーションチェック
+function checkValidation(){
+
+
+
+	alert('作品名を入力してください');
+	return false;
 }

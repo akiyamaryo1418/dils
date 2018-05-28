@@ -82,9 +82,6 @@ function initIllust(){
 	    				     .html('<img src="'+result+'"'+
 	    		            	   'alt="'+data[index].imgname+'">'))
 	    		             .append($('<p></p>').html(data[index].imgname)));
-	    		/*$('.imgbox').append('<img src="'+result+'"'+
-	    				            'alt="'+data[index].imgname+'">');*/
-
 	    	}
 	        //================
 
@@ -178,7 +175,8 @@ function searchCategory(){
 		for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
-    				     .html(  '<img src="'+result+'"'+
+    				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'''}))
+    				.html(  '<img src="'+result+'"'+
     		            		 'alt="'+data[index].imgname+'">')
     		             .append($('<p></p>').html(data[index].imgname)));
     	}

@@ -11,6 +11,8 @@ function Initialize(){
     id = id.substring(1);
 
 
+    var param = { 'id' : id };
+
     data= {
     	'model'  : 'user',
     	'action' : 'illustIndex',
@@ -36,13 +38,12 @@ function Initialize(){
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
             $('.illustbox').append($('<li></li>')
-                          .append($('<div></div>').attr({'class' : 'imgbox', 'id' : '0' })    // ここのIDを修正
+                          .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })    // ここのIDを修正
                           .append($('<img src="'+result+'">')))
                           .append($('<div></div>').attr({'class': 'textbox'})
                           .append($('<p>作品タイトル</p>'))
                           .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
         }
-
 
 
     	triming();
@@ -190,4 +191,5 @@ function inputDeleteButton(){
     	alert('Nodata');
     });
 }
+
 
