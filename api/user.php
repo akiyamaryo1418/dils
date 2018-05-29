@@ -56,7 +56,7 @@ class user {
             return;
         }
 
-        $sql = "SELECT des.name AS d_name, work.id, work.name "
+        $sql = "SELECT des.name AS d_name, work.id, work.name, work.category_id "
               ."FROM designers AS des "
               ."INNER JOIN works AS work "
               ."WHERE des.id = work.designer_id "
@@ -65,7 +65,7 @@ class user {
               ."ORDER BY " .$target." DESC"
         ;
         $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
+        $flag = $stmt->execute();
 
         while ($row = $stmt->fetchObject())
         {
@@ -92,7 +92,6 @@ class user {
                 $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
                 if(file_exists($tmpPath)) {
                     $iconPath = $tmpPath;
-                    $test = 1;
                     break;
                 }
             }
@@ -105,6 +104,7 @@ class user {
                 'imgname'  => $row->name,   // 作品名
                 'userName' => $row->d_name, // 制作者名
                 'iconPath' => $iconPath,    // アイコンパス
+                'category_id' => $row->category_id,    // カテゴリーのID
             );
         }
 
@@ -171,8 +171,6 @@ class user {
                     break;
                 }
             }
-            // 画像サイズの取得
-            $size = getimagesize($filePath);
 
             $result[] = array(
                 'id'        => $id,
