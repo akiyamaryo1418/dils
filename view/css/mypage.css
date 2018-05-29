@@ -215,7 +215,7 @@ header li a {
   margin: 20px auto 60px;
 }
 
-.myistbox ul {
+.myistbox .illustbox {
   list-style: none;
 }
 
@@ -252,6 +252,21 @@ div.creatoricon {
   position : relative;
 }
 
+<<<<<<< HEAD
+=======
+div.imgbox {
+  width   : 150px;
+  height  : 150px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+}
+
+.imgbox img {
+  position : relative;
+}
+
+>>>>>>> origin/akiyama
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
 .lightbox_view {

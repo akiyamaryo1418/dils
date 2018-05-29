@@ -19,9 +19,12 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     $newData = explode(",", $data);
     $name = $newData[2];
 
+<<<<<<< HEAD
     //echo json_encode( $data );
     //echo json_encode( $_FILES[$name]['name'].'___'.$name );
 
+=======
+>>>>>>> origin/akiyama
     if($_FILES[$name]['name'] == null){
         $className->$func($data);
     } else {

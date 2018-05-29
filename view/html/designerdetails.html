@@ -38,6 +38,7 @@
 
       <!------ソート機能------->
       <section id="SearchBox">
+<<<<<<< HEAD
         <form id="SearchAndFilter">
           <ul id="SearchBoxSort">
           <li id="SearchAll" value="1"><label for="all">ALL</label><input type="radio" name="sort" value="id" id="all" checked="checked" onchange="searchCategory();"></li>
@@ -140,6 +141,27 @@
           <li>
             <img src="../images/top/kawaii.jpg" alt=""/>
           </li>-->
+=======
+      <ul id="SearchBoxSort">
+        <li id="SearchAll"><a>ALL</a></li>
+        <li id="SearchUpDeat">UP DATA</li>
+        <li id="SeartReview">REVIEW</li>
+      </ul>
+
+      <!-----フィルタ検索機能------>
+      <div class="SearchBoxfilter">
+        <input type="checkbox" name="Checkbox-chara" value="キャラ" id="chara" />
+        <label for="chara" class="check_css">キャラ</label>
+        <input type="checkbox" name="Checkbox-bg" value="背景" id="bg" />
+        <label for="bg" class="check_css">背景</label>
+        <input type="checkbox" name="Checkbox-item" value="アイテム" id="item" />
+        <label for="item" class="check_css">アイテム</label>
+      </div>
+    </section>
+<!--      <div id="wrap">-->
+      <div class="creatoristbox clearfix">
+        <ul class="creatorillustbox">
+>>>>>>> origin/akiyama
         </ul>
       </div>
 <!--    </div>-->
@@ -155,12 +177,12 @@
       </div>
 
           <div class="leftcontents">
-          <div class="imgbox"></div>
+          <div class="imgbox" id="detailslightbox"></div>
           </div>
 
           <div class="rightcontents">
             <div class="close">
-              <img src="../images/top/batuicon.png" alt=""/>
+              <a href="#" onclick="closeLightbox();"><img src="../images/top/batuicon.png" alt=""/></a>
             </div>
             <div class="star">
               <input id="star1" type="radio" name="star" value="5" />
@@ -176,28 +198,8 @@
             </div>
             <p>評価コメント</p>
             <div class="commentbox">
-              <dl>
-                <dt>18/05/08</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/08</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/08</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/07</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
-              <dl>
-                <dt>18/05/06</dt>
-                <dd>とても素敵です。</dd>
-              </dl>
             </div>
-            <form method="post" action="example.cgi">
+            <form id="sendeva">
               <p>作品評価</p>
               <div class="starbutton">
                 <input id="starbutton1" type="radio" name="star" value="5" />
@@ -213,7 +215,7 @@
               </div>
               <div class="reviewbox">
                 <textarea name="kanso" rows="4" cols="40">作品にコメントする</textarea>
-                <p><input type="submit" value="投稿" class="review"></p>
+                <p><input type="button" value="投稿" class="review" onclick="postText();"></p>
               </div>
 
             </form>
@@ -222,6 +224,7 @@
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -229,6 +232,9 @@
 
 
     <footer>
+=======
+    <footer class="clearfix">
+>>>>>>> origin/akiyama
       <h1>Designer Works</h1>
       <nav>
       <ul>
@@ -238,6 +244,7 @@
       </nav>
       <p>copyright©2018.system</p>
     </footer>
+<<<<<<< HEAD
     <!--js-->
     <script src="../js/jquery-3.3.1.js" type="text/javascript"></script>
 	<script src="../js/style.js" type="text/javascript"></script>
@@ -246,5 +253,11 @@
 	<script src="../js/masonry/masonry.pkgd.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="../js/designerdetails.js"></script>
 	<!--<script type="text/javascript" src="../js/lightbox.js"></script>-->
+=======
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="../js/jquery-3.3.1.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/designerdetails.js"></script>
+>>>>>>> origin/akiyama
   </body>
 </html>

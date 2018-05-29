@@ -12,18 +12,22 @@
       <h1><a href="index.html">Designer Works</a></h1>
       <nav class="login">
         <ul>
-          <li><a>制作者一覧</a></li>
-          <li><a href="login.html">LOGIN</a></li>
+          <li><a href="designerindex.html">制作者一覧</a></li>
+          <li id="loginlink"><a href="login.html">LOGIN</a></li>
         </ul>
       </nav>
-      <nav class="mypage">
+      <!--<nav class="mypage">
         <ul>
           <li><a>制作者一覧</a></li>
           <li><a>MYPAGE</a></li>
         </ul>
-      </nav>
+      </nav>-->
     </header>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/akiyama
     <div id="wrap">
       <div id="Edit">
         <h1>Add New</h1>
@@ -38,7 +42,11 @@
               <option value="アイテム">アイテム</option>
             </select>
             <p><input type="file" name="img1" value="追加" class="imgbutton" v-on:change="onFileChange"></p>
+<<<<<<< HEAD
             <p><input type="button" value="削除" class="delete" onclick="deleteIllust();"></p>
+=======
+            <p><input type="button" value="削除" class="delete" v-on:click="deleteFileChange"></p>
+>>>>>>> origin/akiyama
           </div>
           <div class="box2">
             <div class="img-box"><img v-show="uploadedImage" :src="uploadedImage" /></div>

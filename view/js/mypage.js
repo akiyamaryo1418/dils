@@ -30,12 +30,23 @@ function Initialize(){
     	//alert(data);
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
+<<<<<<< HEAD
     	$('.penname').html(data[0].username);
 
     	alert(data.length);
     	for(var index = 0; index < data.length; index++){
             $('.illustbox').append($('<li></li>')
                           .append($('<div></div>').attr({'class': 'imgbox'})
+=======
+    	$('.penname').html(data[0].userName);
+    	console.log(JSON.stringify(result));
+    	console.log(JSON.stringify(data[0].userName));
+
+    	for(var index = 0; index < data.length; index++){
+    		var result = data[index].img.replace('view/', '');
+            $('.illustbox').append($('<li></li>')
+                          .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })
+>>>>>>> origin/akiyama
                           .append($('<img src="'+result+'">')))
                           .append($('<div></div>').attr({'class': 'textbox'})
                           .append($('<p>作品タイトル</p>'))
@@ -43,23 +54,44 @@ function Initialize(){
         }
 
 
+<<<<<<< HEAD
 
     	triming();
     	illusttriming();
+=======
+    	triming();
+    	illustTriming();
+>>>>>>> origin/akiyama
     	//alert(JSON.stringify(data[0].username));
     }).fail(function(){
     	alert('Nodata');
     });
+
+    var id = location.search;
+    if(id.charAt(0) == '?'){
+    	id = id.substring(1);
+        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
+    }
 }
 
 // イラストのライトボックスを開く(編集)
 function openIllustLightbox(){
+<<<<<<< HEAD
 
 }
 
 function editUserName(){
 	var name = window.prompt("ユーザ名を入力してください","");
 
+=======
+
+}
+
+function editUserName(){
+	var name = window.prompt("ユーザ名を入力してください","");
+
+>>>>>>> origin/akiyama
 	$('.penname').html(name);
 }
 
@@ -98,6 +130,26 @@ function triming(){
 	var resizeClass    = '.creatoricon img';
 	var thumnailWidth  = 150;
 	var thumnailHeight = 150;
+<<<<<<< HEAD
+=======
+
+	$(resizeClass).each(function(){
+
+		$(this).height(thumnailHeight);
+		$(this).width(thumnailWidth);
+		$(this).css("height", 150+"px");
+		$(this).css("top", 0);
+		$(this).css("width", 150+"px");
+		$(this).css("left", 0);
+	});
+}
+
+function illustTriming(){
+
+	var resizeClass = '.imgbox img';
+	var thumnailWidth  = 150;
+	var thumnailHeight = 150;
+>>>>>>> origin/akiyama
 
 	$(resizeClass).each(function(){
 
@@ -111,6 +163,7 @@ function triming(){
 	});
 }
 
+<<<<<<< HEAD
 function illusttriming(){
 
 	var resizeClass = '.imgbox img';
@@ -133,6 +186,11 @@ function illusttriming(){
 function sendAccountEdit(){
 
 	//data = new FormData($('#mypageiconform').get(0));
+=======
+// アカウント編集登録
+function sendAccountEdit(){
+
+>>>>>>> origin/akiyama
 	data = new FormData($('#mypageiconform').get(0));
 	data.append('model', 'user');
 	data.append('action', 'register');
@@ -191,4 +249,7 @@ function inputDeleteButton(){
     	alert('Nodata');
     });
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/akiyama

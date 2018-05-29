@@ -38,6 +38,17 @@ class evaluation {
                     'review'     => $row->average_point,
                 );
             }
+<<<<<<< HEAD
+=======
+
+            if($result == null) {
+                $result[] = array(
+                    'comment'    => '',
+                    'created_at' => '',
+                    'review'     => 0,
+                );
+            }
+>>>>>>> origin/akiyama
         }else{
             // SQLの失敗
             $result = -999;
