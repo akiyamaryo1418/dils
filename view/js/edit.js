@@ -1,7 +1,7 @@
 
 // イラスト編集ページ
 $(function(){
-    //Initialize();
+    Initialize();
 
 
 });
@@ -26,6 +26,13 @@ function Initialize(){
 	}).fail(function(){
 		alert('NoData');
 	});*/
+
+	var id = location.search;
+    if(id.charAt(0) == '?'){
+    	id = id.substring(1);
+        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
+    }
 }
 
 //======Vue.jsの処理======
@@ -325,14 +332,17 @@ function inputUpdateButton(){
     	var data = new FormData($('#send').get(0));
     	data.append('model',  'illustration');
     	data.append('action', 'insert');
+
     	var name = $('.text'+(index+1)+'').val();
+
     	var fileName = 'img'+ (index + 1) + '';
         var param = [ id, name, fileName ];
         data.append('list', param);
 
 
         if(name != '') {
-        	console.log(JSON.stringify(param));
+
+        	//console.log(JSON.stringify(param));
         	$.ajax({
         		url         : '../../api/controller.php',
         		type        : 'POST',
@@ -342,11 +352,20 @@ function inputUpdateButton(){
         		data        :  data,
         		timeout     :  1000,
         	}).done(function(data, dataType){
-        		// alert('Success');
-        		console.log(JSON.stringify(data));
+         		console.log(JSON.stringify(data));
+        		location.href= "../html/mypage.html?" + id;
         	}).fail(function(){
         		alert('NoData');
         	});
         }
     }
+}
+
+//バリデーションチェック
+function checkValidation(){
+
+
+
+	alert('作品名を入力してください');
+	return false;
 }

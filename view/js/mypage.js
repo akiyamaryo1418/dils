@@ -29,12 +29,11 @@ function Initialize(){
     	timeout  :  1000,
     }).done(function(data, dataType){
 
-    	if(data[0].id != -999) {
-    		var result = data[0].iconPath.replace('view/', '');
-        	$('#mypagepreview').append($('<img src="'+result+'">'));
-        	$('.penname').html(data[0].userName);
+    	var result = data[0].iconPath.replace('view/', '');
+    	$('#mypagepreview').append($('<img src="'+result+'">'));
+    	$('.penname').html(data[0].userName);
 
-        	//alert(data.length);
+    	if(data[0].id != -999) {
         	for(var index = 0; index < data.length; index++){
         		var result = data[index].img.replace('view/', '');
                 $('.illustbox').append($('<li></li>')
@@ -44,13 +43,9 @@ function Initialize(){
                               .append($('<p>作品タイトル</p>'))
                               .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
             }
-        	triming();
-        	illustTriming();
     	}
-
-    	console.log(data);
-
-
+    	triming();
+    	illustTriming();
     }).fail(function(){
     	alert('Nodata');
     });

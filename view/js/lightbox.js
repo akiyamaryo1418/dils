@@ -3,6 +3,7 @@ $(function(){
 	$('.illustbox').on('click', '.imgbox', function(){
 		var id = $(this).attr("id");
 	    viewInitialize(id);
+	    $('#imageId').val(id);
 	    $(".lightbox_view").fadeIn(100);
 	});
 
@@ -60,31 +61,4 @@ function trimingLightBox(){
 
 	});
 }
-
-
-
-// 評価送信
-function sendEvaluation(){
-    var param = $('#sendeva').serializeArray();
-    alert(JSON.stringify(param));
-
-    data = {
-    	'model'  : 'evaluation',
-    	'action' : 'insert',
-    	'list'   :  param
-    };
-
-    $.ajax({
-    	type     : 'POST',
-    	url      : '../../api/controller.php',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-    	//alert('Success');
-    }).fail(function(){
-    	alert('Fail');
-    });
-}
-
 
