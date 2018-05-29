@@ -20,11 +20,14 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     $name = $newData[2];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     //echo json_encode( $data );
     //echo json_encode( $_FILES[$name]['name'].'___'.$name );
 
 =======
 >>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
     if($_FILES[$name]['name'] == null){
         $className->$func($data);
     } else {

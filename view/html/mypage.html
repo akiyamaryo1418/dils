@@ -76,13 +76,17 @@
        <img src="../images/top/batuicon.png" alt="閉じるボタン"/>
      </div>
      <div class="formbox">
-       <form method="post" action="example.cgi">
+       <form id ="lightBoxForm" method="post" action="example.cgi">
          <div class="leftcontents">
+<<<<<<< HEAD
 <<<<<<< HEAD
           <div class="imgbox"></div>
 =======
           <div class="imgbox" id="editimgbox"></div>
 >>>>>>> origin/akiyama
+=======
+          <div class="imgbox" id="editimgbox"></div>
+>>>>>>> yamasaki
           <p><input type="file" name="datafile"></p>
          </div>
          <div class="rightcontents">
@@ -90,14 +94,15 @@
             <div class="selectwrap">
               <label for="category">カテゴリ</label>
                 <select name="category">
-                  <option value="キャラ">キャラ</option>
-                  <option value="背景">背景</option>
-                  <option value="アイテム">アイテム</option>
+                  <option value="1">キャラ</option>
+                  <option value="2">背景</option>
+                  <option value="3">アイテム</option>
                 </select>
             </div>
+            <div><input id="imageId" name="imageId" type="radio" value=""checked="checked" style="display:none"></div>
            <div class="buttonbox">
              <p><input type="button" value="変更内容を登録" onclick="sendIllustEdit();"></p>
-           <p><input type="button" value="削除" onclick="deleteIllust();"></p>
+             <p><input type="button" value="削除" onclick="deleteIllust();"></p>
            </div>
          </div>
        </form>

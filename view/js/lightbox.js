@@ -1,6 +1,7 @@
 
 $(function(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	$('.illustbox').on('click', '.imgbox', function(){
 
@@ -8,15 +9,20 @@ $(function(){
 	    var id = $(this).attr("id");
 
 
+=======
+	$('.illustbox').on('click', '.imgbox', function(){
+		var id = $(this).attr("id");
+>>>>>>> yamasaki
 	    viewInitialize(id);
+	    $('#imageId').val(id);
 	    $(".lightbox_view").fadeIn(100);
-
 	});
 
 	$(".close").click(function(){
-
-	    $(".lightbox_view").fadeOut(100);
-
+		$("#editimgbox").empty();
+		triming();
+    	illustTriming();
+		$(".lightbox_view").fadeOut(100);
 	});
 });
 
@@ -26,6 +32,7 @@ function viewInitialize(illustid){
     var id = location.search;
     id = id.substring(1);
 
+<<<<<<< HEAD
     alert('!!');
 
     var param={ 'user' : id, 'illust' : illustid };
@@ -33,6 +40,12 @@ function viewInitialize(illustid){
     data= {
     	'model'  : 'user',
     	'action' : 'illustIndex',
+=======
+    var param={ 'user' : id, 'illust' : illustid };
+    var data= {
+    	'model'  : 'illustration',
+    	'action' : 'selectIllust',
+>>>>>>> yamasaki
     	'list'   :  param
     }
 
@@ -43,6 +56,7 @@ function viewInitialize(illustid){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
+<<<<<<< HEAD
     	for(var index = 0; index < 20; index++){
             $('.illustbox').append($('<li></li>')
                           .append($('<div></div>').attr({'class': 'imgbox'}))
@@ -52,11 +66,18 @@ function viewInitialize(illustid){
 
         }
     	//alert('Success');
+=======
+    	var result = data[0].img.replace('view/', '');
+    	$('#editimgbox').append($('<img src="'+result+'">'));
+    	$('#title').val(data[0].name);
+    	trimingLightBox();
+>>>>>>> yamasaki
     }).fail(function(){
     	alert('Nodata');
     });
 }
 
+<<<<<<< HEAD
 // ライトボックスを開く
 function openLightbox(id,pass){
 
@@ -99,49 +120,24 @@ function openLightbox(id,pass){
         alert('no');
 	})
 }
+=======
+>>>>>>> yamasaki
 
-function lightboxtriming(){
-	var resizeClass    = '.imgbox img';
-	var thumnailHeight = 700;
-	var thumnailWidth  = 750;
-	var iw, ih;
+function trimingLightBox(){
+	var resizeClass = '.imgbox img';
+	var thumnailWidth  = 352;
+	var thumnailHeight = 460;
 
 	$(resizeClass).each(function(){
-		/*var w = $(this).width();   // 画像の幅(原寸)
-		var h = $(this).height();  // 画像の高さ(原寸)
 
-		// 横長の画像の場合
-		if(w >= h){
-			iw = (thumnailHeight / h * w - thumnailWidth) / 2
-			$(this).height(thumnailHeight);    // 高さをサムネイルに合わせる
-			$(this).css("top", 0);
-			$(this).css("left", "-"+iw+"px");  // 画像のセンター合わせ
-		}
-
-		// 縦長の画像の場合
-		else{
-			ih = (thumnailWidth / w * h - thumnailHeight) / 2
-			$(this).width(thumnailWidth);      // 幅をサムネイルに合わせる
-			$(this).css("top","-"+ih+"px");    // 画像のセンター合わせ
-			$(this).css("left", 0);
-		}*/
-
-		//====固定値====
-		$(this).height(thumnailHeight);
-		$(this).width(thumnailWidth);
-		$(this).css("height", 700+"px");
+		$(this).height(566);
+		$(this).width(800);
+		$(this).css("height", 566+"px");
 		$(this).css("top", 0);
-		$(this).css("width", 750+"px");
-		$(this).css("left", 0);
-        //==============
-	});
-}
+		$(this).css("width", 800+"px");
+		$(this).css("left", -100);
 
-// 評価送信
-function sendEvaluation(){
-    var param = $('#sendeva').serializeArray();
-    alert(JSON.stringify(param));
-
+<<<<<<< HEAD
     data = {
     	'model'  : 'evaluation',
     	'action' : 'insert',
@@ -257,3 +253,8 @@ function sendEvaluation(){
     });
 >>>>>>> origin/akiyama
 }
+=======
+	});
+}
+
+>>>>>>> yamasaki
