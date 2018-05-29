@@ -19,8 +19,6 @@ function Initialize(){
     	'list'   :  param
     }
 
-    //console.log(data);
-
     $.ajax({
     	url      : '../../api/controller.php',
     	type     : 'POST',
