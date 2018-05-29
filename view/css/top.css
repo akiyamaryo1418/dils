@@ -92,6 +92,7 @@ header li a {
 
 #Top {
   width: 100%;
+  min-width: 1250px;
   height: 600px;
 }
 .slider-wrapper {
@@ -239,7 +240,7 @@ input[type=checkbox]:checked + .check_css:before {
 
 #wrapper {
   position: relative;
-  max-width: 900px;
+  max-width: 1525px;
   margin: 0 auto;
 }
 

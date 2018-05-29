@@ -10,7 +10,7 @@ function Initialize(){
 	initCategory().then(function(){
 		return initIllust();
 	}).then(function(){
-		//alert('a');
+
 	}).catch(function(){
 		alert('n');
 	});
@@ -75,24 +75,63 @@ function initIllust(){
 	    	//===ただの表示===
 	    	for(var index = 0; index < data.length; index++){
 	    		var result = data[index].img.replace('view/', '');
-	    		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
+	    		$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration'})
 	    				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
 	    				     .html('<img src="'+result+'"'+
 	    		            	   'alt="'+data[index].imgname+'">'))
 	    		             .append($('<p></p>').html(data[index].imgname)));
 	    	}
 	        //================
-
 	    	triming();
-	    	$('.masonry').append($('<div></div>').attr({'class': 'cle' }));
-	    	$('.masonry').masonry({itemSelector: '.item', columnWidth : 300 });
-
+	    	$('#wrapper').append('<div class="cle"></div>');
+	    	$('.masonry').masonry({ itemSelector: '.item', columnWidth : 300 });
 	    	resolve();
 	    	//===============
 	    }).fail(function(){
 	    	alert('NoData');
 	    	reject();
 	    });
+	});
+}
+
+//フィルタ検索機能(ジャンル)
+function searchCategory(){
+
+	var param = $('#SearchAndFilter').serializeArray();
+
+	// 必要な情報はチェックボックスの状態
+	data = {
+		'model'  : 'illustration',
+		'action' : 'index',
+		'list'   :  param
+	};
+
+	$.ajax({
+		url      : '../../api/controller.php',
+		type     : 'POST',
+		dataType : 'json',
+		data     :  data,
+		timeout  :  1000,
+	}).done(function(data, dataType){
+		$('.masonry').remove();
+		$('.item').remove();
+		$('.cle').remove();
+		$('#wrapper').append('<div class="masonry" id="thumbnail"></div>');
+		//===ただの表示===
+    	for(var index = 0; index < data.length; index++){
+    		var result = data[index].img.replace('view/', '');
+    		$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration'})
+    				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
+    				     .html('<img src="'+result+'"'+
+    		            	   'alt="'+data[index].imgname+'">'))
+    		             .append($('<p></p>').html(data[index].imgname)));
+    	}
+        //================
+    	triming();
+    	$('#wrapper').append('<div class="cle"></div>');
+    	$('.masonry').masonry({ itemSelector: '.item', columnWidth : 300 });
+	}).fail(function(){
+		alert('NoData');
 	});
 }
 
@@ -103,6 +142,7 @@ function triming(){
 	var thumnailWidth  = 250;
 	var thumnailHeight = 250;
 	var iw, ih;
+
 
 	$(resizeClass).each(function(){
 		var w = $(this).width();   // 画像の幅(原寸)
@@ -146,45 +186,6 @@ function moveHeadButton(){
 			scrollTop: 0},500);
 		    return false;
 		});
-}
-
-// フィルタ検索機能(ジャンル)
-function searchCategory(){
-
-	var param = $('#SearchAndFilter').serializeArray();
-	//alert(JSON.stringify(param));
-
-	// 必要な情報はチェックボックスの状態
-	data = {
-		'model'  : 'illustration',
-		'action' : 'index',
-		'list'   :  param
-	};
-
-	$.ajax({
-		url      : '../../api/controller.php',
-		type     : 'POST',
-		dataType : 'json',
-		data     :  data,
-		timeout  :  1000,
-	}).done(function(data, dataType){
-		$('.item').remove();
-
-		for(var index = 0; index < data.length; index++){
-    		var result = data[index].img.replace('view/', '');
-    		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
-    				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
-    				     .html(  '<img src="'+result+'"'+
-    		            		 'alt="'+data[index].imgname+'">'))
-    		             .append($('<p></p>').html(data[index].imgname)));
-    	}
-
-        triming();
-        $('.masonry').append($('<div></div>').attr({'class': 'cle' }));
-    	$('.masonry').masonry({itemSelector: '.item', columnWidth: 300 });
-	}).fail(function(){
-		alert('NoData');
-	});
 }
 
 function moveMypage(){
