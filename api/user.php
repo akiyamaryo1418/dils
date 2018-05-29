@@ -369,9 +369,6 @@ class user {
 
         // IDの取得
         $id = $data;
-
-
-
         // IDからユーザ名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$id;
         $stmt = $this->dbm->dbh->prepare($sql);
@@ -389,10 +386,10 @@ class user {
         }
 
         // ファイルパスの指定
-        $dir = '../../view/images/creater/'.$fileName;
+        $dir = '../view/images/creator/'.$fileName;
 
         // フォルダとその中の画像を削除
-        /*if (is_dir($dir) && !is_link($dir)) {
+        if (is_dir($dir) && !is_link($dir)) {
             $paths = array();
             while ($glob = glob($dir)) {
                 $paths = array_merge($glob, $paths);
@@ -416,8 +413,8 @@ class user {
             $result = 'succes';
         }else {
             $result = 'error';
-        }*/
-        echo json_encode( is_dir($dir) );
+        }
+        echo json_encode( $result );
     }
 
     // ================================================================
