@@ -27,11 +27,11 @@
 
       <div class="creatorbox">
         <div class="creatoricon">
-          <img src="../images/creator/1.jpg" alt=""/>
+          <!--<img src="../images/creator/1.jpg" alt=""/>-->
         </div>
         <div class="creatorname">
           <span>Pen Name</span>
-          <p>なまえなまえ</p>
+          <p class="penname"></p>
         </div>
         <p class="return"><a href="designerindex.html">制作者一覧へ戻る</a></p>
       </div>
@@ -71,12 +71,12 @@
       </div>
 
           <div class="leftcontents">
-          <div class="imgbox" id="detailslightbox"></div>
+            <div class="imgbox" id="detailslightbox"></div>
           </div>
 
           <div class="rightcontents">
             <div class="close">
-              <a href="#" onclick="closeLightbox();"><img src="../images/top/batuicon.png" alt=""/></a>
+              <a onclick="closeLightbox();"><img src="../images/top/batuicon.png" alt=""/></a>
             </div>
             <div class="star">
               <input id="star1" type="radio" name="star" value="5" />
@@ -94,6 +94,7 @@
             <div class="commentbox">
             </div>
             <form id="sendeva">
+            <div class="idmem"></div>
               <p>作品評価</p>
               <div class="starbutton">
                 <input id="starbutton1" type="radio" name="star" value="5" />
@@ -106,6 +107,7 @@
                 <label for="starbutton4">★</label>
                 <input id="starbutton5" type="radio" name="star" value="1" />
                 <label for="starbutton5">★</label>
+                <input id="starbutton6" type="radio" name="star" value="0" checked="checked" />
               </div>
               <div class="reviewbox">
                 <textarea name="kanso" rows="4" cols="40">作品にコメントする</textarea>
@@ -115,7 +117,6 @@
             </form>
           </div>
     </div>
-
 
     <footer class="clearfix">
       <h1>Designer Works</h1>

@@ -4,13 +4,12 @@ $(function(){
     Initialize();
 
     $('.creatorillustbox').on('click', '.imgbox', function(){
-        //alert('dd');
 	    $(".lightbox_view").fadeIn(100);
 	});
 
 	$(".close").on('click', function(){
 	    $(".lightbox_view").fadeOut(100);
-	    $('#detailslightbox').empty();
+	    //$('#detailslightbox').empty();
 	});
 });
 
@@ -37,7 +36,10 @@ function Initialize(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		//console.log(JSON.stringify(data));
+		console.log(JSON.stringify(data));
+		var result = data[0].iconPath.replace('view/', '');
+		$('.creatoricon').append($('<img src="'+result+'">'));
+		$('.penname').html(data[0].userName);
 		// ここで値を取得し、表示する
 		for(var index = 0; index < data.length; index++){
 			var result = data[index].img.replace('view/', '')
@@ -98,11 +100,14 @@ function searchCategory(){
 
 // ライトボックスを開く
 function openLightbox(id,pass){
-	var data = {
+	data = {
 			'model'  : 'evaluation',
 			'action' : 'index',
 			'list'   :  id
 		}
+
+	//alert(id);
+	//alert(pass);
 
 		$.ajax({
 	        url      : '../../api/controller.php',
@@ -120,6 +125,7 @@ function openLightbox(id,pass){
 	                            .append($('<dd></dd>').html(data[index].comment)));
 			}
 
+			//alert()
 			var intaverage =  6 - Math.floor(data[0].review);
 			if(intaverage != 6){
 				$('#star'+intaverage+'').attr({'checked': 'checked'});
@@ -132,7 +138,7 @@ function openLightbox(id,pass){
 }
 
 function closeLightbox(){
-	$('lightbox_view').remove();
+	$('.lightboxview').remove();
 	$('.id').remove();
 	//$('body').removeClass("overflow");
 }
@@ -172,6 +178,37 @@ function lightboxtriming(){
 		$(this).css("left", 0);
         //==============
 	});
+}
+
+// コメント送信(評価)
+function postText(){
+	// アドレスの「?」以降のパラメータを取得
+	var adrsid = location.search;
+	// 先頭の「?」をカット
+	adrsid = adrsid.substring(1);
+	id = unescape(adrsid);
+
+	var param = $('#sendeva').serializeArray();
+	alert(JSON.stringify(param));
+
+	data = {
+	    	'model'  : 'evaluation',
+	    	'action' : 'insert',
+	    	'list'   :  param
+	};
+
+	$.ajax({
+    	type     : 'POST',
+    	url      : '../../api/controller.php',
+    	dataType : 'json',
+    	data     :  data,
+    	timeout  :  1000,
+    }).done(function(data, dataType){
+    	alert(JSON.stringify(data));
+    	location.href = "../html/designerdetails.html?"+id;
+    }).fail(function(){
+    	alert('Fail');
+    });
 }
 
 // イラストが選択された後の処理

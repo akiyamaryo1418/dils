@@ -17,6 +17,12 @@ body {
 	letter-spacing: 2px;
 }
 
+.clearfix:after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+
 #wrap {
   width: 900px;
   margin:0 auto;
@@ -149,7 +155,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {
