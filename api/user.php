@@ -270,6 +270,8 @@ class user {
             // テンポラリからファイルを移動
             move_uploaded_file($fileData['tmp_name'], $destination);
 
+            chmod($destination, 0777);
+
         } catch (Exception $e) {
             return false;
         }
@@ -321,27 +323,38 @@ class user {
         rename( $oldPath, $newPath );
 
         // 情報登録
-        $sql = "UPDATE designers SET name = ".$name." WHERE id = " .$id;
+        $sql = "UPDATE designers SET name = '".$name."' WHERE id = " .$id;
         $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
+        $flag = $stmt->execute();
+
+        if(!$flag) {
+            $result = -999;
+            echo json_encode( $result );
+            return;
+        }
 
         // アイコン画像の更新
-        if($fileData == null) {
-            // 新しいアイコンがない場合、現在あるアイコンを消す
+        if($fileData != null) {
+            $iconName = $id.'_icon';
+
             foreach( $this->exts as $ext) {
-                $filePath = $newPath.'/'.$id.'_icon.'.$ext;
+                $filePath = $newPath.'/'.$iconName.'.'.$ext;
                 if(is_file($filePath)) {
                     unlink($filePath);
+                    $result =  $filePath;
+                    break;
                 }
             }
-        } else{
-            $iconName = $id.'_icon';
+
             if($this->uploadImage($fileData, $newPath, $iconName)) {
-                $result = 'success';
+                $result = 'upload';
             }
             else{
-                $result = -999;
+                $result = 'error';
             }
+        } else {
+            // 画像更新なし
+            $result = 'success';
         }
         echo json_encode( $result );
     }
@@ -355,24 +368,38 @@ class user {
         $result = -999;
 
         // IDの取得
-        $id = $data[0][value];
+        $id = $data;
+
+
 
         // IDからユーザ名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$id;
-        $stmt = $dbm->dbh->prepare($sql);
-        $stmt->execute();
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();
+
+        if(!$flag) {
+            echo json_encode( $sql );
+            return;
+        }
 
         $fileName;
         while ($row = $stmt->fetchObject()) {
-            $tmp = $id.'_'.$name;
+            $tmp = $id.'_'.$row->name;
             $fileName = $tmp;
         }
 
         // ファイルパスの指定
-        $filePath = '../../view/images/creater/'.$fileName;
-        if (is_dir($filePath)) {
-            // フォルダの削除
-            rmdir($filePath);
+        $dir = '../../view/images/creater/'.$fileName;
+
+        // フォルダとその中の画像を削除
+        /*if (is_dir($dir) && !is_link($dir)) {
+            $paths = array();
+            while ($glob = glob($dir)) {
+                $paths = array_merge($glob, $paths);
+                $dir .= '/*';
+            }
+            array_map('unlink', array_filter($paths, 'is_file'));
+            array_map('rmdir',  array_filter($paths, 'is_dir'));
 
             // DB上のデータの削除
             // ユーザー
@@ -384,14 +411,13 @@ class user {
                   ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
                   ."WHERE works.id = ".$id
             ;
-
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
             $result = 'succes';
-        } else {
-            $result = -999;
-        }
-        echo json_encode( $result );
+        }else {
+            $result = 'error';
+        }*/
+        echo json_encode( is_dir($dir) );
     }
 
     // ================================================================
