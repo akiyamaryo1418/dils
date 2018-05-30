@@ -36,7 +36,11 @@
             </form>
           </div>
           <form id="mypageiconform" name="mypageicon" method="POST" enctype="multipart/form-data">
-            <p><input type="file" id="sd" class="file_edit" v-on:change="onFileChange" name="datafile"></p>
+            <label for="imgadd">
+              <p>ファイルを選択</p>
+              <input type="file" id="imgadd" class="file_edit" v-on:change="onFileChange" name="datafile">
+            </label>
+            <div class="clearfix"></div>
           </form>
         </div>
         <div class="usernamebox">
@@ -78,15 +82,16 @@
           <div class="imgbox" id="editimgbox"></div>
          </div>
          <div class="rightcontents">
-          <input type="radio" id="imageId" name="id" value='0' style="display:none">
-          <p class="title">タイトル<input id="title" type="text" name="title"></p>
-            <div  class="selectwrap">
-              <label for="category">カテゴリ</label>
+           <input type="radio" id="imageId" name="id" value='0' style="display:none">
+           <p class="title">タイトル<input id="title" type="text" name="title"></p>
+            <div class="selectwrap">
+              <p for="category">カテゴリ
                 <select id="categoryList" name="category">
                   <option value="1">キャラ</option>
                   <option value="2">背景</option>
                   <option value="3">アイテム</option>
                 </select>
+                </p>
             </div>
            <div class="buttonbox">
              <p><input type="button" value="変更内容を登録" onclick="sendIllustEdit();"></p>

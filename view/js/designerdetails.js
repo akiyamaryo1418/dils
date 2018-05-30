@@ -9,7 +9,7 @@ $(function(){
 
 	$(".close").on('click', function(){
 	    $(".lightbox_view").fadeOut(100);
-	    //$('#detailslightbox').empty();
+	    $('#detailslightbox').empty();
 	});
 });
 
