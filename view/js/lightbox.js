@@ -109,6 +109,7 @@ function sendIllustEdit() {
     	timeout  :  1000,
     }).done(function(data, dataType){
     	//alert('Success');
+    	location.reload(true);
     	console.log(data);
     }).fail(function(){
     	alert('Fail');
@@ -135,6 +136,7 @@ function deleteIllust() {
     	timeout  :  1000,
     }).done(function(data, dataType){
     	//alert('Success');
+    	location.reload(true);
     	console.log(data);
     }).fail(function(){
     	alert('Fail');

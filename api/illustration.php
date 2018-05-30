@@ -154,8 +154,7 @@ class illustration {
         $newData = explode(",", $data);
         $designerId = $newData[0];
         $name = $newData[1];
-        //$categoryId = $newData[1];
-        $categoryId = 1;
+        $categoryId = $newData[3];
 
         // IDからユーザー名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$designerId;
@@ -194,11 +193,11 @@ class illustration {
                 $result = 'success';
             } else{
                 // アップロードミス
-                $result =  -999;
+                $result =  'miss upload';
             }
         } else {
             // SQL失敗
-            $result = -999;
+            $result = 'miss sql';
         }
         echo json_encode( $result );
     }
@@ -265,9 +264,6 @@ class illustration {
     // ================================================================
     public function delete($data) {
         $result = -999;
-        /*$id = $data[0][value];
-        $name = $data[1][value];
-        $designerId = $data[2][value];*/
 
         $id = $data['id'];
         $designerId = $data['userId'];
@@ -287,7 +283,6 @@ class illustration {
         // ファイルパスの指定
         foreach( $this->exts as $ext) {
             $filePath = '../view/images/creator/'.$fileName.'/'.$imageName.'.'.$ext;
-
             if(is_file($filePath)) {
 
                 // 画像の削除
@@ -295,7 +290,7 @@ class illustration {
 
                 // DBから作品と評価の削除
                 $sql = "DELETE works, eva FROM works "
-                      ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
+                      ."LEFT JOIN evaluations  AS eva ON works.id = eva.work_id "
                       ."WHERE works.id = ".$id
                 ;
                 $stmt = $this->dbm->dbh->prepare($sql);
@@ -304,12 +299,12 @@ class illustration {
                 if($flag) {
                     $result = 'success';
                 }else{
-                    $result = 'error';
+                    $result = -999;
                 }
                 break;
             } else {
                 // 画像がない
-                $result = 'not image';
+                $result = -999;
             }
         }
         echo json_encode( $sql );
