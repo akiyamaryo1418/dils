@@ -223,11 +223,8 @@ function trimingLightBox(){
 		$(this).css("top", 0);
 		$(this).css("width", 800+"px");
 		$(this).css("left", -100);
-
 	});
 }
-
-
 
 // 評価送信
 function sendEvaluation(){
