@@ -86,6 +86,8 @@ function closeLightbox(){
 	$('.id').remove();
 	$('body').removeClass("overflow");
 }
+<<<<<<< HEAD
+=======
 
 
 //評価送信
@@ -111,3 +113,4 @@ function sendEvaluation(){
     	alert('Fail');
     });
 }
+>>>>>>> yamasaki

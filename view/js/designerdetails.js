@@ -2,15 +2,57 @@
 // デザイナー詳細ページ
 $(function(){
     Initialize();
+<<<<<<< HEAD
+=======
 
     $('.creatorillustbox').on('click', '.imgbox', function(){
+        //alert('dd');
 	    $(".lightbox_view").fadeIn(100);
 	});
 
 	$(".close").on('click', function(){
 	    $(".lightbox_view").fadeOut(100);
 	    $('#detailslightbox').empty();
+	});
+});
+>>>>>>> master
 
+    $('.creatorillustbox').on('click', '.imgbox', function(){
+	    $(".lightbox_view").fadeIn(100);
+	});
+
+<<<<<<< HEAD
+	$(".close").on('click', function(){
+	    $(".lightbox_view").fadeOut(100);
+	    $('#detailslightbox').empty();
+
+=======
+	var param = { 'id' : id };
+
+	data = {
+		'model'  : 'user',
+		'action' : 'illustIndex',
+		'list'   :  param
+	};
+
+	$.ajax({
+		url      : '../../api/controller.php',
+		type     : 'POST',
+		dataType : 'json',
+		data     :  data,
+		timeout  :  1000,
+	}).done(function(data, dataType){
+		//console.log(JSON.stringify(data));
+		// ここで値を取得し、表示する
+		for(var index = 0; index < data.length; index++){
+			var result = data[index].img.replace('view/', '')
+			$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
+			                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
+					              .append($('<img>').attr({'src': result}))));
+		}
+	}).fail(function(){
+		alert('NoData');
+>>>>>>> master
 	});
 });
 
@@ -156,7 +198,7 @@ function sortButton(){
 	};
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
@@ -174,7 +216,7 @@ function searchCategory(){
 	var category = $('#category_id').val();
 
 	$.ajax({
-		url      : '/dils/api/controller.php',
+		url      : '../../api/controller.php',
 		type     : 'POST',
 		dataType : 'json',
 		data     :  data,
@@ -186,7 +228,11 @@ function searchCategory(){
 	});
 }
 
+<<<<<<< HEAD
 //ライトボックスを開く
+=======
+// ライトボックスを開く
+>>>>>>> master
 function openLightbox(id,pass){
 	var data = {
 			'model'  : 'evaluation',
@@ -194,7 +240,10 @@ function openLightbox(id,pass){
 			'list'   :  id
 		}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 		$.ajax({
 	        url      : '../../api/controller.php',
 	        type     : 'POST',
@@ -202,6 +251,10 @@ function openLightbox(id,pass){
 	        data     :  data,
 	        timeout  :  1000,
 		}).done(function(data, dataType){
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 			$('#detailslightbox').append($('<img src="'+pass+'">'));
 			lightboxtriming();
 			for(var index = 0; index < data.length; index++){
@@ -214,7 +267,10 @@ function openLightbox(id,pass){
 			if(intaverage != 6){
 				$('#star'+intaverage+'').attr({'checked': 'checked'});
 			}
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 			// 見えないようにしている
 			$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
 		}).fail(function(){
@@ -222,16 +278,22 @@ function openLightbox(id,pass){
 		})
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> master
 function closeLightbox(){
 	$('lightbox_view').remove();
 	$('.id').remove();
 	//$('body').removeClass("overflow");
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> master
 function lightboxtriming(){
 	var resizeClass    = '#detailslightbox img';
 	var thumnailHeight = 700;
@@ -239,7 +301,10 @@ function lightboxtriming(){
 	var iw, ih;
 
 	$(resizeClass).each(function(){
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 		/*var w = $(this).width();   // 画像の幅(原寸)
 		var h = $(this).height();  // 画像の高さ(原寸)
 
@@ -250,6 +315,10 @@ function lightboxtriming(){
 			$(this).css("top", 0);
 			$(this).css("left", "-"+iw+"px");  // 画像のセンター合わせ
 		}
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 		// 縦長の画像の場合
 		else{
 			ih = (thumnailWidth / w * h - thumnailHeight) / 2
@@ -271,5 +340,9 @@ function lightboxtriming(){
 
 // イラストが選択された後の処理
 function selectIllustration(){
+<<<<<<< HEAD
 
+=======
+	//var
+>>>>>>> origin/akiyama
 }

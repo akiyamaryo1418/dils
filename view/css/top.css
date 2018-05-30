@@ -323,6 +323,7 @@ div.item {
   /*background: #ff0033;*/
 }
 
+<<<<<<< HEAD
 /*div.imgbox{
   width   : 500px;
   height  : 700px;
@@ -331,6 +332,8 @@ div.item {
   border  : 1px solid #eee;
 }*/
 
+=======
+>>>>>>> origin/akiyama
 .imgbox img {
   /*width: 100%;*/
   position : relative;

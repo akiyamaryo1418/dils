@@ -1,9 +1,19 @@
 
 // イラスト編集ページ
 $(function(){
+<<<<<<< HEAD
+<<<<<<< HEAD
+    //Initialize();
+=======
     Initialize();
 
 
+>>>>>>> origin/akiyama
+=======
+    Initialize();
+
+
+>>>>>>> yamasaki
 });
 
 // 初期化
@@ -26,6 +36,11 @@ function Initialize(){
 	}).fail(function(){
 		alert('NoData');
 	});*/
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> yamasaki
 
 	var id = location.search;
     if(id.charAt(0) == '?'){
@@ -33,6 +48,10 @@ function Initialize(){
         $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
                        .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
     }
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
 }
 
 //======Vue.jsの処理======
@@ -45,11 +64,24 @@ new Vue({
 	},
 	methods: {
 		onFileChange(e){
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 			//alert('DD');
+>>>>>>> origin/akiyama
+=======
+			//alert('DD');
+>>>>>>> yamasaki
 			var files = e.target.files || e.dataTransfer.files;
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
+<<<<<<< HEAD
+<<<<<<< HEAD
+			triming();
+=======
+=======
+>>>>>>> yamasaki
 			triming('.box1 ');
 		},
 		deleteFileChange(){
@@ -62,6 +94,10 @@ new Vue({
 			this.uploadedImage = '';
 			resetcss('.box1 ');
 			//reader.readAsDataURL('');
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -266,21 +302,48 @@ new Vue({
 //========================
 
 //トリミング
+<<<<<<< HEAD
+<<<<<<< HEAD
+function triming(){
+
+	var resizeClass    = '.img-box img';
+=======
+=======
+>>>>>>> yamasaki
 function triming(boxclass){
 
 
 	var resizeClass    = boxclass + '.img-box img';
 	//alert(resizeClass);
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
 	var thumnailWidth  = 250;
 	var thumnailHeight = 250;
 	var iw, ih;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 	alert('dds');
 
+>>>>>>> origin/akiyama
+=======
+	alert('dds');
+
+>>>>>>> yamasaki
 	$(resizeClass).each(function(){
 		var w = $(this).width();   // 画像の幅(原寸)
 		var h = $(this).height();  // 画像の高さ(原寸)
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+		// 横長の画像の場合
+		if(w >= h){
+=======
+=======
+>>>>>>> yamasaki
 		/*$(this).css("height", "");
 		$(this).css("top", "");
 		$(this).css("width", "");
@@ -288,6 +351,10 @@ function triming(boxclass){
 
 		// 横長の画像の場合
 		/*if(w >= h){
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
 			iw = (thumnailHeight / h * w - thumnailWidth) / 2
 			$(this).height(thumnailHeight);    // 高さをサムネイルに合わせる
 			$(this).css("top", 0);
@@ -300,6 +367,12 @@ function triming(boxclass){
 			$(this).width(thumnailWidth);      // 幅をサムネイルに合わせる
 			$(this).css("top","-"+ih+"px");    // 画像のセンター合わせ
 			$(this).css("left", 0);
+<<<<<<< HEAD
+<<<<<<< HEAD
+		}
+=======
+=======
+>>>>>>> yamasaki
 		}*/
 		$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);
@@ -316,6 +389,10 @@ function resetcss(boxclass){
 
 	$(resizeClass).each(function(){
 		$(this).removeAttr('style');
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
 	});
 }
 
@@ -324,6 +401,61 @@ function inputUpdateButton(){
 
     var id = location.search;
 	id = id.substring(1);
+<<<<<<< HEAD
+<<<<<<< HEAD
+	id = 8;
+
+    // 毎回通信する
+    for(var index = 0; index < 8; index++){
+
+    	var data = new FormData($('#send').get(0));
+    	data.append('model',  'illustration');
+    	data.append('action', 'insert');
+
+    	var name = $('.text'+(index+1)+'').val();
+    	var fileName = 'img'+ (index + 1) + '';
+        var param = [ id, name, fileName ];
+        data.append('list', param);
+        if(name != '') {
+
+        	console.log(JSON.stringify(param));
+        	$.ajax({
+        		url         : '../../api/controller.php',
+        		type        : 'POST',
+        		dataType    : 'json',
+        		processData : false,
+            	contentType : false,
+        		data        :  data,
+        		timeout     :  1000,
+        	}).done(function(data, dataType){
+        		// alert('Success');
+        		console.log(JSON.stringify(data));
+        	}).fail(function(){
+        		alert('NoData');
+        	});
+        }
+    }
+
+
+	/*data.append('list', param);
+
+	$.ajax({
+		url         : '../../api/controller.php',
+		type        : 'POST',
+		dataType    : 'json',
+		processData : false,
+    	contentType : false,
+		data        :  data,
+		timeout     :  1000,
+	}).done(function(data, dataType){
+		alert('Success');
+		console.log(JSON.stringify(data));
+	}).fail(function(){
+		alert('NoData');
+	});*/
+=======
+=======
+>>>>>>> yamasaki
 	//id = 8;
 
     // 毎回通信する
@@ -368,4 +500,8 @@ function checkValidation(){
 
 	alert('作品名を入力してください');
 	return false;
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
 }

@@ -29,6 +29,41 @@ function Initialize(){
 
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
+<<<<<<< HEAD
+<<<<<<< HEAD
+    	$('.penname').html(data[0].username);
+
+    	alert(data.length);
+    	for(var index = 0; index < data.length; index++){
+            $('.illustbox').append($('<li></li>')
+                          .append($('<div></div>').attr({'class': 'imgbox'})
+=======
+    	$('.penname').html(data[0].userName);
+    	console.log(JSON.stringify(result));
+    	console.log(JSON.stringify(data[0].userName));
+
+    	for(var index = 0; index < data.length; index++){
+    		var result = data[index].img.replace('view/', '');
+            $('.illustbox').append($('<li></li>')
+                          .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })
+>>>>>>> origin/akiyama
+                          .append($('<img src="'+result+'">')))
+                          .append($('<div></div>').attr({'class': 'textbox'})
+                          .append($('<p>作品タイトル</p>'))
+                          .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
+        }
+
+
+<<<<<<< HEAD
+
+    	triming();
+    	illusttriming();
+=======
+    	triming();
+    	illustTriming();
+>>>>>>> origin/akiyama
+    	//alert(JSON.stringify(data[0].username));
+=======
     	$('.penname').html(data[0].userName);
 
     	if(data[0].id != -999) {
@@ -44,6 +79,7 @@ function Initialize(){
     	}
     	triming();
     	illustTriming();
+>>>>>>> yamasaki
     }).fail(function(){
     	alert('Nodata');
     });
@@ -51,17 +87,31 @@ function Initialize(){
 
 // イラストのライトボックスを開く(編集)
 function openIllustLightbox(){
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> yamasaki
 
 }
 
 function editUserName(){
 	var name = window.prompt("ユーザ名を入力してください","");
+<<<<<<< HEAD
+
+=======
+
+=======
 	$('.penname').html(name);
+>>>>>>> yamasaki
 }
 
 // 画像情報の編集
 function sendIllustEdit() {
 
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+	$('.penname').html(name);
+=======
 	var param = $('#lightBoxForm').serializeArray();
     var data= {
     	'model'  : 'illustration',
@@ -80,6 +130,7 @@ function sendIllustEdit() {
     }).fail(function(){
     	alert('Nodata');
     });
+>>>>>>> yamasaki
 }
 
 
@@ -117,6 +168,11 @@ function triming(){
 	var resizeClass    = '.creatoricon img';
 	var thumnailWidth  = 150;
 	var thumnailHeight = 150;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> yamasaki
 
 	$(resizeClass).each(function(){
 
@@ -130,6 +186,30 @@ function triming(){
 }
 
 function illustTriming(){
+<<<<<<< HEAD
+
+	var resizeClass = '.imgbox img';
+	var thumnailWidth  = 150;
+	var thumnailHeight = 150;
+>>>>>>> origin/akiyama
+
+	$(resizeClass).each(function(){
+
+		$(this).height(thumnailHeight);
+		$(this).width(thumnailWidth);
+		$(this).css("height", 150+"px");
+		$(this).css("top", 0);
+		$(this).css("width", 150+"px");
+		$(this).css("left", 0);
+
+	});
+}
+
+<<<<<<< HEAD
+function illusttriming(){
+
+=======
+>>>>>>> yamasaki
 	var resizeClass = '.imgbox img';
 	var thumnailWidth  = 150;
 	var thumnailHeight = 150;
@@ -149,7 +229,17 @@ function illustTriming(){
 // アカウント編集登録
 function sendAccountEdit(){
 
+<<<<<<< HEAD
+	//data = new FormData($('#mypageiconform').get(0));
+=======
+// アカウント編集登録
+function sendAccountEdit(){
+
+>>>>>>> origin/akiyama
+	data = new FormData($('#mypageiconform').get(0));
+=======
 	var data = new FormData($('#mypageiconform').get(0));
+>>>>>>> yamasaki
 	data.append('model', 'user');
 	data.append('action', 'edit');
 
@@ -237,4 +327,11 @@ function inputDeleteButton(){
     	alert('Nodata');
     });
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/akiyama
+=======
+
+>>>>>>> yamasaki

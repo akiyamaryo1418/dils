@@ -80,6 +80,15 @@ function initIllust(){
 	    				     .html('<img src="'+result+'"'+
 	    		            	   'alt="'+data[index].imgname+'">'))
 	    		             .append($('<p></p>').html(data[index].imgname)));
+<<<<<<< HEAD
+<<<<<<< HEAD
+	    		/*$('.imgbox').append('<img src="'+result+'"'+
+	    				            'alt="'+data[index].imgname+'">');*/
+
+=======
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
 	    	}
 	        //================
 
@@ -98,6 +107,8 @@ function initIllust(){
 
 //トリミング
 function triming(){
+<<<<<<< HEAD
+<<<<<<< HEAD
 
 	var resizeClass    = '.item img';
 	var thumnailWidth  = 250;
@@ -116,6 +127,31 @@ function triming(){
 			$(this).css("left", "-"+iw+"px");  // 画像のセンター合わせ
 		}
 
+=======
+=======
+>>>>>>> yamasaki
+
+	var resizeClass    = '.item img';
+	var thumnailWidth  = 250;
+	var thumnailHeight = 250;
+	var iw, ih;
+
+	$(resizeClass).each(function(){
+		var w = $(this).width();   // 画像の幅(原寸)
+		var h = $(this).height();  // 画像の高さ(原寸)
+
+		// 横長の画像の場合
+		if(w >= h){
+			iw = (thumnailHeight / h * w - thumnailWidth) / 2
+			$(this).height(thumnailHeight);    // 高さをサムネイルに合わせる
+			$(this).css("top", 0);
+			$(this).css("left", "-"+iw+"px");  // 画像のセンター合わせ
+		}
+
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
 		// 縦長の画像の場合
 		else{
 			ih = (thumnailWidth / w * h - thumnailHeight) / 2
@@ -173,10 +209,23 @@ function searchCategory(){
 		for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div></div>').attr({'id':'illustid_'+data[index].id, 'class':'item', 'name':'illustration'})
+<<<<<<< HEAD
+<<<<<<< HEAD
+				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
+				     .html('<img src="'+result+'"'+
+		            	   'alt="'+data[index].imgname+'">'))
+		             .append($('<p></p>').html(data[index].imgname)));
+=======
+=======
+>>>>>>> yamasaki
     				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
     				     .html(  '<img src="'+result+'"'+
     		            		 'alt="'+data[index].imgname+'">'))
     		             .append($('<p></p>').html(data[index].imgname)));
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
     	}
 
         triming();

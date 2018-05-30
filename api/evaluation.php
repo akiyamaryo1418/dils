@@ -38,6 +38,11 @@ class evaluation {
                     'review'     => $row->average_point,
                 );
             }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> yamasaki
 
             if($result == null) {
                 $result[] = array(
@@ -46,6 +51,10 @@ class evaluation {
                     'review'     => 0,
                 );
             }
+<<<<<<< HEAD
+>>>>>>> origin/akiyama
+=======
+>>>>>>> yamasaki
         }else{
             // SQLの失敗
             $result = -999;
