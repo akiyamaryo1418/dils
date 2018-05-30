@@ -25,18 +25,8 @@ class illustration {
         $result;
 
         // ユーザーID、作品ID
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $designerId = $data[0][value];
-        $id = $data[0][value];
-=======
         $designerId = $data['user'];
         $id = $data['illust'];
->>>>>>> origin/akiyama
-=======
-        $designerId = $data['user'];
-        $id = $data['illust'];
->>>>>>> yamasaki
 
         // 現在のユーザー名の取得
         $sql = "SELECT name FROM designers WHERE id = ".$designerId;
@@ -54,15 +44,7 @@ class illustration {
         // タイトル
         $sql = "SELECT name, category_id FROM works WHERE id = ".$id;
         $stmt = $this->dbm->dbh->prepare($sql);
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $stmt->execute();
-=======
         $flag = $stmt->execute();
->>>>>>> origin/akiyama
-=======
-        $flag = $stmt->execute();
->>>>>>> yamasaki
 
         $filePath = '';
         while ($row = $stmt->fetchObject())
@@ -84,15 +66,7 @@ class illustration {
         }
 
         if($result == null) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            $result = 999;
-=======
             $result = -999;
->>>>>>> origin/akiyama
-=======
-            $result = -999;
->>>>>>> yamasaki
         }
         echo json_encode( $result );
     }
@@ -220,15 +194,7 @@ class illustration {
                 $result = 'success';
             } else{
                 // アップロードミス
-<<<<<<< HEAD
-<<<<<<< HEAD
-                $result = 'miss upload';
-=======
                 $result =  -999;
->>>>>>> origin/akiyama
-=======
-                $result =  -999;
->>>>>>> yamasaki
             }
         } else {
             // SQL失敗

@@ -81,38 +81,17 @@ class user {
                     break;
                 }
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/akiyama
-=======
-
->>>>>>> yamasaki
             // 画像サイズの取得
             $size = getimagesize($filePath);
 
             // アイコン画像の取得
             $iconPath = '../view/images/creator/Share/default.png';
             foreach( $this->exts as $ext) {
-<<<<<<< HEAD
-<<<<<<< HEAD
                 $imageTmpName = $id.'_icon.'.$ext;
-                $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
-                if(is_file($tmpPath)) {
-                    $iconPath = $tmpPath;
-=======
-=======
->>>>>>> yamasaki
-                $imageTmpName = $designerId.'_icon.'.$ext;
                 $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
                 if(file_exists($tmpPath)) {
                     $iconPath = $tmpPath;
-<<<<<<< HEAD
-=======
-                    $test = 1;
->>>>>>> origin/akiyama
->>>>>>> master
                     break;
                 }
             }
@@ -129,16 +108,7 @@ class user {
             );
         }
 
-
-<<<<<<< HEAD
-        $test = '';
         if($result == null) {
-=======
-       if($result == null) {
-<<<<<<< HEAD
->>>>>>> origin/akiyama
-=======
->>>>>>> yamasaki
             $sql = "SELECT name FROM designers WHERE id = ".$designerId;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
@@ -149,14 +119,6 @@ class user {
                 $fileName = $designerId.'_'.$name;
                 $iconPath = '../view/images/creator/Share/default.png';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                // $result = $fileName;
-
-=======
->>>>>>> origin/akiyama
-=======
->>>>>>> yamasaki
                 foreach( $this->exts as $ext) {
                     $imageTmpName = $designerId.'_icon.'.$ext;
                     $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
@@ -165,13 +127,6 @@ class user {
                         break;
                     }
                 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-                //$result = 'aaa';
-=======
->>>>>>> origin/akiyama
-=======
->>>>>>> yamasaki
 
                 $result[] = array(
                     'id'       => -999,     // 作品ID
@@ -331,18 +286,9 @@ class user {
         $newData = explode(",", $data);
         $id = $newData[0];
         $name = $newData[1];
-<<<<<<< HEAD
-
-        // 名前がない場合
-        if($id == null || $name == null) {
-            $result = -999;
-            echo json_encode( $result );
-            return;
-        }
 
         // 現在のユーザー名の取得
         $sql = "SELECT name FROM designers WHERE id = ".$id;
-=======
 
         // 名前がない場合
         if($id == null || $name == null) {
@@ -378,12 +324,9 @@ class user {
 
         // 情報登録
         $sql = "UPDATE designers SET name = '".$name."' WHERE id = " .$id;
-<<<<<<< HEAD
->>>>>>> origin/akiyama
         $stmt = $this->dbm->dbh->prepare($sql);
         $stmt->execute();
 
-<<<<<<< HEAD
         $oldPath = '';
         $newPath = '';
         while ($row = $stmt->fetchObject())
@@ -406,8 +349,6 @@ class user {
 
         // 情報登録
         $sql = "UPDATE designers SET name = ".$name." WHERE id = " .$id;
-=======
->>>>>>> yamasaki
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
@@ -431,47 +372,15 @@ class user {
             }
 
             if($this->uploadImage($fileData, $newPath, $iconName)) {
-                $result = 'upload';
+                $result = 'success';
             }
             else{
-                $result = 'error';
+                $result = -999;
             }
-<<<<<<< HEAD
-=======
-        if(!$flag) {
-            $result = -999;
-            echo json_encode( $result );
-            return;
         }
-
-        // アイコン画像の更新
-        if($fileData != null) {
-            $iconName = $id.'_icon';
-
-            foreach( $this->exts as $ext) {
-                $filePath = $newPath.'/'.$iconName.'.'.$ext;
-                if(is_file($filePath)) {
-                    unlink($filePath);
-                    $result =  $filePath;
-                    break;
-                }
-            }
-
-            if($this->uploadImage($fileData, $newPath, $iconName)) {
-                $result = 'upload';
-            }
-            else{
-                $result = 'error';
-            }
-        } else {
+        else {
             // 画像更新なし
             $result = 'success';
->>>>>>> origin/akiyama
-=======
-        } else {
-            // 画像更新なし
-            $result = 'success';
->>>>>>> yamasaki
         }
         echo json_encode( $result );
     }
@@ -486,15 +395,7 @@ class user {
 
         // IDの取得
         $id = $data;
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/akiyama
-=======
->>>>>>> yamasaki
         // IDからユーザ名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$id;
         $stmt = $this->dbm->dbh->prepare($sql);
@@ -507,36 +408,13 @@ class user {
 
         $fileName;
         while ($row = $stmt->fetchObject()) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            $tmp = $id.'_'.$name;
-=======
             $tmp = $id.'_'.$row->name;
->>>>>>> origin/akiyama
-=======
-            $tmp = $id.'_'.$row->name;
->>>>>>> yamasaki
             $fileName = $tmp;
         }
 
-        // ファイルパスの指定
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $filePath = '../../view/images/creater/'.$fileName;
-        if (is_dir($filePath)) {
-            // フォルダの削除
-            rmdir($filePath);
-=======
         $dir = '../../view/images/creater/'.$fileName;
-
-        // フォルダとその中の画像を削除
-        /*if (is_dir($dir) && !is_link($dir)) {
-=======
-        $dir = '../view/images/creator/'.$fileName;
-
         // フォルダとその中の画像を削除
         if (is_dir($dir) && !is_link($dir)) {
->>>>>>> yamasaki
             $paths = array();
             while ($glob = glob($dir)) {
                 $paths = array_merge($glob, $paths);
@@ -544,10 +422,6 @@ class user {
             }
             array_map('unlink', array_filter($paths, 'is_file'));
             array_map('rmdir',  array_filter($paths, 'is_dir'));
-<<<<<<< HEAD
->>>>>>> origin/akiyama
-=======
->>>>>>> yamasaki
 
             // DB上のデータの削除
             // ユーザー
@@ -556,28 +430,18 @@ class user {
             $stmt->execute();
 
             $sql = "DELETE works, evaluations FROM works "
-                  ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
-                  ."WHERE works.id = ".$id
-            ;
-            $stmt = $this->dbm->dbh->prepare($sql);
-            $stmt->execute();
-            $result = 'succes';
-<<<<<<< HEAD
-<<<<<<< HEAD
+                ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
+                    ."WHERE works.id = ".$id
+                    ;
+                    $stmt = $this->dbm->dbh->prepare($sql);
+                    $stmt->execute();
+                    $result = 'succes';
         } else {
             $result = -999;
-=======
         }else {
             $result = 'error';
->>>>>>> yamasaki
         }
         echo json_encode( $result );
-=======
-        }else {
-            $result = 'error';
-        }*/
-        echo json_encode( is_dir($dir) );
->>>>>>> origin/akiyama
     }
 
     // ================================================================
