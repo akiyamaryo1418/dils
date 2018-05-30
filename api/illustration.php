@@ -239,12 +239,16 @@ class illustration {
     public function edit($data) {
         $result = -999;
 
-        $id = $data[0][value];
+        /*$id = $data[0][value];
         $name = $data[1][value];
-        $categoryId = $data[2][value];
+        $categoryId = $data[2][value];*/
+
+        $id = $data['id'];
+        $name = $data['param'][0][value];
+        $categoryId = $data['param'][1][value];
 
         // ユーザーをデータベースに登録
-        $sql = "UPDATE works SET name = ".$name.", category_Id = ".$categoryId." WHERE id = ".$id;
+        $sql = "UPDATE works SET name = '".$name."', category_id = ".$categoryId." WHERE id = ".$id;
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
@@ -261,11 +265,22 @@ class illustration {
     // ================================================================
     public function delete($data) {
         $result = -999;
-        $id = $data[0][value];
+        /*$id = $data[0][value];
         $name = $data[1][value];
-        $designerId = $data[2][value];
+        $designerId = $data[2][value];*/
 
+        $id = $data['id'];
+        $designerId = $data['userId'];
 
+        $sql = "SELECT name FROM designers WHERE id = ".$designerId;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        $name;
+        while ($row = $stmt->fetchObject())
+        {
+            $name = $row->name;
+        }
         $fileName = $designerId.'_'.$name;
         $imageName = $designerId.'_'.$id;
 
@@ -279,7 +294,7 @@ class illustration {
                 unlink($filePath);
 
                 // DBから作品と評価の削除
-                $sql = "DELETE works, evaluations FROM works "
+                $sql = "DELETE works, eva FROM works "
                       ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
                       ."WHERE works.id = ".$id
                 ;
@@ -289,15 +304,15 @@ class illustration {
                 if($flag) {
                     $result = 'success';
                 }else{
-                    $result = -999;
+                    $result = 'error';
                 }
                 break;
             } else {
                 // 画像がない
-                $result = -999;
+                $result = 'not image';
             }
         }
-        echo json_encode( $result );
+        echo json_encode( $sql );
     }
 }
 

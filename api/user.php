@@ -272,7 +272,7 @@ class user {
             // テンポラリからファイルを移動
             move_uploaded_file($fileData['tmp_name'], $destination);
 
-            chmod($destination, 0777);
+            // chmod($destination, 0777);
 
         } catch (Exception $e) {
             return false;

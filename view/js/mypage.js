@@ -31,8 +31,6 @@ function Initialize(){
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').html(data[0].userName);
-    	console.log(JSON.stringify(result));
-    	console.log(JSON.stringify(data[0].userName));
 
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
@@ -40,8 +38,10 @@ function Initialize(){
                           .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })
                           .append($('<img src="'+result+'">')))
                           .append($('<div></div>').attr({'class': 'textbox'})
-                          .append($('<p>作品タイトル</p>'))
-                          .append($('<p>カテゴリー</p>').attr({'class':'category'}))));
+                          .append($('<p>'+data[index].imgname+'</p>'))
+                          //.append($('<p>カテゴリー</p>').attr({'class':'category'}))
+                          )
+                          );
         }
 
 
@@ -60,11 +60,7 @@ function Initialize(){
     }
 }
 
-// イラストのライトボックスを開く(編集)
-function openIllustLightbox(){
-
-}
-
+// ユーザー名の編集
 function editUserName(){
 	var name = window.prompt("ユーザ名を入力してください","");
 

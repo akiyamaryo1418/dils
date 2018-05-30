@@ -1,9 +1,11 @@
 
 $(function(){
+
 	$('.illustbox').on('click', '.imgbox', function(){
 		var id = $(this).attr("id");
-	    viewInitialize(id);
-	    $(".lightbox_view").fadeIn(100);
+		$('#imageId').val(id);
+		viewInitialize(id);
+		$(".lightbox_view").fadeIn(100);
 	});
 
 	$(".close").click(function(){
@@ -38,6 +40,7 @@ function viewInitialize(illustid){
     	$('#editimgbox').append($('<img src="'+result+'">'));
     	$('#title').val(data[0].name);
     	trimingLightBox();
+    	$('#categoryList').val(data[0].category_id);
     }).fail(function(){
     	alert('Nodata');
     });
@@ -45,7 +48,7 @@ function viewInitialize(illustid){
 
 
 function trimingLightBox(){
-	var resizeClass = '.imgbox img';
+	var resizeClass = '#editimgbox img';
 	var thumnailWidth  = 352;
 	var thumnailHeight = 460;
 
@@ -79,6 +82,60 @@ function sendEvaluation(){
     	timeout  :  1000,
     }).done(function(data, dataType){
     	//alert('Success');
+    }).fail(function(){
+    	alert('Fail');
+    });
+}
+
+// 編集内容の登録
+function sendIllustEdit() {
+	var id = $('#imageId').val();
+	var list = $('#editForm').serializeArray();
+
+	var param = {'id' : id, 'param': list}
+
+	var data = {
+		'model'  : 'illustration',
+	    'action' : 'edit',
+	    'list'   :  param
+	};
+	console.log(param);
+
+	$.ajax({
+    	type     : 'POST',
+    	url      : '../../api/controller.php',
+    	dataType : 'json',
+    	data     :  data,
+    	timeout  :  1000,
+    }).done(function(data, dataType){
+    	//alert('Success');
+    	console.log(data);
+    }).fail(function(){
+    	alert('Fail');
+    });
+}
+
+function deleteIllust() {
+	var id = $('#imageId').val();
+	var userId = location.search;
+	userId = userId.substring(1);
+	var param = {'id' : id, 'userId' : userId};
+
+	var data = {
+		'model'  : 'illustration',
+	    'action' : 'delete',
+	    'list'   :  param
+	};
+
+	$.ajax({
+    	type     : 'POST',
+    	url      : '../../api/controller.php',
+    	dataType : 'json',
+    	data     :  data,
+    	timeout  :  1000,
+    }).done(function(data, dataType){
+    	//alert('Success');
+    	console.log(data);
     }).fail(function(){
     	alert('Fail');
     });
