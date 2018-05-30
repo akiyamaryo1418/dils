@@ -103,7 +103,7 @@ function searchCategory(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		alert(data.length);
+		//alert(data.length);
 		$('.imgbox').remove();
 		for(var index = 0; index < data.length; index++){
 			var result = data[index].img.replace('view/', '')
