@@ -137,12 +137,15 @@ function sendAccountEdit(){
 
 	data = new FormData($('#mypageiconform').get(0));
 	data.append('model', 'user');
-	data.append('action', 'register');
+	data.append('action', 'edit');
 
-	var id = location.search;
-    id = id.substring(1);
+	var url = location.search;
+    var id = url.substring(1);
 
-	data.append('list', id);
+    var name = $('.penname').text();
+    var param = [id, name , 'datafile']
+
+	data.append('list', param);
 
     $.ajax({
     	url         : '../../api/controller.php',
@@ -153,12 +156,42 @@ function sendAccountEdit(){
     	data        :  data,
     	timeout     :  1000,
     }).done(function(data, dataType){
+
     	location.href = "../html/index.html?"+id;
         //alert(data);
     }).fail(function(){
     	alert('Nodata');
     });
 }
+
+// アカウントの削除
+function deleteAccount() {
+
+    var url = location.search;
+    var id = url.substring(1);
+
+    var data ={'model':'user', 'action':'delete', 'list':id};
+
+    if(window.confirm('このユーザーを削除しますか？')){
+
+    	$.ajax({
+        	url         : '../../api/controller.php',
+        	type        : 'POST',
+        	dataType    : 'json',
+        	data        :  data,
+        	timeout     :  1000,
+        }).done(function(data, dataType){
+        	location.href = "../html/index.html";
+            //alert(data);
+        }).fail(function(){
+        	alert('Nodata');
+        });
+	}
+	else{
+
+	}
+}
+
 
 // 編集画面へ
 function moveEdit(){

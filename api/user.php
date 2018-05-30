@@ -339,6 +339,7 @@ class user {
         if($fileData != null) {
             $iconName = $id.'_icon';
 
+            $result = 'アイコンがあるか';
             foreach( $this->exts as $ext) {
                 $filePath = $newPath.'/'.$iconName.'.'.$ext;
                 if(is_file($filePath)) {
@@ -349,14 +350,14 @@ class user {
             }
 
             if($this->uploadImage($fileData, $newPath, $iconName)) {
-                $result = 'upload';
+                $result = 'succes';
             }
             else{
                 $result = 'error';
             }
         } else {
             // 画像更新なし
-            $result = 'success';
+            $result = 'succes';
         }
         echo json_encode( $result );
     }
