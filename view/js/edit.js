@@ -335,12 +335,6 @@ function inputUpdateButton(){
         	});
         }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/akiyama
-    // 下の関数を使ってみてください。
-    // location.reload(true);
 }
 
 //バリデーションチェック
