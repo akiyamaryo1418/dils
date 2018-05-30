@@ -45,23 +45,11 @@ new Vue({
 	},
 	methods: {
 		onFileChange(e){
-			//alert('DD');
 			var files = e.target.files || e.dataTransfer.files;
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
 			triming('.box1 ');
-		},
-		deleteFileChange(){
-			/*var reader = new FileReader();
-			reader.onload = (e) => {
-				this.uploadedImage = '';
-			}*/
-
-
-			this.uploadedImage = '';
-			resetcss('.box1 ');
-			//reader.readAsDataURL('');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -334,9 +322,11 @@ function inputUpdateButton(){
     	data.append('action', 'insert');
 
     	var name = $('.text'+(index+1)+'').val();
+    	var category = $('#categoryid_'+(index+1)+'').val();
+
 
     	var fileName = 'img'+ (index + 1) + '';
-        var param = [ id, name, fileName ];
+        var param = [ id, name, fileName, category ];
         data.append('list', param);
 
 
@@ -359,6 +349,9 @@ function inputUpdateButton(){
         	});
         }
     }
+
+    // 下の関数を使ってみてください。
+    // location.reload(true);
 }
 
 //バリデーションチェック

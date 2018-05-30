@@ -111,8 +111,8 @@ header li a {
 }
 
 #LeftBox .creatoricon {
-  width: 137px;
-  height: 137px;
+  width: 150px;
+  height: 150px;
   margin: 10px 10px 0 10px;
   background: #000;
 }
@@ -239,6 +239,27 @@ header li a {
 .myistbox .textbox p.category {
   font-size: 12px;
 }
+
+/*ファイルを選択ボタンのカスタマイズ*/
+
+ label {
+  float: right;
+  margin-right: 104px;
+}
+
+label p {
+    width: 130px;
+    height: 24px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 3px;
+}
+
+ #imgadd {
+     display: none;
+ }
 
 div.creatoricon {
   width   : 150px;

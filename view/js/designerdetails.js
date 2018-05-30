@@ -47,6 +47,7 @@ function Initialize(){
 			                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
 					              .append($('<img>').attr({'src': result}))));
 		}
+		//$('.creatorillustbox').masonry({ itemSelector : '.imgbox', columnWidth : 150 });
 	}).fail(function(){
 		alert('NoData');
 	});
@@ -58,7 +59,7 @@ function moveBackButton(){
 }
 
 // ソート時のボタン(非同期)
-function sortButton(){
+/*/function sortButton(){
 	var param = "";
 
 	data = {
@@ -78,12 +79,22 @@ function sortButton(){
 	}).fail(function(){
 		alert('NoData');
 	});
-}
+}*/
 
 //フィルタ検索機能(ジャンル)(非同期)
 function searchCategory(){
 
-	var category = $('#category_id').val();
+	var param = $('#SearchAndFilter').serializeArray();
+
+	//alert(JSON.stringify(param));
+
+	// 必要な情報はチェックボックスの状態
+
+	data = {
+		'model'  : 'illustration',
+		'action' : 'index',
+		'list'   :  param
+	};
 
 	$.ajax({
 		url      : '../../api/controller.php',
@@ -92,7 +103,14 @@ function searchCategory(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		alert('Success');
+		alert(data.length);
+		$('.imgbox').remove();
+		for(var index = 0; index < data.length; index++){
+			var result = data[index].img.replace('view/', '')
+			$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
+			                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
+					              .append($('<img>').attr({'src': result}))));
+		}
 	}).fail(function(){
 		alert('NoData');
 	});

@@ -168,6 +168,23 @@ p.text a {
   color: #000;
 }
 
+/*ファイルを選択ボタンのカスタマイズ*/
+label p {
+    width: 109px;
+    height: 24px;
+    margin-right: 10px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 3px;
+    font-size: 11px;
+ }
+
+ #imgadd {
+     display: none;
+ }
+
 div.item {
   width   : 200px;
   height  : 200px;
