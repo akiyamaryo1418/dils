@@ -232,7 +232,7 @@ class user {
             if($fileData != null) {
                 $iconName = $id.'_icon';
                 if($this->uploadImage($fileData, $directoryPath, $iconName)) {
-                    $result = 'success';
+                    $result = $id;
                 }
                 else{
                     $result = -999;
@@ -240,7 +240,7 @@ class user {
             }
             else{
                 // 画像なし
-                $result = 'success';
+                $result = $id;
             }
         }else{
             $result = -999;

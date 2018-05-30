@@ -22,6 +22,7 @@ function Initialize(){
 	}).done(function(data, dataType){
 		for(var index = 0; index < data.length; index++){
 			var result = data[index].img.replace('view/', '');
+			var id = data[index].id;
 			$('#listbox').append($('<li></li>')
 					     .append($('<a></a>').attr({'onclick':'moveDesignerDetails('+id+')'})
 					    		 .html('<img src="'+result+'"'+
@@ -51,5 +52,6 @@ function searchDesigner(){
 // 引数・・・制作者ID
 function moveDesignerDetails(id){
 	var param = id;
-	location.href = "../html/designerdetails.html?"+param;
+	sessionStorage.setItem('viewUserId', id);
+	location.href = "../html/designerdetails.html";
 }

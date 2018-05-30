@@ -2,37 +2,21 @@
 // イラスト編集ページ
 $(function(){
     Initialize();
-
-
 });
 
 // 初期化
 function Initialize(){
-
-	/*data = {
-		'model'  : 'illustration',
-		'action' : 'insert',
-		'list'   : 'a'
-	}
-
-	$.ajax({
-		url      : '../../api/controller.php',
-		type    ih : 'POST',
-		dataType : 'json',
-		data     :  data,
-		timeout  :  1000,
-	}).done(function(data, dataType){
-		alert('Success');
-	}).fail(function(){
-		alert('NoData');
-	});*/
-
-	var id = location.search;
+	/*var id = location.search;
     if(id.charAt(0) == '?'){
     	id = id.substring(1);
         $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
                        .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
-    }
+    }*/
+	var id = sessionStorage.getItem('userId');
+	if(id != null) {
+		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+        .html('<a href="mypage.html">MYPAGE</a>');
+	}
 }
 
 //======Vue.jsの処理======
@@ -45,23 +29,11 @@ new Vue({
 	},
 	methods: {
 		onFileChange(e){
-			//alert('DD');
 			var files = e.target.files || e.dataTransfer.files;
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
 			triming('.box1 ');
-		},
-		deleteFileChange(){
-			/*var reader = new FileReader();
-			reader.onload = (e) => {
-				this.uploadedImage = '';
-			}*/
-
-
-			this.uploadedImage = '';
-			resetcss('.box1 ');
-			//reader.readAsDataURL('');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -322,9 +294,11 @@ function resetcss(boxclass){
 // 画像新規登録
 function inputUpdateButton(){
 
-    var id = location.search;
-	id = id.substring(1);
+    //var id = location.search;
+	//id = id.substring(1);
 	//id = 8;
+
+	var id = sessionStorage.getItem('userId');
 
     // 毎回通信する
     for(var index = 0; index < 8; index++){
@@ -334,15 +308,17 @@ function inputUpdateButton(){
     	data.append('action', 'insert');
 
     	var name = $('.text'+(index+1)+'').val();
+    	var category = $('#categoryid_'+(index+1)+'').val();
+
 
     	var fileName = 'img'+ (index + 1) + '';
-        var param = [ id, name, fileName ];
+        var param = [ id, name, fileName, category ];
         data.append('list', param);
+
+        console.log(param);
 
 
         if(name != '') {
-
-        	//console.log(JSON.stringify(param));
         	$.ajax({
         		url         : '../../api/controller.php',
         		type        : 'POST',
@@ -359,6 +335,8 @@ function inputUpdateButton(){
         	});
         }
     }
+    // 下の関数を使ってみてください。
+    // location.reload(true);
 }
 
 //バリデーションチェック

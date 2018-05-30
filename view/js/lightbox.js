@@ -3,7 +3,7 @@ $(function(){
 
 	$('.illustbox').on('click', '.imgbox', function(){
 		var id = $(this).attr("id");
-		$('#imageId').val(id);
+		sessionStorage.setItem('imageId', id);
 		viewInitialize(id);
 		$(".lightbox_view").fadeIn(100);
 	});
@@ -19,9 +19,10 @@ $(function(){
 // 初期化(編集画面での表示)
 function viewInitialize(illustid){
 	// アドレスの「?」以降のパラメータを取得
-    var id = location.search;
-    id = id.substring(1);
+    /*var id = location.search;
+    id = id.substring(1);*/
 
+	var id = sessionStorage.getItem('userId');
     var param={ 'user' : id, 'illust' : illustid };
     var data= {
     	'model'  : 'illustration',
@@ -64,7 +65,7 @@ function trimingLightBox(){
 }
 
 // 評価送信
-function sendEvaluation(){
+/*function sendEvaluation(){
     var param = $('#sendeva').serializeArray();
     alert(JSON.stringify(param));
 
@@ -85,13 +86,12 @@ function sendEvaluation(){
     }).fail(function(){
     	alert('Fail');
     });
-}
+}*/
 
 // 編集内容の登録
 function sendIllustEdit() {
-	var id = $('#imageId').val();
+	var id = sessionStorage.getItem('imageId');
 	var list = $('#editForm').serializeArray();
-
 	var param = {'id' : id, 'param': list}
 
 	var data = {
@@ -117,9 +117,8 @@ function sendIllustEdit() {
 }
 
 function deleteIllust() {
-	var id = $('#imageId').val();
-	var userId = location.search;
-	userId = userId.substring(1);
+	var id = sessionStorage.getItem('imageId');
+	var userId = sessionStorage.getItem('userId');
 	var param = {'id' : id, 'userId' : userId};
 
 	var data = {

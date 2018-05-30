@@ -15,12 +15,14 @@ $(function(){
 
 // 初期化
 function Initialize(){
+	/*
 	// アドレスの「?」以降のパラメータを取得
 	var adrsid = location.search;
 	// 先頭の「?」をカット
 	adrsid = adrsid.substring(1);
-	id = unescape(adrsid);
+	id = unescape(adrsid);*/
 
+	var id = sessionStorage.getItem('viewUserId');
 	var param = { 'id' : id };
 
 	data = {

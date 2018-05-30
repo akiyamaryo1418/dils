@@ -26,14 +26,16 @@ function inputLoginButton(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		var id = data;
+
 		//alert(JSON.stringify(id));
+		var id = data;
+		sessionStorage.setItem('userId', id);
+
 		if(id == -999){
 			alert('ユーザ名かパスワードが違います。');
 		}else{
-			location.href = "../html/index.html?"+ id;
+			location.href = "../html/index.html";
 		}
-		//alert('Success');
 	}).fail(function(){
 		alert('ユーザ名かパスワードが違います。');
 	});

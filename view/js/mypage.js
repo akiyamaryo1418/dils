@@ -7,10 +7,9 @@ $(function(){
 // 初期化
 function Initialize(){
 	// アドレスの「?」以降のパラメータを取得
-    var id = location.search;
-    id = id.substring(1);
-
-
+    //var id = location.search;
+    //id = id.substring(1);
+	var id = sessionStorage.getItem('userId');
     var param = { 'id' : id };
 
     data= {
@@ -52,12 +51,17 @@ function Initialize(){
     	alert('Nodata');
     });
 
-    var id = location.search;
+    /*var id = location.search;
     if(id.charAt(0) == '?'){
     	id = id.substring(1);
         $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
                        .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
-    }
+    }*/
+
+    if(id != null) {
+		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+        .html('<a href="mypage.html">MYPAGE</a>');
+	}
 }
 
 // ユーザー名の編集
@@ -132,16 +136,14 @@ function illustTriming(){
 	});
 }
 
-// アカウント編集登録
+// アカウント編集
 function sendAccountEdit(){
 
 	data = new FormData($('#mypageiconform').get(0));
 	data.append('model', 'user');
 	data.append('action', 'edit');
 
-	var url = location.search;
-    var id = url.substring(1);
-
+	var id = sessionStorage.getItem('userId');
     var name = $('.penname').text();
     var param = [id, name , 'datafile']
 
@@ -157,7 +159,7 @@ function sendAccountEdit(){
     	timeout     :  1000,
     }).done(function(data, dataType){
 
-    	location.href = "../html/index.html?"+id;
+    	location.href = "../html/index.html";
         //alert(data);
     }).fail(function(){
     	alert('Nodata');
@@ -167,9 +169,7 @@ function sendAccountEdit(){
 // アカウントの削除
 function deleteAccount() {
 
-    var url = location.search;
-    var id = url.substring(1);
-
+	var id = sessionStorage.getItem('userId');
     var data ={'model':'user', 'action':'delete', 'list':id};
 
     if(window.confirm('このユーザーを削除しますか？')){
@@ -182,7 +182,6 @@ function deleteAccount() {
         	timeout     :  1000,
         }).done(function(data, dataType){
         	location.href = "../html/index.html";
-            //alert(data);
         }).fail(function(){
         	alert('Nodata');
         });
@@ -195,34 +194,8 @@ function deleteAccount() {
 
 // 編集画面へ
 function moveEdit(){
-
-	var id = location.search;
+	/*var id = location.search;
 	id = id.substring(1);
-
-	location.href = "../html/edit.html?"+id;
-}
-
-// 削除ボタンを押したとき
-function inputDeleteButton(){
-	// アドレスの「?」以降のパラメータを取得
-    var id = location.search;
-    id = id.substring(1);
-
-    data= {
-    	'model'  : 'mypage',
-    	'action' : 'mypage',
-    	'list'   :  id
-    }
-
-    $.ajax({
-    	url      : '../../api/controller.php',
-    	type     : 'POST',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-        alert('Success');
-    }).fail(function(){
-    	alert('Nodata');
-    });
+	location.href = "../html/edit.html?"+id;*/
+	location.href = "../html/edit.html"
 }
