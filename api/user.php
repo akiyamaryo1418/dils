@@ -67,6 +67,8 @@ class user {
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
+
+        $test = 0;
         while ($row = $stmt->fetchObject())
         {
             $imageId = $row->id;
@@ -88,7 +90,7 @@ class user {
             // アイコン画像の取得
             $iconPath = '../view/images/creator/Share/default.png';
             foreach( $this->exts as $ext) {
-                $imageTmpName = $id.'_icon.'.$ext;
+                $imageTmpName = $designerId.'_icon.'.$ext;
                 $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
                 if(file_exists($tmpPath)) {
                     $iconPath = $tmpPath;
@@ -106,9 +108,11 @@ class user {
                 'iconPath' => $iconPath,    // アイコンパス
                 'category_id' => $row->category_id,    // カテゴリーのID
             );
+            $test = 1;
         }
 
-        if($result == null) {
+
+       if($result == null) {
             $sql = "SELECT name FROM designers WHERE id = ".$designerId;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
@@ -138,6 +142,7 @@ class user {
                     'iconPath' => $iconPath,    // アイコンパス
                 );
             }
+            $test = 2;
         }
 
         echo json_encode( $result );
@@ -287,9 +292,6 @@ class user {
         $id = $newData[0];
         $name = $newData[1];
 
-        // 現在のユーザー名の取得
-        $sql = "SELECT name FROM designers WHERE id = ".$id;
-
         // 名前がない場合
         if($id == null || $name == null) {
             $result = -999;
@@ -325,31 +327,6 @@ class user {
         // 情報登録
         $sql = "UPDATE designers SET name = '".$name."' WHERE id = " .$id;
         $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
-
-        $oldPath = '';
-        $newPath = '';
-        while ($row = $stmt->fetchObject())
-        {
-            // フォルダのファイルパスの作成
-            $oldName = $row->name;
-            $oldPath = '../view/images/creator/'.$id.'_'.$oldName;
-            $newPath = '../view/images/creator/'.$id.'_'.$name;
-        }
-
-        // パスを確認し、ファイル名の変更
-        if($oldPath == '' || $newPath == '') {
-            $result = -999;
-            echo json_encode( $result );
-            return;
-        }
-
-        // ファイル名の変更
-        rename( $oldPath, $newPath );
-
-        // 情報登録
-        $sql = "UPDATE designers SET name = ".$name." WHERE id = " .$id;
-        $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
         if(!$flag) {
@@ -372,13 +349,12 @@ class user {
             }
 
             if($this->uploadImage($fileData, $newPath, $iconName)) {
-                $result = 'success';
+                $result = 'upload';
             }
             else{
-                $result = -999;
+                $result = 'error';
             }
-        }
-        else {
+        } else {
             // 画像更新なし
             $result = 'success';
         }
@@ -395,7 +371,6 @@ class user {
 
         // IDの取得
         $id = $data;
-
         // IDからユーザ名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$id;
         $stmt = $this->dbm->dbh->prepare($sql);
@@ -412,7 +387,9 @@ class user {
             $fileName = $tmp;
         }
 
-        $dir = '../../view/images/creater/'.$fileName;
+        // ファイルパスの指定
+        $dir = '../view/images/creator/'.$fileName;
+
         // フォルダとその中の画像を削除
         if (is_dir($dir) && !is_link($dir)) {
             $paths = array();
@@ -430,14 +407,12 @@ class user {
             $stmt->execute();
 
             $sql = "DELETE works, evaluations FROM works "
-                ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
-                    ."WHERE works.id = ".$id
-                    ;
-                    $stmt = $this->dbm->dbh->prepare($sql);
-                    $stmt->execute();
-                    $result = 'succes';
-        } else {
-            $result = -999;
+                  ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
+                  ."WHERE works.id = ".$id
+            ;
+            $stmt = $this->dbm->dbh->prepare($sql);
+            $stmt->execute();
+            $result = 'succes';
         }else {
             $result = 'error';
         }
