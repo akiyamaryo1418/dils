@@ -2,18 +2,6 @@
 // デザイナー一覧ページ
 $(function(){
 	Initialize();
-
-	$(".imgbox").click(function(){
-
-
-	    $(".lightbox_view").fadeIn(100);
-
-	  });
-
-	  $(".close").click(function(){
-
-	    $(".lightbox_view").fadeOut(100);
-	  });
 });
 
 // 初期化
@@ -34,24 +22,10 @@ function Initialize(){
 	}).done(function(data, dataType){
 		for(var index = 0; index < data.length; index++){
 			var result = data[index].img.replace('view/', '');
-<<<<<<< HEAD
-<<<<<<< HEAD
-			var id = data[index].id;
-			$('#listbox').append($('<li></li>')
-					     .append($('<a></a>').attr({'onclick':'moveDesignerDetails('+id+')'})
-					    		 .html('<img src="'+result+'"'+ 'alt="'+data[index].imgname+'">'))
-=======
 			$('#listbox').append($('<li></li>')
 					     .append($('<a></a>').attr({'onclick':'moveDesignerDetails('+id+')'})
 					    		 .html('<img src="'+result+'"'+
 					                                 'alt="'+data[index].imgname+'">'))
->>>>>>> origin/akiyama
-=======
-			$('#listbox').append($('<li></li>')
-					     .append($('<a></a>').attr({'onclick':'moveDesignerDetails('+id+')'})
-					    		 .html('<img src="'+result+'"'+
-					                                 'alt="'+data[index].imgname+'">'))
->>>>>>> yamasaki
 					     .append($('<div></div>').attr({'class':'createname'}).html(data[index].imgname))
 					     .append($('<p></p>').html(data[index].userName)));
 		}
