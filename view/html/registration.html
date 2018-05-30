@@ -38,7 +38,10 @@
             </div>
             <div class="cle"></div>
             <form id="previewform" name="preview" method="POST" enctype="multipart/form-data">
-              <p><input type="file" id="test" name="img" v-on:change="onFileChange"></p>
+              <label for="imgadd">
+                <p>ファイルを選択</p>
+                <input type="file" id="imgadd" name="img" v-on:change="onFileChange" />
+              </label>
             </form>
             <div class="cle"></div>
           </div>

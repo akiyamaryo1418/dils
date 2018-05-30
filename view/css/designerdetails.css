@@ -349,6 +349,8 @@ input[type=checkbox]:checked + .check_css:before {
   /*background: #ff0033;*/
 }
 
+.cle { clear: both; }
+
 .imgbox img {
   /*width: 100%;*/
   position : relative;
