@@ -12,31 +12,27 @@
       <h1><a href="index.html">Designer Works</a></h1>
       <nav class="login">
         <ul>
-          <li id="desigerindexlink"><a href="designerindex.html">制作者一覧</a></li>
+          <li><a href="designerindex.html">制作者一覧</a></li>
           <li id="loginlink"><a href="login.html">LOGIN</a></li>
         </ul>
       </nav>
-      <!--<nav class="mypage">
-        <ul>
-          <li><a>制作者一覧</a></li>
-          <li><a>MYPAGE</a></li>
-        </ul>
-      </nav>-->
     </header>
 
     <div id="wrap">
       <div id="contentsbox">
         <h1>制作者一覧</h1>
+        <form id="filter">
         <div class="creatersortbox">
           <ul>
-            <li id="SortAll">All</li>
-            <li id="Sortana">あ<span>▶</span>な</li>
-            <li id="Sortnawa">は<span>▶</span>わ</li>
-            <li id="Sortam">A<span>▶</span>M</li>
-            <li id="Sortnz">N<span>▶</span>Z</li>
-            <li id="SortOther">その他</li>
+            <li id="SortAll" value="1"><label for="all">All</label><input                  type="radio" name="filter" value="all"   id="all" checked="checked" onchange="filterDesigner();"></li>
+            <li id="Sortana" value="2"><label for="ana">あ<span>▶</span>な</label><input   type="radio" name="filter" value="ano"   id="ana"                   onchange="filterDesigner();"></li>
+            <li id="Sortnawa" value="3"><label for="nawa">は<span>▶</span>わ</label><input type="radio" name="filter" value="han"   id="nawa"                  onchange="filterDesigner();"></li>
+            <li id="Sortam" value="4"><label for="am">A<span>▶</span>M</label><input       type="radio" name="filter" value="am"    id="am"                    onchange="filterDesigner();"></li>
+            <li id="Sortnz" value="5"><label for="nz">N<span>▶</span>Z</label><input       type="radio" name="filter" value="nz"    id="nz"                    onchange="filterDesigner();"></li>
+            <li id="SortOther" value="6"><label for="other">その他</label><input           type="radio" name="filter" value="other" id="other"                 onchange="filterDesigner();"></li>
           </ul>
         </div>
+        </form>
         <div class="listbox">
           <ul id="listbox">
 
