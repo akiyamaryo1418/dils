@@ -53,15 +53,16 @@ header nav.login {
   float: right;
   width: 280px;
   margin: 0 50px;
+  cursor: pointer;
 }
 
-header nav.mypage {
+/*header nav.login {
   float: right;
   width: 280px;
   min-width: 960px;
   margin: 0 50px;
   display: none;
-}
+}*/
 
 header ul {
   width: 280px;

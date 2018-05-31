@@ -48,10 +48,10 @@ function Initialize(){
     	alert('Nodata');
     });
 
-    if(id != null) {
+    /*if(id != null) {
 		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
         .html('<a href="mypage.html">MYPAGE</a>');
-	}
+	}*/
 }
 
 // ユーザー名の編集
