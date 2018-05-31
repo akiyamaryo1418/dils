@@ -65,15 +65,11 @@ function trimingLightBox(){
 }
 
 // 評価送信
-<<<<<<< HEAD
-/*function sendEvaluation(){
-=======
 function sendEvaluation(){
-	alert('11');
-	alert(JSON.stringify(param));
->>>>>>> origin/akiyama
+	//alert('11');
+	//alert(JSON.stringify(param));
     var param = $('#sendeva').serializeArray();
-    alert(JSON.stringify(param));
+    // alert(JSON.stringify(param));
 
     data = {
     	'model'  : 'evaluation',
@@ -92,7 +88,7 @@ function sendEvaluation(){
     }).fail(function(){
     	alert('Fail');
     });
-}*/
+}
 
 // 編集内容の登録
 function sendIllustEdit() {

@@ -15,6 +15,7 @@ function Initialize(){
         .html('<a href="mypage.html">MYPAGE</a>');
 	}
 }
+
 // フィルタ
 function filterDesigner(){
 	var param = $('#filter').serializeArray();
@@ -31,7 +32,6 @@ function filterDesigner(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-<<<<<<< HEAD
 		$('.illustratorList').remove();
 		if(data != null) {
 			for(var index = 0; index < data.length; index++){
@@ -43,58 +43,6 @@ function filterDesigner(){
 						                                 'alt="'+data[index].imgname+'">'))
 						     .append($('<p></p>').html(data[index].userName)));
 			}
-		}
-
-	}).fail(function(){
-		alert('NoData');
-	});
-=======
-		for(var index = 0; index < data.length; index++){
-			var result = data[index].img.replace('view/', '');
-			$('#listbox').append($('<li></li>').attr({'class' : 'illustratorList' })
-					     .append($('<a></a>').attr({'onclick':'moveDesignerDetails('+id+')'})
-					    		 .html('<img src="'+result+'"'+
-					                                 'alt="'+data[index].imgname+'">'))
-					     .append($('<p></p>').html(data[index].userName)));
-		}
-		triming();
-	}).fail(function(XMLHttpRequest, textStatus, errorThrown){
-		alert('NoData');
-	});
-
-	var id = location.search;
-    if(id.charAt(0) == '?'){
-    	id = id.substring(1);
-        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
-                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
-    }
-}
-// フィルタ
-function filterDesigner(){
-	var param = $('#filter').serializeArray();
-
-	// 必要な情報
-	data = {
-		'model'  : 'illustration',
-		'action' : 'index',
-		'list'   :  param
-	};
-
-	$.ajax({
-		url      : '../../api/controller.php',
-		type     : 'POST',
-		dataType : 'json',
-		data     :  data,
-		timeout  :  1000,
-	}).done(function(data, dataType){
-		$('.illustratorList').remove();
-		for(var index = 0; index < data.length; index++){
-			var result = data[index].img.replace('view/', '');
-			$('#listbox').append($('<li></li>').attr({'class' : 'illustratorList' })
-					     .append($('<a></a>').attr({'onclick':'moveDesignerDetails('+id+')'})
-					    		 .html('<img src="'+result+'"'+
-					                                 'alt="'+data[index].imgname+'">'))
-					     .append($('<p></p>').html(data[index].userName)));
 		}
 		triming();
 	}).fail(function(){
@@ -132,7 +80,6 @@ function triming(){
 			$(this).css("left", 0);
 		}
 	});
->>>>>>> origin/akiyama
 }
 
 // 制作者詳細へ移動
