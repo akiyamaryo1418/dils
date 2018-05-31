@@ -15,13 +15,6 @@ $(function(){
 
 // 初期化
 function Initialize(){
-	/*
-	// アドレスの「?」以降のパラメータを取得
-	var adrsid = location.search;
-	// 先頭の「?」をカット
-	adrsid = adrsid.substring(1);
-	id = unescape(adrsid);*/
-
 	var id = sessionStorage.getItem('viewUserId');
 	var list = $('#SearchAndFilter').serializeArray();
 	var param = { 'id' : id, 'param':list};
@@ -200,9 +193,4 @@ function postText(){
     }).fail(function(){
     	alert('Fail');
     });
-}
-
-// イラストが選択された後の処理
-function selectIllustration(){
-	//var
 }

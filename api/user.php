@@ -33,9 +33,14 @@ class user {
             $target = $data['param'][0][value];
         }
 
-        $conditions;
+        // フィルタリング条件
+        $conditions = "";
         if($data['param'][1][value] == null) {
-            $conditions = "category_id NOT IN (1,2,3)";
+            if($data['param'][0][value] == null) {
+                $conditions = "category_id IN (1,2,3)";
+            } else {
+                $conditions = "category_id NOT IN (1,2,3)";
+            }
         } else {
             for($num = 1; $num < count($data['param']) ; $num++) {
                 if($conditions != "") {
@@ -152,9 +157,39 @@ class user {
     public function index($data) {
         $result;
 
-        $sql = "SELECT id, name FROM designers";
+        $conditions = "";
+        switch ($data[0][value]) {
+            case 'all':
+                $conditions = "";
+                break;
+            case 'ano':
+                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'あ' AND 'の'";
+                break;
+            case 'han':
+                $conditions = "WHERE name COLLATE utf8_unicode_ci  ETWEEN 'は' AND 'ん'";
+                break;
+            case 'am':
+                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'a' AND 'm'";
+                break;
+            case 'nz':
+                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'n' AND 'z'";
+                break;
+            case 'other':
+                $conditions = "WHERE name COLLATE utf8_unicode_ci NOT BETWEEN 'a' AND 'ん'";
+                break;
+            default:
+                $conditions = 'error';
+                break;
+        }
+
+        if($conditions == 'error') {
+            echo json_encode( 'default_error' );
+            return;
+        }
+
+        $sql = "SELECT id, name FROM designers ".$conditions;
         $stmt = $this->dbm->dbh->prepare($sql);
-        $stmt->execute();
+        $flag = $stmt->execute();
 
         while ($row = $stmt->fetchObject())
         {
@@ -246,7 +281,9 @@ class user {
         echo json_encode( $result );
     }
 
-    // 画像を登録する
+    // ================================================================
+    // 画像登録
+    // ================================================================
     private function uploadImage($fileData, $directoryPath, $name) {
         // 画像ファイルの有無
         if(empty($fileData)) {
@@ -258,20 +295,11 @@ class user {
         }
 
         try {
-            // ファイルの拡張子の取得
+            // ファイルの移動
             $ext = substr($fileData['name'], strrpos($fileData['name'], '.') + 1);
-
-            // ファイル名の設定
             $newName = $name.'.'.$ext;
-
-            // アップロード後のファイルの移動先
             $destination = $directoryPath.'/'.$newName;
-
-            // テンポラリからファイルを移動
             move_uploaded_file($fileData['tmp_name'], $destination);
-
-            // chmod($destination, 0777);
-
         } catch (Exception $e) {
             return false;
         }
@@ -413,7 +441,7 @@ class user {
             $stmt->execute();
             $result = 'succes';
         }else {
-            $result = 'error';
+            $result = -999;
         }
         echo json_encode( $result );
     }

@@ -7,10 +7,8 @@ $(function(){
 // 初期化
 function Initialize(){
 	// アドレスの「?」以降のパラメータを取得
-    //var id = location.search;
-    //id = id.substring(1);
-	var id = sessionStorage.getItem('userId');
-    var param = { 'id' : id };
+    var id = sessionStorage.getItem('userId');
+	var param = { 'id' : id };
 
     data= {
     	'model'  : 'user',
@@ -50,13 +48,6 @@ function Initialize(){
     }).fail(function(){
     	alert('Nodata');
     });
-
-    /*var id = location.search;
-    if(id.charAt(0) == '?'){
-    	id = id.substring(1);
-        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
-                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
-    }*/
 
     if(id != null) {
 		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
@@ -194,8 +185,5 @@ function deleteAccount() {
 
 // 編集画面へ
 function moveEdit(){
-	/*var id = location.search;
-	id = id.substring(1);
-	location.href = "../html/edit.html?"+id;*/
-	location.href = "../html/edit.html"
+	ocation.href = "../html/edit.html"
 }
