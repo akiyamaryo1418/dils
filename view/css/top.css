@@ -137,6 +137,7 @@ header li a {
     color: #fff;
     list-style: none;
     text-align: center;
+    cursor: pointer;
 }
 
 #SearchBoxSort li#SearchAll:hover {
@@ -159,7 +160,7 @@ input[type="radio"]:checked + label{
 	background: rgba(255, 128, 128, 0.8);
 }
 
-.label{
+label{
     cursor: pointer;
 }
 
@@ -256,6 +257,7 @@ div.item {
   float   : left;
   overflow: hidden;
   border  : 1px solid #eee;
+  cursor  : pointer;
 }
 
 .cle { clear: both; }

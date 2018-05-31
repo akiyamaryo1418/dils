@@ -158,6 +158,7 @@ p.return a {
     color: #fff;
     list-style: none;
     text-align: center;
+    cursor: pointer;
 }
 
 #SearchBoxSort li#SearchAll:hover {
@@ -186,8 +187,9 @@ input[type="radio"]:checked + label {
 	color: #ffffff;
 }
 
-
-
+label{
+	cursor: pointer;
+}
 
 /*：：：：チェックボックス：：：：*/
 .SearchBoxfilter {
@@ -256,17 +258,6 @@ input[type=checkbox]:checked + .check_css:before {
   float: left;
   width: 90px;
 }
-
-/*#wrap {
-  width: 1000px;
-  margin:0 auto 100px;
-}
-
-#wrap:after {
-  display: block;
-  clear: both;
-  content: "";
-}*/
 
 .creatoristbox {
   width: 960px;

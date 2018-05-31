@@ -8,9 +8,8 @@ $(function(){
 // 登録ボタン押したとき
 function inputRegistrationButton(){
 
-	// バリデーションチェックの関数を呼び出す
-	//checkValidation();
-
+	if(checkValidation() == false)
+		return;
 
 	data = new FormData($('#previewform').get(0));
 	data.append('model', 'user');
@@ -105,70 +104,35 @@ function triming(){
 	});
 }
 
-// トリミング
-/*function triming(img){
-	// class="previewbox"のimgタグに適用
-	var $image = $('.previewbox > img'),replaced;
-
-	// 何か適用している
-	//console.log($image);
-
-	//console.log(img.images);
-
-	// crop options
-	$(img.images).cropper({ aspectRatio : 4 / 4 });
-
-
-    //var data = $('#img').cropper('onFileChange');
-	var data = $(img.images).cropper('onFileChange');
-
-    console.log(data);
-
-    console.log(data.width);
-    console.log(data.height);
-    console.log(data.x);
-    console.log(data.y);
-
-    // 切り抜きした画像のデータ
-    // このデータを元に画像の切り抜きが行われる
-    var image = {
-    		width  : Math.round(data.width),
-    		height : Math.round(data.height),
-    		x      : Math.round(data.x),
-    		y      : Math.round(data.y)
-    };
-
-    return image;
-}
-}*/
-
-/*var vm =  new Vue({
-		el: '#previewbox',
-	data: {
-		message: '',
-		inputMessage: ''
-	},
-	methods: {
-		// getMessageを発火させると文字列が代入される
-		getMessage: function(){
-			this.message = this.inputMessage
-		}
-	  }
-	})*/
-
-/*new Vue({
-	el: '#previewbox',
-	data: {
-		message: 'TEST'
-	}
-})*/
-
-
-// バリデーションチェック
+//バリデーションチェック
 function checkValidation(){
 
-    validationName();
-    validationPassword();
+	var checkflag = true;
+	var name = $('[name="user"]').val();
+	var password = $('[name="password"]').val();
+	var string = "";
+
+
+
+	if(name == ""){
+		string = 'ユーザ名を入力してください。';
+		if(password == "")
+			string = string + '\n';
+	}else if(name.includes(',') == true){
+		string = 'カンマは使用できません。';
+		if(password == "")
+			string = string + '\n';
+	}
+
+	if(password == "")
+		string = string + 'パスワード入力してください。';
+
+	if(string != ""){
+		alert(string);
+		checkflag = false;
+	}
+
+	return checkflag;
 }
 
 // ユーザ名

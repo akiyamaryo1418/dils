@@ -32,6 +32,11 @@ function openLightbox(id,pass){
 			$('#star'+intaverage+'').attr({'checked': 'checked'});
 		}
 
+		for(var index = 1; index <= 5; index++){
+			$('#star'+index+'').attr({'disabled':'disabled'});
+		}
+
+
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
 	}).fail(function(){
@@ -74,6 +79,30 @@ function lightboxtriming(){
 		$(this).css("left", 0);
         //==============
 	});
+}
+
+//評価送信
+function sendEvaluation(){
+    var param = $('#sendeva').serializeArray();
+    alert(JSON.stringify(param));
+
+    data = {
+    	'model'  : 'evaluation',
+    	'action' : 'insert',
+    	'list'   :  param
+    };
+
+    $.ajax({
+    	type     : 'POST',
+    	url      : '../../api/controller.php',
+    	dataType : 'json',
+    	data     :  data,
+    	timeout  :  1000,
+    }).done(function(data, dataType){
+    	//alert('Success');
+    }).fail(function(){
+    	alert('Fail');
+    });
 }
 
 //ライトボックスを閉じる

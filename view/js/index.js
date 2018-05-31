@@ -99,7 +99,7 @@ function searchCategory(){
 
 	var param = $('#SearchAndFilter').serializeArray();
 
-	// 必要な情報はチェックボックスの状態
+	// 必要な情報
 	data = {
 		'model'  : 'illustration',
 		'action' : 'index',

@@ -62,6 +62,8 @@ function trimingLightBox(){
 
 // 評価送信
 function sendEvaluation(){
+	alert('11');
+	alert(JSON.stringify(param));
     var param = $('#sendeva').serializeArray();
     alert(JSON.stringify(param));
 

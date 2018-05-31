@@ -58,29 +58,6 @@ function moveBackButton(){
 	location.href = "/dils/view/html/designerindex.html";
 }
 
-// ソート時のボタン(非同期)
-/*/function sortButton(){
-	var param = "";
-
-	data = {
-		'model'  : 'indexsort',
-		'action' : 'sort',
-		'list'   :  param
-	};
-
-	$.ajax({
-		url      : '../../api/controller.php',
-		type     : 'POST',
-		dataType : 'json',
-		data     :  data,
-		timeout  :  1000,
-	}).done(function(data, dataType){
-		alert('Success');
-	}).fail(function(){
-		alert('NoData');
-	});
-}*/
-
 //フィルタ検索機能(ジャンル)(非同期)
 function searchCategory(){
 
@@ -148,6 +125,11 @@ function openLightbox(id,pass){
 			if(intaverage != 6){
 				$('#star'+intaverage+'').attr({'checked': 'checked'});
 			}
+
+			for(var index = 1; index <= 5; index++){
+				$('#star'+index+'').attr({'disabled':'disabled'});
+			}
+
 			// 見えないようにしている
 			$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
 		}).fail(function(){
