@@ -80,6 +80,18 @@ header li a {
   text-decoration: none;
 }
 
+input[type=radio]{
+	display:none;
+}
+
+input[type="radio"]:checked + label{
+	background: rgba(255, 128, 128, 0.8);
+}
+
+label{
+    cursor: pointer;
+}
+
 /*--------------------------------------------------
 	3. main
 --------------------------------------------------*/
@@ -133,25 +145,49 @@ header li a {
   list-style: none;
 }
 
-.listbox ul li {
+/*.listbox ul li {
   float: left;
-  width: 115px;
-  height: 125px;
+  width: 130px;
+  height: 170px;
   padding-bottom: 20px;
   color: #000;
   cursor: pointer;
   text-align: center;
-}
+}*/
 
 .listbox ul li div {
   font-size: 12px;
 }
 
+/*li.illustratorList{
+  width   : 125px;
+  height  : 150px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+  cursor  : pointer;
+}*/
 
-img {
+li.illustratorList{
+  width   : 130px;
+  height  : 130px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+  cursor  : pointer;
+  padding-bottom: 30px;
+  text-align: center;
+  margin : 5px;
+}
+
+.illustratorList img{
+	position : relative;
+}
+
+/*img {
   width: 105px;
   border: 1px solid #ccc;
-}
+}*/
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
@@ -179,7 +215,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {

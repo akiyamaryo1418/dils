@@ -65,7 +65,13 @@ function trimingLightBox(){
 }
 
 // 評価送信
+<<<<<<< HEAD
 /*function sendEvaluation(){
+=======
+function sendEvaluation(){
+	alert('11');
+	alert(JSON.stringify(param));
+>>>>>>> origin/akiyama
     var param = $('#sendeva').serializeArray();
     alert(JSON.stringify(param));
 

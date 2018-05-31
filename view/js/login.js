@@ -7,7 +7,8 @@ $(function(){
 // ログインボタン
 function inputLoginButton(){
 
-	//checkValidation();
+	if(checkValidation() == false)
+		return;
 
 	var param = $('#login').serializeArray();
 
@@ -41,32 +42,27 @@ function inputLoginButton(){
 	});
 }
 
-function debugButton(){
-	//location.href = "../html/index.html";
-}
-
 // バリデーションチェック
 function checkValidation(){
-	validationName();
-	validationPassword();
-}
 
-// ユーザ名
-function validationName(){
-	var name = "";
+	var checkflag = true;
+	var name = $('[name="user"]').val();
+	var password = $('[name="password"]').val();
+	var string = "";
 
-	if(name == "")
-		alert('ユーザ名を入力してください。');
-}
-
-// パスワード
-function validationPassword(){
-	var password = "";
-
-	if(password == ""){
-		alert('パスワードを入力してください。')
+	if(name == ""){
+		string = 'ユーザ名を入力してください。';
+		if(password == "")
+			string = string + '\n';
 	}
-	else if(password.length < 8){
-		alert('最低8文字必要です。');
+
+	if(password == "")
+		string = string + 'パスワード入力してください。';
+
+	if(string != ""){
+		alert(string);
+		checkflag = false;
 	}
+
+	return checkflag;
 }
