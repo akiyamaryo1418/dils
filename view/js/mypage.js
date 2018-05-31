@@ -27,7 +27,7 @@ function Initialize(){
     	//alert(data);
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
-    	$('.penname').html(data[0].userName);
+    	$('.penname').val(data[0].userName);
 
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
@@ -37,8 +37,7 @@ function Initialize(){
                           .append($('<div></div>').attr({'class': 'textbox'})
                           .append($('<p>'+data[index].imgname+'</p>'))
                           //.append($('<p>カテゴリー</p>').attr({'class':'category'}))
-                          )
-                          );
+                          ));
         }
 
 
@@ -135,8 +134,10 @@ function sendAccountEdit(){
 	data.append('action', 'edit');
 
 	var id = sessionStorage.getItem('userId');
-    var name = $('.penname').text();
+    var name = $('.penname').val();
     var param = [id, name , 'datafile']
+
+    //alert(JSON.stringify(name));
 
 	data.append('list', param);
 
@@ -182,6 +183,11 @@ function deleteAccount() {
 	}
 }
 
+// ログアウト
+function logout(){
+	sessionStorage.removeItem('userId');
+    location.href = "../html/index.html";
+}
 
 // 編集画面へ
 function moveEdit(){

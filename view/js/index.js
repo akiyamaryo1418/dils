@@ -191,16 +191,3 @@ function moveHeadButton(){
 function moveMypage(){
 	location.href = "../html/mypage.html";
 }
-
-// チェックボックス
-function checkBox(id){
-	if($('input[value="'+id+'"').prop('checked') == true){
-		for(var index = 1; index <= id; index++){
-			$('input[value="'+index+'"]').prop('checked', true);
-		}
-	}else{
-		for(var index = 5; index >= id; index--){
-			$('input[value="'+index+'"]').prop('checked', false);
-		}
-	}
-}

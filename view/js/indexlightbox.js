@@ -19,23 +19,32 @@ function openLightbox(id,pass){
 		$('body').addClass("overflow");
 		lightboxtriming();
 
-		var intaverage = Math.floor(data[0].review);
-
-		for(var index = 0; index < data.length; index++){
-			$('.commentbox').append($('<dl class="lightboxview"></dl>')
-                            .append($('<dt></dt>').html(data[index].created_at))
-                            .append($('<dd></dd>').html(data[index].comment)));
-		}
 
 		var intaverage =  6 - Math.floor(data[0].review);
+
+
+		for(var index = 1; index <= 5; index++){
+			$('#star'+index+'').prop('checked', false);
+		}
+
+		for(var index = 0; index < data.length; index++){
+			var starmark = '';
+			for(var starindex = 1; starindex <= index + 1; starindex++){
+				starmark = starmark + '★';
+			}
+
+			$('.commentbox').append($('<dl class="lightboxview"></dl>')
+                            .append($('<dt></dt>').html(data[index].created_at))
+                            .append($('<dd></dd>').html(starmark)));
+		}
+
 		if(intaverage != 6){
-			$('#star'+intaverage+'').attr({'checked': 'checked'});
+			$('#star'+intaverage+'').prop({'checked': 'checked'});
 		}
 
 		for(var index = 1; index <= 5; index++){
-			$('#star'+index+'').attr({'disabled':'disabled'});
+			$('#star'+index+'').prop({'disabled':'disabled'});
 		}
-
 
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
@@ -51,25 +60,6 @@ function lightboxtriming(){
 	var iw, ih;
 
 	$(resizeClass).each(function(){
-		/*var w = $(this).width();   // 画像の幅(原寸)
-		var h = $(this).height();  // 画像の高さ(原寸)
-
-		// 横長の画像の場合
-		if(w >= h){
-			iw = (thumnailHeight / h * w - thumnailWidth) / 2
-			$(this).height(thumnailHeight);    // 高さをサムネイルに合わせる
-			$(this).css("top", 0);
-			$(this).css("left", "-"+iw+"px");  // 画像のセンター合わせ
-		}
-
-		// 縦長の画像の場合
-		else{
-			ih = (thumnailWidth / w * h - thumnailHeight) / 2
-			$(this).width(thumnailWidth);      // 幅をサムネイルに合わせる
-			$(this).css("top","-"+ih+"px");    // 画像のセンター合わせ
-			$(this).css("left", 0);
-		}*/
-
 		//====固定値====
 		$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);

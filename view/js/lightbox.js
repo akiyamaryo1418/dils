@@ -64,36 +64,6 @@ function trimingLightBox(){
 	});
 }
 
-// 評価送信
-<<<<<<< HEAD
-/*function sendEvaluation(){
-=======
-function sendEvaluation(){
-	alert('11');
-	alert(JSON.stringify(param));
->>>>>>> origin/akiyama
-    var param = $('#sendeva').serializeArray();
-    alert(JSON.stringify(param));
-
-    data = {
-    	'model'  : 'evaluation',
-    	'action' : 'insert',
-    	'list'   :  param
-    };
-
-    $.ajax({
-    	type     : 'POST',
-    	url      : '../../api/controller.php',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-    	//alert('Success');
-    }).fail(function(){
-    	alert('Fail');
-    });
-}*/
-
 // 編集内容の登録
 function sendIllustEdit() {
 	var id = sessionStorage.getItem('imageId');

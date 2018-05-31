@@ -72,10 +72,8 @@ function searchCategory(){
 	var id = sessionStorage.getItem('viewUserId');
 	var param = { 'id' : id, 'param' : list};
 
-	//alert(JSON.stringify(param));
 
-	// 必要な情報はチェックボックスの状態
-
+	// 必要な情報
 	var data = {
 		'model'  : 'user',
 		'action' : 'illustIndex',
@@ -122,40 +120,33 @@ function openLightbox(id,pass){
         timeout  :  1000,
 	}).done(function(data, dataType){
 
-<<<<<<< HEAD
 		$('#detailslightbox').append($('<img src="'+pass+'">'));
 		lightboxtriming();
+		for(var index = 1; index <= 5; index++){
+			$('#star'+index+'').prop('checked', false);
+
+		}
+
 		for(var index = 0; index < data.length; index++){
 			$('.commentbox').append($('<dl class="lightboxview"></dl>')
                             .append($('<dt></dt>').html(data[index].created_at))
                             .append($('<dd></dd>').html(data[index].comment)));
 		}
+
 		var intaverage =  6 - Math.floor(data[0].review);
 		if(intaverage != 6){
-			$('#star'+intaverage+'').attr({'checked': 'checked'});
+			$('#star'+intaverage+'').prop({'checked': 'checked'});
 		}
+
+		for(var index = 1; index <= 5; index++){
+			$('#star'+index+'').prop({'disabled':'disabled'});
+		}
+
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
 	}).fail(function(){
         alert('no');
 	})
-=======
-			//alert()
-			var intaverage =  6 - Math.floor(data[0].review);
-			if(intaverage != 6){
-				$('#star'+intaverage+'').attr({'checked': 'checked'});
-			}
-
-			for(var index = 1; index <= 5; index++){
-				$('#star'+index+'').attr({'disabled':'disabled'});
-			}
-
-			// 見えないようにしている
-			$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
-		}).fail(function(){
-	        alert('no');
-		})
->>>>>>> origin/akiyama
 }
 
 function closeLightbox(){
@@ -163,7 +154,7 @@ function closeLightbox(){
 	$('.id').remove();
 	//$('body').removeClass("overflow");
 }
-
+dfh
 function lightboxtriming(){
 	var resizeClass    = '#detailslightbox img';
 	var thumnailHeight = 700;
