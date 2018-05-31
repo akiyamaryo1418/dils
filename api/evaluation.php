@@ -23,6 +23,29 @@ class evaluation {
         $result;
         $id = $data;
 
+        // 現在のユーザー名の取得
+        $sql = "SELECT work.name AS image_name, des.name AS designer_name, des.id "
+              ."FROM works AS work "
+              ."INNER JOIN designers AS des ON work.designer_id = des.id "
+              ."WHERE work.id = ".$id;
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();
+
+        $userId;
+        $userName;
+        $imageName;
+        $filePath;
+        $test = 1;
+        while ($row = $stmt->fetchObject())
+        {
+            // フォルダのファイルパスの作成
+            $userId = $row->id;
+            $userName = $row->designer_name;
+            $imageName = $row->image_name;
+            $filePath = '../view/images/creator/'.$userId.'_'.$userName;
+            $test = 0;
+        }
+
         $sql = "SELECT eva.comment, eva.created_at, work.designer_id, work.average_point "
               ."FROM evaluations AS eva "
               ."INNER JOIN works AS work ON work.id = eva.work_id "
@@ -37,6 +60,10 @@ class evaluation {
                 $cut = 9;   //カットしたい文字数
                 $newDay = substr( $row->created_at , 0 , strlen($row->created_at)-$cut);
                 $result[] = array(
+                    'id'         => $userId,
+                    'userName'   => $userName,
+                    'imageName'  => $imageName,
+                    'filePath'   => $filePath,
                     'comment'    => $row->comment,
                     'created_at' => $newDay,
                     'review'     => $row->average_point,
@@ -45,6 +72,10 @@ class evaluation {
 
             if($result == null) {
                 $result[] = array(
+                    'id'         => $userId,
+                    'userName'   => $userName,
+                    'imageName'  => $imageName,
+                    'filePath'   => $filePath,
                     'comment'    => '',
                     'created_at' => '',
                     'review'     => 0,

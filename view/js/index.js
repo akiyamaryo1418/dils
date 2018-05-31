@@ -20,7 +20,6 @@ function Initialize(){
 		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
         .html('<a href="mypage.html">MYPAGE</a>');
 	}
-	console.log(id);
 }
 
 function initCategory(){
@@ -76,7 +75,8 @@ function initIllust(){
 	    	for(var index = 0; index < data.length; index++){
 	    		var result = data[index].img.replace('view/', '');
 	    		$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration'})
-	    				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
+	    					 .append($('<a></a>').attr(
+   				            		{'onclick':'openLightbox('+data[index].id+',"'+result+'", '+data[index].width+', '+data[index].height+')'})
 	    				     .html('<img src="'+result+'"'+
 	    		            	   'alt="'+data[index].imgname+'">'))
 	    		             .append($('<p></p>').html(data[index].imgname)));
@@ -121,7 +121,8 @@ function searchCategory(){
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');
     		$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration'})
-    				     .append($('<a></a>').attr({'onclick':'openLightbox('+data[index].id+',"'+result+'")'})
+    				     .append($('<a></a>').attr(
+    				    		 {'onclick':'openLightbox('+data[index].id+',"'+result+'", '+data[index].width+', '+data[index].height+')'})
     				     .html('<img src="'+result+'"'+
     		            	   'alt="'+data[index].imgname+'">'))
     		             .append($('<p></p>').html(data[index].imgname)));
