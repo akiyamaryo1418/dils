@@ -35,12 +35,11 @@ function Initialize(){
 		alert('n');
 	});
 
-	var id = location.search;
-    if(id.charAt(0) == '?'){
-    	id = id.substring(1);
-        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
-                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
-    }
+	var id = sessionStorage.getItem('userId');
+	if(id != null) {
+		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+        .html('<a href="mypage.html">MYPAGE</a>');
+	}
 }
 
 // 制作者検索

@@ -13,15 +13,15 @@
       <nav class="login">
         <ul>
           <li><a href="designerindex.html">制作者一覧</a></li>
-          <li><a href="login.html">LOGIN</a></li>
+          <li id="loginlink"><a href="login.html">LOGIN</a></li>
         </ul>
       </nav>
-      <nav class="mypage">
+      <!-- <nav class="mypage">
         <ul>
           <li><a href="designerindex.html">制作者一覧</a></li>
           <li><a href="mypage.html">MYPAGE</a></li>
         </ul>
-      </nav>
+      </nav>-->
     </header>
 
 
@@ -46,11 +46,11 @@
 
       <!-----フィルタ検索機能------>
       <div class="SearchBoxfilter">
-        <input type="checkbox" name="Checkbox-chara" value="キャラ" id="categoryid_1" checked="checked" onchange="searchCategory();" />
+        <input type="checkbox" name="Checkbox-chara" value="1" id="categoryid_1" checked="checked" onchange="searchCategory();" />
         <label for="categoryid_1" class="check_css">キャラ</label>
-        <input type="checkbox" name="Checkbox-bg" value="背景" id="categoryid_2" checked="checked" onchange="searchCategory();"/>
+        <input type="checkbox" name="Checkbox-bg" value="2" id="categoryid_2" checked="checked" onchange="searchCategory();"/>
         <label for="categoryid_2" class="check_css">背景</label>
-        <input type="checkbox" name="Checkbox-item" value="アイテム" id="categoryid_3" checked="checked" onchange="searchCategory();"/>
+        <input type="checkbox" name="Checkbox-item" value="3" id="categoryid_3" checked="checked" onchange="searchCategory();"/>
         <label for="categoryid_3" class="check_css">アイテム</label>
       </div>
       </form>

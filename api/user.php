@@ -27,23 +27,22 @@ class user {
 
         // ソート対象
         $target = "";
-        if($data[1][value] == null) {
+        if($data['param'][0][value] == null) {
             $target = 'uploaded_at';
         } else {
-            $target = $data[1][value];
+            $target = $data['param'][0][value];
         }
 
-        // 検索条件
-        $conditions = "";
-        if($data[2][value] == null) {
-            $conditions = "category_id IN (1,2,3)";
+        $conditions;
+        if($data['param'][1][value] == null) {
+            $conditions = "category_id NOT IN (1,2,3)";
         } else {
-            for($num = 2; $num < count($data) ; $num++) {
+            for($num = 1; $num < count($data['param']) ; $num++) {
                 if($conditions != "") {
                     $tmp = $conditions.' or ';
                     $conditions = $tmp;
                 }
-                $tmp = $conditions."category_id = ".$data[$num][value];
+                $tmp = $conditions."category_id = ".$data['param'][$num][value];
                 $conditions = $tmp;
             }
         }
@@ -61,14 +60,13 @@ class user {
               ."INNER JOIN works AS work "
               ."WHERE des.id = work.designer_id "
               ."AND des.id = ".$designerId." "
-              ."AND ".$conditions." "
+              ."AND (".$conditions.") "
               ."ORDER BY " .$target." DESC"
         ;
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
 
-        $test = 0;
         while ($row = $stmt->fetchObject())
         {
             $imageId = $row->id;
@@ -108,7 +106,6 @@ class user {
                 'iconPath' => $iconPath,    // アイコンパス
                 'category_id' => $row->category_id,    // カテゴリーのID
             );
-            $test = 1;
         }
 
 
@@ -142,8 +139,9 @@ class user {
                     'iconPath' => $iconPath,    // アイコンパス
                 );
             }
-            $test = 2;
         }
+
+        // $result[] = array_merge(array('key2'=>'value2'));
 
         echo json_encode( $result );
     }

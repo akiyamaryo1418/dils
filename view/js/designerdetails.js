@@ -23,7 +23,8 @@ function Initialize(){
 	id = unescape(adrsid);*/
 
 	var id = sessionStorage.getItem('viewUserId');
-	var param = { 'id' : id };
+	var list = $('#SearchAndFilter').serializeArray();
+	var param = { 'id' : id, 'param':list};
 
 	data = {
 		'model'  : 'user',
@@ -38,21 +39,32 @@ function Initialize(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		console.log(JSON.stringify(data));
+		// console.log(JSON.stringify(data));
+		// console.log(data);
 		var result = data[0].iconPath.replace('view/', '');
 		$('.creatoricon').append($('<img src="'+result+'">'));
 		$('.penname').html(data[0].userName);
-		// ここで値を取得し、表示する
-		for(var index = 0; index < data.length; index++){
-			var result = data[index].img.replace('view/', '')
-			$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
-			                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
-					              .append($('<img>').attr({'src': result}))));
+
+		console.log(data);
+		console.log(data.length);
+		if(data[0].id != -999) {
+			// ここで値を取得し、表示する
+			for(var index = 0; index < data.length; index++){
+				var result = data[index].img.replace('view/', '')
+				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
+				                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
+						              .append($('<img>').attr({'src': result}))));
+			}
 		}
-		//$('.creatorillustbox').masonry({ itemSelector : '.imgbox', columnWidth : 150 });
 	}).fail(function(){
 		alert('NoData');
 	});
+
+	var id = sessionStorage.getItem('userId');
+	if(id != null) {
+		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+        .html('<a href="mypage.html">MYPAGE</a>');
+	}
 }
 
 // 前のページへ移動(戻るボタン)
@@ -60,41 +72,20 @@ function moveBackButton(){
 	location.href = "/dils/view/html/designerindex.html";
 }
 
-// ソート時のボタン(非同期)
-/*/function sortButton(){
-	var param = "";
-
-	data = {
-		'model'  : 'indexsort',
-		'action' : 'sort',
-		'list'   :  param
-	};
-
-	$.ajax({
-		url      : '../../api/controller.php',
-		type     : 'POST',
-		dataType : 'json',
-		data     :  data,
-		timeout  :  1000,
-	}).done(function(data, dataType){
-		alert('Success');
-	}).fail(function(){
-		alert('NoData');
-	});
-}*/
-
 //フィルタ検索機能(ジャンル)(非同期)
 function searchCategory(){
 
-	var param = $('#SearchAndFilter').serializeArray();
+	var list = $('#SearchAndFilter').serializeArray();
+	var id = sessionStorage.getItem('viewUserId');
+	var param = { 'id' : id, 'param' : list};
 
 	//alert(JSON.stringify(param));
 
 	// 必要な情報はチェックボックスの状態
 
-	data = {
-		'model'  : 'illustration',
-		'action' : 'index',
+	var data = {
+		'model'  : 'user',
+		'action' : 'illustIndex',
 		'list'   :  param
 	};
 
@@ -106,13 +97,17 @@ function searchCategory(){
 		timeout  :  1000,
 	}).done(function(data, dataType){
 		//alert(data.length);
+		console.log(data);
 		$('.imgbox').remove();
-		for(var index = 0; index < data.length; index++){
-			var result = data[index].img.replace('view/', '')
-			$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
-			                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
-					              .append($('<img>').attr({'src': result}))));
+		if(data[0].id != -999) {
+			for(var index = 0; index < data.length; index++){
+				var result = data[index].img.replace('view/', '')
+				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
+				                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
+						              .append($('<img>').attr({'src': result}))));
+			}
 		}
+
 	}).fail(function(){
 		alert('NoData');
 	});
@@ -124,37 +119,32 @@ function openLightbox(id,pass){
 			'model'  : 'evaluation',
 			'action' : 'index',
 			'list'   :  id
+		};
+
+	$.ajax({
+        url      : '../../api/controller.php',
+        type     : 'POST',
+        dataType : 'json',
+        data     :  data,
+        timeout  :  1000,
+	}).done(function(data, dataType){
+
+		$('#detailslightbox').append($('<img src="'+pass+'">'));
+		lightboxtriming();
+		for(var index = 0; index < data.length; index++){
+			$('.commentbox').append($('<dl class="lightboxview"></dl>')
+                            .append($('<dt></dt>').html(data[index].created_at))
+                            .append($('<dd></dd>').html(data[index].comment)));
 		}
-
-	//alert(id);
-	//alert(pass);
-
-		$.ajax({
-	        url      : '../../api/controller.php',
-	        type     : 'POST',
-	        dataType : 'json',
-	        data     :  data,
-	        timeout  :  1000,
-		}).done(function(data, dataType){
-
-			$('#detailslightbox').append($('<img src="'+pass+'">'));
-			lightboxtriming();
-			for(var index = 0; index < data.length; index++){
-				$('.commentbox').append($('<dl class="lightboxview"></dl>')
-	                            .append($('<dt></dt>').html(data[index].created_at))
-	                            .append($('<dd></dd>').html(data[index].comment)));
-			}
-
-			//alert()
-			var intaverage =  6 - Math.floor(data[0].review);
-			if(intaverage != 6){
-				$('#star'+intaverage+'').attr({'checked': 'checked'});
-			}
-			// 見えないようにしている
-			$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
-		}).fail(function(){
-	        alert('no');
-		})
+		var intaverage =  6 - Math.floor(data[0].review);
+		if(intaverage != 6){
+			$('#star'+intaverage+'').attr({'checked': 'checked'});
+		}
+		// 見えないようにしている
+		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
+	}).fail(function(){
+        alert('no');
+	})
 }
 
 function closeLightbox(){
@@ -170,25 +160,6 @@ function lightboxtriming(){
 	var iw, ih;
 
 	$(resizeClass).each(function(){
-		/*var w = $(this).width();   // 画像の幅(原寸)
-		var h = $(this).height();  // 画像の高さ(原寸)
-
-		// 横長の画像の場合
-		if(w >= h){
-			iw = (thumnailHeight / h * w - thumnailWidth) / 2
-			$(this).height(thumnailHeight);    // 高さをサムネイルに合わせる
-			$(this).css("top", 0);
-			$(this).css("left", "-"+iw+"px");  // 画像のセンター合わせ
-		}
-
-		// 縦長の画像の場合
-		else{
-			ih = (thumnailWidth / w * h - thumnailHeight) / 2
-			$(this).width(thumnailWidth);      // 幅をサムネイルに合わせる
-			$(this).css("top","-"+ih+"px");    // 画像のセンター合わせ
-			$(this).css("left", 0);
-		}*/
-
 		//====固定値====
 		$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);
