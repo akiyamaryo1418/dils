@@ -13,14 +13,19 @@ body {
   text-align: justify;
   font-size: 14px;
   font-family: "メイリオ", sans-serif;
-	line-height: 20px;
-	letter-spacing: 2px;
+  line-height: 20px;
+  letter-spacing: 2px;
 }
 
 .clearfix:after {
     content: " ";
     display: block;
     clear: both;
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow: auto;
 }
 
 #wrap {

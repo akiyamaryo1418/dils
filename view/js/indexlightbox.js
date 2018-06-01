@@ -14,7 +14,6 @@ function openLightbox(id,pass){
         data     :  data,
         timeout  :  1000,
 	}).done(function(data, dataType){
-		console.log(data);
 		var icon = data[0].filePath.replace('view/', '');
 		$('.iconbox').append('<img class="iconimg" src="'+icon+'">');
 		$('.illustname').html(data[0].imageName);
@@ -52,6 +51,9 @@ function openLightbox(id,pass){
 		for(var index = 1; index <= 5; index++){
 			$('#star'+index+'').prop({'disabled':'disabled'});
 		}
+
+		// スクロールを隠す
+		$('.stop-scrolling').css("overflow", "hidden");
 
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
@@ -92,6 +94,7 @@ function lightboxtriming(){
 	});
 }
 
+
 //評価送信
 function sendEvaluation(){
     var param = $('#sendeva').serializeArray();
@@ -119,35 +122,12 @@ function sendEvaluation(){
 //ライトボックスを閉じる
 function closeLightbox(){
 	var memid = $('.id').val();
-
-	//alert(memid);
 	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
 	$('.lightboxview').remove();
 	$('.iconimg').remove();
 	$('.id').remove();
 	$('body').removeClass("overflow");
-}
 
-//評価送信
-function sendEvaluation(){
-    var param = $('#sendeva').serializeArray();
-    alert(JSON.stringify(param));
+	$('.stop-scrolling').css("overflow", "auto");
 
-    data = {
-    	'model'  : 'evaluation',
-    	'action' : 'insert',
-    	'list'   :  param
-    };
-
-    $.ajax({
-    	type     : 'POST',
-    	url      : '../../api/controller.php',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-    	//alert('Success');
-    }).fail(function(){
-    	alert('Fail');
-    });
 }
