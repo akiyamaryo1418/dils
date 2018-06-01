@@ -289,6 +289,7 @@ function resetcss(boxclass){
 	$(resizeClass).each(function(){
 		$(this).removeAttr('style');
 	});
+<<<<<<< HEAD
 }
 
 // 画像新規登録
@@ -351,3 +352,6 @@ function checkValidation(){
 	alert('作品名を入力してください');
 	return false;
 }
+=======
+}
+>>>>>>> origin/inouesaki

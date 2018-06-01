@@ -93,10 +93,13 @@ header li a {
   font-size: 36px;
 }
 
+<<<<<<< HEAD
 form p {
   float: left;
 }
 
+=======
+>>>>>>> origin/inouesaki
 .editbox {
   width: 1100px;
   height: 764px;
@@ -145,6 +148,7 @@ form p {
   height: 20px;
 }
 
+<<<<<<< HEAD
 div.img-box {
   width   : 250px;
   height  : 250px;
@@ -163,29 +167,43 @@ select {
   height: 23px;
   margin: 5px 5px 0 2px;
 }
+=======
+select {
+  float: left;
+  width: 122px;
+  height: 23px;
+  margin: 0 5px 0 2px;
+}
+
+.selectwrap {
+    margin: 5px 0 0 0;
+}
+
+>>>>>>> origin/inouesaki
 
 input.imgbutton {
   float: left;
-  width: 50px;
-  height: 23px;
-  margin: 5px 5px 0 2px;
+  width: 109px;
+  height: 24px;
+  margin: 2px 0 0 2px;
   background: #000;
   color: #fff;
   border: none;
 }
 
-input.delete {
+/*input.delete {
   width: 50px;
   height: 23px;
-  margin: 5px 0;
+  margin: 0;
   background: #000;
   color: #fff;
   border: none;
-}
+}*/
 
 form p.button {
+  clear: both;
   width: 1100px;
-  margin: 30px 0;
+  padding: 30px 0;
   text-align: center;
 }
 
@@ -196,11 +214,18 @@ input.button {
   color: #fff;
 }
 
+<<<<<<< HEAD
 label p {
     width: 109px;
     height: 24px;
     float: left;
     margin-top: 5px;
+=======
+ label p {
+    width: 109px;
+    height: 24px;
+    float: left;
+>>>>>>> origin/inouesaki
     background: #000;
     color: #fff;
     text-align: center;
@@ -209,10 +234,24 @@ label p {
     font-size: 13px;
 }
 
+<<<<<<< HEAD
  #img1, #img2, #img3, #img4,
  #img5, #img6, #img7, #img8 {
      display: none;
  }
+=======
+ #imgadd {
+     display: none;
+ }
+ 
+
+
+
+
+
+
+
+>>>>>>> origin/inouesaki
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/

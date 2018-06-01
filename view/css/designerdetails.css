@@ -185,17 +185,29 @@ p.return a {
 
 
 input[type=radio] {
+<<<<<<< HEAD
 	display: none;
+=======
+	display: none; 	
+>>>>>>> origin/inouesaki
 }
 
 input[type="radio"]:checked + label {
 	background: #31A9EE;
+<<<<<<< HEAD
 	color: #ffffff;
 }
 
 label{
 	cursor: pointer;
 }
+=======
+	color: #ffffff; 	
+}
+
+
+
+>>>>>>> origin/inouesaki
 
 /*：：：：チェックボックス：：：：*/
 .SearchBoxfilter {
@@ -293,6 +305,7 @@ input[type=checkbox]:checked + .check_css:before {
 
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
+<<<<<<< HEAD
 /*;;;;;;;;;;投稿者アイコン;;;;;;;;;;*/
 div.iconbox{
 	width    : 60px;
@@ -305,6 +318,8 @@ div.iconbox{
 	position :relative;
 }
 
+=======
+>>>>>>> origin/inouesaki
 .lightbox_view{
   display: none;
   position: fixed;
@@ -313,7 +328,11 @@ div.iconbox{
   z-index: 10000;
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   background-color: rgba(0, 0, 0, 0.5);
+=======
+  background-color: rgba(0, 0, 0, 0.8);
+>>>>>>> origin/inouesaki
 }
 
 .usernamebox {
@@ -345,6 +364,7 @@ div.iconbox{
   float: left;
   width: 750px;
   margin: 60px 50px 0 200px;
+<<<<<<< HEAD
   /*background: #fff;*/
 }
 
@@ -370,6 +390,18 @@ div.iconbox{
 }
 
 
+=======
+  background: #fff;
+}
+
+.leftcontents .imgbox {
+  width: 500px;
+  height: 700px;
+  margin: 0 auto;
+  background: #ff0033;
+}
+
+>>>>>>> origin/inouesaki
 .rightcontents {
   position: relative;
   float: left;
@@ -405,7 +437,10 @@ div.iconbox{
   margin: 0 0 20px 10px;
   padding: 10px 0;
   background: #fff;
+<<<<<<< HEAD
   overflow-y: scroll;
+=======
+>>>>>>> origin/inouesaki
 }
 
 .commentbox dl {
