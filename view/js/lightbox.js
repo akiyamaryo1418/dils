@@ -18,10 +18,6 @@ $(function(){
 
 // 初期化(編集画面での表示)
 function viewInitialize(illustid){
-	// アドレスの「?」以降のパラメータを取得
-    /*var id = location.search;
-    id = id.substring(1);*/
-
 	var id = sessionStorage.getItem('userId');
     var param={ 'user' : id, 'illust' : illustid };
     var data= {
@@ -40,7 +36,7 @@ function viewInitialize(illustid){
     	var result = data[0].img.replace('view/', '');
     	$('#editimgbox').append($('<img src="'+result+'">'));
     	$('#title').val(data[0].name);
-    	trimingLightBox();
+    	trimingLightBox(data[0].width, data[0].height);
     	$('#categoryList').val(data[0].category_id);
     }).fail(function(){
     	alert('Nodata');
@@ -48,19 +44,36 @@ function viewInitialize(illustid){
 }
 
 
-function trimingLightBox(){
+//ライトボックスに表示する画像サイズの変更
+function trimingLightBox(_width, _height){
+
+	// 表示できる大きさを取得
+	var baseWidth = $('#editimgbox').width();
+	var baseHeight = $('#editimgbox').height();
+
+	// 画像の元サイズを取得
+	var newlWidth  = _width;
+	var newlHeight = _height;
+
+	// 画像サイズ、表示位置の設定
+	if(_width > _height) {
+		newlWidth = baseWidth;
+		newlHeight = _height * (baseWidth / _width);
+	} else {
+		newlHeight = baseHeight;
+		newlWidth = _width * (baseHeight / _height);
+	}
+	var newTop = (baseHeight / 2) - (newlHeight / 2);
+	var newLeft = (baseWidth / 2) - (newlWidth / 2);
+
 	var resizeClass = '#editimgbox img';
-	var thumnailWidth  = 352;
-	var thumnailHeight = 460;
-
 	$(resizeClass).each(function(){
-
-		$(this).height(566);
-		$(this).width(800);
-		$(this).css("height", 566+"px");
-		$(this).css("top", 0);
-		$(this).css("width", 800+"px");
-		$(this).css("left", -100);
+		$(this).height(newlHeight);
+		$(this).width(newlWidth);
+		$(this).css("height", newlHeight+"px");
+		$(this).css("top", newTop);
+		$(this).css("width", newlWidth+"px");
+		$(this).css("left", newLeft);
 	});
 }
 
