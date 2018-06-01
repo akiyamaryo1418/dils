@@ -143,6 +143,9 @@ function sendAccountEdit(){
 
     $.ajax({
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
     	url         : '../../api/controller.php',
     	type        : 'POST',
     	dataType    : 'json',
@@ -150,6 +153,7 @@ function sendAccountEdit(){
     	contentType : false,
     	data        :  data,
     	timeout     :  1000,
+<<<<<<< HEAD
 =======
     	url      : '../../api/controller.php',
     	type     : 'POST',
@@ -157,6 +161,8 @@ function sendAccountEdit(){
     	data     :  data,
     	timeout  :  1000,
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
     }).done(function(data, dataType){
 
     	location.href = "../html/index.html";
@@ -198,9 +204,16 @@ function logout(){
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // 編集画面へ
 function moveEdit(){
 	ocation.href = "../html/edit.html"
 }
 =======
 >>>>>>> inouesaki
+=======
+// 編集画面へ
+function moveEdit(){
+	ocation.href = "../html/edit.html"
+}
+>>>>>>> origin/inouesaki

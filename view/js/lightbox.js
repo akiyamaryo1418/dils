@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
 
 $(function(){
 
@@ -24,6 +27,7 @@ function viewInitialize(illustid){
     var data= {
     	'model'  : 'illustration',
     	'action' : 'selectIllust',
+<<<<<<< HEAD
 =======
 $(document).ready(function(){
   
@@ -65,6 +69,8 @@ function Initialize(illustid){
     	'model'  : 'user',
     	'action' : 'illustIndex',
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
     	'list'   :  param
     }
 
@@ -76,6 +82,9 @@ function Initialize(illustid){
     	timeout  :  1000,
     }).done(function(data, dataType){
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
     	var result = data[0].img.replace('view/', '');
     	$('#editimgbox').append($('<img src="'+result+'">'));
     	$('#title').val(data[0].name);
@@ -173,6 +182,7 @@ function deleteIllust() {
     	alert('Fail');
     });
 }
+<<<<<<< HEAD
 =======
       /*for(var index = 0; index < 100; index++){
         $('.myistbox').append($('<ul></ul>')
@@ -188,3 +198,5 @@ function deleteIllust() {
     });
 }
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki

@@ -1,9 +1,13 @@
 // ライトボックスを開く
 <<<<<<< HEAD
+<<<<<<< HEAD
 function openLightbox(id,pass,width, height){
 =======
 function openLightbox(id,pass){
 >>>>>>> inouesaki
+=======
+function openLightbox(id,pass,width, height){
+>>>>>>> origin/inouesaki
 
 	var data = {
 		'model'  : 'evaluation',
@@ -19,6 +23,9 @@ function openLightbox(id,pass){
         timeout  :  1000,
 	}).done(function(data, dataType){
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
 		var icon = data[0].filePath.replace('view/', '');
 		$('.iconbox').append('<img class="iconimg" src="'+icon+'">');
 		$('.illustname').html(data[0].imageName);
@@ -59,6 +66,7 @@ function openLightbox(id,pass){
         $('.stop-scrolling').css("overflow", "hidden");
 
 
+<<<<<<< HEAD
 =======
 		$('.imgbox').append('<img class="lightboxview" id="lightboxid_"'+id+'"  src="'+pass+'">')
 		$(".lightbox_view, #lightboxid_"+id+"").fadeIn();   // 第1引数・・・背景？(class)  第2引数・・・拡大写真(class)
@@ -79,6 +87,8 @@ function openLightbox(id,pass){
 		}
 
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
 	}).fail(function(){
@@ -87,6 +97,9 @@ function openLightbox(id,pass){
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
 function icontriming(width, height){
 	var resizeClass    = '.iconbox img';
 	var iconHeight     =  60;
@@ -175,6 +188,7 @@ function sendEvaluation(){
     });
 }
 
+<<<<<<< HEAD
 =======
 function lightboxtriming(){
 	var resizeClass    = '.imgbox img';
@@ -214,6 +228,8 @@ function lightboxtriming(){
 }
 
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 //ライトボックスを閉じる
 function closeLightbox(){
 	var memid = $('.id').val();
@@ -222,6 +238,9 @@ function closeLightbox(){
 	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
 	$('.lightboxview').remove();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
 	$('.iconimg').remove();
 	$('.id').remove();
 	$('.comment').remove();
@@ -252,9 +271,13 @@ function closeLightbox(){
     }).fail(function(){
     	alert('Fail');
     });
+<<<<<<< HEAD
 }*/
 =======
 	$('.id').remove();
 	$('body').removeClass("overflow");
 }
 >>>>>>> inouesaki
+=======
+}*/
+>>>>>>> origin/inouesaki

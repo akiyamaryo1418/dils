@@ -96,7 +96,6 @@ header li a {
   margin: 0 auto;
 }
 
-/*左コンテンツ*/
 #LeftBox {
   float: left;
   width: 260px;
@@ -156,15 +155,19 @@ header li a {
 #LeftBox .buttonbox {
   float: left;
   width: 250px;
-  margin: 40px 0 20px 0;
+  margin: 40px 0;
 }
 
 #LeftBox .buttonbox p {
+<<<<<<< HEAD
 <<<<<<< HEAD
   /*float: left;*/
 =======
 /*  float: left;*/
 >>>>>>> inouesaki
+=======
+  /*float: left;*/
+>>>>>>> origin/inouesaki
   width: 100px;
 }
 
@@ -178,6 +181,7 @@ header li a {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .buttonbox input.delete {
   width: 232px;
   margin-top: 100px;
@@ -185,11 +189,14 @@ header li a {
 
 =======
 
+=======
+>>>>>>> origin/inouesaki
 .buttonbox input.delete {
   width: 232px;
   margin-top: 10px;
 }
 
+<<<<<<< HEAD
 
 
 
@@ -219,6 +226,8 @@ header li a {
 /*右コンテンツ*/
  
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 #RightBox {
  float: left;
  width: 742px;
@@ -243,8 +252,6 @@ header li a {
   font-size: 15px;
   font-weight: bold;
 }
-
-/*画像追加ボタンデザイン*/
 
 #RightBox p.addbutton {
   float: right;
@@ -291,6 +298,9 @@ header li a {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
 /*ファイルを選択ボタンのカスタマイズ*/
 
  label {
@@ -335,6 +345,7 @@ div.imgbox {
 .imgbox img {
   position : relative;
 }
+<<<<<<< HEAD
 =======
 
 
@@ -344,6 +355,8 @@ div.imgbox {
 
 
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
@@ -368,9 +381,13 @@ div.imgbox {
   height: 30px;
   background: #99ccff;
 <<<<<<< HEAD
+<<<<<<< HEAD
   cursor:pointer;
 =======
 >>>>>>> inouesaki
+=======
+  cursor:pointer;
+>>>>>>> origin/inouesaki
 }
 
 .close img {
@@ -386,25 +403,35 @@ div.imgbox {
 
 .lightbox_view .imgbox {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
   width: 420px;
   height: 460px;
   margin: 0 auto;
   /*background: #000;*/
+<<<<<<< HEAD
 =======
   width: 350px;
   height: 458px;
   margin: 0 auto;
   background: #000;
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 }
 
 .lightbox_view .leftcontents p {
   width: 120px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   margin: 10px 0 0 266px;
 =======
   margin: 3px 0 0 266px;
 >>>>>>> inouesaki
+=======
+  margin: 10px 0 0 266px;
+>>>>>>> origin/inouesaki
 }
 
 .lightbox_view .leftcontents p input {
@@ -427,12 +454,15 @@ div.imgbox {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .lightbox_view .rightcontents label {
   float: none;
   margin-right: 0;
 }
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 
 .lightbox_view select {
   width: 174px;
@@ -453,6 +483,7 @@ div.imgbox {
   height: 38px;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -481,6 +512,8 @@ div.imgbox {
  }
 
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/

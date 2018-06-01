@@ -175,9 +175,7 @@ label{
 #SeartReview {
   border-right: solid 2px #fff;
 }
-
 /*：：：：チェックボックス：：：：*/
-
 .SearchBoxfilter {
   float: left;
   width: 300px;
@@ -222,7 +220,6 @@ input[type=checkbox] {
   border-radius: 6px;
   content: '';
 }
-
 .check_css:before {
   -webkit-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
@@ -237,17 +234,16 @@ input[type=checkbox] {
   content: '';
   opacity: 0;
 }
-
 input[type=checkbox]:checked + .check_css:before {
   opacity: 1;
 }
+
 
 #SearchBoxfilter div {
   float: left;
   width: 90px;
 
 }
-
 /*：：：：：作品一覧：：：：：*/
 
 #wrapper {
@@ -263,6 +259,9 @@ input[type=checkbox]:checked + .check_css:before {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
 div.item {
   width   : 250px;
   height  : 250px;
@@ -270,6 +269,7 @@ div.item {
   overflow: hidden;
   border  : 1px solid #eee;
   cursor  : pointer;
+<<<<<<< HEAD
 =======
 .item {
   float: left;
@@ -279,6 +279,8 @@ div.item {
   border: 1px solid #eee;
   cursor: pointer;
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 }
 
 .cle { clear: both; }
@@ -335,6 +337,7 @@ div.iconbox{
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
@@ -364,6 +367,8 @@ div.iconbox{
 }
 
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 .usernamebox .textbox {
   float: left;
   width: 100px;
@@ -371,6 +376,9 @@ div.iconbox{
   color: #fff;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
 
 .usernamebox p {
   font-size: 12px;
@@ -500,6 +508,7 @@ textarea {
   color: gray;
 }
 
+<<<<<<< HEAD
 =======
 
 .usernamebox p {
@@ -618,6 +627,8 @@ textarea {
 }
 
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 .star label:hover,
 .star label:hover ~ label,
 .star input[type='radio']:checked ~ label,

@@ -127,8 +127,8 @@ img{
 }
 
 .preview input {
-  width: 110px;
-  margin: 12px 0 0 90px;
+  width: 100px;
+  margin: 12px 0 0 100px;
   background: #fff;
 }
 
@@ -137,7 +137,6 @@ img{
   width: 340px;
   margin: 0 0 169px 0;
 }
-
 input {
   width: 330px;
   height: 23px;
@@ -171,6 +170,7 @@ p.text a {
 
 /*ファイルを選択ボタンのカスタマイズ*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 label p {
     width: 109px;
     height: 24px;
@@ -181,6 +181,11 @@ label p {
     height: 24px;
     float: right;
 >>>>>>> inouesaki
+=======
+label p {
+    width: 109px;
+    height: 24px;
+>>>>>>> origin/inouesaki
     margin-right: 10px;
     background: #000;
     color: #fff;
@@ -190,15 +195,21 @@ label p {
     font-size: 11px;
  }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
  
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 
  #imgadd {
      display: none;
  }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/inouesaki
 div.item {
   width   : 200px;
   height  : 200px;
@@ -213,8 +224,11 @@ div.item {
 
 .cle { clear: both; }
 
+<<<<<<< HEAD
 =======
 >>>>>>> inouesaki
+=======
+>>>>>>> origin/inouesaki
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/

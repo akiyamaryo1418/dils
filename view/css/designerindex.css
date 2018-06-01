@@ -122,11 +122,15 @@ label{
   height: 22px;
   text-align: center;
 <<<<<<< HEAD
+<<<<<<< HEAD
   border-left: 1px solid #000;
 =======
   border-left: 2px solid #000;
   cursor: pointer;
 >>>>>>> inouesaki
+=======
+  border-left: 1px solid #000;
+>>>>>>> origin/inouesaki
 }
 
 #SortOther {
