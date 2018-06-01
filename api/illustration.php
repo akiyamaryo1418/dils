@@ -150,16 +150,12 @@ class illustration {
 
         // ファイルデータの確認
         if($fileData == null) {
-            $result = 'not file data';
+            $result = '-999';
             echo json_encode( $result );
             return;
         }
 
-        // ユーザーID、カテゴリーID、作品名を取得
-        $newData = explode(",", $data);
-        $designerId = $newData[0];
-        $name = $newData[1];
-        $categoryId = $newData[3];
+
 
         // IDからユーザー名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$designerId;
@@ -174,7 +170,7 @@ class illustration {
 
         // SQLミス、ファイル名の取得ミス
         if(!$flag || $designerName == '') {
-            $result = 'miss get file';
+            $result = '-999';
             echo json_encode( $result );
             return;
         }
@@ -198,11 +194,11 @@ class illustration {
                 $result = 'success';
             } else{
                 // アップロードミス
-                $result =  'miss upload';
+                $result =  '-999';
             }
         } else {
             // SQL失敗
-            $result = 'miss sql';
+            $result = '-999';
         }
         echo json_encode( $result );
     }
