@@ -33,7 +33,10 @@
         <h2>プロフィール</h2>
         <form method="post" action="example.cgi">
         <div class="creatoricon"></div>
-        <p><input type="file" class="file_edit" name="datafile"></p>
+           <label for="imgadd">
+             <p>編集</p>
+                  <input type="file" id="imgadd"/>
+           </label>
         <div class="usernamebox">
         <span>Pen Name</span>
         <p>なまえなまえ</p>
@@ -43,6 +46,7 @@
           <p><input type="button" class="reg" value="変更内容を登録" onclick="sendEdit();"></p>
           <p><input type="button" class="delete" value="アカウント削除" onclick="DeleteAccount();"></p>
         </div>
+        
         </form>
       </div>
 
@@ -244,7 +248,10 @@
        <form method="post" action="example.cgi">
          <div class="leftcontents">
           <div class="imgbox"></div>
-          <p><input type="file" name="datafile"></p>
+           <label for="imgadd">
+                  <p>画像を変更</p>
+                  <input type="file" id="imgadd"/>
+           </label>
          </div>
          <div class="rightcontents">
            <p class="title">タイトル<input type="text" name="title"></p>

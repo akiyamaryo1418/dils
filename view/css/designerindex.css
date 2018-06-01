@@ -118,6 +118,7 @@ header li a {
   height: 22px;
   text-align: center;
   border-left: 2px solid #000;
+  cursor: pointer;
 }
 
 #SortOther {

@@ -95,6 +95,7 @@ header li a {
   margin: 0 auto;
 }
 
+/*左コンテンツ*/
 #LeftBox {
   float: left;
   width: 260px;
@@ -154,11 +155,11 @@ header li a {
 #LeftBox .buttonbox {
   float: left;
   width: 250px;
-  margin: 40px 0;
+  margin: 40px 0 20px 0;
 }
 
 #LeftBox .buttonbox p {
-  float: left;
+/*  float: left;*/
   width: 100px;
 }
 
@@ -171,6 +172,40 @@ header li a {
   border: 1px solid #ccc;
 }
 
+
+.buttonbox input.delete {
+  width: 232px;
+  margin-top: 100px;
+}
+
+
+
+
+/*ファイルを選択ボタンのカスタマイズ*/
+
+ label {
+  float: right;
+  margin-right: 104px;
+}
+
+ label p {
+    width: 50px;
+    height: 24px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 3px;
+
+ }
+ 
+
+ #imgadd {
+     display: none;
+ }
+
+/*右コンテンツ*/
+ 
 #RightBox {
  float: left;
  width: 742px;
@@ -195,6 +230,8 @@ header li a {
   font-size: 15px;
   font-weight: bold;
 }
+
+/*画像追加ボタンデザイン*/
 
 #RightBox p.addbutton {
   float: right;
@@ -241,6 +278,13 @@ header li a {
 }
 
 
+
+
+
+
+
+
+
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
 .lightbox_view {
@@ -285,7 +329,7 @@ header li a {
 
 .lightbox_view .leftcontents p {
   width: 120px;
-  margin: 10px 0 0 266px;
+  margin: 3px 0 0 266px;
 }
 
 .lightbox_view .leftcontents p input {
@@ -307,6 +351,10 @@ header li a {
   height: 18px;
 }
 
+.lightbox_view .rightcontents label {
+  float: none;
+  margin-right: 0;
+}
 
 .lightbox_view select {
   width: 174px;
@@ -326,6 +374,31 @@ header li a {
 .lightbox_view .buttonbox input {
   height: 38px;
 }
+
+
+
+
+/*ファイルを選択ボタンのカスタマイズ*/
+
+.lightbox_view label {
+  margin-right: 26px;
+}
+
+ .lightbox_view label p {
+    height: 24px;
+    float: right;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 3px;
+    font-size: 11px;
+ }
+ 
+
+ #imgadd {
+     display: none;
+ }
 
 /*--------------------------------------------------
 	4. footer
