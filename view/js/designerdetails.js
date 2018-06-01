@@ -121,12 +121,13 @@ function openLightbox(id,pass, width, height){
 		$('.illustratorname').html(data[0].userName);
 		icontriming(data[0].width, data[0].height);
 
-		$('#detailslightbox').append($('<img src="'+pass+'">'));
+		$('#detailslightbox').html($('<img src="'+pass+'">'));
 		lightboxtriming(width, height);
 		var intaverage =  6 - Math.floor(data[1].review);
 
 		for(var index = 1; index <= 5; index++){
 			$('#star'+index+'').prop('checked', false);
+			$('#starbutton'+index+'').prop('checked', false);
 
 		}
 
@@ -162,6 +163,7 @@ function openLightbox(id,pass, width, height){
 function closeLightbox(){
 	$('.lightboxview').remove();
 	$('.comment').remove();
+	$('[name="kanso"]').val('');
 	$('.id').remove();
 	//$('.stop-scrolling').css("overflow", "auto");
 	//$('body').removeClass("overflow");
@@ -213,6 +215,7 @@ function lightboxtriming(_width, _height){
 		$(this).css("top", 0);
 		$(this).css("width",newlWidth+"px");
 		$(this).css("left", newLeft+"px");
+		$(this).css("background-color", "#fff");
 	});
 }
 
@@ -246,8 +249,10 @@ function postText(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
+    	$(".lightbox_view").fadeOut(100);
     	$('.lightboxview').remove();
     	$('.comment').remove();
+    	$('[name="kanso"]').val('');
     	$('.id').remove();
     }).fail(function(){
     	alert('Fail');
