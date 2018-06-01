@@ -376,7 +376,7 @@ class user {
             }
 
             if($this->uploadImage($fileData, $newPath, $iconName)) {
-                $result = 'succes';
+                $result = 'success';
             }
             else{
                 $result = 'error';

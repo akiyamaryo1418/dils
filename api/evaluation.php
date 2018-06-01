@@ -9,6 +9,9 @@ class evaluation {
     // データベース操作用クラス
     private $dbm;
 
+    // 登録できる拡張子
+    private $exts = ['jpg', 'png', 'bmp'];
+
     // ================================================================
     // コンストラクタ
     // ================================================================
@@ -27,23 +30,37 @@ class evaluation {
         $sql = "SELECT work.name AS image_name, des.name AS designer_name, des.id "
               ."FROM works AS work "
               ."INNER JOIN designers AS des ON work.designer_id = des.id "
-              ."WHERE work.id = ".$id;
+              ."WHERE work.id = ".$id
+        ;
+
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
-        $userId;
-        $userName;
-        $imageName;
-        $filePath;
-        $test = 1;
         while ($row = $stmt->fetchObject())
         {
-            // フォルダのファイルパスの作成
             $userId = $row->id;
             $userName = $row->designer_name;
-            $imageName = $row->image_name;
-            $filePath = '../view/images/creator/'.$userId.'_'.$userName;
-            $test = 0;
+            $fileName = $userId.'_'.$userName;
+            $filePath = '../view/images/creator/Share/default.png';
+
+            foreach( $this->exts as $ext) {
+                $imageTmpName = $id.'_icon.'.$ext;
+                $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
+                if(is_file($tmpPath)) {
+                    $filePath = $tmpPath;
+                    break;
+                }
+            }
+
+            $size = getimagesize($filePath);
+
+            $result[] = array(
+                'userName'  => $userName,
+                'imageName' => $row->image_name,
+                'filePath'  => $filePath,
+                'width'     => $size[0],
+                'height'    => $size[1],
+            );
         }
 
         $sql = "SELECT eva.comment, eva.created_at, work.designer_id, work.average_point "
@@ -55,37 +72,34 @@ class evaluation {
         $flag = $stmt->execute();
 
         if($flag) {
+            $row = null;
             while ($row = $stmt->fetchObject())
             {
                 $cut = 9;   //カットしたい文字数
                 $newDay = substr( $row->created_at , 0 , strlen($row->created_at)-$cut);
-                $result[] = array(
-                    'id'         => $userId,
-                    'userName'   => $userName,
-                    'imageName'  => $imageName,
-                    'filePath'   => $filePath,
-                    'comment'    => $row->comment,
-                    'created_at' => $newDay,
-                    'review'     => $row->average_point,
+                $result[] = array_merge(
+                    array(
+                        'comment'    => $row->comment,
+                        'created_at' => $newDay,
+                        'review'     => $row->average_point,
+                    )
                 );
             }
 
-            if($result == null) {
-                $result[] = array(
-                    'id'         => $userId,
-                    'userName'   => $userName,
-                    'imageName'  => $imageName,
-                    'filePath'   => $filePath,
-                    'comment'    => '',
-                    'created_at' => '',
-                    'review'     => 0,
+            if($row != null) {
+                $result[] = array_merge(
+                    array(
+                        'comment'    => '',
+                        'created_at' => '',
+                        'review'     => 0,
+                    )
                 );
             }
         }else{
             // SQLの失敗
             $result = -999;
         }
-        echo json_encode( $result );
+        echo json_encode($result);
     }
 
     // ================================================================
@@ -105,6 +119,12 @@ class evaluation {
         ;
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
+
+        if(!$flag) {
+            $result = -999;
+            echo json_encode( $result );
+            return;
+        }
 
 
         // 作品の平均点の更新

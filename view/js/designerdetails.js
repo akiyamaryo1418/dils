@@ -154,7 +154,7 @@ function closeLightbox(){
 	$('.id').remove();
 	//$('body').removeClass("overflow");
 }
-dfh
+
 function lightboxtriming(){
 	var resizeClass    = '#detailslightbox img';
 	var thumnailHeight = 700;
