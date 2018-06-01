@@ -1,42 +1,28 @@
-$(document).ready(function(){
-  
-  for(var index = 0; index < 20; index++){
-        $('.illustbox').append($('<li></li>')
-                      .append($('<div></div>').attr({'class':'imgbox'}))
-                      .append($('<div></div>').attr({'class': 'textbox'})
-                      .append($('<p>作品タイトル</p>'))
-                      .append($('<p>カテゴリー</p>').attr({'class':'category'})))                      );
-                      
-      }
-  
-  $(".imgbox").click(function(){
-    
-    var id = $(this).attr("id");
-    
-    Initialize(id);
-    $(".lightbox_view").fadeIn(100);
-    
-  });
-  
-  $(".close").click(function(){
-    
-    $(".lightbox_view").fadeOut(100);
-    
-  });
-  
+
+$(function(){
+
+	$('.illustbox').on('click', '.imgbox', function(){
+		var id = $(this).attr("id");
+		sessionStorage.setItem('imageId', id);
+		viewInitialize(id);
+		$(".lightbox_view").fadeIn(100);
+	});
+
+	$(".close").click(function(){
+		$("#editimgbox").empty();
+		triming();
+    	illustTriming();
+		$(".lightbox_view").fadeOut(100);
+	});
 });
 
-// 初期化
-function Initialize(illustid){
-	// アドレスの「?」以降のパラメータを取得
-    var id = location.search;
-    id = id.substring(1);
-
-    var param={ 'user' : id, 'illust' : illustid};
-    
-    data= {
-    	'model'  : 'user',
-    	'action' : 'illustIndex',
+// 初期化(編集画面での表示)
+function viewInitialize(illustid){
+	var id = sessionStorage.getItem('userId');
+    var param={ 'user' : id, 'illust' : illustid };
+    var data= {
+    	'model'  : 'illustration',
+    	'action' : 'selectIllust',
     	'list'   :  param
     }
 
@@ -47,16 +33,100 @@ function Initialize(illustid){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-      /*for(var index = 0; index < 100; index++){
-        $('.myistbox').append($('<ul></ul>')
-                      .append($('<li></li')
-                      .append($('<div></div>').attr({'class':'imgbox'}))
-                      .append($('<div></div>').attr({'class': 'textbox'}))
-                      .append($('<p>作品タイトル</p>'))));
-      }*/
-      
-    	alert('Success');
+    	var result = data[0].img.replace('view/', '');
+    	$('#editimgbox').append($('<img src="'+result+'">'));
+    	$('#title').val(data[0].name);
+    	trimingLightBox(data[0].width, data[0].height);
+    	$('#categoryList').val(data[0].category_id);
     }).fail(function(){
     	alert('Nodata');
+    });
+}
+
+
+//ライトボックスに表示する画像サイズの変更
+function trimingLightBox(_width, _height){
+
+	// 表示できる大きさを取得
+	var baseWidth = $('#editimgbox').width();
+	var baseHeight = $('#editimgbox').height();
+
+	// 画像の元サイズを取得
+	var newlWidth  = _width;
+	var newlHeight = _height;
+
+	// 画像サイズ、表示位置の設定
+	if(_width > _height) {
+		newlWidth = baseWidth;
+		newlHeight = _height * (baseWidth / _width);
+	} else {
+		newlHeight = baseHeight;
+		newlWidth = _width * (baseHeight / _height);
+	}
+	var newTop = (baseHeight / 2) - (newlHeight / 2);
+	var newLeft = (baseWidth / 2) - (newlWidth / 2);
+
+	var resizeClass = '#editimgbox img';
+	$(resizeClass).each(function(){
+		$(this).height(newlHeight);
+		$(this).width(newlWidth);
+		$(this).css("height", newlHeight+"px");
+		$(this).css("top", newTop);
+		$(this).css("width", newlWidth+"px");
+		$(this).css("left", newLeft);
+	});
+}
+
+// 編集内容の登録
+function sendIllustEdit() {
+	var id = sessionStorage.getItem('imageId');
+	var list = $('#editForm').serializeArray();
+	var param = {'id' : id, 'param': list}
+
+	var data = {
+		'model'  : 'illustration',
+	    'action' : 'edit',
+	    'list'   :  param
+	};
+	console.log(param);
+
+	$.ajax({
+    	type     : 'POST',
+    	url      : '../../api/controller.php',
+    	dataType : 'json',
+    	data     :  data,
+    	timeout  :  1000,
+    }).done(function(data, dataType){
+    	//alert('Success');
+    	location.reload(true);
+    	console.log(data);
+    }).fail(function(){
+    	alert('Fail');
+    });
+}
+
+function deleteIllust() {
+	var id = sessionStorage.getItem('imageId');
+	var userId = sessionStorage.getItem('userId');
+	var param = {'id' : id, 'userId' : userId};
+
+	var data = {
+		'model'  : 'illustration',
+	    'action' : 'delete',
+	    'list'   :  param
+	};
+
+	$.ajax({
+    	type     : 'POST',
+    	url      : '../../api/controller.php',
+    	dataType : 'json',
+    	data     :  data,
+    	timeout  :  1000,
+    }).done(function(data, dataType){
+    	//alert('Success');
+    	location.reload(true);
+    	console.log(data);
+    }).fail(function(){
+    	alert('Fail');
     });
 }

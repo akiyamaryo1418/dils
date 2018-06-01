@@ -13,14 +13,19 @@ body {
   text-align: justify;
   font-size: 14px;
   font-family: "メイリオ", sans-serif;
-	line-height: 20px;
-	letter-spacing: 2px;
+  line-height: 20px;
+  letter-spacing: 2px;
 }
 
 .clearfix:after {
     content: " ";
     display: block;
     clear: both;
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow: auto;
 }
 
 #wrap {
@@ -36,7 +41,6 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
-  min-width: 1250px;
   height: 75px;
   background: rgba(0,0,0,0.5);
 }
@@ -114,7 +118,7 @@ header li a {
 
 #SearchBox {
   width: 100%;
-  min-width: 1000px;
+  min-width: 960px;
   height: 45px;
   margin: 15px 0;
   background: #000;
@@ -155,13 +159,23 @@ header li a {
   background: rgba(255,124,127,0.8);
 }
 
+input[type=radio]{
+	display:none;
+}
+
+input[type="radio"]:checked + label{
+	background: rgba(255, 128, 128, 0.8);
+}
+
+label{
+    cursor: pointer;
+}
+
 
 #SeartReview {
   border-right: solid 2px #fff;
 }
-
 /*：：：：チェックボックス：：：：*/
-
 .SearchBoxfilter {
   float: left;
   width: 300px;
@@ -206,7 +220,6 @@ input[type=checkbox] {
   border-radius: 6px;
   content: '';
 }
-
 .check_css:before {
   -webkit-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
@@ -221,17 +234,16 @@ input[type=checkbox] {
   content: '';
   opacity: 0;
 }
-
 input[type=checkbox]:checked + .check_css:before {
   opacity: 1;
 }
 
+
 #SearchBoxfilter div {
   float: left;
   width: 90px;
-  
-}
 
+}
 /*：：：：：作品一覧：：：：：*/
 
 #wrapper {
@@ -246,26 +258,44 @@ input[type=checkbox]:checked + .check_css:before {
   margin: 0 auto;
 }
 
-.item {
-  float: left;
-  width: 140px;
-  margin: 10px;
-  padding: 8px;
-  border: 1px solid #eee;
-  cursor: pointer;
+div.item {
+  width   : 250px;
+  height  : 250px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+  cursor  : pointer;
 }
+
+.cle { clear: both; }
 
 .item.x2 {
   width: 320px;
 }
 
 .item img {
-  width: 100%;
+  /*width: 100%;*/
+  position : relative;
 }
 
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
-.lightbox_view {
+/*;;;;;;;;;;投稿者アイコン;;;;;;;;;;*/
+div.iconbox{
+	width    : 60px;
+	height   : 60px;
+	float    : left;
+	overflow : hidden;
+}
+
+.iconbox img {
+	position :relative;
+}
+
+
+/*;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;*/
+
+.lightbox_view{
   display: none;
   position: fixed;
   top: 0px;
@@ -273,7 +303,7 @@ input[type=checkbox]:checked + .check_css:before {
   z-index: 10000;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .usernamebox {
@@ -305,14 +335,22 @@ input[type=checkbox]:checked + .check_css:before {
   float: left;
   width: 750px;
   margin: 60px 50px 0 200px;
-  background: #fff;
+  /*background: #fff;*/
 }
 
 .leftcontents .imgbox {
-  width: 500px;
+  width: 750px;
   height: 700px;
   margin: 0 auto;
-  background: #ff0033;
+  float   : left;
+  overflow: hidden;
+  /*border  : 1px solid #eee;*/
+  /*background: #ff0033;*/
+}
+
+.imgbox img {
+  /*width: 100%;*/
+  position : relative;
 }
 
 .rightcontents {
@@ -350,6 +388,11 @@ input[type=checkbox]:checked + .check_css:before {
   margin: 0 0 20px 10px;
   padding: 10px 0;
   background: #fff;
+  overflow-y:scroll;
+}
+
+.comment{
+	padding-buttom : 10px;
 }
 
 .commentbox dl {
@@ -428,7 +471,6 @@ textarea {
 footer {
   position: relative;
   width: 100%;
-  min-width: 1250px;
   height: 70px;
   background: #000;
 }
@@ -449,7 +491,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {

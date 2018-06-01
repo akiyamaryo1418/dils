@@ -13,14 +13,13 @@ class category {
         $this->dbm = new DatabaseManager();
     }
 
-    public function get() {
-        // 返却用の配列
+    // カテゴリーの一覧
+    public function info($data) {
         $return_list = null;
 
-        $sql = 'select * from categories';
-
+        $sql = 'SELECT * FROM categories';
         $stmt = $this->dbm->dbh->prepare($sql);
-        $flag = $stmt->execute();
+        $stmt->execute();
 
         // 取得したデータを配列に格納
         while ($row = $stmt->fetchObject())

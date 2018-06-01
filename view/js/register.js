@@ -1,43 +1,143 @@
 
 // デザイナー新規登録ページ
 $(function(){
-
+	var id = sessionStorage.getItem('userId');
+	if(id != null) {
+		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
+        .html('<a href="mypage.html">MYPAGE</a>');
+	}
 });
 
 // 新規登録ページ情報
 // 登録ボタン押したとき
 function inputRegistrationButton(){
 
-	// バリデーションチェックの関数を呼び出す
-	checkValidation();
+	if(checkValidation() == false)
+		return;
 
-	// 新規ユーザ情報
-	var param = "";
+	data = new FormData($('#previewform').get(0));
+	data.append('model', 'user');
+	data.append('action', 'register');
 
-	data = {
-		'model'  : 'user_register',
-		'action' : 'register',
-		'list'   :  param
-	}
+	var fileName = 'img';
+	var param = [ $('#username').val(), $('#password').val(), fileName ];
+	data.append('list', param);
 
     $.ajax({
-    	url      : '/dils/api/controller.php',
-    	type     : 'POST',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
+    	url         : '../../api/controller.php',
+    	type        : 'POST',
+    	dataType    : 'json',
+    	processData : false,
+    	contentType : false,
+    	data        :  data,
+    	timeout     :  1000,
     }).done(function(data, dataType){
-        alert('Success');
+    	location.href = "../html/index.html";
+        alert(data);
+        sessionStorage.setItem('userId', data);
     }).fail(function(){
     	alert('Nodata');
     });
 }
 
-// バリデーションチェック
+// 一覧画面へ移動
+function moveIndex(){
+    location.href = "../html/index.html";
+}
+
+// Vue.jsの処理
+new Vue({
+	el: '#previewbox',
+	data() {
+		return {
+			uploadedImage: '',
+		};
+	},
+	methods: {
+		onFileChange(e){
+			var files = e.target.files || e.dataTransfer.files;
+			if(!files.length)
+				return;
+			this.createImage(files[0]);
+			triming();
+		},
+		// アップロードした画像を表示
+		createImage(file){
+			var reader = new FileReader();
+			reader.onload = (e) => {
+				// まずは表示
+				this.uploadedImage = e.target.result;
+			};
+			reader.readAsDataURL(file);
+		},
+	},
+})
+
+//トリミング
+function triming(){
+
+	var resizeClass    = '.item img';
+	var thumnailWidth  = 200;
+	var thumnailHeight = 200;
+	//var iw, ih;
+
+	$(resizeClass).each(function(){
+
+		/*var w = $(this).width();
+		var h = $(this).height();
+
+		if(w >= h){
+			iw = (thumnailHeight/h*w-thumnailWidth)/2
+			$(this).height(thumnailHeight);
+			$(this).css("top",0);
+            $(this).css("left","-"+iw+"px");
+		}
+		else{
+			ih = (thumnailWidth/w*h-thumnailHeight)/2
+			$(this).css("top","-"+ih+"px");
+            $(this).css("left",0);
+		}*/
+
+		//====固定値====
+		$(this).height(thumnailHeight);
+		$(this).width(thumnailWidth);
+		$(this).css("height", 200+"px");
+		$(this).css("top", -60+"px");
+		$(this).css("width", 200+"px");
+		$(this).css("left", -70+"px");
+        //==============
+	});
+}
+
+//バリデーションチェック
 function checkValidation(){
 
-    validationName();
-    validationPassword();
+	var checkflag = true;
+	var name = $('[name="user"]').val();
+	var password = $('[name="password"]').val();
+	var string = "";
+
+
+
+	if(name == ""){
+		string = 'ユーザ名を入力してください。';
+		if(password == "")
+			string = string + '\n';
+	}else if(name.includes(',') == true){
+		string = 'カンマは使用できません。';
+		if(password == "")
+			string = string + '\n';
+	}
+
+	if(password == "")
+		string = string + 'パスワード入力してください。';
+
+	if(string != ""){
+		alert(string);
+		checkflag = false;
+	}
+
+	return checkflag;
 }
 
 // ユーザ名

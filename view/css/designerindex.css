@@ -17,12 +17,6 @@ body {
 	letter-spacing: 2px;
 }
 
-.clearfix:after {
-    content: " ";
-    display: block;
-    clear: both;
-}
-
 #wrap {
   width: 1160px;
   margin:0 auto;
@@ -36,7 +30,6 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
-  min-width: 1250px;
   height: 75px;
   background: #000;
 }
@@ -87,12 +80,23 @@ header li a {
   text-decoration: none;
 }
 
+input[type=radio]{
+	display:none;
+}
+
+input[type="radio"]:checked + label{
+	background: rgba(255, 128, 128, 0.8);
+}
+
+label{
+    cursor: pointer;
+}
+
 /*--------------------------------------------------
 	3. main
 --------------------------------------------------*/
 #contentabox {
   width: 1160px;
-  min-width: 1200px;
   margin: 0 auto;
 }
 
@@ -117,12 +121,11 @@ header li a {
   width: 70px;
   height: 22px;
   text-align: center;
-  border-left: 2px solid #000;
-  cursor: pointer;
+  border-left: 1px solid #000;
 }
 
 #SortOther {
-  border-right: 2px solid #000;
+  border-right: 1px solid #000;
 }
 
 .creatersortbox li span {
@@ -132,6 +135,7 @@ header li a {
 
 .listbox {
   min-width: 960px;
+  height: 580px;
   margin: 0 0 150px 0;
 }
 
@@ -141,33 +145,49 @@ header li a {
   list-style: none;
 }
 
-.listbox ul li {
+/*.listbox ul li {
   float: left;
-  width: 115px;
-  height: 125px;
+  width: 130px;
+  height: 170px;
   padding-bottom: 20px;
   color: #000;
   cursor: pointer;
   text-align: center;
-}
+}*/
 
 .listbox ul li div {
   font-size: 12px;
 }
 
-img {
+/*li.illustratorList{
+  width   : 125px;
+  height  : 150px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+  cursor  : pointer;
+}*/
+
+li.illustratorList{
+  width   : 130px;
+  height  : 130px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+  cursor  : pointer;
+  padding-bottom: 30px;
+  text-align: center;
+  margin : 5px;
+}
+
+.illustratorList img{
+	position : relative;
+}
+
+/*img {
   width: 105px;
   border: 1px solid #ccc;
-}
-
-.creatersortbox ul li:hover {
-  background: #99ccff;
-}
-
-img:hover {
-  opacity:0.8;
-}
-
+}*/
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
@@ -175,7 +195,6 @@ img:hover {
 footer {
   position: relative;
   width: 100%;
-  min-width: 1250px;
   height: 70px;
   background: #000;
 }
@@ -196,7 +215,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {

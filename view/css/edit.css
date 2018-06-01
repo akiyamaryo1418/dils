@@ -17,12 +17,6 @@ body {
 	letter-spacing: 2px;
 }
 
-.clearfix:after {
-    content: " ";
-    display: block;
-    clear: both;
-}
-
 #wrap {
   width: 1200px;
   margin:0 auto;
@@ -36,7 +30,6 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
-  min-width: 1250px;
   height: 75px;
   background: #000;
 }
@@ -92,13 +85,16 @@ header li a {
 --------------------------------------------------*/
 #Edit {
   width: 1200px;
-  min-width: 1250px;
   margin: 0 auto;
 }
 
 #Edit h1 {
   margin: 60px 0;
   font-size: 36px;
+}
+
+form p {
+  float: left;
 }
 
 .editbox {
@@ -130,7 +126,7 @@ header li a {
   margin: 25px 0 0 0;
 }
 
-.box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box 
+.box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box
 ,.box5 .img-box ,.box6 .img-box ,.box7 .img-box ,.box8 .img-box {
   float: left;
   width: 240px;
@@ -138,7 +134,7 @@ header li a {
   background: #000;
 }
 
-.box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box 
+.box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box
 ,.box5 .img-box ,.box6 .img-box ,.box7 .img-box ,.box8 .img-box {
   margin: 0 46px 0 0;
 }
@@ -149,41 +145,47 @@ header li a {
   height: 20px;
 }
 
+div.img-box {
+  width   : 250px;
+  height  : 250px;
+  float   : left;
+  overflow: hidden;
+  border  : 1px solid #eee;
+}
+
+.img-box img {
+  position : relative;
+}
+
 select {
   float: left;
   width: 122px;
   height: 23px;
-  margin: 0 5px 0 2px;
+  margin: 5px 5px 0 2px;
 }
-
-.selectwrap {
-    margin: 5px 0 0 0;
-}
-
 
 input.imgbutton {
   float: left;
-  width: 109px;
-  height: 24px;
-  margin: 2px 0 0 2px;
+  width: 50px;
+  height: 23px;
+  margin: 5px 5px 0 2px;
   background: #000;
   color: #fff;
   border: none;
 }
 
-/*input.delete {
+input.delete {
   width: 50px;
   height: 23px;
-  margin: 0;
+  margin: 5px 0;
   background: #000;
   color: #fff;
   border: none;
-}*/
+}
 
 form p.button {
-  clear: both;
   width: 1100px;
-  padding: 30px 0;
+  margin: 30px 0;
   text-align: center;
 }
 
@@ -194,10 +196,11 @@ input.button {
   color: #fff;
 }
 
- label p {
+label p {
     width: 109px;
     height: 24px;
     float: left;
+    margin-top: 5px;
     background: #000;
     color: #fff;
     text-align: center;
@@ -206,17 +209,10 @@ input.button {
     font-size: 13px;
 }
 
- #imgadd {
+ #img1, #img2, #img3, #img4,
+ #img5, #img6, #img7, #img8 {
      display: none;
  }
- 
-
-
-
-
-
-
-
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
@@ -224,7 +220,6 @@ input.button {
 footer {
   position: relative;
   width: 100%;
-  min-width: 1250px;
   height: 70px;
   background: #000;
 }
@@ -245,7 +240,7 @@ footer nav {
   margin-left: 23%;
   width: 280px;
   padding: 30px 25px;
-  
+
 }
 
 footer nav ul {
