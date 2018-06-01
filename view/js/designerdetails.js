@@ -119,21 +119,32 @@ function openLightbox(id,pass){
         data     :  data,
         timeout  :  1000,
 	}).done(function(data, dataType){
+		var icon = data[0].filePath.replace('view/', '');
+		$('.iconbox').append('<img class="iconimg" src="'+icon+'">');
+		$('.illustname').html(data[0].imageName);
+		$('.illustratorname').html(data[0].userName);
+		icontriming(data[0].width, data[0].height);
 
 		$('#detailslightbox').append($('<img src="'+pass+'">'));
 		lightboxtriming();
+		var intaverage =  6 - Math.floor(data[1].review);
+
 		for(var index = 1; index <= 5; index++){
 			$('#star'+index+'').prop('checked', false);
 
 		}
 
-		for(var index = 0; index < data.length; index++){
+		for(var index = 1; index < data.length; index++){
+			var starmark = '';
+			for(var starindex = 1; starindex <= index; starindex++){
+				starmark = starmark + '★';
+			}
+
 			$('.commentbox').append($('<dl class="lightboxview"></dl>')
                             .append($('<dt></dt>').html(data[index].created_at))
                             .append($('<dd></dd>').html(data[index].comment)));
 		}
 
-		var intaverage =  6 - Math.floor(data[0].review);
 		if(intaverage != 6){
 			$('#star'+intaverage+'').prop({'checked': 'checked'});
 		}
@@ -153,6 +164,20 @@ function closeLightbox(){
 	$('.lightboxview').remove();
 	$('.id').remove();
 	//$('body').removeClass("overflow");
+}
+
+function icontriming(width, height){
+	var resizeClass    = '.iconbox img';
+	var iconHeight     =  60;
+	var iconWidth      =  60;
+	var iw, ih;
+
+	$(resizeClass).each(function(){
+		$(this).css("height", 60+"px");
+		$(this).css("top",  0);
+		$(this).css("width", 60+"px");
+		$(this).css("left", 0);
+	});
 }
 
 function lightboxtriming(){
@@ -182,7 +207,13 @@ function postText(){
 	id = unescape(adrsid);
 
 	var param = $('#sendeva').serializeArray();
-	alert(JSON.stringify(param));
+	var comment = param[2]['value'];
+
+    // 入力文字数が30文字を超えた場合
+    if(comment.length > 30){
+    	alert('入力文字数が多すぎます。');
+    	return;
+    }
 
 	data = {
 	    	'model'  : 'evaluation',
@@ -197,8 +228,10 @@ function postText(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	alert(JSON.stringify(data));
-    	location.href = "../html/designerdetails.html?"+id;
+    	//alert(JSON.stringify(data));
+    	//location.href = "../html/designerdetails.html?"+id;
+    	$('.lightboxview').remove();
+    	$('.id').remove();
     }).fail(function(){
     	alert('Fail');
     });

@@ -26,23 +26,22 @@ function openLightbox(id,pass){
 		$('body').addClass("overflow");
 		lightboxtriming();
 
-
-		var intaverage =  6 - Math.floor(data[0].review);
-
+		var intaverage =  6 - Math.floor(data[1].review);
 
 		for(var index = 1; index <= 5; index++){
 			$('#star'+index+'').prop('checked', false);
 		}
 
-		for(var index = 0; index < data.length; index++){
+		for(var index = 1; index < data.length; index++){
 			var starmark = '';
-			for(var starindex = 1; starindex <= index + 1; starindex++){
+			for(var starindex = 1; starindex <= index; starindex++){
 				starmark = starmark + '★';
 			}
 
 			$('.commentbox').append($('<dl class="lightboxview"></dl>')
                             .append($('<dt></dt>').html(data[index].created_at))
-                            .append($('<dd></dd>').html(starmark)));
+                            .append($('<dd></dd>').html(starmark)))
+                            .append($('<pre class="comment"></pre>').html(data[index].comment));
 		}
 
 		if(intaverage != 6){
@@ -95,7 +94,13 @@ function lightboxtriming(){
 //評価送信
 function sendEvaluation(){
     var param = $('#sendeva').serializeArray();
-    alert(JSON.stringify(param));
+    var comment = param[2]['value'];
+
+    // 入力文字数が30文字を超えた場合
+    if(comment.length > 30){
+    	alert('入力文字数が多すぎます。');
+    	return;
+    }
 
     data = {
     	'model'  : 'evaluation',
@@ -111,6 +116,12 @@ function sendEvaluation(){
     	timeout  :  1000,
     }).done(function(data, dataType){
     	//alert('Success');
+    	var memid = $('.id').val();
+    	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
+    	$('.lightboxview').remove();
+    	$('.iconimg').remove();
+    	$('.id').remove();
+    	$('body').removeClass("overflow");
     }).fail(function(){
     	alert('Fail');
     });
@@ -129,7 +140,7 @@ function closeLightbox(){
 }
 
 //評価送信
-function sendEvaluation(){
+/*function sendEvaluation(){
     var param = $('#sendeva').serializeArray();
     alert(JSON.stringify(param));
 
@@ -150,4 +161,4 @@ function sendEvaluation(){
     }).fail(function(){
     	alert('Fail');
     });
-}
+}*/

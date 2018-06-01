@@ -386,6 +386,10 @@ div.iconbox{
   overflow-y:scroll;
 }
 
+.comment{
+	padding-buttom : 10px;
+}
+
 .commentbox dl {
   width: 360px;
   margin: 9px auto;
