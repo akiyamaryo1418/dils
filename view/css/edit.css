@@ -93,19 +93,10 @@ header li a {
   font-size: 36px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/inouesaki
 form p {
   float: left;
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> inouesaki
-=======
->>>>>>> origin/inouesaki
 .editbox {
   width: 1100px;
   height: 764px;
@@ -154,10 +145,6 @@ form p {
   height: 20px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/inouesaki
 div.img-box {
   width   : 250px;
   height  : 250px;
@@ -176,22 +163,6 @@ select {
   height: 23px;
   margin: 5px 5px 0 2px;
 }
-<<<<<<< HEAD
-=======
-select {
-  float: left;
-  width: 122px;
-  height: 23px;
-  margin: 0 5px 0 2px;
-}
-
-.selectwrap {
-    margin: 5px 0 0 0;
-}
-
->>>>>>> inouesaki
-=======
->>>>>>> origin/inouesaki
 
 input.imgbutton {
   float: left;
@@ -225,24 +196,11 @@ input.button {
   color: #fff;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/inouesaki
 label p {
     width: 109px;
     height: 24px;
     float: left;
     margin-top: 5px;
-<<<<<<< HEAD
-=======
- label p {
-    width: 109px;
-    height: 24px;
-    float: left;
->>>>>>> inouesaki
-=======
->>>>>>> origin/inouesaki
     background: #000;
     color: #fff;
     text-align: center;
@@ -251,30 +209,10 @@ label p {
     font-size: 13px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/inouesaki
  #img1, #img2, #img3, #img4,
  #img5, #img6, #img7, #img8 {
      display: none;
  }
-<<<<<<< HEAD
-=======
- #imgadd {
-     display: none;
- }
- 
-
-
-
-
-
-
-
->>>>>>> inouesaki
-=======
->>>>>>> origin/inouesaki
 /*--------------------------------------------------
 	4. footer
 --------------------------------------------------*/
