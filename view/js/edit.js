@@ -233,6 +233,7 @@ new Vue({
 
 //トリミング
 function triming(boxclass){
+	console.log(boxclass);
 
 	var resizeClass    = boxclass + '.img-box img';
 	var thumnailWidth  = 250;
@@ -281,10 +282,10 @@ function inputUpdateButton(){
         var param = [ id, name, fileName, category ];
         data.append('list', param);
 
-        var file = $('#img'+(index+1)+'').val();
+        console.log(param);
 
-        if(checkSendData(name, file)) {
-        	var errorName = name;
+
+        if(name != '') {
         	$.ajax({
         		url         : '../../api/controller.php',
         		type        : 'POST',
@@ -294,36 +295,18 @@ function inputUpdateButton(){
         		data        :  data,
         		timeout     :  1000,
         	}).done(function(data, dataType){
-        		if(data == -999) {
-        			var text = 'タイトル名「'+errorName+ '」の登録に失敗しました。';
-        			alert(text);
-        			// location.reload(true);
-        			location.href= "../html/mypage.html";
-        			return;
-        		}
-         		// console.log(JSON.stringify(data));
-        		// location.href= "../html/mypage.html?" + id;
+         		console.log(JSON.stringify(data));
+        		location.href= "../html/mypage.html?" + id;
         	}).fail(function(){
         		alert('NoData');
         	});
         }
     }
-
-    //
 }
 
 //バリデーションチェック
-function checkSendData(_name, _file){
+function checkValidation(){
 
-	// 入力文字数が30文字を超えた場合
-    if(_name.length > 20){
-    	alert('タイトルは20文字までしか登録できません。');
-    	return false;
-    }
-
-    if(_file == null) {
-    	alert('ファイルが選択されていません。');
-    	return false;
-    }
-	return true;
+	alert('作品名を入力してください');
+	return false;
 }
