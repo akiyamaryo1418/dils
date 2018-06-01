@@ -32,16 +32,21 @@ function Initialize(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
+		// console.log(JSON.stringify(data));
+		// console.log(data);
 		var result = data[0].iconPath.replace('view/', '');
 		$('.creatoricon').append($('<img src="'+result+'">'));
 		$('.penname').html(data[0].userName);
+
+		console.log(data);
+		console.log(data.length);
 		if(data[0].id != -999) {
 			// ここで値を取得し、表示する
 			for(var index = 0; index < data.length; index++){
 				var result = data[index].img.replace('view/', '')
 				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
-									  .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
-				                      .append($('<img>').attr({'src': result}))));
+				                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
+						              .append($('<img>').attr({'src': result}))));
 			}
 		}
 	}).fail(function(){
@@ -83,14 +88,13 @@ function searchCategory(){
 		timeout  :  1000,
 	}).done(function(data, dataType){
 		//alert(data.length);
-		//console.log(data);
+		console.log(data);
 		$('.imgbox').remove();
 		if(data[0].id != -999) {
 			for(var index = 0; index < data.length; index++){
 				var result = data[index].img.replace('view/', '')
 				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
-				                      .append($('<a></a>').attr(
-				                    		  {'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
+				                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
 						              .append($('<img>').attr({'src': result}))));
 			}
 		}
@@ -101,7 +105,7 @@ function searchCategory(){
 }
 
 // ライトボックスを開く
-function openLightbox(id,pass, width, height){
+function openLightbox(id,pass){
 	data = {
 			'model'  : 'evaluation',
 			'action' : 'index',
@@ -122,7 +126,7 @@ function openLightbox(id,pass, width, height){
 		icontriming(data[0].width, data[0].height);
 
 		$('#detailslightbox').append($('<img src="'+pass+'">'));
-		lightboxtriming(width, height);
+		lightboxtriming();
 		var intaverage =  6 - Math.floor(data[1].review);
 
 		for(var index = 1; index <= 5; index++){
@@ -132,14 +136,13 @@ function openLightbox(id,pass, width, height){
 
 		for(var index = 1; index < data.length; index++){
 			var starmark = '';
-			for(var starindex = 1; starindex <= data[index].point; starindex++){
+			for(var starindex = 1; starindex <= index; starindex++){
 				starmark = starmark + '★';
 			}
 
 			$('.commentbox').append($('<dl class="lightboxview"></dl>')
                             .append($('<dt></dt>').html(data[index].created_at))
-                            .append($('<dd></dd>').html(starmark)))
-                            .append($('<pre class="comment"></pre>').html(data[index].comment));
+                            .append($('<dd></dd>').html(data[index].comment)));
 		}
 
 		if(intaverage != 6){
@@ -150,8 +153,6 @@ function openLightbox(id,pass, width, height){
 			$('#star'+index+'').prop({'disabled':'disabled'});
 		}
 
-		//$('.stop-scrolling').css("overflow", "hidden");
-
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
 	}).fail(function(){
@@ -161,9 +162,7 @@ function openLightbox(id,pass, width, height){
 
 function closeLightbox(){
 	$('.lightboxview').remove();
-	$('.comment').remove();
 	$('.id').remove();
-	//$('.stop-scrolling').css("overflow", "auto");
 	//$('body').removeClass("overflow");
 }
 
@@ -179,53 +178,36 @@ function icontriming(width, height){
 		$(this).css("width", 60+"px");
 		$(this).css("left", 0);
 	});
-
-
 }
 
-function lightboxtriming(_width, _height){
-	// 表示できる大きさを取得
-	var baseWidth = $('.leftcontents .lightboximg').width();
-	var baseHeight = $('.leftcontents .lightboximg').height();
+function lightboxtriming(){
+	var resizeClass    = '#detailslightbox img';
+	var thumnailHeight = 700;
+	var thumnailWidth  = 750;
+	var iw, ih;
 
-	// 画像の元サイズを取得
-	var newlWidth  = _width;
-	var newlHeight = _height;
-
-	// 画像サイズ、表示位置の設定
-	if(_width > _height ) {
-		newlWidth = baseWidth;
-		newlHeight = _height * (baseWidth / _width);
-	} else {
-		newlHeight = baseHeight;
-		newlWidth = _width * (baseHeight / _height);
-	}
-	var newTop = (baseHeight / 2) - (newlHeight / 2);
-	var newLeft = (baseWidth / 2) - (newlWidth / 2);
-
-	// console.log(newLeft);
-
-	var resizeClass = '#detailslightbox img';
 	$(resizeClass).each(function(){
-		$(this).height(newlHeight);
-		$(this).width(newlWidth);
-		$(this).css("height", newlHeight+"px");
+		//====固定値====
+		$(this).height(thumnailHeight);
+		$(this).width(thumnailWidth);
+		$(this).css("height", 700+"px");
 		$(this).css("top", 0);
-		$(this).css("width",newlWidth+"px");
-		$(this).css("left", newLeft+"px");
+		$(this).css("width", 750+"px");
+		$(this).css("left", 0);
+        //==============
 	});
 }
 
 // コメント送信(評価)
 function postText(){
-	var param = $('#sendeva').serializeArray();
-	var point = param[1]['value'];
-	var comment = param[2]['value'];
+	// アドレスの「?」以降のパラメータを取得
+	var adrsid = location.search;
+	// 先頭の「?」をカット
+	adrsid = adrsid.substring(1);
+	id = unescape(adrsid);
 
-	if(point < 1){
-    	alert('評価点数を決めてください。')
-    	return;
-    }
+	var param = $('#sendeva').serializeArray();
+	var comment = param[2]['value'];
 
     // 入力文字数が30文字を超えた場合
     if(comment.length > 30){
@@ -246,8 +228,9 @@ function postText(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
+    	//alert(JSON.stringify(data));
+    	//location.href = "../html/designerdetails.html?"+id;
     	$('.lightboxview').remove();
-    	$('.comment').remove();
     	$('.id').remove();
     }).fail(function(){
     	alert('Fail');
