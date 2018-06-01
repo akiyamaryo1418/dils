@@ -23,11 +23,11 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//$('#mypageicon').html('<img id="mypageicon" v-show>')
-    	//alert(data);
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').val(data[0].userName);
+
+    	console.log(data);
 
     	for(var index = 0; index < data.length; index++){
     		var result = data[index].img.replace('view/', '');

@@ -160,22 +160,22 @@ class user {
         $conditions = "";
         switch ($data[0][value]) {
             case 'all':
-                $conditions = "";
+                $conditions = "ORDER BY id ASC";
                 break;
             case 'ano':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'あ' AND 'の'";
+                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'あ' AND 'の' ORDER BY name ASC";
                 break;
             case 'han':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci  ETWEEN 'は' AND 'ん'";
+                $conditions = "WHERE name COLLATE utf8_unicode_ci  ETWEEN 'は' AND 'ん' ORDER BY name ASC";
                 break;
             case 'am':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'a' AND 'm'";
+                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'a' AND 'm' ORDER BY name ASC";
                 break;
             case 'nz':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'n' AND 'z'";
+                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'n' AND 'z' ORDER BY name ASC";
                 break;
             case 'other':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci NOT BETWEEN 'a' AND 'ん'";
+                $conditions = "WHERE name COLLATE utf8_unicode_ci NOT BETWEEN 'a' AND 'ん' ORDER BY name ASC";
                 break;
             default:
                 $conditions = 'error';
