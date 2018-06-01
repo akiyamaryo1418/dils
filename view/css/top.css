@@ -315,7 +315,7 @@ div.item {
   float: left;
   width: 750px;
   margin: 60px 50px 0 200px;
-  background: #fff;
+  /*background: #fff;*/
 }
 
 .leftcontents .imgbox {
@@ -324,7 +324,7 @@ div.item {
   margin: 0 auto;
   float   : left;
   overflow: hidden;
-  border  : 1px solid #eee;
+  /*border  : 1px solid #eee;*/
   /*background: #ff0033;*/
 }
 
@@ -368,6 +368,7 @@ div.item {
   margin: 0 0 20px 10px;
   padding: 10px 0;
   background: #fff;
+  overflow-y:scroll;
 }
 
 .commentbox dl {

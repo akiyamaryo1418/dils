@@ -284,7 +284,7 @@ div.imgbox {
   height  : 150px;
   float   : left;
   overflow: hidden;
-  border  : 1px solid #eee;
+  /*border  : 1px solid #eee;*/
 }
 
 .imgbox img {
@@ -313,6 +313,7 @@ div.imgbox {
   width: 30px;
   height: 30px;
   background: #99ccff;
+  cursor:pointer;
 }
 
 .close img {
@@ -327,10 +328,10 @@ div.imgbox {
 }
 
 .lightbox_view .imgbox {
-  width: 350px;
-  height: 458px;
+  width: 420px;
+  height: 460px;
   margin: 0 auto;
-  background: #000;
+  /*background: #000;*/
 }
 
 .lightbox_view .leftcontents p {

@@ -19,7 +19,7 @@ class illustration {
     }
 
     // ================================================================
-    // クリックされた作品の情報を渡す
+    // 特定の作品情報を渡す
     // ================================================================
     public function selectIllust($data) {
         $result;
@@ -57,10 +57,15 @@ class illustration {
                 }
             }
 
+            // 画像サイズの取得
+            $size = getimagesize($filePath);
+
             $result[] = array(
                 'id'       => $id,
                 'img'      => $filePath,
                 'name'     => $row->name,
+                'width'    => $size[0],
+                'height'   => $size[1],
                 'category_id'  => $row->category_id,
             );
         }
