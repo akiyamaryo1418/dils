@@ -1,11 +1,12 @@
 // ライトボックスを開く
-function openLightbox(id,pass){
+function openLightbox(id,pass,width, height){
 
 	var data = {
 		'model'  : 'evaluation',
 		'action' : 'index',
 		'list'   :  id
 	}
+
 
 	$.ajax({
         url      : '../../api/controller.php',
@@ -14,7 +15,6 @@ function openLightbox(id,pass){
         data     :  data,
         timeout  :  1000,
 	}).done(function(data, dataType){
-		console.log(data);
 		var icon = data[0].filePath.replace('view/', '');
 		$('.iconbox').append('<img class="iconimg" src="'+icon+'">');
 		$('.illustname').html(data[0].imageName);
@@ -24,17 +24,18 @@ function openLightbox(id,pass){
 		$('.imgbox').append('<img class="lightboxview" id="lightboxid_"'+id+'"  src="'+pass+'">')
 		$(".lightbox_view, #lightboxid_"+id+"").fadeIn();   // 第1引数・・・背景？(class)  第2引数・・・拡大写真(class)
 		$('body').addClass("overflow");
-		lightboxtriming();
+		lightboxtriming(width, height);
 
 		var intaverage =  6 - Math.floor(data[1].review);
 
 		for(var index = 1; index <= 5; index++){
 			$('#star'+index+'').prop('checked', false);
+			$('#starbutton'+index+'').prop('checked', false);
 		}
 
 		for(var index = 1; index < data.length; index++){
 			var starmark = '';
-			for(var starindex = 1; starindex <= index; starindex++){
+			for(var starindex = 1; starindex <= data[index].point; starindex++){
 				starmark = starmark + '★';
 			}
 
@@ -51,6 +52,9 @@ function openLightbox(id,pass){
 		for(var index = 1; index <= 5; index++){
 			$('#star'+index+'').prop({'disabled':'disabled'});
 		}
+
+        $('.stop-scrolling').css("overflow", "hidden");
+
 
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
@@ -73,28 +77,49 @@ function icontriming(width, height){
 	});
 }
 
-function lightboxtriming(){
-	var resizeClass    = '.imgbox img';
-	var thumnailHeight = 700;
-	var thumnailWidth  = 750;
-	var iw, ih;
+function lightboxtriming(_width, _height){
+	// 表示できる大きさを取得
+	var baseWidth = $('.imgbox').width();
+	var baseHeight = $('.imgbox').height();
 
+	// 画像の元サイズを取得
+	var newlWidth  = _width;
+	var newlHeight = _height;
+
+	// 画像サイズ、表示位置の設定
+	if(_width > _height ) {
+		newlWidth = baseWidth;
+		newlHeight = _height * (baseWidth / _width);
+	} else {
+		newlHeight = baseHeight;
+		newlWidth = _width * (baseHeight / _height);
+	}
+	var newTop = (baseHeight / 2) - (newlHeight / 2);
+	var newLeft = (baseWidth / 2) - (newlWidth / 2);
+
+
+	var resizeClass = '.imgbox img';
 	$(resizeClass).each(function(){
-		//====固定値====
-		$(this).height(thumnailHeight);
-		$(this).width(thumnailWidth);
-		$(this).css("height", 700+"px");
+		$(this).height(newlHeight);
+		$(this).width(newlWidth);
+		$(this).css("height", newlHeight+"px");
 		$(this).css("top", 0);
-		$(this).css("width", 750+"px");
-		$(this).css("left", 0);
-        //==============
+		$(this).css("width", newlWidth+"px");
+		$(this).css("left", newLeft);
+		$(this).css("background-color", "#fff");
 	});
 }
 
 //評価送信
 function sendEvaluation(){
     var param = $('#sendeva').serializeArray();
+    var point = param[1]['value'];
     var comment = param[2]['value'];
+
+    if(point < 1){
+    	alert('評価点数を決めてください。')
+    	return;
+    }
 
     // 入力文字数が30文字を超えた場合
     if(comment.length > 30){
@@ -121,6 +146,8 @@ function sendEvaluation(){
     	$('.lightboxview').remove();
     	$('.iconimg').remove();
     	$('.id').remove();
+    	$('.comment').remove();
+    	$('[name="kanso"]').val('');
     	$('body').removeClass("overflow");
     }).fail(function(){
     	alert('Fail');
@@ -136,7 +163,11 @@ function closeLightbox(){
 	$('.lightboxview').remove();
 	$('.iconimg').remove();
 	$('.id').remove();
+	$('.comment').remove();
+	$('[name="kanso"]').val('');
 	$('body').removeClass("overflow");
+
+	$('.stop-scrolling').css("overflow", "auto");
 }
 
 //評価送信
