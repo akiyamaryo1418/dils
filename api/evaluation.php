@@ -87,7 +87,7 @@ class evaluation {
                 );
             }
 
-            if($row != null) {
+            if($result[1] == null) {
                 $result[] = array_merge(
                     array(
                         'point'    => 0,

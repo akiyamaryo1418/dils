@@ -32,21 +32,16 @@ function Initialize(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		// console.log(JSON.stringify(data));
-		// console.log(data);
 		var result = data[0].iconPath.replace('view/', '');
 		$('.creatoricon').append($('<img src="'+result+'">'));
 		$('.penname').html(data[0].userName);
-
-		console.log(data);
-		console.log(data.length);
 		if(data[0].id != -999) {
 			// ここで値を取得し、表示する
 			for(var index = 0; index < data.length; index++){
 				var result = data[index].img.replace('view/', '')
 				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
-				                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
-						              .append($('<img>').attr({'src': result}))));
+									  .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
+				                      .append($('<img>').attr({'src': result}))));
 			}
 		}
 	}).fail(function(){
@@ -88,13 +83,14 @@ function searchCategory(){
 		timeout  :  1000,
 	}).done(function(data, dataType){
 		//alert(data.length);
-		console.log(data);
+		//console.log(data);
 		$('.imgbox').remove();
 		if(data[0].id != -999) {
 			for(var index = 0; index < data.length; index++){
 				var result = data[index].img.replace('view/', '')
 				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
-				                      .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+',"'+result+'")'})
+				                      .append($('<a></a>').attr(
+				                    		  {'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
 						              .append($('<img>').attr({'src': result}))));
 			}
 		}
@@ -105,7 +101,7 @@ function searchCategory(){
 }
 
 // ライトボックスを開く
-function openLightbox(id,pass){
+function openLightbox(id,pass, width, height){
 	data = {
 			'model'  : 'evaluation',
 			'action' : 'index',
@@ -126,7 +122,7 @@ function openLightbox(id,pass){
 		icontriming(data[0].width, data[0].height);
 
 		$('#detailslightbox').append($('<img src="'+pass+'">'));
-		lightboxtriming();
+		lightboxtriming(width, height);
 		var intaverage =  6 - Math.floor(data[1].review);
 
 		for(var index = 1; index <= 5; index++){
@@ -154,6 +150,8 @@ function openLightbox(id,pass){
 			$('#star'+index+'').prop({'disabled':'disabled'});
 		}
 
+		//$('.stop-scrolling').css("overflow", "hidden");
+
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
 	}).fail(function(){
@@ -165,6 +163,7 @@ function closeLightbox(){
 	$('.lightboxview').remove();
 	$('.comment').remove();
 	$('.id').remove();
+	//$('.stop-scrolling').css("overflow", "auto");
 	//$('body').removeClass("overflow");
 }
 
@@ -180,23 +179,40 @@ function icontriming(width, height){
 		$(this).css("width", 60+"px");
 		$(this).css("left", 0);
 	});
+
+
 }
 
-function lightboxtriming(){
-	var resizeClass    = '#detailslightbox img';
-	var thumnailHeight = 700;
-	var thumnailWidth  = 750;
-	var iw, ih;
+function lightboxtriming(_width, _height){
+	// 表示できる大きさを取得
+	var baseWidth = $('.leftcontents .lightboximg').width();
+	var baseHeight = $('.leftcontents .lightboximg').height();
 
+	// 画像の元サイズを取得
+	var newlWidth  = _width;
+	var newlHeight = _height;
+
+	// 画像サイズ、表示位置の設定
+	if(_width > _height ) {
+		newlWidth = baseWidth;
+		newlHeight = _height * (baseWidth / _width);
+	} else {
+		newlHeight = baseHeight;
+		newlWidth = _width * (baseHeight / _height);
+	}
+	var newTop = (baseHeight / 2) - (newlHeight / 2);
+	var newLeft = (baseWidth / 2) - (newlWidth / 2);
+
+	// console.log(newLeft);
+
+	var resizeClass = '#detailslightbox img';
 	$(resizeClass).each(function(){
-		//====固定値====
-		$(this).height(thumnailHeight);
-		$(this).width(thumnailWidth);
-		$(this).css("height", 700+"px");
+		$(this).height(newlHeight);
+		$(this).width(newlWidth);
+		$(this).css("height", newlHeight+"px");
 		$(this).css("top", 0);
-		$(this).css("width", 750+"px");
-		$(this).css("left", 0);
-        //==============
+		$(this).css("width",newlWidth+"px");
+		$(this).css("left", newLeft+"px");
 	});
 }
 
