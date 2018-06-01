@@ -136,13 +136,14 @@ function openLightbox(id,pass){
 
 		for(var index = 1; index < data.length; index++){
 			var starmark = '';
-			for(var starindex = 1; starindex <= index; starindex++){
+			for(var starindex = 1; starindex <= data[index].point; starindex++){
 				starmark = starmark + '★';
 			}
 
 			$('.commentbox').append($('<dl class="lightboxview"></dl>')
                             .append($('<dt></dt>').html(data[index].created_at))
-                            .append($('<dd></dd>').html(data[index].comment)));
+                            .append($('<dd></dd>').html(starmark)))
+                            .append($('<pre class="comment"></pre>').html(data[index].comment));
 		}
 
 		if(intaverage != 6){
@@ -162,6 +163,7 @@ function openLightbox(id,pass){
 
 function closeLightbox(){
 	$('.lightboxview').remove();
+	$('.comment').remove();
 	$('.id').remove();
 	//$('body').removeClass("overflow");
 }
@@ -200,14 +202,14 @@ function lightboxtriming(){
 
 // コメント送信(評価)
 function postText(){
-	// アドレスの「?」以降のパラメータを取得
-	var adrsid = location.search;
-	// 先頭の「?」をカット
-	adrsid = adrsid.substring(1);
-	id = unescape(adrsid);
-
 	var param = $('#sendeva').serializeArray();
+	var point = param[1]['value'];
 	var comment = param[2]['value'];
+
+	if(point < 1){
+    	alert('評価点数を決めてください。')
+    	return;
+    }
 
     // 入力文字数が30文字を超えた場合
     if(comment.length > 30){
@@ -228,9 +230,8 @@ function postText(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//alert(JSON.stringify(data));
-    	//location.href = "../html/designerdetails.html?"+id;
     	$('.lightboxview').remove();
+    	$('.comment').remove();
     	$('.id').remove();
     }).fail(function(){
     	alert('Fail');

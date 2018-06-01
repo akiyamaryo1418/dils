@@ -34,7 +34,7 @@ function openLightbox(id,pass){
 
 		for(var index = 1; index < data.length; index++){
 			var starmark = '';
-			for(var starindex = 1; starindex <= index; starindex++){
+			for(var starindex = 1; starindex <= data[index].point; starindex++){
 				starmark = starmark + '★';
 			}
 
@@ -94,7 +94,13 @@ function lightboxtriming(){
 //評価送信
 function sendEvaluation(){
     var param = $('#sendeva').serializeArray();
+    var point = param[1]['value'];
     var comment = param[2]['value'];
+
+    if(point < 1){
+    	alert('評価点数を決めてください。')
+    	return;
+    }
 
     // 入力文字数が30文字を超えた場合
     if(comment.length > 30){
@@ -120,6 +126,7 @@ function sendEvaluation(){
     	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
     	$('.lightboxview').remove();
     	$('.iconimg').remove();
+    	$('.comment').remove();
     	$('.id').remove();
     	$('body').removeClass("overflow");
     }).fail(function(){
@@ -136,6 +143,7 @@ function closeLightbox(){
 	$('.lightboxview').remove();
 	$('.iconimg').remove();
 	$('.id').remove();
+	$('.comment').remove();
 	$('body').removeClass("overflow");
 }
 
