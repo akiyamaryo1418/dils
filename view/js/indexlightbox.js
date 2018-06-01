@@ -14,10 +14,12 @@ function openLightbox(id,pass){
         data     :  data,
         timeout  :  1000,
 	}).done(function(data, dataType){
-		$('.iconbox').append('<img class="iconimg" src="'+data[0]+'">');
-		$('.illustname').html(data[0]);
-		$('.illustratorname').html(data[0]);
-		icontriming(data[0], data[0]);
+		console.log(data);
+		var icon = data[0].filePath.replace('view/', '');
+		$('.iconbox').append('<img class="iconimg" src="'+icon+'">');
+		$('.illustname').html(data[0].imageName);
+		$('.illustratorname').html(data[0].userName);
+		icontriming(data[0].width, data[0].height);
 
 		$('.imgbox').append('<img class="lightboxview" id="lightboxid_"'+id+'"  src="'+pass+'">')
 		$(".lightbox_view, #lightboxid_"+id+"").fadeIn();   // 第1引数・・・背景？(class)  第2引数・・・拡大写真(class)

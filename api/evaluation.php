@@ -44,7 +44,7 @@ class evaluation {
             $filePath = '../view/images/creator/Share/default.png';
 
             foreach( $this->exts as $ext) {
-                $imageTmpName = $id.'_icon.'.$ext;
+                $imageTmpName = $userId.'_icon.'.$ext;
                 $tmpPath = '../view/images/creator/'.$fileName.'/'.$imageTmpName;
                 if(is_file($tmpPath)) {
                     $filePath = $tmpPath;
