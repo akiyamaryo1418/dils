@@ -205,8 +205,6 @@ function lightboxtriming(_width, _height){
 	var newTop = (baseHeight / 2) - (newlHeight / 2);
 	var newLeft = (baseWidth / 2) - (newlWidth / 2);
 
-	// console.log(newLeft);
-
 	var resizeClass = '#detailslightbox img';
 	$(resizeClass).each(function(){
 		$(this).height(newlHeight);

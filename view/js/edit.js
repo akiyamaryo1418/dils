@@ -263,7 +263,7 @@ function resetcss(boxclass){
 	});
 }
 
-// 画像新規登録
+//画像新規登録
 function inputUpdateButton(){
 	var id = sessionStorage.getItem('userId');
 
@@ -282,10 +282,9 @@ function inputUpdateButton(){
         var param = [ id, name, fileName, category ];
         data.append('list', param);
 
-        console.log(param);
-
-
-        if(name != '') {
+        var file = $('#img'+(index+1)+'').val();
+        if(checkSendData(name, file)) {
+        	var errorName = name;
         	$.ajax({
         		url         : '../../api/controller.php',
         		type        : 'POST',
@@ -295,18 +294,40 @@ function inputUpdateButton(){
         		data        :  data,
         		timeout     :  1000,
         	}).done(function(data, dataType){
-         		console.log(JSON.stringify(data));
-        		location.href= "../html/mypage.html?" + id;
+        		if(data == -999) {
+        			var text = 'タイトル名「'+errorName+ '」の登録に失敗しました。';
+        			alert(text);
+        			// location.reload(true);
+        			location.href= "../html/mypage.html";
+        			return;
+        		}
+         		// console.log(JSON.stringify(data));
+        		// location.href= "../html/mypage.html?" + id;
         	}).fail(function(){
         		alert('NoData');
         	});
         }
     }
+
+    //
 }
 
 //バリデーションチェック
-function checkValidation(){
+function checkSendData(_name, _file){
 
-	alert('作品名を入力してください');
-	return false;
+	if(_name == '' && _file == null) {
+		return false;
+	}
+
+	// 入力文字数が30文字を超えた場合
+    if(_name.length > 20){
+    	alert('タイトルは20文字までしか登録できません。');
+    	return false;
+    }
+
+    /*if(_file == null) {
+    	alert('ファイルが選択されていません。');
+    	return false;
+    }*/
+	return true;
 }
