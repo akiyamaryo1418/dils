@@ -14,6 +14,11 @@ function openLightbox(id,pass){
         data     :  data,
         timeout  :  1000,
 	}).done(function(data, dataType){
+		$('.iconbox').append('<img class="iconimg" src="'+data[0]+'">');
+		$('.illustname').html(data[0]);
+		$('.illustratorname').html(data[0]);
+		icontriming(data[0], data[0]);
+
 		$('.imgbox').append('<img class="lightboxview" id="lightboxid_"'+id+'"  src="'+pass+'">')
 		$(".lightbox_view, #lightboxid_"+id+"").fadeIn();   // 第1引数・・・背景？(class)  第2引数・・・拡大写真(class)
 		$('body').addClass("overflow");
@@ -39,7 +44,7 @@ function openLightbox(id,pass){
 		}
 
 		if(intaverage != 6){
-			$('#star'+intaverage+'').prop({'checked': 'checked'});
+			$('#star'+intaverage+'').prop({'checked':'checked'});
 		}
 
 		for(var index = 1; index <= 5; index++){
@@ -51,6 +56,20 @@ function openLightbox(id,pass){
 	}).fail(function(){
         alert('no');
 	})
+}
+
+function icontriming(width, height){
+	var resizeClass    = '.iconbox img';
+	var iconHeight     =  60;
+	var iconWidth      =  60;
+	var iw, ih;
+
+	$(resizeClass).each(function(){
+		$(this).css("height", 60+"px");
+		$(this).css("top",  0);
+		$(this).css("width", 60+"px");
+		$(this).css("left", 0);
+	});
 }
 
 function lightboxtriming(){
@@ -102,6 +121,7 @@ function closeLightbox(){
 	//alert(memid);
 	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
 	$('.lightboxview').remove();
+	$('.iconimg').remove();
 	$('.id').remove();
 	$('body').removeClass("overflow");
 }

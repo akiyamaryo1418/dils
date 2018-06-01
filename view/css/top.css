@@ -275,6 +275,21 @@ div.item {
 
 /*;;;;;;;;;;ライトボックス;;;;;;;;;*/
 
+/*;;;;;;;;;;投稿者アイコン;;;;;;;;;;*/
+div.iconbox{
+	width    : 60px;
+	height   : 60px;
+	float    : left;
+	overflow : hidden;
+}
+
+.iconbox img {
+	position :relative;
+}
+
+
+/*;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;*/
+
 .lightbox_view{
   display: none;
   position: fixed;
