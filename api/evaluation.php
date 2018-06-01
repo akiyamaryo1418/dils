@@ -63,7 +63,7 @@ class evaluation {
             );
         }
 
-        $sql = "SELECT eva.comment, eva.created_at, work.designer_id, work.average_point "
+        $sql = "SELECT eva.point, eva.comment, eva.created_at, work.designer_id, work.average_point "
               ."FROM evaluations AS eva "
               ."INNER JOIN works AS work ON work.id = eva.work_id "
               ."WHERE eva.work_id = ".$id
@@ -79,6 +79,7 @@ class evaluation {
                 $newDay = substr( $row->created_at , 0 , strlen($row->created_at)-$cut);
                 $result[] = array_merge(
                     array(
+                        'point'    => $row->point,
                         'comment'    => $row->comment,
                         'created_at' => $newDay,
                         'review'     => $row->average_point,
@@ -89,6 +90,7 @@ class evaluation {
             if($row != null) {
                 $result[] = array_merge(
                     array(
+                        'point'    => 0,
                         'comment'    => '',
                         'created_at' => '',
                         'review'     => 0,

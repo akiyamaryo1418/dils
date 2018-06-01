@@ -434,7 +434,7 @@ class user {
             $stmt->execute();
 
             $sql = "DELETE works, evaluations FROM works "
-                  ."INNER JOIN evaluations  AS eva ON works.id = eva.work_id "
+                  ."LEFT JOIN evaluations  AS eva ON works.id = eva.work_id "
                   ."WHERE works.id = ".$id
             ;
             $stmt = $this->dbm->dbh->prepare($sql);
