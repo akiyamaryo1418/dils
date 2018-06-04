@@ -139,7 +139,7 @@ class evaluation {
 
         if($flag)
         {
-            $result = 'succes';
+            $result = index($id);
         } else {
             $result = -999;
         }
