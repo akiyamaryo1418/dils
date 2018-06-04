@@ -3,6 +3,8 @@
 $(function(){
 	Initialize();
     moveHeadButton();
+
+    console.log(sessionStorage.getItem('userId'));
 });
 
 function Initialize(){
@@ -71,20 +73,22 @@ function initIllust(){
 	    	data     :  data,
 	    	timeout  :  1000,
 	    }).done(function(data, dataType){
-	    	//===ただの表示===
-	    	for(var index = 0; index < data.length; index++){
-	    		var result = data[index].img.replace('view/', '');
-	    		$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration'})
-	    					 .append($('<a></a>').attr(
-   				            		{'onclick':'openLightbox('+data[index].id+',"'+result+'", '+data[index].width+', '+data[index].height+')'})
-	    				     .html('<img src="'+result+'"'+
-	    		            	   'alt="'+data[index].imgname+'">'))
-	    		             .append($('<p></p>').html(data[index].imgname)));
-	    	}
-	        //================
-	    	triming();
-	    	$('#wrapper').append('<div class="cle"></div>');
-	    	$('.masonry').masonry({ itemSelector: '.item', columnWidth : 300 });
+	    	//if(data == -999) {
+	    		//===ただの表示===
+		    	for(var index = 0; index < data.length; index++){
+		    		var result = data[index].img.replace('view/', '');
+		    		$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration'})
+		    					 .append($('<a></a>').attr(
+	   				            		{'onclick':'openLightbox('+data[index].id+',"'+result+'", '+data[index].width+', '+data[index].height+')'})
+		    				     .html('<img src="'+result+'"'+
+		    		            	   'alt="'+data[index].imgname+'">'))
+		    		             .append($('<p></p>').html(data[index].imgname)));
+		    	}
+		        //================
+		    	triming();
+		    	$('#wrapper').append('<div class="cle"></div>');
+		    	$('.masonry').masonry({ itemSelector: '.item', columnWidth : 300 });
+	    	//}
 	    	resolve();
 	    	//===============
 	    }).fail(function(){

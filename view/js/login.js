@@ -7,18 +7,15 @@ $(function(){
 // ログインボタン
 function inputLoginButton(){
 
-	if(checkValidation() == false)
+	if(checkValidation() == false) {
 		return;
-
+	}
 	var param = $('#login').serializeArray();
-
 	data = {
 		'model'  : 'user',
 		'action' : 'login',
 		'list'   :  param
 	}
-
-	//alert(JSON.stringify(param));
 
 	$.ajax({
 		url      : '../../api/controller.php',
@@ -27,14 +24,11 @@ function inputLoginButton(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-
-		//alert(JSON.stringify(id));
 		var id = data;
-		sessionStorage.setItem('userId', id);
-
 		if(id == -999){
 			alert('ユーザ名かパスワードが違います。');
 		}else{
+			sessionStorage.setItem('userId', id);
 			location.href = "../html/index.html";
 		}
 	}).fail(function(){
@@ -57,7 +51,7 @@ function checkValidation(){
 	}
 
 	if(password == "")
-		string = string + 'パスワード入力してください。';
+		string = string + 'パスワードを入力してください。';
 
 	if(string != ""){
 		alert(string);
