@@ -5,8 +5,6 @@ require_once('illustration.php');
 require_once('evaluation.php');
 require_once('category.php');
 
-
-
 if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
 {

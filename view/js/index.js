@@ -3,8 +3,6 @@
 $(function(){
 	Initialize();
     moveHeadButton();
-
-    console.log(sessionStorage.getItem('userId'));
 });
 
 function Initialize(){
@@ -43,7 +41,6 @@ function initCategory(){
 			data:categorydata,
 			timeout:1000,
 	    }).done(function(categorydata, dataType){
-
 	    	for(var index = 0; index < categorydata.length; index++){
 	    		$('.SearchBoxfilter').append('<input type="checkbox" name="checkbox" id="categoryid_'+ categorydata[index].id +'" value="'+ categorydata[index].id +'" checked="checked" onchange="searchCategory();">')
 	            .append($('<label></label>').attr({'for':'categoryid_'+categorydata[index].id, 'class':'check_css'}).html(categorydata[index].name));

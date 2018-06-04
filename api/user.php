@@ -430,7 +430,7 @@ class user {
             $sql = "DELETE designers AS des, works, evaluations FROM designers "
                   ."LEFT JOIN works  AS work ON des.id = work.designer_idse "
                   ."LEFT JOIN evaluations  AS eva ON works.id = eva.work_id "
-                  ."WHERE works.id = ".$id
+                  ."WHERE works.id = ".$id;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
             $result = 'succes';
