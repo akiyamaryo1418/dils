@@ -165,7 +165,7 @@ class user {
                 $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'あ' AND 'の' ORDER BY name ASC";
                 break;
             case 'han':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci  ETWEEN 'は' AND 'ん' ORDER BY name ASC";
+                $conditions = "WHERE name COLLATE utf8_unicode_ci  BETWEEN 'は' AND 'ん' ORDER BY name ASC";
                 break;
             case 'am':
                 $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'a' AND 'm' ORDER BY name ASC";
@@ -427,15 +427,10 @@ class user {
             array_map('rmdir',  array_filter($paths, 'is_dir'));
 
             // DB上のデータの削除
-            // ユーザー
-            $sql = "DELETE FROM designers WHERE id = '".$id."'";
-            $stmt = $this->dbm->dbh->prepare($sql);
-            $stmt->execute();
-
-            $sql = "DELETE works, evaluations FROM works "
+            $sql = "DELETE designers AS des, works, evaluations FROM designers "
+                  ."LEFT JOIN works  AS work ON des.id = work.designer_idse "
                   ."LEFT JOIN evaluations  AS eva ON works.id = eva.work_id "
                   ."WHERE works.id = ".$id
-            ;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
             $result = 'succes';
