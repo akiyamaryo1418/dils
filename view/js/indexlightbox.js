@@ -141,7 +141,6 @@ function sendEvaluation(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//alert('Success');
     	var memid = $('.id').val();
     	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
     	$('.lightboxview').remove();
@@ -159,7 +158,6 @@ function sendEvaluation(){
 function closeLightbox(){
 	var memid = $('.id').val();
 
-	//alert(memid);
 	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
 	$('.lightboxview').remove();
 	$('.iconimg').remove();
@@ -170,27 +168,3 @@ function closeLightbox(){
 
 	$('.stop-scrolling').css("overflow", "auto");
 }
-
-//評価送信
-/*function sendEvaluation(){
-    var param = $('#sendeva').serializeArray();
-    alert(JSON.stringify(param));
-
-    data = {
-    	'model'  : 'evaluation',
-    	'action' : 'insert',
-    	'list'   :  param
-    };
-
-    $.ajax({
-    	type     : 'POST',
-    	url      : '../../api/controller.php',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-    	//alert('Success');
-    }).fail(function(){
-    	alert('Fail');
-    });
-}*/

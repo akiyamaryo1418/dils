@@ -97,7 +97,6 @@ function sendIllustEdit() {
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//alert('Success');
     	location.reload(true);
     	console.log(data);
     }).fail(function(){
@@ -123,7 +122,6 @@ function deleteIllust() {
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//alert('Success');
     	location.reload(true);
     	console.log(data);
     }).fail(function(){

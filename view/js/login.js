@@ -18,7 +18,6 @@ function inputLoginButton(){
 		'list'   :  param
 	}
 
-	//alert(JSON.stringify(param));
 
 	$.ajax({
 		url      : '../../api/controller.php',
