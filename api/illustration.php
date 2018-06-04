@@ -146,15 +146,19 @@ class illustration {
     // 登録
     // ================================================================
     public function insert($data, $fileData = null) {
-        $result = 'test';
+        $result = '';
 
         // ファイルデータの確認
         if($fileData == null) {
-            $result = '-999';
+            $result = 'no file';
             echo json_encode( $result );
             return;
         }
 
+        $newData = explode(",", $data);
+        $designerId = $newData[0];
+        $name = $newData[1];
+        $categoryId = $newData[3];
 
 
         // IDからユーザー名を取得
@@ -170,7 +174,7 @@ class illustration {
 
         // SQLミス、ファイル名の取得ミス
         if(!$flag || $designerName == '') {
-            $result = '-999';
+            $result = 'miss sql';
             echo json_encode( $result );
             return;
         }
@@ -194,7 +198,7 @@ class illustration {
                 $result = 'success';
             } else{
                 // アップロードミス
-                $result =  '-999';
+                $result =  'miss upload';
             }
         } else {
             // SQL失敗

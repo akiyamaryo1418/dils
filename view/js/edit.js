@@ -233,7 +233,6 @@ new Vue({
 
 //トリミング
 function triming(boxclass){
-	console.log(boxclass);
 
 	var resizeClass    = boxclass + '.img-box img';
 	var thumnailWidth  = 250;
@@ -265,7 +264,7 @@ function resetcss(boxclass){
 
 //画像新規登録
 function inputUpdateButton(){
-	var id = sessionStorage.getItem('userId');
+
 
     // 毎回通信する
     for(var index = 0; index < 8; index++){
@@ -277,7 +276,7 @@ function inputUpdateButton(){
     	var name = $('.text'+(index+1)+'').val();
     	var category = $('#categoryid_'+(index+1)+'').val();
 
-
+    	var id = sessionStorage.getItem('userId');
     	var fileName = 'img'+ (index + 1) + '';
         var param = [ id, name, fileName, category ];
         data.append('list', param);
@@ -294,40 +293,43 @@ function inputUpdateButton(){
         		data        :  data,
         		timeout     :  1000,
         	}).done(function(data, dataType){
-        		if(data == -999) {
+        		if(data != 'success') {
         			var text = 'タイトル名「'+errorName+ '」の登録に失敗しました。';
         			alert(text);
-        			// location.reload(true);
-        			location.href= "../html/mypage.html";
+        			location.href= "../html/edit.html";
         			return;
         		}
-         		// console.log(JSON.stringify(data));
-        		// location.href= "../html/mypage.html?" + id;
+
         	}).fail(function(){
         		alert('NoData');
         	});
         }
     }
-
-    //
+    alert('画像の登録が完了しました。');
+    location.href= "../html/mypage.html";
 }
 
 //バリデーションチェック
 function checkSendData(_name, _file){
 
-	if(_name == '' && _file == null) {
+	if(_name == '' && _file == '') {
+		return false;
+	}
+
+	if(_name != '' && _file == '') {
+		alert('ファイルに画像がありません。');
+		return false;
+	}
+
+	if(_name == '' && _file != '') {
+		alert('作品のタイトルを入力してください。');
 		return false;
 	}
 
 	// 入力文字数が30文字を超えた場合
-    if(_name.length > 20){
+    if(_name.length > 20 && _file != ''){
     	alert('タイトルは20文字までしか登録できません。');
     	return false;
     }
-
-    /*if(_file == null) {
-    	alert('ファイルが選択されていません。');
-    	return false;
-    }*/
 	return true;
 }
