@@ -8,6 +8,7 @@ $(function(){
 function Initialize(){
 	// アドレスの「?」以降のパラメータを取得
     var id = sessionStorage.getItem('userId');
+
 	var param = { 'id' : id };
 
     data= {
@@ -26,8 +27,6 @@ function Initialize(){
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').val(data[0].userName);
-
-    	console.log("aaa");
 
     	if(data[0].id != -999) {
     		for(var index = 0; index < data.length; index++){
