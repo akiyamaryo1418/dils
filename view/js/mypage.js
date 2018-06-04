@@ -8,6 +8,7 @@ $(function(){
 function Initialize(){
 	// アドレスの「?」以降のパラメータを取得
     var id = sessionStorage.getItem('userId');
+
 	var param = { 'id' : id };
 
     data= {
@@ -82,7 +83,6 @@ new Vue({
 
 //トリミング
 function triming(){
-
 	var resizeClass    = '.creatoricon img';
 	var thumnailWidth  = 150;
 	var thumnailHeight = 150;

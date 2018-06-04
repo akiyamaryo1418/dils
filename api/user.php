@@ -1,4 +1,3 @@
-
 <?php
 require_once('databaseManager.php');
 header('Content-type:application/json; charset=utf8');
