@@ -163,9 +163,9 @@ input[type=radio]{
 	display:none;
 }
 
-input[type="radio"]:checked + label{
+/*input[type="radio"]:checked + label{
 	background: rgba(255, 128, 128, 0.8);
-}
+}*/
 
 label{
     cursor: pointer;
@@ -250,6 +250,7 @@ input[type=checkbox]:checked + .check_css:before {
   position: relative;
   max-width: 1525px;
   margin: 0 auto;
+  min-height: 150px;
 }
 
 .masonry {
@@ -302,8 +303,9 @@ div.iconbox{
   left: 0px;
   z-index: 10000;
   width: 100%;
+  min-width: 1520px;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .usernamebox {
@@ -322,7 +324,7 @@ div.iconbox{
 
 .usernamebox .textbox {
   float: left;
-  width: 100px;
+  width: 400px;
   margin: 16px 0;
   color: #fff;
 }
@@ -334,7 +336,7 @@ div.iconbox{
 .leftcontents {
   float: left;
   width: 750px;
-  margin: 60px 50px 0 200px;
+  margin: 60px 50px 0 300px;
   /*background: #fff;*/
 }
 
@@ -345,7 +347,7 @@ div.iconbox{
   float   : left;
   overflow: hidden;
   /*border  : 1px solid #eee;*/
-  /*background: #ff0033;*/
+  background: #fff;
 }
 
 .imgbox img {

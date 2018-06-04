@@ -26,6 +26,7 @@ function openLightbox(id,pass,width, height){
 		$('body').addClass("overflow");
 		lightboxtriming(width, height);
 
+		console.log(data);
 		var intaverage =  6 - Math.floor(data[1].review);
 
 		for(var index = 1; index <= 5; index++){

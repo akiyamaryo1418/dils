@@ -6,12 +6,6 @@ $(function(){
 
 // 初期化
 function Initialize(){
-	/*var id = location.search;
-    if(id.charAt(0) == '?'){
-    	id = id.substring(1);
-        $('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
-                       .html('<a href="mypage.html?'+id+'">MYPAGE</a>');
-    }*/
 	var id = sessionStorage.getItem('userId');
 	if(id != null) {
 		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
@@ -60,7 +54,7 @@ new Vue({
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
-			triming();
+			triming('.box2 ');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -87,7 +81,7 @@ new Vue({
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
-			triming();
+			triming('.box3 ');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -114,7 +108,7 @@ new Vue({
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
-			triming();
+			triming('.box4 ');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -141,7 +135,7 @@ new Vue({
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
-			triming();
+			triming('.box5 ');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -168,7 +162,7 @@ new Vue({
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
-			triming();
+			triming('.box6 ');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -195,7 +189,7 @@ new Vue({
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
-			triming();
+			triming('.box7 ');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -222,7 +216,7 @@ new Vue({
 			if(!files.length)
 				return;
 			this.createImage(files[0]);
-			triming();
+			triming('.box8 ');
 		},
 		// アップロードした画像を表示
 		createImage(file){
@@ -240,39 +234,16 @@ new Vue({
 //トリミング
 function triming(boxclass){
 
-
 	var resizeClass    = boxclass + '.img-box img';
-	//alert(resizeClass);
 	var thumnailWidth  = 250;
 	var thumnailHeight = 250;
 	var iw, ih;
 
-	alert('dds');
 
 	$(resizeClass).each(function(){
 		var w = $(this).width();   // 画像の幅(原寸)
 		var h = $(this).height();  // 画像の高さ(原寸)
 
-		/*$(this).css("height", "");
-		$(this).css("top", "");
-		$(this).css("width", "");
-		$(this).css("left", "");
-
-		// 横長の画像の場合
-		/*if(w >= h){
-			iw = (thumnailHeight / h * w - thumnailWidth) / 2
-			$(this).height(thumnailHeight);    // 高さをサムネイルに合わせる
-			$(this).css("top", 0);
-			$(this).css("left", "-"+iw+"px");  // 画像のセンター合わせ
-		}
-
-		// 縦長の画像の場合
-		else{
-			ih = (thumnailWidth / w * h - thumnailHeight) / 2
-			$(this).width(thumnailWidth);      // 幅をサムネイルに合わせる
-			$(this).css("top","-"+ih+"px");    // 画像のセンター合わせ
-			$(this).css("left", 0);
-		}*/
 		$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);
 		$(this).css("height", 250+"px");
@@ -291,14 +262,9 @@ function resetcss(boxclass){
 	});
 }
 
-// 画像新規登録
+//画像新規登録
 function inputUpdateButton(){
 
-    //var id = location.search;
-	//id = id.substring(1);
-	//id = 8;
-
-	var id = sessionStorage.getItem('userId');
 
     // 毎回通信する
     for(var index = 0; index < 8; index++){
@@ -310,15 +276,14 @@ function inputUpdateButton(){
     	var name = $('.text'+(index+1)+'').val();
     	var category = $('#categoryid_'+(index+1)+'').val();
 
-
+    	var id = sessionStorage.getItem('userId');
     	var fileName = 'img'+ (index + 1) + '';
         var param = [ id, name, fileName, category ];
         data.append('list', param);
 
-        console.log(param);
-
-
-        if(name != '') {
+        var file = $('#img'+(index+1)+'').val();
+        if(checkSendData(name, file)) {
+        	var errorName = name;
         	$.ajax({
         		url         : '../../api/controller.php',
         		type        : 'POST',
@@ -328,26 +293,43 @@ function inputUpdateButton(){
         		data        :  data,
         		timeout     :  1000,
         	}).done(function(data, dataType){
-         		console.log(JSON.stringify(data));
-        		location.href= "../html/mypage.html?" + id;
+        		if(data != 'success') {
+        			var text = 'タイトル名「'+errorName+ '」の登録に失敗しました。';
+        			alert(text);
+        			location.href= "../html/edit.html";
+        			return;
+        		}
+
         	}).fail(function(){
         		alert('NoData');
         	});
         }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/akiyama
-    // 下の関数を使ってみてください。
-    // location.reload(true);
+    alert('画像の登録が完了しました。');
+    location.href= "../html/mypage.html";
 }
 
 //バリデーションチェック
-function checkValidation(){
+function checkSendData(_name, _file){
 
+	if(_name == '' && _file == '') {
+		return false;
+	}
 
+	if(_name != '' && _file == '') {
+		alert('ファイルに画像がありません。');
+		return false;
+	}
 
-	alert('作品名を入力してください');
-	return false;
+	if(_name == '' && _file != '') {
+		alert('作品のタイトルを入力してください。');
+		return false;
+	}
+
+	// 入力文字数が30文字を超えた場合
+    if(_name.length > 20 && _file != ''){
+    	alert('タイトルは20文字までしか登録できません。');
+    	return false;
+    }
+	return true;
 }

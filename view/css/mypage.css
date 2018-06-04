@@ -115,7 +115,7 @@ header li a {
   width: 150px;
   height: 150px;
   margin: 10px 10px 0 10px;
-  background: #000;
+  background: #ddd;
 }
 
 #LeftBox .file_edit {
@@ -124,8 +124,9 @@ header li a {
 }
 
 #LeftBox .usernamebox {
-  width: 120px;
+  width: 165px;
   float: left;
+  margin: 20px 0 0 0;
 }
 
 #LeftBox span {
@@ -163,8 +164,16 @@ header li a {
   width: 100px;
 }
 
+#penname {
+  margin: 0 10px;
+}
+
+#penname input.penname {
+  width: 150px;
+}
+
 .buttonbox input {
-  width: 112px;
+  width: 150px;
   height: 40px;
   background: #000;
   color: #fff;
@@ -235,7 +244,7 @@ header li a {
 .myistbox li .imgbox {
   width: 125px;
   height: 125px;
-  background: #000;
+  background: #ddd;
 }
 
 .myistbox .textbox {
@@ -250,11 +259,11 @@ header li a {
 
  label {
   float: right;
-  margin-right: 104px;
+  margin-right: 89px;
 }
 
 label p {
-    width: 130px;
+    width: 150px;
     height: 24px;
     background: #000;
     color: #fff;

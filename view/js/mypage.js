@@ -27,37 +27,29 @@ function Initialize(){
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').val(data[0].userName);
 
-    	console.log(data);
+    	console.log("aaa");
 
-    	for(var index = 0; index < data.length; index++){
-    		var result = data[index].img.replace('view/', '');
-            $('.illustbox').append($('<li></li>')
-                          .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })
-                          .append($('<img src="'+result+'">')))
-                          .append($('<div></div>').attr({'class': 'textbox'})
-                          .append($('<p>'+data[index].imgname+'</p>'))
-                          //.append($('<p>カテゴリー</p>').attr({'class':'category'}))
-                          ));
-        }
-
-
-    	triming();
-    	illustTriming();
-    	//alert(JSON.stringify(data[0].username));
+    	if(data[0].id != -999) {
+    		for(var index = 0; index < data.length; index++){
+        		var result = data[index].img.replace('view/', '');
+                $('.illustbox').append($('<li></li>')
+                              .append($('<div></div>').attr({'class' : 'imgbox', 'id' : data[index].id })
+                              .append($('<img src="'+result+'">')))
+                              .append($('<div></div>').attr({'class': 'textbox'})
+                              .append($('<p>'+data[index].imgname+'</p>'))
+                              ));
+            }
+    		triming();
+        	illustTriming();
+    	}
     }).fail(function(){
     	alert('Nodata');
     });
-
-    /*if(id != null) {
-		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
-        .html('<a href="mypage.html">MYPAGE</a>');
-	}*/
 }
 
 // ユーザー名の編集
 function editUserName(){
 	var name = window.prompt("ユーザ名を入力してください","");
-
 	$('.penname').html(name);
 }
 
@@ -92,7 +84,6 @@ new Vue({
 
 //トリミング
 function triming(){
-
 	var resizeClass    = '.creatoricon img';
 	var thumnailWidth  = 150;
 	var thumnailHeight = 150;
@@ -137,8 +128,6 @@ function sendAccountEdit(){
     var name = $('.penname').val();
     var param = [id, name , 'datafile']
 
-    //alert(JSON.stringify(name));
-
 	data.append('list', param);
 
     $.ajax({
@@ -150,9 +139,7 @@ function sendAccountEdit(){
     	data        :  data,
     	timeout     :  1000,
     }).done(function(data, dataType){
-
     	location.href = "../html/index.html";
-        //alert(data);
     }).fail(function(){
     	alert('Nodata');
     });
@@ -165,7 +152,6 @@ function deleteAccount() {
     var data ={'model':'user', 'action':'delete', 'list':id};
 
     if(window.confirm('このユーザーを削除しますか？')){
-
     	$.ajax({
         	url         : '../../api/controller.php',
         	type        : 'POST',
@@ -173,6 +159,7 @@ function deleteAccount() {
         	data        :  data,
         	timeout     :  1000,
         }).done(function(data, dataType){
+        	sessionStorage.removeItem('userId');
         	location.href = "../html/index.html";
         }).fail(function(){
         	alert('Nodata');
@@ -191,5 +178,5 @@ function logout(){
 
 // 編集画面へ
 function moveEdit(){
-	ocation.href = "../html/edit.html"
+	location.href = "../html/edit.html"
 }
