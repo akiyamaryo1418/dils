@@ -24,7 +24,7 @@ class category {
         {
             $return_list[] = array(
                 'id'   => $row->id,
-                'name' => $row->name
+                'name' => $row->name,
             );
         }
         // jsonに変換して返す
