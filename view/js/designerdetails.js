@@ -137,7 +137,7 @@ function openLightbox(id,pass, width, height){
 				starmark = starmark + '★';
 			}
 
-			$('.commentbox').append($('<dl class="lightboxview"></dl>')
+			$('.commentbox').append($('<dl class="comment"></dl>')
                             .append($('<dt></dt>').html(data[index].created_at))
                             .append($('<dd></dd>').html(starmark)))
                             .append($('<pre class="comment"></pre>').html(data[index].comment));
@@ -181,8 +181,6 @@ function icontriming(width, height){
 		$(this).css("width", 60+"px");
 		$(this).css("left", 0);
 	});
-
-
 }
 
 function lightboxtriming(_width, _height){
@@ -230,7 +228,7 @@ function postText(){
 
     // 入力文字数が30文字を超えた場合
     if(comment.length > 30){
-    	alert('入力文字数が多すぎます。');
+    	alert('入力文字数が多すぎます。\n入力できる文字数は30文字までです。');
     	return;
     }
 
@@ -247,11 +245,28 @@ function postText(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	$(".lightbox_view").fadeOut(100);
-    	$('.lightboxview').remove();
+    	//$(".lightbox_view").fadeOut(100);
+    	//$('.lightboxview').remove();
+
     	$('.comment').remove();
+    	for(var index = 1; index <= 5; index++){
+			$('#starbutton'+index+'').prop('checked', false);
+		}
+
+    	for(var index = 1; index < data.length; index++){
+			var starmark = '';
+			for(var starindex = 1; starindex <= data[index].point; starindex++){
+				starmark = starmark + '★';
+			}
+
+			$('.commentbox').append($('<dl class="comment"></dl>')
+                            .append($('<dt></dt>').html(data[index].created_at))
+                            .append($('<dd></dd>').html(starmark)))
+                            .append($('<pre class="comment"></pre>').html(data[index].comment));
+		}
+
     	$('[name="kanso"]').val('');
-    	$('.id').remove();
+    	//$('.id').remove();
     }).fail(function(){
     	alert('Fail');
     });
