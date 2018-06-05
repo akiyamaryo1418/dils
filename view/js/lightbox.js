@@ -96,7 +96,6 @@ function sendIllustEdit() {
     	timeout  :  1000,
     }).done(function(data, dataType){
     	location.reload(true);
-    	console.log(data);
     }).fail(function(){
     	alert('Fail');
     });

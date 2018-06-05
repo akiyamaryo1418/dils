@@ -313,7 +313,7 @@ function inputUpdateButton(){
 	console.log("data");
 
     // 毎回通信する
-    for(var index = 0; index < 8; index++){
+    for(var index = 0; index < 4; index++){
     	var data = new FormData($('#send').get(0));
     	data.append('model',  'illustration');
     	data.append('action', 'insert');

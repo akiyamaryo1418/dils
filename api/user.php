@@ -164,40 +164,7 @@ class user {
     public function index($data) {
         $result;
 
-        $conditions = "";
-
-        // $sql = "SELECT id, name FROM designers WHERE name LIKE '%".$data[0][value]."%'";
-
-        switch ($data[0][value]) {
-            case 'all':
-                $conditions = "ORDER BY id ASC";
-                break;
-            case 'ano':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'あ' AND 'の' ORDER BY name ASC";
-                break;
-            case 'han':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci  BETWEEN 'は' AND 'ん' ORDER BY name ASC";
-                break;
-            case 'am':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'a' AND 'm' ORDER BY name ASC";
-                break;
-            case 'nz':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci BETWEEN 'n' AND 'z' ORDER BY name ASC";
-                break;
-            case 'other':
-                $conditions = "WHERE name COLLATE utf8_unicode_ci NOT BETWEEN 'a' AND 'ん' ORDER BY name ASC";
-                break;
-            default:
-                $conditions = 'error';
-                break;
-        }
-
-        if($conditions == 'error') {
-            echo json_encode( 'default_error' );
-            return;
-        }
-
-        $sql = "SELECT id, name FROM designers ".$conditions;
+        $sql = "SELECT id, name FROM designers WHERE name LIKE '%".$data[0][value]."%'";
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
@@ -239,10 +206,10 @@ class user {
         $newData = explode(",", $data);
         $name = $newData[0];
         $inputPassword = $newData[1];
-        $address = $newData[2];
+        $address = $newData[3];
 
         // 名前、パスワードがない場合
-        if($name == null || $inputPassword == null) {
+        if($name == null || $inputPassword == null || $address == null) {
             $result = -999;
             echo json_encode( $result );
             return;

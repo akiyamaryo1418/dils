@@ -41,12 +41,8 @@ function Initialize(){
                               .append($('<div></div>').attr({'class': 'textbox'})
                               .append($('<p>'+data[index].imgname+'</p>'))
                               ));
-
-                trimingIllust('.imgbox', data[0].width, data[0].height);
+                trimingIllust('#'+data[index].id+'', data[index].width, data[index].height);
             }
-
-    		// illustTriming();
-
 
     	}
     }).fail(function(){
@@ -104,9 +100,11 @@ function trimingIllust(_class, _width, _height){
 	if(_width > _height ) {
 		newlWidth = baseWidth;
 		newlHeight = _height * (baseWidth / _width);
+		console.log("aaa");
 	} else {
 		newlHeight = baseHeight;
 		newlWidth = _width * (baseHeight / _height);
+		console.log("bbb");
 	}
 	var newTop = (baseHeight / 2) - (newlHeight / 2);
 	var newLeft = (baseWidth / 2) - (newlWidth / 2);
@@ -115,7 +113,7 @@ function trimingIllust(_class, _width, _height){
 		$(this).height(newlHeight);
 		$(this).width(newlWidth);
 		$(this).css("height", newlHeight+"px");
-		$(this).css("top", newTop);
+		$(this).css("top", newTop+"px");
 		$(this).css("width",newlWidth+"px");
 		$(this).css("left", newLeft+"px");
 	});
