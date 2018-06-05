@@ -59,7 +59,7 @@ class user {
             return;
         }
 
-        $sql = "SELECT des.name AS d_name, work.id, work.name, work.category_id "
+        $sql = "SELECT des.name AS d_name, des.address, work.id, work.name, work.category_id "
               ."FROM designers AS des "
               ."INNER JOIN works AS work "
               ."WHERE des.id = work.designer_id "
@@ -107,6 +107,7 @@ class user {
                 'height'   => $size[1],     // 画像の縦幅
                 'imgname'  => $row->name,   // 作品名
                 'userName' => $row->d_name, // 制作者名
+                'address'  => $row->address,// メールアドレス
                 'iconPath' => $iconPath,    // アイコンパス
                 'category_id' => $row->category_id,    // カテゴリーのID
             );
@@ -114,7 +115,7 @@ class user {
 
 
        if($result == null) {
-            $sql = "SELECT name FROM designers WHERE id = ".$designerId;
+            $sql = "SELECT name, address FROM designers WHERE id = ".$designerId;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
 
@@ -140,6 +141,7 @@ class user {
                     'height'   => 0,     // 画像の縦幅
                     'imgname'  => '',   // 作品名
                     'userName' => $name, // 制作者名
+                    'address'  => $row->address,// メールアドレス
                     'iconPath' => $iconPath,    // アイコンパス
                 );
             }
@@ -228,6 +230,7 @@ class user {
         $newData = explode(",", $data);
         $name = $newData[0];
         $inputPassword = $newData[1];
+        $address = $newData[2];
 
         // 名前、パスワードがない場合
         if($name == null || $inputPassword == null) {
@@ -243,8 +246,8 @@ class user {
         ];
         $password = password_hash($inputPassword, PASSWORD_BCRYPT, $options);
 
-        $sql = "INSERT INTO designers(name, password) "
-              ."VALUES ('".$name."', '".$password."')"
+        $sql = "INSERT INTO designers(name, password, address) "
+              ."VALUES ('".$name."', '".$password."', '".$address."')"
         ;
         $stmt = $this->dbm->dbh->prepare($sql);
         $stmt->execute();
@@ -316,6 +319,7 @@ class user {
         $newData = explode(",", $data);
         $id = $newData[0];
         $name = $newData[1];
+        $address = $newData[3];
 
         // 名前がない場合
         if($id == null || $name == null) {
@@ -350,7 +354,8 @@ class user {
         rename( $oldPath, $newPath );
 
         // 情報登録
-        $sql = "UPDATE designers SET name = '".$name."' WHERE id = " .$id;
+        $sql = "UPDATE designers SET name = '".$name."', address = '".$address."' "
+              ."WHERE id = " .$id;
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 

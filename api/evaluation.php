@@ -140,11 +140,12 @@ class evaluation {
 
         if($flag)
         {
-            $result = index($id);
+            $this->index($id);
         } else {
             $result = -999;
+            echo json_encode( $result );
         }
-        echo json_encode( $result );
+
     }
 }
 

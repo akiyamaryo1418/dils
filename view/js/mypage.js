@@ -27,7 +27,7 @@ function Initialize(){
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').val(data[0].userName);
-
+    	$('.mail').val(data[0].address);
     	sessionStorage.setItem('iconPath', result);
 
     	if(data[0].id != -999) {
@@ -129,11 +129,12 @@ function sendAccountEdit(){
 
 	var id = sessionStorage.getItem('userId');
     var name = $('.penname').val();
-    var param = [id, name , 'datafile']
+    var address = $('.mail').val();
+    var param = [id, name , 'datafile', address];
 	data.append('list', param);
 
     var file = $('#imgadd');
-	if(checkSendData(name, file)){
+	if(checkSendData(name, file, address)){
 		$.ajax({
 	    	url         : '../../api/controller.php',
 	    	type        : 'POST',
@@ -153,11 +154,17 @@ function sendAccountEdit(){
 }
 
 //バリデーションチェック
-function checkSendData(_name, _file){
+function checkSendData(_name, _file, _address){
 
-	if(_name == '') {
-		alert('ユーザー名を入力してください。');
-		return false;
+	var flag = true;
+	var message = '';
+
+	if(_name == ""){
+		message = 'ユーザ名を入力してください。';
+		flag = false;
+	}else if(_name.includes(',') == true){
+		message = 'カンマは使用できません。';
+		flag = false;
 	}
 
     var lg = _file[0].files.length;
@@ -166,16 +173,43 @@ function checkSendData(_name, _file){
     	for (var i = 0; i < lg; i++) {
             var fileSize = items[i].size;
             if(fileSize >= 2000000){
-            	alert('アイコンのファイルサイズは 2MB より小さくしてください.');
 
-            	// 前のアイコン画像に戻す
-            	var path = sessionStorage.getItem('iconPath');
-            	$('#mypageicon').attr('src', path);
-            	return false;
+            	if(message != '') {
+            		message += '\n';
+            	}
+            	message += 'アイコンのファイルサイズは 2MB より小さくしてください。';
+            	flag = false;
             }
         }
     }
-	return true;
+
+    if(_address == ""){
+    	if(message != '') {
+    		message  += '\n';
+    	}
+    	message += 'メールアドレスを入力してください。';
+    	flag = false;
+	}else{
+		regexp = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+		// バリデーションチェック
+		if(!regexp.test(_address)){
+			if(message != '') {
+	    		message  += '\n';
+	    	}
+			message += 'メールアドレスの入力形式が違います。';
+			flag = false;
+		}else{
+
+		}
+	}
+
+    if(!flag) {
+    	alert(message);
+    	var path = sessionStorage.getItem('iconPath');
+    	$('#mypageicon').attr('src', path);
+    }
+
+	return flag;
 }
 
 // アカウントの削除
