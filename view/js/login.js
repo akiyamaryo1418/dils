@@ -17,10 +17,6 @@ function inputLoginButton(){
 		'list'   :  param
 	}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2dd471e265d30b6e8bbec845935e5eba311bee67
 	$.ajax({
 		url      : '../../api/controller.php',
 		type     : 'POST',

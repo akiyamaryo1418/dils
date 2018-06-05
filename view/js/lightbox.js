@@ -81,7 +81,7 @@ function trimingLightBox(_width, _height){
 function sendIllustEdit() {
 	var id = sessionStorage.getItem('imageId');
 	var list = $('#editForm').serializeArray();
-	var param = {'id' : id, 'param': list}
+	var param = { 'id' : id, 'param': list }
 
 	var data = {
 		'model'  : 'illustration',
@@ -104,27 +104,33 @@ function sendIllustEdit() {
     });
 }
 
+// イラストの削除
 function deleteIllust() {
-	var id = sessionStorage.getItem('imageId');
-	var userId = sessionStorage.getItem('userId');
-	var param = {'id' : id, 'userId' : userId};
 
-	var data = {
-		'model'  : 'illustration',
-	    'action' : 'delete',
-	    'list'   :  param
-	};
+	var result = confirm("このイラストを削除しますか？");
 
-	$.ajax({
-    	type     : 'POST',
-    	url      : '../../api/controller.php',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-    	location.reload(true);
-    	console.log(data);
-    }).fail(function(){
-    	alert('Fail');
-    });
+	if(result){
+		var id = sessionStorage.getItem('imageId');
+		var userId = sessionStorage.getItem('userId');
+		var param = {'id' : id, 'userId' : userId};
+
+		var data = {
+			'model'  : 'illustration',
+		    'action' : 'delete',
+		    'list'   :  param
+		};
+
+		$.ajax({
+	    	type     : 'POST',
+	    	url      : '../../api/controller.php',
+	    	dataType : 'json',
+	    	data     :  data,
+	    	timeout  :  1000,
+	    }).done(function(data, dataType){
+	    	location.reload(true);
+	    	console.log(data);
+	    }).fail(function(){
+	    	alert('Fail');
+	    });
+	}
 }
