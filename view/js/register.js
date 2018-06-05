@@ -20,7 +20,7 @@ function inputRegistrationButton(){
 	data.append('action', 'register');
 
 	var fileName = 'img';
-	var param = [ $('#username').val(), $('#password').val(), fileName ];
+	var param = [ $('#username').val(), $('#password').val(), fileName, $('#mail').val() ];
 	data.append('list', param);
 
     $.ajax({
@@ -115,9 +115,8 @@ function checkValidation(){
 	var checkflag = true;
 	var name = $('[name="user"]').val();
 	var password = $('[name="password"]').val();
-	var mail = $('').val();
+	var mail = $('[name="mail"]').val();
 	var string = "";
-
 
 
 	if(name == ""){
