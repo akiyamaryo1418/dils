@@ -106,27 +106,40 @@ function sendIllustEdit() {
 }
 
 function deleteIllust() {
+
+	console.log("test");
 	var id = sessionStorage.getItem('imageId');
 	var userId = sessionStorage.getItem('userId');
 	var param = {'id' : id, 'userId' : userId};
 
-	var data = {
-		'model'  : 'illustration',
-	    'action' : 'delete',
-	    'list'   :  param
-	};
+	var result = window.confirm('削除した画像は復元できません。\n本当に、この画像を削除しますか？');
+	if(result){
+		var data = {
+				'model'  : 'illustration',
+			    'action' : 'delete',
+			    'list'   :  param
+			};
 
-	$.ajax({
-    	type     : 'POST',
-    	url      : '../../api/controller.php',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-    	//alert('Success');
-    	location.reload(true);
-    	console.log(data);
-    }).fail(function(){
-    	alert('Fail');
-    });
+			$.ajax({
+		    	type     : 'POST',
+		    	url      : '../../api/controller.php',
+		    	dataType : 'json',
+		    	data     :  data,
+		    	timeout  :  1000,
+		    }).done(function(data, dataType){
+		    	console.log(data);
+		    	if(data == 'success') {
+		    		alert('削除に成功しました。');
+		    		location.reload(true);
+		    	}
+
+
+		    }).fail(function(){
+		    	alert('Fail');
+		    });
+	}
+	else{
+
+	}
+
 }

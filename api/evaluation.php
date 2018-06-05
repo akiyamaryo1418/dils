@@ -64,7 +64,8 @@ class evaluation {
         $sql = "SELECT eva.point, eva.comment, eva.created_at, work.designer_id, work.average_point "
               ."FROM evaluations AS eva "
               ."INNER JOIN works AS work ON work.id = eva.work_id "
-              ."WHERE eva.work_id = ".$id
+              ."WHERE eva.work_id = ".$id." "
+              ."ORDER BY eva.created_at DESC"
         ;
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();

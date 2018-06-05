@@ -28,6 +28,8 @@ function Initialize(){
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').val(data[0].userName);
 
+    	sessionStorage.setItem('iconPath', result);
+
     	if(data[0].id != -999) {
     		for(var index = 0; index < data.length; index++){
         		var result = data[index].img.replace('view/', '');
@@ -40,6 +42,8 @@ function Initialize(){
             }
     		triming();
         	illustTriming();
+
+
     	}
     }).fail(function(){
     	alert('Nodata');
@@ -119,29 +123,59 @@ function illustTriming(){
 // アカウント編集
 function sendAccountEdit(){
 
-	data = new FormData($('#mypageiconform').get(0));
+	var data = new FormData($('#mypageiconform').get(0));
 	data.append('model', 'user');
 	data.append('action', 'edit');
 
 	var id = sessionStorage.getItem('userId');
     var name = $('.penname').val();
     var param = [id, name , 'datafile']
-
 	data.append('list', param);
 
-    $.ajax({
-    	url         : '../../api/controller.php',
-    	type        : 'POST',
-    	dataType    : 'json',
-    	processData : false,
-    	contentType : false,
-    	data        :  data,
-    	timeout     :  1000,
-    }).done(function(data, dataType){
-    	location.href = "../html/index.html";
-    }).fail(function(){
-    	alert('Nodata');
-    });
+    var file = $('#imgadd');
+	if(checkSendData(name, file)){
+		$.ajax({
+	    	url         : '../../api/controller.php',
+	    	type        : 'POST',
+	    	dataType    : 'json',
+	    	processData : false,
+	    	contentType : false,
+	    	data        :  data,
+	    	timeout     :  1000,
+	    }).done(function(data, dataType){
+	    	location.href = "../html/mypage.html";
+	    }).fail(function(){
+	    	alert('Nodata');
+	    });
+	}
+
+
+}
+
+//バリデーションチェック
+function checkSendData(_name, _file){
+
+	if(_name == '') {
+		alert('ユーザー名を入力してください。');
+		return false;
+	}
+
+    var lg = _file[0].files.length;
+    var items = _file[0].files;
+    if (lg > 0) {
+    	for (var i = 0; i < lg; i++) {
+            var fileSize = items[i].size;
+            if(fileSize >= 2000000){
+            	alert('アイコンのファイルサイズは 2MB より小さくしてください.');
+
+            	// 前のアイコン画像に戻す
+            	var path = sessionStorage.getItem('iconPath');
+            	$('#mypageicon').attr('src', path);
+            	return false;
+            }
+        }
+    }
+	return true;
 }
 
 // アカウントの削除

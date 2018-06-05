@@ -310,7 +310,7 @@ class illustration {
                 $result = -999;
             }
         }
-        echo json_encode( $sql );
+        echo json_encode( $result );
     }
 }
 

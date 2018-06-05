@@ -266,7 +266,7 @@ function resetcss(boxclass){
 function inputUpdateButton(){
 
 
-	var data = new FormData($('#send').get(0));
+	/*var data = new FormData($('#send').get(0));
 	data.append('model',  'illustration');
 	data.append('action', 'insert');
 	var param
@@ -289,8 +289,7 @@ function inputUpdateButton(){
         }
 
     }
-
-	console.log(param);
+	console.log(param);*/
 
 	/*$.ajax({
 		url         : '../../api/controller.php',
@@ -311,8 +310,8 @@ function inputUpdateButton(){
 		alert('NoData');
 	});*/
 
+	console.log("data");
 
-	/*
     // 毎回通信する
     for(var index = 0; index < 8; index++){
     	var data = new FormData($('#send').get(0));
@@ -327,15 +326,10 @@ function inputUpdateButton(){
         var param = [ id, name, fileName, category ];
         data.append('list', param);
 
-        var file = $('#img'+(index+1)+'').val();
-
-        //console.log($('#img1').val());
-        //console.log($('#img1').files[0].size);
-
         var file = $('#img'+(index+1)+'');
-        if(checkSendData(name, file)) {
-        	console.log("ok");
-        }
+
+        console.log(name);
+        console.log(file.val());
 
 
         if(checkSendData(name, file)) {
@@ -349,20 +343,23 @@ function inputUpdateButton(){
         		data        :  data,
         		timeout     :  1000,
         	}).done(function(data, dataType){
-        		if(data != 'success') {
-        			var text = 'タイトル名「'+errorName+ '」の登録に失敗しました。';
-        			alert(text);
-        			location.href= "../html/edit.html";
-        			return;
+        		if(data == 'success') {
+        			alert('画像の登録が完了しました。');
+        		    location.href= "../html/mypage.html";
+        		} else {
+        			console.log(data);
         		}
 
         	}).fail(function(){
         		alert('NoData');
         	});
         }
+        else {
+        	return;
+        }
+
     }
-    alert('画像の登録が完了しました。');
-    location.href= "../html/mypage.html";*/
+
 }
 
 //バリデーションチェック
