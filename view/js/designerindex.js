@@ -50,7 +50,6 @@ function filterDesigner(){
 	});*/
 	var param = $('[name="search"]').val();
 
-	alert(param);
 	var data = {
 			'model'  : 'user',
 			'action' : 'index',
