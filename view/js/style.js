@@ -9,9 +9,15 @@ $('.slider-wrapper').slick({
 
 $('#container').masonry({
     itemSelector: '.item',
-    columnWidth: 180, 
+    columnWidth: 180,
     isFitWidth: true  //親要素の幅に合わせてカラム数を自動調整
   });
+
+var btn = $('#SearchBoxSort li');
+btn.click(function(){
+  btn.removeClass('active');
+  $(this).addClass('active');
+});
 
 
 });
