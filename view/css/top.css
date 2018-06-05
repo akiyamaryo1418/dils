@@ -41,6 +41,7 @@ header {
   position: relative;
   z-index: 9999;
   width: 100%;
+  min-width: 1250px;
   height: 75px;
   background: rgba(0,0,0,0.5);
 }
@@ -118,25 +119,26 @@ header li a {
 
 #SearchBox {
   width: 100%;
-  min-width: 960px;
+  min-width: 1000px;
   height: 45px;
   margin: 15px 0;
   background: #000;
+  border-radius: 24px;
 }
 
 #SearchBoxSort {
-  width: 323px;
+  width: 495px;
   height: 45px;
   float: left;
   position: relative;
   top: 0;
   left: 0;
-  margin-left: 34%;
+  margin-left: 27%;
 }
 
 #SearchBoxSort li {
     float: left;
-    width: 105px;
+    width: 155px;
     height: 45px;
     padding: 15px 0;
     box-sizing: border-box;
@@ -145,19 +147,27 @@ header li a {
     list-style: none;
     text-align: center;
     cursor: pointer;
+
 }
 
-#SearchBoxSort li#SearchAll:hover {
-  background: rgba(255,200,188,0.8);
+
+
+
+#SearchBoxSort li:hover {
+  background: #0171bd;
 }
 
-#SearchBoxSort li#SearchUpDeat:hover {
+.active {
+  background:#0171bd;
+}
+
+/*#SearchBoxSort li#SearchUpDeat:hover {
   background: rgba(255,187,187,0.8);
 }
 
 #SearchBoxSort li#SeartReview:hover {
   background: rgba(255,124,127,0.8);
-}
+}*/
 
 input[type=radio]{
 	display:none;
@@ -393,6 +403,7 @@ div.iconbox{
   overflow-y:scroll;
 }
 
+
 .comment{
 	padding-buttom : 10px;
 }
@@ -408,7 +419,11 @@ div.iconbox{
 }
 
 dd {
-  margin-left: 80px
+  margin-left: 80px;
+  color: yellow;
+  -webkit-text-stroke: 1px #000;
+  font-size: 17px;
+
 }
 
 textarea {
@@ -443,8 +458,16 @@ textarea {
   position: relative;
   padding: 10px 5px 0;
   color: #282828;
-  cursor: pointer;
   font-size: 20px;
+}
+
+.star label {
+  cursor: default;
+
+}
+
+.starbutton label {
+  cursor: pointer;
 }
 
 .star label .text ,.starbutton label .text{
@@ -457,8 +480,6 @@ textarea {
   color: gray;
 }
 
-.star label:hover,
-.star label:hover ~ label,
 .star input[type='radio']:checked ~ label,
 .starbutton label:hover,
 .starbutton label:hover ~ label,
@@ -473,6 +494,7 @@ textarea {
 footer {
   position: relative;
   width: 100%;
+  min-width: 1250px;
   height: 70px;
   background: #000;
 }
