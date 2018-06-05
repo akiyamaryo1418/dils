@@ -116,17 +116,31 @@ header li a {
 }
 
 span {
-  font-size: 12px;
+  font-size: 18px;
 }
 
+.penname {
+  font-size: 28px;
+  margin: 16px 0
+}
 p.return {
   float: right;
   margin: 330px 60px 0 0;
 }
 
+p.return a:hover {
+  background: #0171bd;;
+  color: white;
+}
+
 p.return a {
   text-decoration: none;
   color: #000;
+  display: inline-block;
+  padding: 10px 12px;
+  border: solid 2px #0171bd;
+  border-radius: 25px;
+  transition: .4s;
 }
 
 /*：：：：検索：：：：*/
@@ -161,17 +175,22 @@ p.return a {
     cursor: pointer;
 }
 
-#SearchBoxSort li#SearchAll:hover {
-  background: rgba(255,200,188,0.8);
+#SearchBoxSort li:hover {
+  background: #0171bd;
 }
 
+.active {
+  background:#0171bd;
+}
+
+/*
 #SearchBoxSort li#SearchUpDeat:hover {
   background: rgba(255,187,187,0.8);
 }
 
 #SearchBoxSort li#SeartReview:hover {
   background: rgba(255,124,127,0.8);
-}
+}*/
 
 #SeartReview {
   border-right: solid 2px #fff;
@@ -182,10 +201,10 @@ input[type=radio] {
 	display: none;
 }
 
-input[type="radio"]:checked + label {
+/*input[type="radio"]:checked + label {
 	background: #31A9EE;
 	color: #ffffff;
-}
+}*/
 
 label{
 	cursor: pointer;
@@ -307,6 +326,7 @@ div.iconbox{
   left: 0px;
   z-index: 10000;
   width: 100%;
+  min-width: 1520px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.9);
 }
@@ -327,7 +347,7 @@ div.iconbox{
 
 .usernamebox .textbox {
   float: left;
-  width: 100px;
+  width: 400px;
   margin: 16px 0;
   color: #fff;
 }
@@ -343,13 +363,13 @@ div.iconbox{
   background: #fff;
 }
 
-.leftcontents .lightboximg {
+.leftcontents .imgbox {
   width: 750px;
   height: 700px;
   margin: 0 auto;
   float   : left;
   overflow: hidden;
-  /*border  : 1px solid #eee;*/
+  border  : 1px solid #eee;
   /*background: #ff0033;*/
 }
 
@@ -358,10 +378,6 @@ div.iconbox{
 .imgbox img {
   /*width: 100%;*/
   position : relative;
-}
-
-.lightboximg img{
-	position : relative;
 }
 
 
@@ -400,7 +416,6 @@ div.iconbox{
   margin: 0 0 20px 10px;
   padding: 10px 0;
   background: #fff;
-  overflow-y:scroll;
 }
 
 .commentbox dl {
