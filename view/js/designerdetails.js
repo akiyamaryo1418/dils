@@ -232,42 +232,45 @@ function postText(){
     	return;
     }
 
-	data = {
-	    	'model'  : 'evaluation',
-	    	'action' : 'insert',
-	    	'list'   :  param
-	};
+    var result = confirm("内容を登録しますか？");
+    if(result){
+		data = {
+		    	'model'  : 'evaluation',
+		    	'action' : 'insert',
+		    	'list'   :  param
+		};
 
-	$.ajax({
-    	type     : 'POST',
-    	url      : '../../api/controller.php',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-    	//$(".lightbox_view").fadeOut(100);
-    	//$('.lightboxview').remove();
+		$.ajax({
+			type     : 'POST',
+			url      : '../../api/controller.php',
+			dataType : 'json',
+			data     :  data,
+			timeout  :  1000,
+		}).done(function(data, dataType){
+			//$(".lightbox_view").fadeOut(100);
+			//$('.lightboxview').remove();
 
-    	$('.comment').remove();
-    	for(var index = 1; index <= 5; index++){
-			$('#starbutton'+index+'').prop('checked', false);
-		}
-
-    	for(var index = 1; index < data.length; index++){
-			var starmark = '';
-			for(var starindex = 1; starindex <= data[index].point; starindex++){
-				starmark = starmark + '★';
+			$('.comment').remove();
+			for(var index = 1; index <= 5; index++){
+				$('#starbutton'+index+'').prop('checked', false);
 			}
 
-			$('.commentbox').append($('<dl class="comment"></dl>')
-                            .append($('<dt></dt>').html(data[index].created_at))
-                            .append($('<dd></dd>').html(starmark)))
-                            .append($('<pre class="comment"></pre>').html(data[index].comment));
-		}
+			for(var index = 1; index < data.length; index++){
+				var starmark = '';
+				for(var starindex = 1; starindex <= data[index].point; starindex++){
+					starmark = starmark + '★';
+				}
 
-    	$('[name="kanso"]').val('');
-    	//$('.id').remove();
-    }).fail(function(){
-    	alert('Fail');
-    });
+				$('.commentbox').append($('<dl class="comment"></dl>')
+		                        .append($('<dt></dt>').html(data[index].created_at))
+		                        .append($('<dd></dd>').html(starmark)))
+		                        .append($('<pre class="comment"></pre>').html(data[index].comment));
+			}
+
+			$('[name="kanso"]').val('');
+			//$('.id').remove();
+		}).fail(function(){
+			alert('Fail');
+		});
+    }
 }
