@@ -10,8 +10,6 @@ $(function(){
 
 	$(".close").click(function(){
 		$("#editimgbox").empty();
-		triming();
-    	illustTriming();
 		$(".lightbox_view").fadeOut(100);
 	});
 });
@@ -97,7 +95,6 @@ function sendIllustEdit() {
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//alert('Success');
     	location.reload(true);
     	console.log(data);
     }).fail(function(){

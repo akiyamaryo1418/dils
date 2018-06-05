@@ -100,6 +100,8 @@ class user {
                 }
             }
 
+            $iconSize = getimagesize($iconPath);
+
             $result[] = array(
                 'id'       => $imageId,     // 作品ID
                 'img'      => $filePath,    // 作品のファイルパス
@@ -109,6 +111,8 @@ class user {
                 'userName' => $row->d_name, // 制作者名
                 'address'  => $row->address,// メールアドレス
                 'iconPath' => $iconPath,    // アイコンパス
+                'iconWidth'    => $iconSize[0],     // 画像の横幅
+                'iconHeight'   => $iconSize[1],
                 'category_id' => $row->category_id,    // カテゴリーのID
             );
         }
@@ -134,11 +138,13 @@ class user {
                     }
                 }
 
+                $size = getimagesize($iconPath);
+
                 $result[] = array(
                     'id'       => -999,     // 作品ID
                     'img'      => '',    // 作品のファイルパス
-                    'width'    => 0,     // 画像の横幅
-                    'height'   => 0,     // 画像の縦幅
+                    'width'    => $size[0],     // 画像の横幅
+                    'height'   => $size[1],     // 画像の縦幅
                     'imgname'  => '',   // 作品名
                     'userName' => $name, // 制作者名
                     'address'  => $row->address,// メールアドレス
@@ -159,6 +165,9 @@ class user {
         $result;
 
         $conditions = "";
+
+        // $sql = "SELECT id, name FROM designers WHERE name LIKE '%".$data[0][value]."%'";
+
         switch ($data[0][value]) {
             case 'all':
                 $conditions = "ORDER BY id ASC";

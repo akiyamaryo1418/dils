@@ -30,6 +30,8 @@ function Initialize(){
     	$('.mail').val(data[0].address);
     	sessionStorage.setItem('iconPath', result);
 
+    	trimingIllust('.creatoricon', data[0].iconWidth, data[0].iconHeight);
+
     	if(data[0].id != -999) {
     		for(var index = 0; index < data.length; index++){
         		var result = data[index].img.replace('view/', '');
@@ -39,9 +41,11 @@ function Initialize(){
                               .append($('<div></div>').attr({'class': 'textbox'})
                               .append($('<p>'+data[index].imgname+'</p>'))
                               ));
+
+                trimingIllust('.imgbox', data[0].width, data[0].height);
             }
-    		triming();
-        	illustTriming();
+
+    		// illustTriming();
 
 
     	}
@@ -86,19 +90,34 @@ new Vue({
 })
 
 //トリミング
-function triming(){
-	var resizeClass    = '.creatoricon img';
-	var thumnailWidth  = 150;
-	var thumnailHeight = 150;
+function trimingIllust(_class, _width, _height){
+	var resizeClass    = _class + ' img';
+
+	var baseWidth  = $(_class).width();
+	var baseHeight = $(_class).height();
+
+	// 画像の元サイズを取得
+	var newlWidth  = _width;
+	var newlHeight = _height;
+
+	// 画像サイズ、表示位置の設定
+	if(_width > _height ) {
+		newlWidth = baseWidth;
+		newlHeight = _height * (baseWidth / _width);
+	} else {
+		newlHeight = baseHeight;
+		newlWidth = _width * (baseHeight / _height);
+	}
+	var newTop = (baseHeight / 2) - (newlHeight / 2);
+	var newLeft = (baseWidth / 2) - (newlWidth / 2);
 
 	$(resizeClass).each(function(){
-
-		$(this).height(thumnailHeight);
-		$(this).width(thumnailWidth);
-		$(this).css("height", 150+"px");
-		$(this).css("top", 0);
-		$(this).css("width", 150+"px");
-		$(this).css("left", 0);
+		$(this).height(newlHeight);
+		$(this).width(newlWidth);
+		$(this).css("height", newlHeight+"px");
+		$(this).css("top", newTop);
+		$(this).css("width",newlWidth+"px");
+		$(this).css("left", newLeft+"px");
 	});
 }
 
@@ -196,7 +215,7 @@ function checkSendData(_name, _file, _address){
 			if(message != '') {
 	    		message  += '\n';
 	    	}
-			message += 'メールアドレスの入力形式が違います。';
+			message += '半角英数字と記号で記入してください。\n例) sample@test.com';
 			flag = false;
 		}else{
 
@@ -218,7 +237,7 @@ function deleteAccount() {
 	var id = sessionStorage.getItem('userId');
     var data ={'model':'user', 'action':'delete', 'list':id};
 
-    if(window.confirm('このユーザーを削除しますか？')){
+    if(window.confirm('このアカウントを削除しますか？\n削除すると作品などのデータも削除されます。')){
     	$.ajax({
         	url         : '../../api/controller.php',
         	type        : 'POST',
@@ -231,9 +250,6 @@ function deleteAccount() {
         }).fail(function(){
         	alert('Nodata');
         });
-	}
-	else{
-
 	}
 }
 
