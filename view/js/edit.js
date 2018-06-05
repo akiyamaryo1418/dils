@@ -122,7 +122,7 @@ new Vue({
 	},
 })
 
-new Vue({
+/*new Vue({
 	el:'.box5',
 	data() {
 		return {
@@ -228,7 +228,7 @@ new Vue({
 			reader.readAsDataURL(file);
 		},
 	},
-})
+})*/
 //========================
 
 //トリミング

@@ -22,6 +22,11 @@ body {
   margin:0 auto;
 }
 
+#wrap:after {
+    content: " ";
+    display: block;
+    clear: both;
+}
 /*--------------------------------------------------
 	2. header
 --------------------------------------------------*/
@@ -99,8 +104,8 @@ form p {
 
 .editbox {
   width: 1100px;
-  height: 764px;
-  margin: 0 auto;
+  height: 400px;
+  margin: 180px auto;
 }
 
 .box1 ,.box2 ,.box3 ,.box4{
@@ -114,7 +119,7 @@ form p {
   margin: 0;
 }
 
-
+/*
 .box5 ,.box6 ,.box7 ,.box8 {
   float: left;
   width: 240px;
@@ -124,10 +129,10 @@ form p {
 
 .box8 ,.box8 .img-box {
   margin: 25px 0 0 0;
-}
+}*/
 
 .box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box
-,.box5 .img-box ,.box6 .img-box ,.box7 .img-box ,.box8 .img-box {
+/*,.box5 .img-box ,.box6 .img-box ,.box7 .img-box ,.box8 .img-box*/ {
   float: left;
   width: 240px;
   height: 240px;
@@ -135,12 +140,12 @@ form p {
 }
 
 .box1 .img-box ,.box2 .img-box ,.box3 .img-box ,.box4 .img-box
-,.box5 .img-box ,.box6 .img-box ,.box7 .img-box ,.box8 .img-box {
+/*,.box5 .img-box ,.box6 .img-box ,.box7 .img-box ,.box8 .img-box*/ {
   margin: 0 46px 0 0;
 }
 
-.text1 ,.text2 ,.text3 ,.text4 ,.text5
-,.text6 ,.text7 ,.text8 {
+.text1 ,.text2 ,.text3 ,.text4 /*,.text5
+,.text6 ,.text7 ,.text8*/ {
   width: 236px;
   height: 20px;
 }
@@ -185,7 +190,7 @@ input.delete {
 
 form p.button {
   width: 1100px;
-  margin: 30px 0;
+  margin: 80px 0;
   text-align: center;
 }
 
@@ -209,8 +214,8 @@ label p {
     font-size: 13px;
 }
 
- #img1, #img2, #img3, #img4,
- #img5, #img6, #img7, #img8 {
+ #img1, #img2, #img3, #img4
+ /*#img5, #img6, #img7, #img8*/ {
      display: none;
  }
 /*--------------------------------------------------
