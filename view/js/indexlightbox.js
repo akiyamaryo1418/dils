@@ -7,7 +7,6 @@ function openLightbox(id,pass,width, height){
 		'list'   :  id
 	}
 
-
 	$.ajax({
         url      : '../../api/controller.php',
         type     : 'POST',
@@ -40,7 +39,7 @@ function openLightbox(id,pass,width, height){
 				starmark = starmark + '★';
 			}
 
-			$('.commentbox').append($('<dl class="lightboxview"></dl>')
+			$('.commentbox').append($('<dl class="comment"></dl>')
                             .append($('<dt></dt>').html(data[index].created_at))
                             .append($('<dd></dd>').html(starmark)))
                             .append($('<pre class="comment"></pre>').html(data[index].comment));
@@ -124,9 +123,10 @@ function sendEvaluation(){
 
     // 入力文字数が30文字を超えた場合
     if(comment.length > 30){
-    	alert('入力文字数が多すぎます。');
+    	alert('入力文字数が多すぎます。\n入力できる文字数は30文字までです。');
     	return;
     }
+
 
     data = {
     	'model'  : 'evaluation',
@@ -141,15 +141,31 @@ function sendEvaluation(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
-    	//alert('Success');
     	var memid = $('.id').val();
-    	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
-    	$('.lightboxview').remove();
-    	$('.iconimg').remove();
-    	$('.id').remove();
     	$('.comment').remove();
+    	//$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
+    	//$('.lightboxview').remove();
+    	//$('.iconimg').remove();
+    	//$('.id').remove();
+
+    	for(var index = 1; index <= 5; index++){
+			$('#starbutton'+index+'').prop('checked', false);
+		}
+
+    	for(var index = 1; index < data.length; index++){
+			var starmark = '';
+			for(var starindex = 1; starindex <= data[index].point; starindex++){
+				starmark = starmark + '★';
+			}
+
+			$('.commentbox').append($('<dl class="comment"></dl>')
+                            .append($('<dt></dt>').html(data[index].created_at))
+                            .append($('<dd></dd>').html(starmark)))
+                            .append($('<pre class="comment"></pre>').html(data[index].comment));
+		}
+
     	$('[name="kanso"]').val('');
-    	$('body').removeClass("overflow");
+    	//$('body').removeClass("overflow");
     }).fail(function(){
     	alert('Fail');
     });
@@ -159,7 +175,6 @@ function sendEvaluation(){
 function closeLightbox(){
 	var memid = $('.id').val();
 
-	//alert(memid);
 	$(".lightbox_view, #lightboxid_"+memid+"").fadeOut();
 	$('.lightboxview').remove();
 	$('.iconimg').remove();
@@ -170,27 +185,3 @@ function closeLightbox(){
 
 	$('.stop-scrolling').css("overflow", "auto");
 }
-
-//評価送信
-/*function sendEvaluation(){
-    var param = $('#sendeva').serializeArray();
-    alert(JSON.stringify(param));
-
-    data = {
-    	'model'  : 'evaluation',
-    	'action' : 'insert',
-    	'list'   :  param
-    };
-
-    $.ajax({
-    	type     : 'POST',
-    	url      : '../../api/controller.php',
-    	dataType : 'json',
-    	data     :  data,
-    	timeout  :  1000,
-    }).done(function(data, dataType){
-    	//alert('Success');
-    }).fail(function(){
-    	alert('Fail');
-    });
-}*/

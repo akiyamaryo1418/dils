@@ -115,18 +115,31 @@ function checkValidation(){
 	var checkflag = true;
 	var name = $('[name="user"]').val();
 	var password = $('[name="password"]').val();
+	var mail = $('').val();
 	var string = "";
 
 
 
 	if(name == ""){
 		string = 'ユーザ名を入力してください。';
-		if(password == "")
+		if(password == "" || mail == "")
 			string = string + '\n';
 	}else if(name.includes(',') == true){
 		string = 'カンマは使用できません。';
-		if(password == "")
+		if(password == "" || mail == "")
 			string = string + '\n';
+	}
+
+	if(mail == ""){
+		string = string + 'メールアドレスを入力してください。'
+	}else{
+		regexp = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+		// バリデーションチェック
+		if(!regexp.test(mail)){
+			string = string + 'メールアドレスの入力形式が違います。';
+			if(password == "")
+				string = string + '\n';
+		}
 	}
 
 	if(password == "")
