@@ -164,12 +164,16 @@ header li a {
   width: 100px;
 }
 
-#penname {
+#penname ,#mail{
   margin: 0 10px;
 }
 
 #penname input.penname {
   width: 150px;
+}
+
+#mail input.mail {
+  width: 230px;
 }
 
 .buttonbox input {
