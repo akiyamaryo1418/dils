@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/designerindex.css" rel="stylesheet" type="text/css"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   </head>
   <body>
    <header>
@@ -13,7 +14,7 @@
       <nav class="login">
         <ul>
           <li><a href="designerindex.html">制作者一覧</a></li>
-          <li id="loginlink"><a href="login.html">LOGIN</a></li>
+          <li id="loginlink"><a href="login.html">ログイン</a></li>
         </ul>
       </nav>
     </header>
@@ -24,8 +25,11 @@
         <form id="filter">
         <div class="creatersortbox">
           <input type="text" name="search" value="">
-          <input type="button"  value="&#xf002;" class="searchbtn" onclick="filterDesigner();">
-          <!-- <ul>
+          <button type="button" onclick="filterDesigner();">
+            <i class="fas fa-search"></i>
+          </button>
+          <!--<input type="button"  value="&#xf002;" class="searchbtn" onclick="filterDesigner();">
+           <ul>
             <li id="SortAll" value="1"><label for="all">All</label><input                  type="radio" name="filter" value="all"   id="all" checked="checked" onchange="filterDesigner();"></li>
             <li id="Sortana" value="2"><label for="ana">あ<span>▶</span>な</label><input   type="radio" name="filter" value="ano"   id="ana"                   onchange="filterDesigner();"></li>
             <li id="Sortnawa" value="3"><label for="nawa">は<span>▶</span>わ</label><input type="radio" name="filter" value="han"   id="nawa"                  onchange="filterDesigner();"></li>
