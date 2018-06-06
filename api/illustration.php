@@ -193,7 +193,7 @@ class illustration {
             $imageName = $designerId.'_'.$id;
 
             if($this->uploadImage($fileData, $filePath, $imageName)) {
-                $result = 'success';
+                $result = $name.'_success';
             } else{
                 // アップロードミス
                 $result =  'miss upload';
@@ -240,10 +240,6 @@ class illustration {
     // ================================================================
     public function edit($data) {
         $result = -999;
-
-        /*$id = $data[0][value];
-        $name = $data[1][value];
-        $categoryId = $data[2][value];*/
 
         $id = $data['id'];
         $name = $data['param'][0][value];

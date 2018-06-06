@@ -2,6 +2,7 @@
 // イラスト編集ページ
 $(function(){
     Initialize();
+
 });
 
 // 初期化
@@ -122,113 +123,7 @@ new Vue({
 	},
 })
 
-/*new Vue({
-	el:'.box5',
-	data() {
-		return {
-			uploadedImage: '',
-		};
-	},
-	methods: {
-		onFileChange(e){
-			var files = e.target.files || e.dataTransfer.files;
-			if(!files.length)
-				return;
-			this.createImage(files[0]);
-			triming('.box5 ');
-		},
-		// アップロードした画像を表示
-		createImage(file){
-			var reader = new FileReader();
-			reader.onload = (e) => {
-				// 表示
-				this.uploadedImage = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		},
-	},
-})
 
-new Vue({
-	el:'.box6',
-	data() {
-		return {
-			uploadedImage: '',
-		};
-	},
-	methods: {
-		onFileChange(e){
-			var files = e.target.files || e.dataTransfer.files;
-			if(!files.length)
-				return;
-			this.createImage(files[0]);
-			triming('.box6 ');
-		},
-		// アップロードした画像を表示
-		createImage(file){
-			var reader = new FileReader();
-			reader.onload = (e) => {
-				// 表示
-				this.uploadedImage = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		},
-	},
-})
-
-new Vue({
-	el:'.box7',
-	data() {
-		return {
-			uploadedImage: '',
-		};
-	},
-	methods: {
-		onFileChange(e){
-			var files = e.target.files || e.dataTransfer.files;
-			if(!files.length)
-				return;
-			this.createImage(files[0]);
-			triming('.box7 ');
-		},
-		// アップロードした画像を表示
-		createImage(file){
-			var reader = new FileReader();
-			reader.onload = (e) => {
-				// 表示
-				this.uploadedImage = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		},
-	},
-})
-
-new Vue({
-	el:'.box8',
-	data() {
-		return {
-			uploadedImage: '',
-		};
-	},
-	methods: {
-		onFileChange(e){
-			var files = e.target.files || e.dataTransfer.files;
-			if(!files.length)
-				return;
-			this.createImage(files[0]);
-			triming('.box8 ');
-		},
-		// アップロードした画像を表示
-		createImage(file){
-			var reader = new FileReader();
-			reader.onload = (e) => {
-				// 表示
-				this.uploadedImage = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		},
-	},
-})*/
 //========================
 
 //トリミング
@@ -266,50 +161,6 @@ function resetcss(boxclass){
 function inputUpdateButton(){
 
 
-	/*var data = new FormData($('#send').get(0));
-	data.append('model',  'illustration');
-	data.append('action', 'insert');
-	var param
-
-	for(var index = 0; index < 8; index++){
-
-        var name = $('.text'+(index+1)+'').val();	// 作品名
-        var file = $('#img'+(index+1)+'');			// ファイル情報
-        if(checkSendData(name, file)) {
-
-        	console.log("test");
-
-        	var id = sessionStorage.getItem('userId');		// 登録するユーザーID
-            var category = $('#categoryid_'+(index+1)+'').val();		// カテゴリー
-            var fileName = 'img'+ (index + 1) + '';			// ファイル名
-            param = [ id, name, fileName, category ];
-            data.append('list', param);
-
-        	// return;
-        }
-
-    }
-	console.log(param);*/
-
-	/*$.ajax({
-		url         : '../../api/controller.php',
-		type        : 'POST',
-		dataType    : 'json',
-		processData : false,
-    	contentType : false,
-		data        :  data,
-		timeout     :  1000,
-	}).done(function(data, dataType){
-		if(data == 'success' ) {
-			alert('すべての画像の登録が完了しました。');
-		    location.href= "../html/mypage.html";
-		} else {
-			alert(data);
-		}
-	}).fail(function(){
-		alert('NoData');
-	});*/
-
 	var flag = true;
 	for(var index = 0; index < 4; index++){
 
@@ -325,15 +176,16 @@ function inputUpdateButton(){
         }
 	}
 
+
+
 	if(flag) {
 		// 毎回通信する
-	    for(var index = 0; index < 4; index++){
-	    	console.log("送信");
-	    	var data = new FormData($('#send').get(0));
-	    	data.append('model',  'illustration');
-	    	data.append('action', 'insert');
+		for(var index = 0; index < 4; index++){
 
-	    	var name = $('.text'+(index+1)+'').val();
+			var data = new FormData($('#send').get(0));
+			data.append('model',  'illustration');
+			data.append('action', 'insert');
+			var name = $('.text'+(index+1)+'').val();
 	    	var category = $('#categoryid_'+(index+1)+'').val();
 
 	    	var id = sessionStorage.getItem('userId');
@@ -343,8 +195,7 @@ function inputUpdateButton(){
 
 	        var file = $('#img'+(index+1)+'');
 
-	        var errorName = name;
-	    	$.ajax({
+    		$.ajax({
 	    		url         : '../../api/controller.php',
 	    		type        : 'POST',
 	    		dataType    : 'json',
@@ -355,53 +206,87 @@ function inputUpdateButton(){
 	    	}).done(function(data, dataType){
 	    		if(data == 'success') {
 	    			alert('画像の登録が完了しました。');
-	    		    location.href= "../html/mypage.html";
+	    			location.href= "../html/mypage.html";
 	    		} else {
-	    			console.log(data);
+	    			//console.log(data);
+	    			return;
 	    		}
 	    		console.log(data);
 
 	    	}).fail(function(){
 	    		alert('NoData');
 	    	});
-
 	    }
+
+		/*var promises = [];
+		for(var index = 0; index < 4; index++) {
+		    (function(index) {
+		        promises.push(Test(index));
+		    })(index);
+		}
+
+		Promise.all(promises).then(function(_data) {
+			for(var index = 0; index < 4; index++) {
+				console.log(_data[index]);
+				var file = $('#img'+(index+1)+'').val();
+				if(file != '') {
+					$.ajax({
+						url         : '../../api/controller.php',
+						type        : 'POST',
+						dataType    : 'json',
+						processData : false,
+				    	contentType : false,
+						data        :  _data[index],
+						timeout     :  1000,
+					}).done(function(data, dataType){
+						console.log(data);
+					}).fail(function(){
+						alert('NoData');
+					});
+				}
+			}
+
+		});*/
+
+
 	}
 
-    // 毎回通信する
-    for(var index = 0; index < 4; index++){
-
-
-        /*if(checkSendData(name, file)) {
-        	var errorName = name;
-        	$.ajax({
-        		url         : '../../api/controller.php',
-        		type        : 'POST',
-        		dataType    : 'json',
-        		processData : false,
-            	contentType : false,
-        		data        :  data,
-        		timeout     :  1000,
-        	}).done(function(data, dataType){
-        		if(data == 'success') {
-        			alert('画像の登録が完了しました。');
-        		    location.href= "../html/mypage.html";
-        		} else {
-        			console.log(data);
-        		}
-        		console.log(data);
-
-        	}).fail(function(){
-        		alert('NoData');
-        	});
-        }
-        else {
-        	return;
-        }*/
-
-    }
 
 }
+
+/*function Test(index) {
+	console.log(index);
+	return new Promise(function(resolve, reject) {
+		var data = new FormData($('#send').get(0));
+		data.append('model',  'illustration');
+		data.append('action', 'insert');
+		var name = $('.text'+(index+1)+'').val();
+		var category = $('#categoryid_'+(index+1)+'').val();
+
+		var id = sessionStorage.getItem('userId');
+		var fileName = 'img'+ (index + 1) + '';
+	    var param = [ id, name, fileName, category ];
+		data.append('list', param);
+
+	    resolve(data);
+
+		/*$.ajax({
+			url         : '../../api/controller.php',
+			type        : 'POST',
+			dataType    : 'json',
+			processData : false,
+	    	contentType : false,
+			data        :  data,
+			timeout     :  1000,
+		}).done(function(data, dataType){
+			console.log(data);
+
+		}).fail(function(){
+			alert('NoData');
+		});
+	});
+}*/
+
 
 //バリデーションチェック
 function checkSendData(_name, _file){

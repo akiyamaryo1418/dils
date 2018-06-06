@@ -231,7 +231,8 @@ function checkSendData(_name, _file, _address){
 function deleteAccount() {
 
 	var id = sessionStorage.getItem('userId');
-    var data ={'model':'user', 'action':'delete', 'list':id};
+	var param = {'id' : id};
+    var data ={'model':'user', 'action':'delete', 'list':param};
 
     if(window.confirm('このアカウントを削除しますか？\n削除すると作品などのデータも削除されます。')){
     	$.ajax({

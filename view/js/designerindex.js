@@ -48,7 +48,7 @@ function filterDesigner(){
 	}).fail(function(){
 		alert('NoData');
 	});*/
-	var param = $('[name="search"]').val();
+	var param = {'name' : $('[name="search"]').val()};
 
 	var data = {
 			'model'  : 'user',

@@ -23,8 +23,9 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     if($_FILES[$name]['name'] == null){
         $className->$func($data);
     } else {
-        $tmp = [$data, $_FILES[$name]];
-        $className->$func(...$tmp);
+        echo json_encode( $_FILES[$name]['name'] );
+        //$tmp = [$data, $_FILES[$name]];
+        //$className->$func(...$tmp);
     }
 }
 ?>

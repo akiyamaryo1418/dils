@@ -1,6 +1,8 @@
 // ライトボックスを開く
 function openLightbox(id,pass,width, height){
 
+	var param = {'id': id};
+
 	var data = {
 		'model'  : 'evaluation',
 		'action' : 'index',
