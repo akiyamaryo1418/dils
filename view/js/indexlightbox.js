@@ -26,8 +26,6 @@ function openLightbox(id,pass,width, height){
 		$(".lightbox_view, #lightboxid_"+id+"").fadeIn();   // 第1引数・・・背景？(class)  第2引数・・・拡大写真(class)
 		$('body').addClass("overflow");
 		lightboxtriming(width, height);
-
-		console.log(data);
 		var intaverage =  6 - Math.floor(data[1].review);
 
 		for(var index = 1; index <= 5; index++){
@@ -105,7 +103,7 @@ function lightboxtriming(_width, _height){
 		$(this).height(newlHeight);
 		$(this).width(newlWidth);
 		$(this).css("height", newlHeight+"px");
-		$(this).css("top", 0);
+		$(this).css("top", newTop);
 		$(this).css("width", newlWidth+"px");
 		$(this).css("left", newLeft);
 		$(this).css("background-color", "#fff");
