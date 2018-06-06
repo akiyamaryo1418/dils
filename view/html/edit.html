@@ -31,7 +31,7 @@
         <form id="send" name="edit" method="POST" enctype="multipart/form-data">
         <div class="editbox">
           <div class="box1">
-            <div class="img-box"><img v-show="uploadedImage" :src="uploadedImage" /></div>
+            <div class="img-box"><div class="child-box1"><img v-show="uploadedImage" :src="uploadedImage" /></div></div>
             <p><input type="text" placeholder="タイトルを入力" class="text1" name="title"></p>
             <select name="category" id="categoryid_1">
               <option value="1">キャラ</option>
@@ -41,10 +41,11 @@
             <label for="img1">
               <p>画像を追加</p>
               <input type="file" name="img1" id="img1" class="imgbutton" v-on:change="onFileChange">
+              <input type="button" value="delete" onclick="deleteillust(.child-box1);">
             </label>
           </div>
           <div class="box2">
-            <div class="img-box"><img v-show="uploadedImage" :src="uploadedImage" /></div>
+            <div class="img-box"><div class="child-box2"><img v-show="uploadedImage" :src="uploadedImage" /></div></div>
             <p><input type="text" placeholder="タイトルを入力" class="text2" name="title"></p>
             <select name="category" id="categoryid_2">
               <option value="1">キャラ</option>
@@ -58,7 +59,7 @@
             </label>
             </div>
           <div class="box3">
-            <div class="img-box"><img v-show="uploadedImage" :src="uploadedImage" /></div>
+            <div class="img-box"><div class="child-box3"><img v-show="uploadedImage" :src="uploadedImage" /></div></div>
             <p><input type="text" placeholder="タイトルを入力" class="text3" name="title"></p>
             <select name="category" id="categoryid_3">
               <option value="1">キャラ</option>
@@ -72,7 +73,7 @@
             </label>
             </div>
           <div class="box4">
-            <div class="img-box"><img v-show="uploadedImage" :src="uploadedImage" /></div>
+            <div class="img-box"><div class="child-box4"><img v-show="uploadedImage" :src="uploadedImage" /></div></div>
             <p><input type="text" placeholder="タイトルを入力" class="text4" name="title"></p>
             <select name="category" id="categoryid_4">
               <option value="1">キャラ</option>
