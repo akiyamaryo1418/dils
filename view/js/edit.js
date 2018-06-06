@@ -14,7 +14,7 @@ function Initialize(){
 }
 
 //======Vue.jsの処理======
-new Vue({
+var box1 = new Vue({
 	el:'.box1',
 	data() {
 		return {
@@ -37,6 +37,10 @@ new Vue({
 				this.uploadedImage = e.target.result;
 			};
 			reader.readAsDataURL(file);
+		},
+		del(){
+			//alert('dd');
+			//$(this).val('');
 		},
 	},
 })
@@ -121,114 +125,6 @@ new Vue({
 		},
 	},
 })
-
-/*new Vue({
-	el:'.box5',
-	data() {
-		return {
-			uploadedImage: '',
-		};
-	},
-	methods: {
-		onFileChange(e){
-			var files = e.target.files || e.dataTransfer.files;
-			if(!files.length)
-				return;
-			this.createImage(files[0]);
-			triming('.box5 ');
-		},
-		// アップロードした画像を表示
-		createImage(file){
-			var reader = new FileReader();
-			reader.onload = (e) => {
-				// 表示
-				this.uploadedImage = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		},
-	},
-})
-
-new Vue({
-	el:'.box6',
-	data() {
-		return {
-			uploadedImage: '',
-		};
-	},
-	methods: {
-		onFileChange(e){
-			var files = e.target.files || e.dataTransfer.files;
-			if(!files.length)
-				return;
-			this.createImage(files[0]);
-			triming('.box6 ');
-		},
-		// アップロードした画像を表示
-		createImage(file){
-			var reader = new FileReader();
-			reader.onload = (e) => {
-				// 表示
-				this.uploadedImage = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		},
-	},
-})
-
-new Vue({
-	el:'.box7',
-	data() {
-		return {
-			uploadedImage: '',
-		};
-	},
-	methods: {
-		onFileChange(e){
-			var files = e.target.files || e.dataTransfer.files;
-			if(!files.length)
-				return;
-			this.createImage(files[0]);
-			triming('.box7 ');
-		},
-		// アップロードした画像を表示
-		createImage(file){
-			var reader = new FileReader();
-			reader.onload = (e) => {
-				// 表示
-				this.uploadedImage = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		},
-	},
-})
-
-new Vue({
-	el:'.box8',
-	data() {
-		return {
-			uploadedImage: '',
-		};
-	},
-	methods: {
-		onFileChange(e){
-			var files = e.target.files || e.dataTransfer.files;
-			if(!files.length)
-				return;
-			this.createImage(files[0]);
-			triming('.box8 ');
-		},
-		// アップロードした画像を表示
-		createImage(file){
-			var reader = new FileReader();
-			reader.onload = (e) => {
-				// 表示
-				this.uploadedImage = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		},
-	},
-})*/
 //========================
 
 //トリミング
@@ -264,51 +160,6 @@ function resetcss(boxclass){
 
 //画像新規登録
 function inputUpdateButton(){
-
-
-	/*var data = new FormData($('#send').get(0));
-	data.append('model',  'illustration');
-	data.append('action', 'insert');
-	var param
-
-	for(var index = 0; index < 8; index++){
-
-        var name = $('.text'+(index+1)+'').val();	// 作品名
-        var file = $('#img'+(index+1)+'');			// ファイル情報
-        if(checkSendData(name, file)) {
-
-        	console.log("test");
-
-        	var id = sessionStorage.getItem('userId');		// 登録するユーザーID
-            var category = $('#categoryid_'+(index+1)+'').val();		// カテゴリー
-            var fileName = 'img'+ (index + 1) + '';			// ファイル名
-            param = [ id, name, fileName, category ];
-            data.append('list', param);
-
-        	// return;
-        }
-
-    }
-	console.log(param);*/
-
-	/*$.ajax({
-		url         : '../../api/controller.php',
-		type        : 'POST',
-		dataType    : 'json',
-		processData : false,
-    	contentType : false,
-		data        :  data,
-		timeout     :  1000,
-	}).done(function(data, dataType){
-		if(data == 'success' ) {
-			alert('すべての画像の登録が完了しました。');
-		    location.href= "../html/mypage.html";
-		} else {
-			alert(data);
-		}
-	}).fail(function(){
-		alert('NoData');
-	});*/
 
 	var flag = true;
 	for(var index = 0; index < 4; index++){
