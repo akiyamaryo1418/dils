@@ -70,7 +70,8 @@ function initIllust(){
 	    	data     :  data,
 	    	timeout  :  1000,
 	    }).done(function(data, dataType){
-	    	//if(data == -999) {
+	    	console.log(data);
+	    	if(data != -999) {
 	    		//===ただの表示===
 		    	for(var index = 0; index < data.length; index++){
 		    		var result = data[index].img.replace('view/', '');
@@ -82,10 +83,9 @@ function initIllust(){
 		    		triming(data[index].id, data[index].width, data[index].height);
 		    	}
 		        //================
-		    	// triming();
 		    	$('#wrapper').append('<div class="cle"></div>');
 		    	$('.masonry').masonry({ itemSelector: '.item', columnWidth : 300 });
-	    	//}
+	    	}
 	    	resolve();
 	    	//===============
 	    }).fail(function(){
@@ -119,23 +119,28 @@ function searchCategory(){
 		$('.cle').remove();
 		$('#wrapper').append('<div class="masonry" id="thumbnail"></div>');
 		//===ただの表示===
-    	for(var index = 0; index < data.length; index++){
-    		var result = data[index].img.replace('view/', '');
-    		/*$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration'})
-    				     .append($('<a></a>').attr(
-    				    		 {'onclick':'openLightbox('+data[index].id+',"'+result+'", '+data[index].width+', '+data[index].height+')'})
-    				     .html('<img src="'+result+'"'+
-    		            	   'alt="'+data[index].imgname+'">'))
-    		             .append($('<p></p>').html(data[index].imgname)));*/
-    		$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration', 'onclick':'openLightbox('+data[index].id+',"'+result+'", '+data[index].width+', '+data[index].height+')'})
-    				     .html('<img src="'+result+'"'+
-		            	   'alt="'+data[index].imgname+'">'));
-    		triming(data[index].id, data[index].width, data[index].height);
-    	}
-        //================
+		console.log(data);
+		if(data != -999) {
+			for(var index = 0; index < data.length; index++){
+	    		var result = data[index].img.replace('view/', '');
+	    		/*$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration'})
+	    				     .append($('<a></a>').attr(
+	    				    		 {'onclick':'openLightbox('+data[index].id+',"'+result+'", '+data[index].width+', '+data[index].height+')'})
+	    				     .html('<img src="'+result+'"'+
+	    		            	   'alt="'+data[index].imgname+'">'))
+	    		             .append($('<p></p>').html(data[index].imgname)));*/
+	    		$('.masonry').append($('<div class="item"></div>').attr({'id':'illustid_'+data[index].id, 'name':'illustration', 'onclick':'openLightbox('+data[index].id+',"'+result+'", '+data[index].width+', '+data[index].height+')'})
+	    				     .html('<img src="'+result+'"'+
+			            	   'alt="'+data[index].imgname+'">'));
+	    		triming(data[index].id, data[index].width, data[index].height);
+	    	}
+	        //================
 
-    	$('#wrapper').append('<div class="cle"></div>');
-    	$('.masonry').masonry({ itemSelector: '.item', columnWidth : 300 });
+	    	$('#wrapper').append('<div class="cle"></div>');
+	    	$('.masonry').masonry({ itemSelector: '.item', columnWidth : 300 });
+		}
+
+
 	}).fail(function(){
 		alert('NoData');
 	});

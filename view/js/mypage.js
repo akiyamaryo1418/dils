@@ -24,6 +24,7 @@ function Initialize(){
     	data     :  data,
     	timeout  :  1000,
     }).done(function(data, dataType){
+    	console.log(data);
     	var result = data[0].iconPath.replace('view/', '');
     	$('#mypagepreview').append($('<img src="'+result+'">'));
     	$('.penname').val(data[0].userName);
@@ -79,14 +80,15 @@ new Vue({
 				// まずは表示
 				this.uploadedImage = e.target.result;
 			};
-			triming();
+			trimingIllust('.creatoricon')
 			reader.readAsDataURL(file);
+			// console.log(file.width);
 		},
 	},
 })
 
 //トリミング
-function trimingIllust(_class, _width, _height){
+function trimingIllust(_class, _width = 150, _height = 150){
 	var resizeClass    = _class + ' img';
 
 	var baseWidth  = $(_class).width();

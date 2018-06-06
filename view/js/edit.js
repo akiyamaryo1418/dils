@@ -193,8 +193,6 @@ function inputUpdateButton(){
 	        var param = [ id, name, fileName, category ];
 	        data.append('list', param);
 
-	        var file = $('#img'+(index+1)+'');
-
     		$.ajax({
 	    		url         : '../../api/controller.php',
 	    		type        : 'POST',
@@ -212,7 +210,6 @@ function inputUpdateButton(){
 	    			return;
 	    		}
 	    		console.log(data);
-
 	    	}).fail(function(){
 	    		alert('NoData');
 	    	});

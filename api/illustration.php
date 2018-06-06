@@ -193,7 +193,7 @@ class illustration {
             $imageName = $designerId.'_'.$id;
 
             if($this->uploadImage($fileData, $filePath, $imageName)) {
-                $result = $name.'_success';
+                $result = 'success';
             } else{
                 // アップロードミス
                 $result =  'miss upload';
