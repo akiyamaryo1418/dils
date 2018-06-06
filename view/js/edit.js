@@ -184,6 +184,7 @@ function inputUpdateButton(){
 
 
 	if(flag) {
+		flag = false;
 		// 毎回通信する
 		for(var index = 0; index < 4; index++){
 
@@ -198,25 +199,28 @@ function inputUpdateButton(){
 	        var param = [ id, name, fileName, category ];
 	        data.append('list', param);
 
-    		$.ajax({
-	    		url         : '../../api/controller.php',
-	    		type        : 'POST',
-	    		dataType    : 'json',
-	    		processData : false,
-	        	contentType : false,
-	    		data        :  data,
-	    		timeout     :  1000,
-	    	}).done(function(data, dataType){
-	    		if(data == 'success') {
-
-	    		} else {
-	    			//console.log(data);
-	    			return;
-	    		}
-	    		console.log(data);
-	    	}).fail(function(){
-	    		alert('NoData');
-	    	});
+	        // if(name != '' &&  $('#img'+(index+1)+'').val() != '')
+	        {
+	        	$.ajax({
+		    		url         : '../../api/controller.php',
+		    		type        : 'POST',
+		    		dataType    : 'json',
+		    		processData : false,
+		        	contentType : false,
+		    		data        :  data,
+		    		timeout     :  1000,
+		    	}).done(function(data, dataType){
+		    		if(data == 'success') {
+		    			flag = true;
+		    		} else {
+		    			//console.log(data);
+		    			return;
+		    		}
+		    		console.log(data);
+		    	}).fail(function(){
+		    		alert('NoData');
+		    	});
+	        }
 	    }
 	}
 

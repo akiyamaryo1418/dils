@@ -33,8 +33,7 @@ function inputRegistrationButton(){
     	data        :  data,
     	timeout     :  1000,
     }).done(function(data, dataType){
-    	location.href = "../html/index.html";
-        alert(data);
+    	location.href = "../html/mypage.html";
         sessionStorage.setItem('userId', data);
     }).fail(function(){
     	alert('Nodata');
