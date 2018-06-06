@@ -100,11 +100,9 @@ function trimingIllust(_class, _width, _height){
 	if(_width > _height ) {
 		newlWidth = baseWidth;
 		newlHeight = _height * (baseWidth / _width);
-		console.log("aaa");
 	} else {
 		newlHeight = baseHeight;
 		newlWidth = _width * (baseHeight / _height);
-		console.log("bbb");
 	}
 	var newTop = (baseHeight / 2) - (newlHeight / 2);
 	var newLeft = (baseWidth / 2) - (newlWidth / 2);

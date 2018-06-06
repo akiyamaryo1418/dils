@@ -310,29 +310,69 @@ function inputUpdateButton(){
 		alert('NoData');
 	});*/
 
-	console.log("data");
+	var flag = true;
+	for(var index = 0; index < 4; index++){
+
+        var name = $('.text'+(index+1)+'').val();
+        var file = $('#img'+(index+1)+'');
+
+        if(checkSendData(name, file)) {
+        	console.log("success");
+        }
+        else {
+        	flag = false;
+        	return;
+        }
+	}
+
+	if(flag) {
+		// 毎回通信する
+	    for(var index = 0; index < 4; index++){
+	    	console.log("送信");
+	    	var data = new FormData($('#send').get(0));
+	    	data.append('model',  'illustration');
+	    	data.append('action', 'insert');
+
+	    	var name = $('.text'+(index+1)+'').val();
+	    	var category = $('#categoryid_'+(index+1)+'').val();
+
+	    	var id = sessionStorage.getItem('userId');
+	    	var fileName = 'img'+ (index + 1) + '';
+	        var param = [ id, name, fileName, category ];
+	        data.append('list', param);
+
+	        var file = $('#img'+(index+1)+'');
+
+	        var errorName = name;
+	    	$.ajax({
+	    		url         : '../../api/controller.php',
+	    		type        : 'POST',
+	    		dataType    : 'json',
+	    		processData : false,
+	        	contentType : false,
+	    		data        :  data,
+	    		timeout     :  1000,
+	    	}).done(function(data, dataType){
+	    		if(data == 'success') {
+	    			alert('画像の登録が完了しました。');
+	    		    location.href= "../html/mypage.html";
+	    		} else {
+	    			console.log(data);
+	    		}
+	    		console.log(data);
+
+	    	}).fail(function(){
+	    		alert('NoData');
+	    	});
+
+	    }
+	}
 
     // 毎回通信する
     for(var index = 0; index < 4; index++){
-    	var data = new FormData($('#send').get(0));
-    	data.append('model',  'illustration');
-    	data.append('action', 'insert');
-
-    	var name = $('.text'+(index+1)+'').val();
-    	var category = $('#categoryid_'+(index+1)+'').val();
-
-    	var id = sessionStorage.getItem('userId');
-    	var fileName = 'img'+ (index + 1) + '';
-        var param = [ id, name, fileName, category ];
-        data.append('list', param);
-
-        var file = $('#img'+(index+1)+'');
-
-        console.log(name);
-        console.log(file.val());
 
 
-        if(checkSendData(name, file)) {
+        /*if(checkSendData(name, file)) {
         	var errorName = name;
         	$.ajax({
         		url         : '../../api/controller.php',
@@ -349,6 +389,7 @@ function inputUpdateButton(){
         		} else {
         			console.log(data);
         		}
+        		console.log(data);
 
         	}).fail(function(){
         		alert('NoData');
@@ -356,7 +397,7 @@ function inputUpdateButton(){
         }
         else {
         	return;
-        }
+        }*/
 
     }
 
@@ -366,7 +407,7 @@ function inputUpdateButton(){
 function checkSendData(_name, _file){
 
 	if(_name == '' && _file.val() == '') {
-		return false;
+		// return false;
 	}
 
 	if(_name != '' && _file.val() == '') {
@@ -391,7 +432,7 @@ function checkSendData(_name, _file){
     	for (var i = 0; i < lg; i++) {
             var fileSize = items[i].size;
             if(_name != '' && fileSize >= 2000000){
-            	alert('ファイルサイズは 2MB より小さくしてください.');
+            	alert('作品タイトル「 '+_name+ ' 」のファイルサイズが大きすぎます。\nファイルサイズは 2MB より小さくしてください.');
             	return false;
             }
         }
