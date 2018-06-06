@@ -378,7 +378,7 @@ div.iconbox{
   margin: 0 auto;
   float   : left;
   overflow: hidden;
-  border  : 1px solid #eee;
+  /*border  : 1px solid #eee;*/
   /*background: #ff0033;*/
 }
 

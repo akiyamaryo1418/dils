@@ -102,10 +102,11 @@ function searchCategory(){
 
 // ライトボックスを開く
 function openLightbox(id,pass, width, height){
+	var param = {'id': id};
 	data = {
 			'model'  : 'evaluation',
 			'action' : 'index',
-			'list'   :  id
+			'list'   :  param,
 		};
 
 	$.ajax({
@@ -184,9 +185,10 @@ function icontriming(width, height){
 }
 
 function lightboxtriming(_width, _height){
+
 	// 表示できる大きさを取得
-	var baseWidth = $('.leftcontents .lightboximg').width();
-	var baseHeight = $('.leftcontents .lightboximg').height();
+	var baseWidth = $('.leftcontents #detailslightbox').width();
+	var baseHeight = $('.leftcontents #detailslightbox').height();
 
 	// 画像の元サイズを取得
 	var newlWidth  = _width;
@@ -194,8 +196,15 @@ function lightboxtriming(_width, _height){
 
 	// 画像サイズ、表示位置の設定
 	if(_width > _height ) {
-		newlWidth = baseWidth;
-		newlHeight = _height * (baseWidth / _width);
+		var num = 2;
+		if(baseWidth >= newlWidth*num) {
+			newlWidth *= num;
+			newlHeight *= num;
+		} else {
+			newlWidth = baseWidth;
+			newlHeight = _height * (baseWidth / _width);
+		}
+
 	} else {
 		newlHeight = baseHeight;
 		newlWidth = _width * (baseHeight / _height);
@@ -208,7 +217,7 @@ function lightboxtriming(_width, _height){
 		$(this).height(newlHeight);
 		$(this).width(newlWidth);
 		$(this).css("height", newlHeight+"px");
-		$(this).css("top", 0);
+		$(this).css("top", newTop);
 		$(this).css("width",newlWidth+"px");
 		$(this).css("left", newLeft+"px");
 		$(this).css("background-color", "#fff");
