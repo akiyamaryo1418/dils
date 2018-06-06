@@ -27,7 +27,7 @@ class user {
         // ソート対象
         $target = "";
         if($data['param'][0][value] == null) {
-            $target = 'id';
+            $target = 'id DESC';
         } else {
             $target = $data['param'][0][value];
         }
@@ -65,7 +65,7 @@ class user {
               ."WHERE des.id = work.designer_id "
               ."AND des.id = ".$designerId." "
               ."AND (".$conditions.") "
-              ."ORDER BY " .$target." DESC"
+              ."ORDER BY " .$target
         ;
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();

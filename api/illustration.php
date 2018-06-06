@@ -100,7 +100,7 @@ class illustration {
             $sql = "SELECT work.id, work.designer_id, work.name AS image_name, des.name AS designer_name "
                   ."FROM works AS work "
                   ."INNER JOIN designers AS des ON work.designer_id = des.id "
-                  ."WHERE ".$conditions." ORDER BY " .$target. " DESC"
+                  ."WHERE ".$conditions." ORDER BY " .$target
             ;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();

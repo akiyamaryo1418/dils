@@ -70,7 +70,6 @@ function initIllust(){
 	    	data     :  data,
 	    	timeout  :  1000,
 	    }).done(function(data, dataType){
-	    	console.log(data);
 	    	if(data != -999) {
 	    		//===ただの表示===
 		    	for(var index = 0; index < data.length; index++){
