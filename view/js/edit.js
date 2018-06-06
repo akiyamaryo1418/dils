@@ -203,8 +203,7 @@ function inputUpdateButton(){
 	    		timeout     :  1000,
 	    	}).done(function(data, dataType){
 	    		if(data == 'success') {
-	    			alert('画像の登録が完了しました。');
-	    			location.href= "../html/mypage.html";
+
 	    		} else {
 	    			//console.log(data);
 	    			return;
@@ -214,76 +213,13 @@ function inputUpdateButton(){
 	    		alert('NoData');
 	    	});
 	    }
-
-		/*var promises = [];
-		for(var index = 0; index < 4; index++) {
-		    (function(index) {
-		        promises.push(Test(index));
-		    })(index);
-		}
-
-		Promise.all(promises).then(function(_data) {
-			for(var index = 0; index < 4; index++) {
-				console.log(_data[index]);
-				var file = $('#img'+(index+1)+'').val();
-				if(file != '') {
-					$.ajax({
-						url         : '../../api/controller.php',
-						type        : 'POST',
-						dataType    : 'json',
-						processData : false,
-				    	contentType : false,
-						data        :  _data[index],
-						timeout     :  1000,
-					}).done(function(data, dataType){
-						console.log(data);
-					}).fail(function(){
-						alert('NoData');
-					});
-				}
-			}
-
-		});*/
-
-
 	}
 
-
+	if(flag) {
+		alert('画像の登録が完了しました。');
+		location.href= "../html/mypage.html";
+	}
 }
-
-/*function Test(index) {
-	console.log(index);
-	return new Promise(function(resolve, reject) {
-		var data = new FormData($('#send').get(0));
-		data.append('model',  'illustration');
-		data.append('action', 'insert');
-		var name = $('.text'+(index+1)+'').val();
-		var category = $('#categoryid_'+(index+1)+'').val();
-
-		var id = sessionStorage.getItem('userId');
-		var fileName = 'img'+ (index + 1) + '';
-	    var param = [ id, name, fileName, category ];
-		data.append('list', param);
-
-	    resolve(data);
-
-		/*$.ajax({
-			url         : '../../api/controller.php',
-			type        : 'POST',
-			dataType    : 'json',
-			processData : false,
-	    	contentType : false,
-			data        :  data,
-			timeout     :  1000,
-		}).done(function(data, dataType){
-			console.log(data);
-
-		}).fail(function(){
-			alert('NoData');
-		});
-	});
-}*/
-
 
 //バリデーションチェック
 function checkSendData(_name, _file){
