@@ -116,12 +116,12 @@ label{
   position: absolute;
   top: 0;
   right: 50px;
-  width: 150px;
+  width: 200px;
   height: 20px;
   float: left;
 }
 
-.creatersortbox input.searchbtn {
+.creatersortbox button {
   position: absolute;
   top: 0;
   right: 0;
