@@ -186,11 +186,14 @@ class user {
                 }
             }
 
+            $size = getimagesize($filePath);
             $result[] = array(
                 'id'        => $id,
                 'userName'  => $row->name,
                 'img'       => $filePath,
                 'imgname'   => $imageName,
+                'width'    => $size[0],     // 画像の横幅
+                'height'   => $size[1],     // 画像の縦幅
             );
         }
         echo json_encode( $result );

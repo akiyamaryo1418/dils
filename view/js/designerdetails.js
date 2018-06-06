@@ -196,15 +196,8 @@ function lightboxtriming(_width, _height){
 
 	// 画像サイズ、表示位置の設定
 	if(_width > _height ) {
-		var num = 2;
-		if(baseWidth >= newlWidth*num) {
-			newlWidth *= num;
-			newlHeight *= num;
-		} else {
-			newlWidth = baseWidth;
-			newlHeight = _height * (baseWidth / _width);
-		}
-
+		newlWidth = baseWidth;
+		newlHeight = _height * (baseWidth / _width);
 	} else {
 		newlHeight = baseHeight;
 		newlWidth = _width * (baseHeight / _height);

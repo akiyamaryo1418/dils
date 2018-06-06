@@ -49,7 +49,6 @@ function filterDesigner(){
 		alert('NoData');
 	});*/
 	var param = {'name' : $('[name="search"]').val()};
-
 	var data = {
 			'model'  : 'user',
 			'action' : 'index',
@@ -74,26 +73,55 @@ function filterDesigner(){
 							    		 .html('<img src="'+result+'"'+
 							                                 'alt="'+data[index].imgname+'">'))
 							     .append($('<p></p>').html(data[index].userName)));
+					triming(data[index].width, data[index].height);
 				}
 			}
-			triming();
+
 		}).fail(function(){
 			alert('NoData');
 		});
 }
 
 //トリミング
-function triming(){
+function triming(_width, _height){
 
 	var resizeClass    = '.illustratorList img';
-	var thumnailWidth  = 130;
-	var thumnailHeight = 130;
-	var iw, ih;
 
+	// 表示できる大きさを取得
+	var baseWidth = 130;//$('.leftcontents #detailslightbox').width();
+	var baseHeight = 130;//$('.leftcontents #detailslightbox').height();
 
+	// 画像の元サイズを取得
+	var newlWidth  = _width;
+	var newlHeight = _height;
+
+	// 画像サイズ、表示位置の設定
+	if(_width > _height ) {
+		newlWidth = baseWidth;
+		newlHeight = _height * (baseWidth / _width);
+
+	} else {
+		newlHeight = baseHeight;
+		newlWidth = _width * (baseHeight / _height);
+	}
+	var newTop = (baseHeight / 2) - (newlHeight / 2);
+	var newLeft = (baseWidth / 2) - (newlWidth / 2);
+
+	//var resizeClass = '#detailslightbox img';
 	$(resizeClass).each(function(){
+		$(this).height(newlHeight);
+		$(this).width(newlWidth);
+		$(this).css("height", newlHeight+"px");
+		$(this).css("top", newTop+"px");
+		$(this).css("width",newlWidth+"px");
+		$(this).css("left", newLeft+"px");
+	});
+
+
+	/*$(resizeClass).each(function(){
 		var w = $(this).width();   // 画像の幅(原寸)
 		var h = $(this).height();  // 画像の高さ(原寸)
+		console.log(w+'___'+h);
 
 		// 横長の画像の場合
 		if(w >= h){
@@ -111,7 +139,7 @@ function triming(){
 			$(this).css("top",0);    // 画像のセンター合わせ
 			$(this).css("left", 0);
 		}
-	});
+	});*/
 }
 
 // 制作者詳細へ移動
