@@ -51,7 +51,7 @@ function Initialize(){
 	var id = sessionStorage.getItem('userId');
 	if(id != null) {
 		$('#loginlink').html('<li></li>').attr({'id':'mypagelink'})
-        .html('<a href="mypage.html">MYPAGE</a>');
+        .html('<a href="mypage.html">マイページ</a>');
 	}
 }
 
