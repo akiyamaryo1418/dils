@@ -27,7 +27,7 @@ class user {
         // ソート対象
         $target = "";
         if($data['param'][0][value] == null) {
-            $target = 'uploaded_at';
+            $target = 'id DESC';
         } else {
             $target = $data['param'][0][value];
         }
@@ -65,7 +65,7 @@ class user {
               ."WHERE des.id = work.designer_id "
               ."AND des.id = ".$designerId." "
               ."AND (".$conditions.") "
-              ."ORDER BY " .$target." DESC"
+              ."ORDER BY " .$target
         ;
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
@@ -164,7 +164,7 @@ class user {
     public function index($data) {
         $result;
 
-        $sql = "SELECT id, name FROM designers WHERE name LIKE '%".$data[0][value]."%'";
+        $sql = "SELECT id, name FROM designers WHERE name LIKE '%".$data['name']."%'";
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
@@ -186,11 +186,14 @@ class user {
                 }
             }
 
+            $size = getimagesize($filePath);
             $result[] = array(
                 'id'        => $id,
                 'userName'  => $row->name,
                 'img'       => $filePath,
                 'imgname'   => $imageName,
+                'width'    => $size[0],     // 画像の横幅
+                'height'   => $size[1],     // 画像の縦幅
             );
         }
         echo json_encode( $result );
@@ -377,7 +380,7 @@ class user {
         $result = -999;
 
         // IDの取得
-        $id = $data;
+        $id = $data['id'];
         // IDからユーザ名を取得
         $sql = "SELECT name FROM designers WHERE id = ".$id;
         $stmt = $this->dbm->dbh->prepare($sql);
@@ -408,10 +411,10 @@ class user {
             array_map('rmdir',  array_filter($paths, 'is_dir'));
 
             // DB上のデータの削除
-            $sql = "DELETE designers AS des, works, evaluations FROM designers "
-                  ."LEFT JOIN works  AS work ON des.id = work.designer_idse "
-                  ."LEFT JOIN evaluations  AS eva ON works.id = eva.work_id "
-                  ."WHERE works.id = ".$id;
+            $sql = "DELETE designers, works, evaluations FROM designers "
+                  ."LEFT JOIN works ON designers.id = works.designer_id "
+                  ."LEFT JOIN evaluations ON works.id = evaluations.work_id "
+                  ."WHERE designers.id = ".$id;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
             $result = 'succes';

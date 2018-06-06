@@ -100,7 +100,7 @@ class illustration {
             $sql = "SELECT work.id, work.designer_id, work.name AS image_name, des.name AS designer_name "
                   ."FROM works AS work "
                   ."INNER JOIN designers AS des ON work.designer_id = des.id "
-                  ."WHERE ".$conditions." ORDER BY " .$target. " DESC"
+                  ."WHERE ".$conditions." ORDER BY " .$target
             ;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
@@ -240,10 +240,6 @@ class illustration {
     // ================================================================
     public function edit($data) {
         $result = -999;
-
-        /*$id = $data[0][value];
-        $name = $data[1][value];
-        $categoryId = $data[2][value];*/
 
         $id = $data['id'];
         $name = $data['param'][0][value];

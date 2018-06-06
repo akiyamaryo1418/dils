@@ -102,10 +102,11 @@ function searchCategory(){
 
 // ライトボックスを開く
 function openLightbox(id,pass, width, height){
+	var param = {'id': id};
 	data = {
 			'model'  : 'evaluation',
 			'action' : 'index',
-			'list'   :  id
+			'list'   :  param,
 		};
 
 	$.ajax({
@@ -151,7 +152,7 @@ function openLightbox(id,pass, width, height){
 			$('#star'+index+'').prop({'disabled':'disabled'});
 		}
 
-		//$('.stop-scrolling').css("overflow", "hidden");
+		$('.stop-scrolling').css("overflow", "hidden");
 
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
@@ -165,8 +166,8 @@ function closeLightbox(){
 	$('.comment').remove();
 	$('[name="kanso"]').val('');
 	$('.id').remove();
-	//$('.stop-scrolling').css("overflow", "auto");
-	//$('body').removeClass("overflow");
+	$('.stop-scrolling').css("overflow", "auto");
+	// $('body').removeClass("overflow");
 }
 
 function icontriming(width, height){
@@ -184,9 +185,10 @@ function icontriming(width, height){
 }
 
 function lightboxtriming(_width, _height){
+
 	// 表示できる大きさを取得
-	var baseWidth = $('.leftcontents .lightboximg').width();
-	var baseHeight = $('.leftcontents .lightboximg').height();
+	var baseWidth = $('.leftcontents #detailslightbox').width();
+	var baseHeight = $('.leftcontents #detailslightbox').height();
 
 	// 画像の元サイズを取得
 	var newlWidth  = _width;
@@ -208,7 +210,7 @@ function lightboxtriming(_width, _height){
 		$(this).height(newlHeight);
 		$(this).width(newlWidth);
 		$(this).css("height", newlHeight+"px");
-		$(this).css("top", 0);
+		$(this).css("top", newTop);
 		$(this).css("width",newlWidth+"px");
 		$(this).css("left", newLeft+"px");
 		$(this).css("background-color", "#fff");

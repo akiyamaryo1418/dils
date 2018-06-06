@@ -22,7 +22,7 @@ class evaluation {
     // ================================================================
     public function index($data) {
         $result;
-        $id = $data;
+        $id = $data['id'];
 
         // 現在のユーザー名の取得
         $sql = "SELECT work.name AS image_name, des.name AS designer_name, des.id "

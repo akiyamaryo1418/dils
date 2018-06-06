@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/designerdetails.css" rel="stylesheet" type="text/css"/>
   </head>
-  <body>
+  <body class= "stop-scrolling">
     <header class="clearfix">
       <h1><a href="index.html">Designer Works</a></h1>
       <nav class="login">
@@ -41,9 +41,9 @@
       <section id="SearchBox">
       <form id="SearchAndFilter">
       <ul id="SearchBoxSort">
-        <li id="SearchAll" value="1"><label for="all">新着順</label><input type="radio" name="sort" value="id" id="all" checked="checked" onchange="searchCategory();"></li>
-        <li id="SearchUpDeat" value="2"><label for="date">投稿順</label><input type="radio" name="sort" value="uploaded_at" id="date" onchange="searchCategory();"></li>
-        <li id="SeartReview" value="3"><label for="review">高評価</label><input type="radio" name="sort" value="average_point" id="review" onchange="searchCategory();"></li>
+        <li id="SearchAll" value="1"><label for="all">新着順</label><input type="radio" name="sort" value="uploaded_at DESC" id="all" checked="checked" onchange="searchCategory();"></li>
+        <li id="SearchUpDeat" value="2"><label for="date">投稿順</label><input type="radio" name="sort" value="uploaded_at ASC" id="date" onchange="searchCategory();"></li>
+        <li id="SeartReview" value="3"><label for="review">高評価</label><input type="radio" name="sort" value="average_point DESC" id="review" onchange="searchCategory();"></li>
       </ul>
 
       <!-----フィルタ検索機能------>

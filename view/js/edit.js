@@ -2,6 +2,7 @@
 // イラスト編集ページ
 $(function(){
     Initialize();
+
 });
 
 // 初期化
@@ -14,7 +15,7 @@ function Initialize(){
 }
 
 //======Vue.jsの処理======
-var box1 = new Vue({
+new Vue({
 	el:'.box1',
 	data() {
 		return {
@@ -37,10 +38,6 @@ var box1 = new Vue({
 				this.uploadedImage = e.target.result;
 			};
 			reader.readAsDataURL(file);
-		},
-		del(){
-			//alert('dd');
-			//$(this).val('');
 		},
 	},
 })
@@ -125,6 +122,8 @@ new Vue({
 		},
 	},
 })
+
+
 //========================
 
 //トリミング
@@ -161,6 +160,7 @@ function resetcss(boxclass){
 //画像新規登録
 function inputUpdateButton(){
 
+
 	var flag = true;
 	for(var index = 0; index < 4; index++){
 
@@ -176,15 +176,16 @@ function inputUpdateButton(){
         }
 	}
 
+
+
 	if(flag) {
 		// 毎回通信する
-	    for(var index = 0; index < 4; index++){
-	    	console.log("送信");
-	    	var data = new FormData($('#send').get(0));
-	    	data.append('model',  'illustration');
-	    	data.append('action', 'insert');
+		for(var index = 0; index < 4; index++){
 
-	    	var name = $('.text'+(index+1)+'').val();
+			var data = new FormData($('#send').get(0));
+			data.append('model',  'illustration');
+			data.append('action', 'insert');
+			var name = $('.text'+(index+1)+'').val();
 	    	var category = $('#categoryid_'+(index+1)+'').val();
 
 	    	var id = sessionStorage.getItem('userId');
@@ -192,10 +193,7 @@ function inputUpdateButton(){
 	        var param = [ id, name, fileName, category ];
 	        data.append('list', param);
 
-	        var file = $('#img'+(index+1)+'');
-
-	        var errorName = name;
-	    	$.ajax({
+    		$.ajax({
 	    		url         : '../../api/controller.php',
 	    		type        : 'POST',
 	    		dataType    : 'json',
@@ -206,53 +204,86 @@ function inputUpdateButton(){
 	    	}).done(function(data, dataType){
 	    		if(data == 'success') {
 	    			alert('画像の登録が完了しました。');
-	    		    location.href= "../html/mypage.html";
+	    			location.href= "../html/mypage.html";
 	    		} else {
-	    			console.log(data);
+	    			//console.log(data);
+	    			return;
 	    		}
 	    		console.log(data);
-
 	    	}).fail(function(){
 	    		alert('NoData');
 	    	});
-
 	    }
+
+		/*var promises = [];
+		for(var index = 0; index < 4; index++) {
+		    (function(index) {
+		        promises.push(Test(index));
+		    })(index);
+		}
+
+		Promise.all(promises).then(function(_data) {
+			for(var index = 0; index < 4; index++) {
+				console.log(_data[index]);
+				var file = $('#img'+(index+1)+'').val();
+				if(file != '') {
+					$.ajax({
+						url         : '../../api/controller.php',
+						type        : 'POST',
+						dataType    : 'json',
+						processData : false,
+				    	contentType : false,
+						data        :  _data[index],
+						timeout     :  1000,
+					}).done(function(data, dataType){
+						console.log(data);
+					}).fail(function(){
+						alert('NoData');
+					});
+				}
+			}
+
+		});*/
+
+
 	}
 
-    // 毎回通信する
-    for(var index = 0; index < 4; index++){
-
-
-        /*if(checkSendData(name, file)) {
-        	var errorName = name;
-        	$.ajax({
-        		url         : '../../api/controller.php',
-        		type        : 'POST',
-        		dataType    : 'json',
-        		processData : false,
-            	contentType : false,
-        		data        :  data,
-        		timeout     :  1000,
-        	}).done(function(data, dataType){
-        		if(data == 'success') {
-        			alert('画像の登録が完了しました。');
-        		    location.href= "../html/mypage.html";
-        		} else {
-        			console.log(data);
-        		}
-        		console.log(data);
-
-        	}).fail(function(){
-        		alert('NoData');
-        	});
-        }
-        else {
-        	return;
-        }*/
-
-    }
 
 }
+
+/*function Test(index) {
+	console.log(index);
+	return new Promise(function(resolve, reject) {
+		var data = new FormData($('#send').get(0));
+		data.append('model',  'illustration');
+		data.append('action', 'insert');
+		var name = $('.text'+(index+1)+'').val();
+		var category = $('#categoryid_'+(index+1)+'').val();
+
+		var id = sessionStorage.getItem('userId');
+		var fileName = 'img'+ (index + 1) + '';
+	    var param = [ id, name, fileName, category ];
+		data.append('list', param);
+
+	    resolve(data);
+
+		/*$.ajax({
+			url         : '../../api/controller.php',
+			type        : 'POST',
+			dataType    : 'json',
+			processData : false,
+	    	contentType : false,
+			data        :  data,
+			timeout     :  1000,
+		}).done(function(data, dataType){
+			console.log(data);
+
+		}).fail(function(){
+			alert('NoData');
+		});
+	});
+}*/
+
 
 //バリデーションチェック
 function checkSendData(_name, _file){
