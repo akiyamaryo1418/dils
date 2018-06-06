@@ -68,12 +68,12 @@ function filterDesigner(){
 				for(var index = 0; index < data.length; index++){
 					var result = data[index].img.replace('view/', '');
 					var id = data[index].id;
-					$('#listbox').append($('<li></li>').attr({'class' : 'illustratorList' })
+					$('#listbox').append($('<li></li>').attr({'class' : 'illustratorList', 'id' : 'test_'+id+''})
 							     .append($('<a></a>').attr({'onclick':'moveDesignerDetails('+id+')'})
 							    		 .html('<img src="'+result+'"'+
 							                                 'alt="'+data[index].imgname+'">'))
 							     .append($('<p></p>').html(data[index].userName)));
-					triming(data[index].width, data[index].height);
+					triming(id, data[index].width, data[index].height);
 				}
 			}
 
@@ -83,8 +83,7 @@ function filterDesigner(){
 }
 
 //トリミング
-function triming(_width, _height){
-
+function triming(_id, _width, _height){
 	var resizeClass    = '.illustratorList img';
 
 	// 表示できる大きさを取得
@@ -98,8 +97,8 @@ function triming(_width, _height){
 	// 画像サイズ、表示位置の設定
 	if(_width > _height ) {
 		newlWidth = baseWidth;
-		newlHeight = _height * (baseWidth / _width);
-
+		newlHeight = 130;
+		//newlHeight = _height * (baseWidth / _width);
 	} else {
 		newlHeight = baseHeight;
 		newlWidth = _width * (baseHeight / _height);
@@ -107,11 +106,11 @@ function triming(_width, _height){
 	var newTop = (baseHeight / 2) - (newlHeight / 2);
 	var newLeft = (baseWidth / 2) - (newlWidth / 2);
 
-	//var resizeClass = '#detailslightbox img';
+	var resizeClass = '#test_'+_id+' img';
 	$(resizeClass).each(function(){
 		$(this).height(newlHeight);
 		$(this).width(newlWidth);
-		$(this).css("height", newlHeight+"px");
+		$(this).css("height", 130+"px");
 		$(this).css("top", newTop+"px");
 		$(this).css("width",newlWidth+"px");
 		$(this).css("left", newLeft+"px");

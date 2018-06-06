@@ -29,7 +29,7 @@ function inputLoginButton(){
 			alert('ユーザ名かパスワードが違います。');
 		}else{
 			sessionStorage.setItem('userId', id);
-			location.href = "../html/index.html";
+			location.href = "../html/mypage.html";
 		}
 	}).fail(function(){
 		alert('ユーザ名かパスワードが違います。');
