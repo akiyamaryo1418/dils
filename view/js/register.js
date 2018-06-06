@@ -12,7 +12,8 @@ $(function(){
 // 登録ボタン押したとき
 function inputRegistrationButton(){
 
-	if(checkValidation() == false)
+	var file = $('#imgadd');
+	if(checkValidation(file) == false)
 		return;
 
 	data = new FormData($('#previewform').get(0));
@@ -95,14 +96,23 @@ function triming(){
 }
 
 //バリデーションチェック
-function checkValidation(){
+function checkValidation(_file){
 
 	var checkflag = true;
+	var lg = _file[0].files.length;
+	var item = _file[0].files;
 	var name = $('[name="user"]').val();
 	var password = $('[name="password"]').val();
 	var mail = $('[name="mail"]').val();
 	var string = "";
 
+	for(var index = 0; index < lg; index++){
+		var fileSize = item[index].size;
+		if(fileSize > 2000000){
+			alert('アイコン画像のファイルサイズが大きすぎます。\nファイルサイズは2MB より小さくしてください。');
+			checkflag = false;
+		}
+	}
 
 	if(name == ""){
 		string = 'ユーザ名を入力してください。';
