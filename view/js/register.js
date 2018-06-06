@@ -141,8 +141,12 @@ function checkValidation(){
 		}
 	}
 
-	if(password == "")
+	if(password == ""){
 		string = string + 'パスワード入力してください。';
+	}else if(password.length < 8){
+		string = string +'パスワードは最低8文字必要です。';
+	}
+
 
 	if(string != ""){
 		alert(string);
@@ -153,7 +157,7 @@ function checkValidation(){
 }
 
 // ユーザ名
-function validationName(){
+/*function validationName(){
 
 	var name = "";
 
@@ -174,4 +178,4 @@ function validationPassword(){
 	if(password.length < 8){
 		alert('パスワード : 最低8文字必要です。');
 	}
-}
+}*/
