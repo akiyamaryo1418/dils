@@ -14,6 +14,11 @@ function Initialize(){
 	}
 }
 
+function deleteIllust(_classNum){
+	alert('dd');
+	$(_classNum).empty();
+}
+
 //======Vue.jsの処理======
 new Vue({
 	el:'.box1',
