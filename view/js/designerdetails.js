@@ -151,7 +151,7 @@ function openLightbox(id,pass, width, height){
 			$('#star'+index+'').prop({'disabled':'disabled'});
 		}
 
-		//$('.stop-scrolling').css("overflow", "hidden");
+		$('.stop-scrolling').css("overflow", "hidden");
 
 		// 見えないようにしている
 		$('.idmem').append($('<input type="radio" name="illustid" value="'+id+'" class="id" checked="checked" display:none>'));
@@ -165,8 +165,8 @@ function closeLightbox(){
 	$('.comment').remove();
 	$('[name="kanso"]').val('');
 	$('.id').remove();
-	//$('.stop-scrolling').css("overflow", "auto");
-	//$('body').removeClass("overflow");
+	$('.stop-scrolling').css("overflow", "auto");
+	// $('body').removeClass("overflow");
 }
 
 function icontriming(width, height){
