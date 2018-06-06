@@ -21,7 +21,7 @@ body {
 }
 
 #wrap {
-  width: 900px;
+  width: 1050px;
   margin:0 auto;
 }
 
@@ -100,7 +100,7 @@ img{
 }
 
 #Registration {
-  width: 800px;
+  width: 1000px;
   margin: 0 auto;
 }
 
@@ -109,15 +109,15 @@ img{
   font-size: 36px;
 }
 
-#Registration form {
+/*#Registration form {
   width: 340px;
   margin: 60px auto 100px;
-}
+}*/
 
 .preview {
   float: left;
   width: 210px;
-  margin: 60px 68px 0 108px;
+  margin: 60px 75px 0 190px;
 }
 
 .previewbox {
@@ -137,6 +137,7 @@ img{
   width: 340px;
   margin: 0 0 169px 0;
 }
+
 input {
   width: 330px;
   height: 23px;
@@ -168,7 +169,18 @@ p.text a {
   color: #000;
 }
 
+.form form {
+  margin: 28px auto 100px;
+}
+
 /*ファイルを選択ボタンのカスタマイズ*/
+
+#previewform {
+  float: right;
+  width: 109px;
+  margin: 0;
+}
+
 label p {
     width: 109px;
     height: 24px;

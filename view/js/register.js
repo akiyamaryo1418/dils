@@ -83,28 +83,13 @@ function triming(){
 
 	$(resizeClass).each(function(){
 
-		/*var w = $(this).width();
-		var h = $(this).height();
-
-		if(w >= h){
-			iw = (thumnailHeight/h*w-thumnailWidth)/2
-			$(this).height(thumnailHeight);
-			$(this).css("top",0);
-            $(this).css("left","-"+iw+"px");
-		}
-		else{
-			ih = (thumnailWidth/w*h-thumnailHeight)/2
-			$(this).css("top","-"+ih+"px");
-            $(this).css("left",0);
-		}*/
-
 		//====固定値====
 		$(this).height(thumnailHeight);
 		$(this).width(thumnailWidth);
 		$(this).css("height", 200+"px");
-		$(this).css("top", -60+"px");
+		$(this).css("top", 0+"px");
 		$(this).css("width", 200+"px");
-		$(this).css("left", -70+"px");
+		$(this).css("left", 0+"px");
         //==============
 	});
 }
