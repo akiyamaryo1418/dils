@@ -6,7 +6,7 @@ function openLightbox(id,pass,width, height){
 	var data = {
 		'model'  : 'evaluation',
 		'action' : 'index',
-		'list'   :  id
+		'list'   :  param
 	}
 
 	$.ajax({

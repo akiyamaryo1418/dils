@@ -79,10 +79,11 @@ function initIllust(){
 	   				            		{'onclick':'openLightbox('+data[index].id+',"'+result+'", '+data[index].width+', '+data[index].height+')'})
 		    				     .html('<img src="'+result+'"'+
 		    		            	   'alt="'+data[index].imgname+'">'))
-		    		             .append($('<p></p>').html(data[index].imgname)));
+		    		             /*.append($('<p></p>').html(data[index].imgname))*/);
+		    		triming(data[index].id, data[index].width, data[index].height);
 		    	}
 		        //================
-		    	triming();
+		    	// triming();
 		    	$('#wrapper').append('<div class="cle"></div>');
 		    	$('.masonry').masonry({ itemSelector: '.item', columnWidth : 300 });
 	    	//}
@@ -127,9 +128,10 @@ function searchCategory(){
     				     .html('<img src="'+result+'"'+
     		            	   'alt="'+data[index].imgname+'">'))
     		             .append($('<p></p>').html(data[index].imgname)));
+    		triming(data[index].id, data[index].width, data[index].height);
     	}
         //================
-    	triming();
+
     	$('#wrapper').append('<div class="cle"></div>');
     	$('.masonry').masonry({ itemSelector: '.item', columnWidth : 300 });
 	}).fail(function(){
@@ -138,15 +140,38 @@ function searchCategory(){
 }
 
 //トリミング
-function triming(){
+function triming(_id, _width, _height){
+	var resizeClass    = '#illustid_'+_id+' img';//'.item img';
+	var baseWidth  = 250;
+	var baseHeight = 250;
 
-	var resizeClass    = '.item img';
-	var thumnailWidth  = 250;
-	var thumnailHeight = 250;
-	var iw, ih;
+	// 画像の元サイズを取得
+	var newlWidth  = _width;
+	var newlHeight = _height;
+
+	// 画像サイズ、表示位置の設定
+	if(_width > _height ) {
+		newlWidth = baseWidth;
+		newlHeight = _height * (baseWidth / _width);
+	} else {
+		newlHeight = baseHeight;
+		newlWidth = _width * (baseHeight / _height);
+		console.log("te__"+newlHeight);
+	}
+	var newTop = (baseHeight / 2) - (newlHeight / 2);
+	var newLeft = (baseWidth / 2) - (newlWidth / 2);
+
+	$(resizeClass).each(function() {
+		$(this).height(newlHeight);
+		$(this).width(newlWidth);
+		$(this).css("height", newlHeight+"px");
+		$(this).css("top", newTop+"px");
+		$(this).css("width",newlWidth+"px");
+		$(this).css("left", newLeft+"px");
+	});
 
 
-	$(resizeClass).each(function(){
+	/*$(resizeClass).each(function(){
 		var w = $(this).width();   // 画像の幅(原寸)
 		var h = $(this).height();  // 画像の高さ(原寸)
 
@@ -165,7 +190,7 @@ function triming(){
 			$(this).css("top","-"+ih+"px");    // 画像のセンター合わせ
 			$(this).css("left", 0);
 		}
-	});
+	});*/
 }
 
 // ページの先頭へ戻るボタン
