@@ -164,9 +164,9 @@ div.img-box {
 
 select {
   float: left;
-  width: 122px;
+  width: 241px;
   height: 23px;
-  margin: 5px 5px 0 2px;
+  margin: 5px 5px 0 0;
 }
 
 input.imgbutton {
@@ -180,9 +180,9 @@ input.imgbutton {
 }
 
 input.delete {
-  width: 50px;
-  height: 23px;
-  margin: 5px 0;
+  width: 115px;
+  height: 24px;
+  margin: 5px 0 0 5px;
   background: #000;
   color: #fff;
   border: none;
@@ -202,10 +202,10 @@ input.button {
 }
 
 label p {
-    width: 109px;
+    width: 115px;
     height: 24px;
     float: left;
-    margin-top: 5px;
+    margin: 5px 5px 0 0;
     background: #000;
     color: #fff;
     text-align: center;
