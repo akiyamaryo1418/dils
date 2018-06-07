@@ -39,9 +39,10 @@ function Initialize(){
 			// ここで値を取得し、表示する
 			for(var index = 0; index < data.length; index++){
 				var result = data[index].img.replace('view/', '')
-				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
+				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox', 'id' : 'img_'+index})
 									  .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
 				                      .append($('<img>').attr({'src': result}))));
+				triming(index, data[index].width, data[index].height);
 			}
 		}
 	}).fail(function(){
@@ -67,7 +68,7 @@ function searchCategory(){
 	var id = sessionStorage.getItem('viewUserId');
 	var param = { 'id' : id, 'param' : list};
 
-
+	console.log(param);
 	// 必要な情報
 	var data = {
 		'model'  : 'user',
@@ -82,21 +83,59 @@ function searchCategory(){
 		data     :  data,
 		timeout  :  1000,
 	}).done(function(data, dataType){
-		//alert(data.length);
-		//console.log(data);
+		console.log(data);
 		$('.imgbox').remove();
 		if(data[0].id != -999) {
 			for(var index = 0; index < data.length; index++){
 				var result = data[index].img.replace('view/', '')
-				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox'})
+				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox', 'id' : 'img_'+index})
 				                      .append($('<a></a>').attr(
 				                    		  {'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
 						              .append($('<img>').attr({'src': result}))));
+
+				triming(index, data[index].width, data[index].height);
 			}
 		}
 
 	}).fail(function(){
 		alert('NoData');
+	});
+}
+
+function triming(_id, _width, _height){
+	// var resizeClass    = '.illustratorList img';
+
+	// 表示できる大きさを取得
+	var baseWidth = 105;//$('.leftcontents #detailslightbox').width();
+	var baseHeight = 105;//$('.leftcontents #detailslightbox').height();
+
+	// 画像の元サイズを取得
+	var newlWidth  = _width;
+	var newlHeight = _height;
+
+	// 画像サイズ、表示位置の設定
+	if(_width > _height ) {
+		newlWidth = baseWidth;
+		//newlHeight = 105;
+		newlHeight = _height * (baseWidth / _width);
+		console.log("aa");
+	} else {
+		newlHeight = baseHeight;
+		//newlWidth = 105;
+		newlWidth = _width * (baseHeight / _height);
+		console.log("bb");
+	}
+	var newTop = (baseHeight / 2) - (newlHeight / 2);
+	var newLeft = (baseWidth / 2) - (newlWidth / 2);
+
+	var resizeClass = '#img_'+_id+' img';
+	$(resizeClass).each(function(){
+		$(this).height(newlHeight);
+		$(this).width(newlWidth);
+		$(this).css("height", newlHeight+"px");
+		$(this).css("top", newTop+"px");
+		$(this).css("width",newlWidth+"px");
+		$(this).css("left", 0+"px");
 	});
 }
 
