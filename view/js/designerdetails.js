@@ -253,7 +253,9 @@ function postText(){
 			//$('.lightboxview').remove();
 
 			$('.comment').remove();
+			var intaverage =  6 - Math.floor(data[1].review);
 			for(var index = 1; index <= 5; index++){
+				$('#star'+index+'').prop('checked', false);
 				$('#starbutton'+index+'').prop('checked', false);
 			}
 
@@ -267,6 +269,13 @@ function postText(){
 		                        .append($('<dt></dt>').html(data[index].created_at))
 		                        .append($('<dd></dd>').html(starmark)))
 		                        .append($('<pre class="comment"></pre>').html(data[index].comment));
+			}
+
+			if(intaverage != 6){
+				$('#star'+intaverage+'').prop({'checked':'checked'});
+			}
+			for(var index = 1; index <= 5; index++){
+				$('#star'+index+'').prop({'disabled':'disabled'});
 			}
 
 			$('[name="kanso"]').val('');
