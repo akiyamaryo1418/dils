@@ -39,8 +39,11 @@ function Initialize(){
 			// ここで値を取得し、表示する
 			for(var index = 0; index < data.length; index++){
 				var result = data[index].img.replace('view/', '')
-				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox', 'id' : 'img_'+index})
+				/*$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox', 'id' : 'img_'+index})
 									  .append($('<a></a>').attr({'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
+				                      .append($('<img>').attr({'src': result}))));*/
+				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox', 'id' : 'img_'+index, 'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
+									  .append($('<a></a>').attr({})
 				                      .append($('<img>').attr({'src': result}))));
 				triming(index, data[index].width, data[index].height);
 			}
@@ -88,10 +91,14 @@ function searchCategory(){
 		if(data[0].id != -999) {
 			for(var index = 0; index < data.length; index++){
 				var result = data[index].img.replace('view/', '')
-				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox', 'id' : 'img_'+index})
+				/*$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox', 'id' : 'img_'+index})
 				                      .append($('<a></a>').attr(
 				                    		  {'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
-						              .append($('<img>').attr({'src': result}))));
+						              .append($('<img>').attr({'src': result}))));*/
+
+				$('.creatorillustbox').append($('<li></li>').attr({'class' : 'imgbox', 'id' : 'img_'+index, 'onclick': 'openLightbox('+data[index].id+', "'+result+'", '+data[index].width+', '+data[index].height+')'})
+									  .append($('<a></a>').attr({})
+				                      .append($('<img>').attr({'src': result}))));
 
 				triming(index, data[index].width, data[index].height);
 			}
@@ -118,12 +125,10 @@ function triming(_id, _width, _height){
 		newlWidth = baseWidth;
 		//newlHeight = 105;
 		newlHeight = _height * (baseWidth / _width);
-		console.log("aa");
 	} else {
 		newlHeight = baseHeight;
 		//newlWidth = 105;
 		newlWidth = _width * (baseHeight / _height);
-		console.log("bb");
 	}
 	var newTop = (baseHeight / 2) - (newlHeight / 2);
 	var newLeft = (baseWidth / 2) - (newlWidth / 2);
