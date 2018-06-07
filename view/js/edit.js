@@ -14,10 +14,12 @@ function Initialize(){
 	}
 }
 
-function deleteIllust(_classNum){
-	alert('dd');
-	$(_classNum).empty();
-}
+/*function deleteIllust(_classNum){
+	//alert('dd');
+	$('.child-box'+_classNum+'').empty();
+	$('.child-box'+_classNum+'').append('<img />').attr({ 'v-show': 'uploadedImage'});
+	//$('')
+}*/
 
 //======Vue.jsの処理======
 new Vue({
@@ -44,6 +46,11 @@ new Vue({
 			};
 			reader.readAsDataURL(file);
 		},
+		// 画像の削除
+		deleteIllust(){
+			$('#img1').val('');
+			this.uploadedImage = '';
+		}
 	},
 })
 
@@ -71,6 +78,11 @@ new Vue({
 			};
 			reader.readAsDataURL(file);
 		},
+		// 画像の削除
+		deleteIllust(){
+			$('#img2').val('');
+			this.uploadedImage = '';
+		}
 	},
 })
 
@@ -98,6 +110,11 @@ new Vue({
 			};
 			reader.readAsDataURL(file);
 		},
+		// 画像の削除
+		deleteIllust(){
+			$('#img3').val('');
+			this.uploadedImage = '';
+		}
 	},
 })
 
@@ -125,6 +142,11 @@ new Vue({
 			};
 			reader.readAsDataURL(file);
 		},
+		// 画像の削除
+		deleteIllust(){
+			$('#img4').val('');
+			this.uploadedImage = '';
+		}
 	},
 })
 
