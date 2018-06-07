@@ -137,8 +137,8 @@ function checkValidation(_file){
 
 	if(password == ""){
 		string = string + 'パスワード入力してください。';
-	}else if(password.length < 8){
-		string = string +'パスワードは最低8文字必要です。';
+	}else if(password.length < 4){
+		string = string +'パスワードは最低4文字必要です。';
 	}
 
 
