@@ -221,7 +221,7 @@ function inputUpdateButton(){
 	        var param = [ id, name, fileName, category ];
 	        data.append('list', param);
 
-	        // if(name != '' &&  $('#img'+(index+1)+'').val() != '')
+	        if(name != '' &&  $('#img'+(index+1)+'').val() != '')
 	        {
 	        	$.ajax({
 		    		url         : '../../api/controller.php',
@@ -245,11 +245,8 @@ function inputUpdateButton(){
 	        }
 	    }
 	}
-
-	if(flag) {
-		alert('画像の登録が完了しました。');
-		location.href= "../html/mypage.html";
-	}
+	alert('画像の登録が完了しました。');
+	location.href= "../html/mypage.html";
 }
 
 //バリデーションチェック

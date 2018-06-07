@@ -125,7 +125,7 @@ function deleteIllust() {
 		    }).done(function(data, dataType){
 		    	console.log(data);
 		    	if(data == 'success') {
-		    		alert('削除に成功しました。');
+		    		alert('画像を削除しました。');
 		    		location.reload(true);
 		    	}
 
