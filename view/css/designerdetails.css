@@ -361,8 +361,13 @@ div.iconbox{
   color: #fff;
 }
 
-.usernamebox p {
-  font-size: 12px;
+.usernamebox .illustname {
+  font-size: 18px;
+}
+
+
+.usernamebox p.illustratorname {
+  font-size: 15px;
 }
 
 .leftcontents {

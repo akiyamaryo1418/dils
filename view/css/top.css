@@ -339,8 +339,12 @@ div.iconbox{
   color: #fff;
 }
 
-.usernamebox p {
-  font-size: 12px;
+.usernamebox .illustname {
+  font-size: 18px;
+}
+
+.usernamebox p.illustratorname {
+  font-size: 15px;
 }
 
 .leftcontents {
@@ -386,7 +390,7 @@ div.iconbox{
 }
 
 .rightcontents p {
-  font-size: 12px;
+  font-size: 17px;
   margin: 15px 10px;
 }
 
@@ -405,7 +409,8 @@ div.iconbox{
 
 
 .comment{
-	padding-buttom : 10px;
+  padding-bottom: 10px;
+  font-size: 16px;
 }
 
 .commentbox dl {
@@ -416,13 +421,14 @@ div.iconbox{
 .commentbox dl dt {
   float: left;
   margin-right: 40px;
+  font-size: 16px;
 }
 
 dd {
   margin-left: 80px;
   color: yellow;
   -webkit-text-stroke: 1px #000;
-  font-size: 17px;
+  font-size: 20px;
 
 }
 
