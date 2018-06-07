@@ -189,6 +189,7 @@ function inputUpdateButton(){
 
 
 	var flag = true;
+	var illustNum = 0;
 	for(var index = 0; index < 4; index++){
 
         var name = $('.text'+(index+1)+'').val();
@@ -196,6 +197,7 @@ function inputUpdateButton(){
 
         if(checkSendData(name, file)) {
         	console.log("success");
+        	illustNum += 1;
         }
         else {
         	flag = false;
@@ -207,10 +209,78 @@ function inputUpdateButton(){
 
 	if(flag) {
 		flag = false;
-		// 毎回通信する
-		for(var index = 0; index < 4; index++){
 
-			var data = new FormData($('#send').get(0));
+		new Promise(function (res, rej){
+			function loop(index){
+
+				return new Promise(function(resolve, reject){
+
+					var data = new FormData($('#send').get(0));
+					data.append('model',  'illustration');
+					data.append('action', 'insert');
+					var name = $('.text'+(index+1)+'').val();
+			    	var category = $('#categoryid_'+(index+1)+'').val();
+
+			    	var id = sessionStorage.getItem('userId');
+			    	var fileName = 'img'+ (index + 1) + '';
+			        var param = [ id, name, fileName, category ];
+			        data.append('list', param);
+			        //alert('aa');
+			        //alert(index);
+			        if(name != '' &&  $('#img'+(index+1)+'').val() != '')
+			        {
+			        	$.ajax({
+				    		url         : '../../api/controller.php',
+				    		type        : 'POST',
+				    		dataType    : 'json',
+				    		processData : false,
+				        	contentType : false,
+				    		data        :  data,
+				    		timeout     :  1000,
+				    	}).done(function(data, dataType){
+				    		if(data == 'success') {
+				    			flag = true;
+				    			//alert('suc');
+				    			resolve(index+1);
+				    		} else {
+				    			//alert('No');
+				    			//console.log(data);
+				    			return;
+				    		}
+				    		console.log(data);
+				    	}).fail(function(){
+				    		alert('NoData');
+				    		reject();
+				    	});
+			        }else{
+			        	//alert('next');
+		    			resolve(index+1);
+			        }
+				}).then(function(count){
+					if(count > illustNum - 1){
+						//alert('res');
+						res();
+					}else{
+						//alert('loop');
+						loop(count);
+					}
+				});
+			}
+			loop(0);
+		}).then(function(){
+			//alert('ddd');
+			alert('画像の登録が完了しました。');
+			location.href= "../html/mypage.html";
+		}).catch(function(){
+			alert('n');
+		});
+
+		//alert('ff');
+		// 毎回通信する
+		/*for(var index = 0; index < 4; index++){
+
+			sendImageInfo(index);*/
+			/*var data = new FormData($('#send').get(0));
 			data.append('model',  'illustration');
 			data.append('action', 'insert');
 			var name = $('.text'+(index+1)+'').val();
@@ -242,11 +312,50 @@ function inputUpdateButton(){
 		    	}).fail(function(){
 		    		alert('NoData');
 		    	});
-	        }
-	    }
+	        }*/
+	    //}
 	}
-	alert('画像の登録が完了しました。');
-	location.href= "../html/mypage.html";
+	//alert('d');
+
+	//location.href= "../html/mypage.html";
+}
+
+function sendImageInfo(index){
+
+	var data = new FormData($('#send').get(0));
+	data.append('model',  'illustration');
+	data.append('action', 'insert');
+	var name = $('.text'+(index+1)+'').val();
+	var category = $('#categoryid_'+(index+1)+'').val();
+
+	var id = sessionStorage.getItem('userId');
+	var fileName = 'img'+ (index + 1) + '';
+    var param = [ id, name, fileName, category ];
+    data.append('list', param);
+
+    if(name != '' &&  $('#img'+(index+1)+'').val() != '')
+    {
+    	$.ajax({
+    		url         : '../../api/controller.php',
+    		type        : 'POST',
+    		dataType    : 'json',
+    		processData : false,
+        	contentType : false,
+    		data        :  data,
+    		timeout     :  1000,
+    	}).done(function(data, dataType){
+    		if(data == 'success') {
+    			flag = true;
+    			return flag;
+    		} else {
+    			//console.log(data);
+    			return false;
+    		}
+    		console.log(data);
+    	}).fail(function(){
+    		alert('NoData');
+    	});
+    }
 }
 
 //バリデーションチェック
