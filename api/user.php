@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('databaseManager.php');
 header('Content-type:application/json; charset=utf8');
 
@@ -203,7 +204,7 @@ class user {
     // ユーザーの登録
     // ================================================================
     public function register($data, $fileData = null) {
-        $result = -999;
+        $result;
 
         // ユーザー名、パスワードを取得
         $newData = explode(",", $data);
@@ -213,7 +214,29 @@ class user {
 
         // 名前、パスワードがない場合
         if($name == null || $inputPassword == null || $address == null) {
-            $result = -999;
+            $result = '入力データがはいっていません。';
+            echo json_encode( $result );
+            return;
+        }
+
+        $flag = -999;
+        $sql = "SELECT * FROM designers WHERE name = '".$name."' ";
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $flag = $stmt->execute();
+
+        while ($row = $stmt->fetchObject())
+        {
+            $hash  = $row->password;
+            if(password_verify($inputPassword, $hash)) {
+                $flag = false;
+                break;
+            } else {
+                $flag = true;   // 入力したパスワードが違う
+            }
+        }
+
+        if(!$flag) {
+            $result = '同じユーザーは使用できません。';
             echo json_encode( $result );
             return;
         }
@@ -246,18 +269,30 @@ class user {
             if($fileData != null) {
                 $iconName = $id.'_icon';
                 if($this->uploadImage($fileData, $directoryPath, $iconName)) {
-                    $result = $id;
+                    $result[] = array(
+                        'result'   => 'success',
+                        'id'      => $id,
+                    );
+                    if($_SESSION['password'] == null) {
+                        $_SESSION['password'] = $inputPassword;
+                    }
                 }
                 else{
-                    $result = -999;
+                    $result = 'アイコンの登録に失敗しました。';
                 }
             }
             else{
                 // 画像なし
-                $result = $id;
+                $result[] = array(
+                    'result'   => 'success',
+                    'id'      => $id,
+                );
+                if($_SESSION['password'] == null) {
+                    $_SESSION['password'] = $inputPassword;
+                }
             }
         }else{
-            $result = -999;
+            $result = 'フォルダ作成に失敗しました。';
         }
         echo json_encode( $result );
     }
@@ -302,7 +337,34 @@ class user {
 
         // 名前がない場合
         if($id == null || $name == null) {
-            $result = -999;
+            $result = '入力データに取得できませんでした。';
+            echo json_encode( $result );
+            return;
+        }
+
+        // ユーザー名に合致するデータの取得
+        $sql = "SELECT * FROM designers WHERE name = '".$name."' ";
+        $stmt = $this->dbm->dbh->prepare($sql);
+        $stmt->execute();
+
+        $flag = false;
+        $row;
+        while ($row = $stmt->fetchObject())
+        {
+            if($row->id == $id) {
+                $flag = true;
+                break;
+            }
+
+            // データベースにあるデータとの比較
+            $hash  = $row->password;
+            if(password_verify($_SESSION['password'], $hash)) {
+                break;
+            }
+        }
+
+        if(!$flag && $row != null) {
+            $result = 'そのユーザー名での登録はできません。';
             echo json_encode( $result );
             return;
         }
@@ -362,11 +424,11 @@ class user {
                 $result = 'success';
             }
             else{
-                $result = 'error';
+                $result = 'アイコンのアップロードに失敗しました。';
             }
         } else {
             // 画像更新なし
-            $result = 'succes';
+            $result = 'success';
         }
         echo json_encode( $result );
     }
@@ -417,6 +479,7 @@ class user {
                   ."WHERE designers.id = ".$id;
             $stmt = $this->dbm->dbh->prepare($sql);
             $stmt->execute();
+            unset($_SESSION['password']);
             $result = 'succes';
         }else {
             $result = -999;
@@ -435,7 +498,7 @@ class user {
         $password = $data[1][value];
 
         // ユーザー名に合致するデータの取得
-        $sql = "SELECT * FROM designers WHERE name = '".$userName."' ";
+        $sql = "SELECT * FROM designers WHERE name = '".$userName."' or address = '".$userName."' ";
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
@@ -446,6 +509,7 @@ class user {
                 // データベースにあるデータとの比較
                 $hash  = $row->password;
                 if(password_verify($password, $hash)) {
+                    $_SESSION['password'] = $password;
                     $result = $row->id;
                     break;
                 } else {

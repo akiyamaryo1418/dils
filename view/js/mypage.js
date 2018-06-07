@@ -161,8 +161,13 @@ function sendAccountEdit(){
 	    	data        :  data,
 	    	timeout     :  1000,
 	    }).done(function(data, dataType){
-	    	alert('編集内容を登録しました。');
-	    	location.href = "../html/mypage.html";
+	    	if(data == 'success') {
+	    		alert('編集内容を登録しました。');
+		    	location.href = "../html/mypage.html";
+	    	} else {
+	    		alert(data);
+	    	}
+
 	    }).fail(function(){
 	    	alert('Nodata');
 	    });
