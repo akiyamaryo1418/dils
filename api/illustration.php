@@ -132,6 +132,9 @@ class illustration {
                     'imgname'  => $row->image_name,
                 );
             }
+            if($result == null) {
+                $result = -999;
+            }
         }
         else {
             $result = -999;
