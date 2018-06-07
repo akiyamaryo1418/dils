@@ -372,7 +372,7 @@ div.iconbox{
   background: #fff;
 }
 
-.leftcontents .imgbox {
+.leftcontents .imgbox2 {
   width: 750px;
   height: 700px;
   margin: 0 auto;
@@ -385,6 +385,11 @@ div.iconbox{
 .cle { clear: both; }
 
 .imgbox img {
+  /*width: 100%;*/
+  position : relative;
+}
+
+.imgbox2 img {
   /*width: 100%;*/
   position : relative;
 }
