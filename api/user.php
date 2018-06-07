@@ -498,7 +498,7 @@ class user {
         $password = $data[1][value];
 
         // ユーザー名に合致するデータの取得
-        $sql = "SELECT * FROM designers WHERE name = '".$userName."' ";
+        $sql = "SELECT * FROM designers WHERE name = '".$userName."' or address = '".$userName."' ";
         $stmt = $this->dbm->dbh->prepare($sql);
         $flag = $stmt->execute();
 
