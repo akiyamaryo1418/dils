@@ -24,25 +24,27 @@ function inputRegistrationButton(){
 	var param = [ $('#username').val(), $('#password').val(), fileName, $('#mail').val() ];
 	data.append('list', param);
 
-    $.ajax({
-    	url         : '../../api/controller.php',
-    	type        : 'POST',
-    	dataType    : 'json',
-    	processData : false,
-    	contentType : false,
-    	data        :  data,
-    	timeout     :  1000,
-    }).done(function(data, dataType){
-    	if(data[0].result == 'success') {
-    		location.href = "../html/mypage.html";
-            sessionStorage.setItem('userId', data[0].id);
-    	} else {
-    		alert(data);
-    	}
+	if(window.confirm('この内容で登録しますか？')){
+		$.ajax({
+	    	url         : '../../api/controller.php',
+	    	type        : 'POST',
+	    	dataType    : 'json',
+	    	processData : false,
+	    	contentType : false,
+	    	data        :  data,
+	    	timeout     :  1000,
+	    }).done(function(data, dataType){
+	    	if(data[0].result == 'success') {
+	    		location.href = "../html/mypage.html";
+	            sessionStorage.setItem('userId', data[0].id);
+	    	} else {
+	    		alert(data);
+	    	}
 
-    }).fail(function(){
-    	alert('Nodata');
-    });
+	    }).fail(function(){
+	    	alert('Nodata');
+	    });
+	}
 }
 
 // 一覧画面へ移動
@@ -75,6 +77,11 @@ new Vue({
 			};
 			reader.readAsDataURL(file);
 		},
+		// アイコンの削除
+		deleteIllust(){
+			$('#imgadd').val('');
+			this.uploadedImage = '';
+		}
 	},
 })
 
@@ -106,7 +113,9 @@ function checkValidation(_file){
 	var lg = _file[0].files.length;
 	var item = _file[0].files;
 	var name = $('[name="user"]').val();
-	var password = $('[name="password"]').val();
+	// var password = $('[name="password"]').val();
+	var password = $('#password').val();
+	var password2 = $('#password2').val();
 	var mail = $('[name="mail"]').val();
 	var string = "";
 
@@ -120,31 +129,49 @@ function checkValidation(_file){
 
 	if(name == ""){
 		string = 'ユーザ名を入力してください。';
-		if(password == "" || mail == "")
-			string = string + '\n';
+		//if(password == "" || mail == "")
+			// string = string + '\n';
 	}else if(name.includes(',') == true){
 		string = 'カンマは使用できません。';
-		if(password == "" || mail == "")
-			string = string + '\n';
+		//if(password == "" || mail == "")
+			//string = string + '\n';
 	}
 
 	if(mail == ""){
+		if(string != "") {
+			string = string + '\n';
+		}
 		string = string + 'メールアドレスを入力してください。'
 	}else{
 		regexp = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
 		// バリデーションチェック
 		if(!regexp.test(mail)){
-			string = string + 'メールアドレスの入力形式が違います。';
-			if(password == "")
+			if(string != "") {
 				string = string + '\n';
+			}
+			string = string + 'メールアドレスの入力形式が違います。';
+			//if(password == "" )
+				//string = string + '\n';
 		}
 	}
 
-	if(password == ""){
+	if(password == "" || password2 == ""){
+		if(string != "") {
+			string = string + '\n';
+		}
 		string = string + 'パスワード入力してください。';
 	}else if(password.length < 4){
+		if(string != "") {
+			string = string + '\n';
+		}
 		string = string +'パスワードは最低4文字必要です。';
+	}else if(password != password2) {
+		if(string != "") {
+			string = string + '\n';
+		}
+		string = string +'パスワードが一致しませんでした。';
 	}
+
 
 
 	if(string != ""){

@@ -41,6 +41,7 @@
               <label for="imgadd">
                 <p>ファイルを選択</p>
                 <input type="file" id="imgadd" name="img" v-on:change="onFileChange" />
+                <input type="button" value="削除" class="delete" v-on:click="deleteIllust">
               </label>
             </form>
             <div class="cle"></div>
@@ -60,6 +61,9 @@
 
           <p>パスワード<br>
           <input type="password" id="password" name="password"></p>
+
+          <p>パスワードを再入力<br>
+          <input type="password" id="password2" name="password"></p>
           <p><input type="button"value="新規登録" class="button" onclick="inputRegistrationButton();"></p>
         </form>
         </div>
