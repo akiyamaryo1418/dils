@@ -174,30 +174,31 @@ p.text a {
 /*ファイルを選択ボタンのカスタマイズ*/
 
 #previewform {
-  float: right;
-  width: 109px;
+  width: 196px;
   margin: 0;
 }
 
 label p {
-    width: 109px;
+    width: 101px;
     height: 24px;
-    margin-right: 10px;
+    margin-right: 5px;
     background: #000;
     color: #fff;
     text-align: center;
     box-sizing: border-box;
     padding-top: 3px;
     font-size: 11px;
+    float: left;
  }
 
  input.delete {
-  width: 109px;
+  width: 90px;
   height: 24px;
-  margin: 5px 0 0 0;
+  margin: 0 0 0 0;
   background: #000;
   color: #fff;
   border: none;
+  float: right;
 }
 
  #imgadd {
