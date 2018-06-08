@@ -41,6 +41,7 @@
               <label for="imgadd">
                 <p>ファイルを選択</p>
                 <input type="file" id="imgadd" name="img" v-on:change="onFileChange" />
+                <input type="button" value="削除" class="delete" v-on:click="deleteIllust">
               </label>
             </form>
             <div class="cle"></div>
