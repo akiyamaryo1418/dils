@@ -179,6 +179,7 @@ input[type=radio]{
 
 label{
     cursor: pointer;
+    padding: 10px 50px 10px 50px;
 }
 
 
