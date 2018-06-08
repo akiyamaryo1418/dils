@@ -369,6 +369,11 @@ div.iconbox{
   position : relative;
 }
 
+.req {
+	font-weight: bold;
+	color: #f22;
+}
+
 .rightcontents {
   position: relative;
   float: left;

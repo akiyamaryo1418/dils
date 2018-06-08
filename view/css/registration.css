@@ -112,6 +112,11 @@ img{
   margin: 60px auto 100px;
 }*/
 
+.req {
+	font-weight: bold;
+	color: #f00;
+}
+
 .preview {
   float: left;
   width: 210px;
