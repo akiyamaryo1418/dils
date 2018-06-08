@@ -361,7 +361,7 @@ div.iconbox{
   float   : left;
   overflow: hidden;
   /*border  : 1px solid #eee;*/
-  background: #fff;
+  /*background: #fff;*/
 }
 
 .imgbox img {
