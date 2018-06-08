@@ -129,32 +129,49 @@ function checkValidation(_file){
 
 	if(name == ""){
 		string = 'ユーザ名を入力してください。';
-		if(password == "" || mail == "")
-			string = string + '\n';
+		//if(password == "" || mail == "")
+			// string = string + '\n';
 	}else if(name.includes(',') == true){
 		string = 'カンマは使用できません。';
-		if(password == "" || mail == "")
-			string = string + '\n';
+		//if(password == "" || mail == "")
+			//string = string + '\n';
 	}
 
 	if(mail == ""){
+		if(string != "") {
+			string = string + '\n';
+		}
 		string = string + 'メールアドレスを入力してください。'
 	}else{
 		regexp = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
 		// バリデーションチェック
 		if(!regexp.test(mail)){
-			string = string + 'メールアドレスの入力形式が違います。';
-			if(password == "")
+			if(string != "") {
 				string = string + '\n';
+			}
+			string = string + 'メールアドレスの入力形式が違います。';
+			//if(password == "" )
+				//string = string + '\n';
 		}
 	}
 
 	if(password == "" || password2 == ""){
+		if(string != "") {
+			string = string + '\n';
+		}
 		string = string + 'パスワード入力してください。';
 	}else if(password.length < 4){
+		if(string != "") {
+			string = string + '\n';
+		}
 		string = string +'パスワードは最低4文字必要です。';
-	}else if(password != password2)
+	}else if(password != password2) {
+		if(string != "") {
+			string = string + '\n';
+		}
 		string = string +'パスワードが一致しませんでした。';
+	}
+
 
 
 	if(string != ""){
