@@ -26,7 +26,7 @@ function openLightbox(id,pass,width, height){
 		$(".lightbox_view, #lightboxid_"+id+"").fadeIn();   // 第1引数・・・背景？(class)  第2引数・・・拡大写真(class)
 		$('body').addClass("overflow");
 		lightboxtriming(width, height);
-		var intaverage =  6 - Math.floor(data[1].review);
+		var intaverage =  6 - Math.round(data[1].review);
 
 		for(var index = 1; index <= 5; index++){
 			$('#star'+index+'').prop('checked', false);
@@ -148,7 +148,7 @@ function sendEvaluation(){
     	//$('.iconimg').remove();
     	//$('.id').remove();
 
-    	var intaverage =  6 - Math.floor(data[1].review);
+    	var intaverage =  6 - Math.round(data[1].review);
     	for(var index = 1; index <= 5; index++){
     		$('#star'+index+'').prop('checked', false);
 			$('#starbutton'+index+'').prop('checked', false);
