@@ -77,6 +77,11 @@ new Vue({
 			};
 			reader.readAsDataURL(file);
 		},
+		// アイコンの削除
+		deleteIllust(){
+			$('#imgadd').val('');
+			this.uploadedImage = '';
+		}
 	},
 })
 
