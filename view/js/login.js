@@ -45,7 +45,7 @@ function checkValidation(){
 	var string = "";
 
 	if(name == ""){
-		string = 'ユーザ名を入力してください。';
+		string = 'ユーザ名または登録したメールアドレスを入力してください。';
 		if(password == "")
 			string = string + '\n';
 	}

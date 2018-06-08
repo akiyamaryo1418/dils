@@ -74,7 +74,7 @@ header li:hover {
 
 header li a {
   display: block;
-  margin: 30px 0;
+  padding: 30px;
   font-size: 14px;
   color: #fff;
   text-decoration: none;
@@ -95,6 +95,7 @@ label{
 /*--------------------------------------------------
 	3. main
 --------------------------------------------------*/
+
 #contentabox {
   width: 1160px;
   margin: 0 auto;
@@ -131,6 +132,7 @@ label{
   color: #fff;
   border: none;
   font-family: FontAwesome;
+  cursor: pointer;
 }
 
 /*input[type=button] {

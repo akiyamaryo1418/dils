@@ -27,7 +27,7 @@ function openLightbox(id,pass,width, height){
 		$('body').addClass("overflow");
 		lightboxtriming(width, height);
 		var intaverage =  6 - Math.round(data[1].review);
-
+		intaverage = Math.round(intaverage);
 		for(var index = 1; index <= 5; index++){
 			$('#star'+index+'').prop('checked', false);
 			$('#starbutton'+index+'').prop('checked', false);
@@ -149,6 +149,7 @@ function sendEvaluation(){
     	//$('.id').remove();
 
     	var intaverage =  6 - Math.round(data[1].review);
+    	intaverage = Math.round(intaverage);
     	for(var index = 1; index <= 5; index++){
     		$('#star'+index+'').prop('checked', false);
 			$('#starbutton'+index+'').prop('checked', false);

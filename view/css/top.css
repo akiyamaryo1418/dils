@@ -86,7 +86,7 @@ header li:hover {
 
 header li a {
   display: block;
-  margin: 30px 0;
+  padding: 30px;
   font-size: 14px;
   color: #fff;
   text-decoration: none;
@@ -179,6 +179,7 @@ input[type=radio]{
 
 label{
     cursor: pointer;
+    padding: 10px 50px 10px 50px;
 }
 
 
@@ -361,12 +362,17 @@ div.iconbox{
   float   : left;
   overflow: hidden;
   /*border  : 1px solid #eee;*/
-  background: #fff;
+  /*background: #fff;*/
 }
 
 .imgbox img {
   /*width: 100%;*/
   position : relative;
+}
+
+.req {
+	font-weight: bold;
+	color: #f22;
 }
 
 .rightcontents {

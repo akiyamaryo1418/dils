@@ -50,19 +50,27 @@
 
         <div class="form">
         <form name="senddata" method="post" action="example.cgi">
-          <p>ユーザー名<br>
+          <p>ユーザー名
+          <span class="req">※ 入力必須</span>
+          <br>
           <input type="text" id="username" name="user"></p>
-          <p>メールアドレス<br>
+          <p>メールアドレス
+          <span class="req">※ 入力必須</span>
+          <br>
           <input type="text" id="mail" name="mail"></p>
 
           <!--<div id="app">
             {{ message }}
           </div>-->
 
-          <p>パスワード<br>
+          <p>パスワード
+          <span class="req">※ 入力必須</span>
+          <br>
           <input type="password" id="password" name="password"></p>
 
-          <p>パスワードを再入力<br>
+          <p>パスワードを再入力
+          <span class="req">※ 入力必須</span>
+          <br>
           <input type="password" id="password2" name="password"></p>
           <p><input type="button"value="新規登録" class="button" onclick="inputRegistrationButton();"></p>
         </form>
