@@ -169,7 +169,7 @@ function openLightbox(id,pass, width, height){
 		$('#detailslightbox').html($('<img src="'+pass+'">'));
 		lightboxtriming(width, height);
 		var intaverage =  6 - Math.round(data[1].review);
-
+		intaverage = Math.round(intaverage);
 		for(var index = 1; index <= 5; index++){
 			$('#star'+index+'').prop('checked', false);
 			$('#starbutton'+index+'').prop('checked', false);
@@ -298,6 +298,7 @@ function postText(){
 
 			$('.comment').remove();
 			var intaverage =  6 - Math.round(data[1].review);
+			intaverage = Math.round(intaverage);
 			for(var index = 1; index <= 5; index++){
 				$('#star'+index+'').prop('checked', false);
 				$('#starbutton'+index+'').prop('checked', false);
